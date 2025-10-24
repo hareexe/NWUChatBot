@@ -3,7 +3,8 @@ import nltk
 import os
 import json
 import random
-from nltk.tokenize import word_tokenize, PunktSentenceTokenizer
+# Using RegexpTokenizer instead of the problematic word_tokenize
+from nltk.tokenize import PunktSentenceTokenizer, RegexpTokenizer
 from nltk.corpus import stopwords
 from nltk.stem import WordNetLemmatizer
 
@@ -57,11 +58,13 @@ def initialize_nltk_data():
         # Fallback if the above path still fails (shouldn't happen with the fixes above)
         tokenizer = PunktSentenceTokenizer()
 
+    # Initialize a RegexpTokenizer that splits on non-word characters
+    regexp_word_tokenizer = RegexpTokenizer(r'\w+')
 
-    return lemmatizer, stop_words, tokenizer
+    return lemmatizer, stop_words, tokenizer, regexp_word_tokenizer
 
 # Initialize NLTK data and get resources
-lemmatizer, stop_words, tokenizer = initialize_nltk_data()
+lemmatizer, stop_words, tokenizer, regexp_word_tokenizer = initialize_nltk_data()
 
 # --- 2. Data Loading ---
 
@@ -94,18 +97,19 @@ intents_data = load_data()
 
 def preprocess(text):
     """Tokenizes, lowercases, removes stopwords, and lemmatizes text."""
-    # Use the pre-initialized tokenizer to break text into words
-    # We now call the function directly on the text without relying on the NLTK wrapper's internal lookup
-    tokens = tokenizer.tokenize(text.lower()) # First, split into sentences/tokens
+    # We no longer use tokenizer.tokenize() because we only need word tokens, not sentence tokens.
+    # The direct word tokenization call should be the most resilient one.
     
-    # Flatten the list of tokens and apply lemmatization/stopwords
+    # FIX: Use the resilient RegexpTokenizer to tokenize words directly
+    words = regexp_word_tokenizer.tokenize(text.lower())
+    
+    # Apply filtering and lemmatization
     final_tokens = []
-    for token in tokens:
-        # Use word_tokenize for simple word splitting after sentence tokenization
-        words = word_tokenize(token)
-        for word in words:
-            if word.isalpha() and word not in stop_words:
-                final_tokens.append(lemmatizer.lemmatize(word))
+    for word in words:
+        # word.isalpha() check is implicitly handled by RegexpTokenizer(r'\w+'),
+        # but we keep the stop_words and lemmatization.
+        if word not in stop_words:
+            final_tokens.append(lemmatizer.lemmatize(word))
     
     return set(final_tokens)
 
