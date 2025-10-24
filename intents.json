@@ -11,8 +11,13 @@
                 "How are you",
                 "What's up",
                 "hello chatbot",
+                "is anyone there",
+                "can you help me",
+                "Kumusta",
                 "Magandang araw",
-                "Helo"
+                "Helo",
+                "Tulungan mo ako",
+                "Nandiyan ka ba"
             ],
             "responses": [
                 "Hello! I'm here to answer your questions about Northwestern University's history.",
@@ -21,7 +26,7 @@
                 "Welcome! I am the Northwestern University History Chatbot. What can I tell you about?"
             ]
         },
-           {
+        {
             "tag": "general_info",
             "patterns": [
                 "What is Northwestern University?",
@@ -73,6 +78,130 @@
             "responses": [
                 "Northwestern College was granted *University Status* in *1993*. The official confirmation was issued by the Ministry of Education, Culture and Sports on *January 13, 1994*.",
                 "The 50th founding anniversary of Northwestern College was celebrated in *1982*."
+            ]
+        },
+        {
+            "tag": "university_incorporators",
+            "patterns": [
+                "Who were the incorporators of Northwestern University?",
+                "List the incorporators of Northwestern University.",
+                "Who are the original incorporators of Northwestern?",
+                "Who helped establish Northwestern University?",
+                "Who were part of the group that incorporated Northwestern?",
+                "Sino ang mga nag-incorporate ng Northwestern University?",
+                "Ilista ang mga incorporator ng Northwestern.",
+                "Sino ang mga tumulong magtatag ng Northwestern University?"
+            ],
+            "responses": [
+                "The incorporators of Northwestern University were Marcelino G. Ligot, Manuel E. Pintado, Angel A. Albano, Manuela A. Castisimo, Encarnacion L. Ruiz, Marcelo A. Tajon, and Rufina S. Mariano."
+            ]
+        },
+        {
+            "tag": "angel_albano_history",
+            "patterns": [
+                "Who was Angel A. Albano?",
+                "Tell me about Angel A. Albano’s contribution to Northwestern University.",
+                "What was Angel A. Albano’s role in Northwestern University?",
+                "Who was one of the founders named Angel A. Albano?",
+                "Who was Angel Albano in the history of Northwestern University?",
+                "Sino si Angel A. Albano?",
+                "Ano ang kontribusyon ni Angel A. Albano sa Northwestern?",
+                "Ano ang papel ni Angel A. Albano?"
+            ],
+            "responses": [
+                "Angel A. Albano was one of the founders of Northwestern University. He is remembered as a model of diligence and was among the key figures who helped establish the institution during its humble beginnings."
+            ]
+        },
+        {
+            "tag": "cresencio_barangan_history",
+            "patterns": [
+                "Who was Cresencio J. Barangan?",
+                "Tell me about Cresencio J. Barangan’s contribution to Northwestern University.",
+                "What was Cresencio J. Barangan’s role in Northwestern University?",
+                "Who was known as the faithful steward of Northwestern University?",
+                "Who managed the university funds during the early years of Northwestern University?",
+                "Sino si Cresencio J. Barangan?",
+                "Ano ang kontribusyon ni Cresencio J. Barangan?",
+                "Sino ang tapat na tagapamahala ng pondo ng unibersidad?"
+            ],
+            "responses": [
+                "Cresencio J. Barangan was one of the founding fathers of Northwestern University and served as its cashier. He was known for his honesty and faithfulness in protecting the university’s funds and ensuring proper financial management. He earned his degree from Washington State College in the United States while working to support his studies, and later devoted his life to serving Northwestern University."
+            ]
+        },
+        {
+            "tag": "nicolas_contribution",
+            "patterns": [
+                "What did Nicolas N. Nicolas do for Northwestern University?",
+                "What were the contributions of Nicolas N. Nicolas to Northwestern?",
+                "How did the founder Nicolas N. Nicolas help the school?",
+                "Nicolas N. Nicolas contributions",
+                "What did the founder do for Northwestern?",
+                "Ano ang ginawa ni Nicolas N. Nicolas para sa Northwestern University?",
+                "Ano ang mga kontribusyon ni Nicolas N. Nicolas?"
+            ],
+            "responses": [
+                "Nicolas N. Nicolas laid a strong foundation for Northwestern University. He led the institution in its early growth, expanding opportunities for students who wanted to pursue careers in law, engineering, nursing, business, education, and criminology."
+            ]
+        },
+        {
+            "tag": "nicolas_role",
+            "patterns": [
+                "What position did Nicolas N. Nicolas hold at Northwestern?",
+                "Was Nicolas N. Nicolas the chairman of the board?",
+                "What leadership role did the founder Nicolas N. Nicolas have?",
+                "What was Nicolas N. Nicolas's role in Northwestern University?",
+                "What office did the founder hold at Northwestern?",
+                "Ano ang posisyon ni Nicolas N. Nicolas?",
+                "Siya ba ang chairman ng board?",
+                "Ano ang leadership role ni Nicolas N. Nicolas?"
+            ],
+            "responses": [
+                "Nicolas N. Nicolas served as the longest-serving Chairman of the Board of Directors of Northwestern University. He provided leadership and direction during the institution’s formative years."
+            ]
+        },
+        {
+            "tag": "nicolas_title",
+            "patterns": [
+                "Why was Nicolas N. Nicolas called 'Mr. Northwestern'?",
+                "Who was called Mr. Northwestern?",
+                "How did Nicolas N. Nicolas earn the title Mr. Northwestern?",
+                "Why is the founder referred to as Mr. Northwestern?",
+                "Who earned the title Mr. Northwestern at the school?",
+                "Bakit tinawag si Nicolas N. Nicolas na 'Mr. Northwestern'?",
+                "Sino ang tinawag na Mr. Northwestern?"
+            ],
+            "responses": [
+                "Nicolas N. Nicolas earned the title 'Mr. Northwestern' because of his unmatched dedication and major role in building and shaping the university. His colleagues, students, and the community gave him this recognition for his lifelong service."
+            ]
+        },
+        {
+            "tag": "northwestern_fiat_lux_meaning",
+            "patterns": [
+                "What does Fiat Lux mean in Northwestern University?",
+                "What is the meaning of Northwestern University's motto?",
+                "What does the phrase Fiat Lux represent for Northwestern?",
+                "Explain the symbolism of Fiat Lux in Northwestern University history.",
+                "Ano ang ibig sabihin ng Fiat Lux sa Northwestern University?",
+                "Ano ang kahulugan ng motto ng Northwestern University?",
+                "Ano ang kinakatawan ng Fiat Lux?"
+            ],
+            "responses": [
+                "The phrase 'Fiat Lux', which means 'Let there be light', serves as Northwestern University's guiding motto. It symbolizes the founders’ mission to bring enlightenment through education, spreading the flame of knowledge to future generations and inspiring the institution’s continued growth and resilience."
+            ]
+        },
+        {
+            "tag": "northwestern_logo_symbolism",
+            "patterns": [
+                "What is the logo of Northwestern University?",
+                "Why is the owl used in Northwestern University’s logo?",
+                "What does the owl represent in Northwestern University?",
+                "What is the meaning of the Northwestern University symbol?",
+                "Ano ang logo ng Northwestern University?",
+                "Bakit owl ang ginamit sa logo?",
+                "Ano ang sinisimbolo ng owl sa Northwestern?"
+            ],
+            "responses": [
+                "The owl is the official logo of Northwestern University. It was chosen because it symbolizes wisdom, knowledge, and insight. The founders selected the owl to represent their mission of developing human potential and guiding learners to see clearly through the darkness of ignorance."
             ]
         },
         {
@@ -151,5 +280,3 @@
         }
     ]
 }
-
-
