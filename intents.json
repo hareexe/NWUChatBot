@@ -11,13 +11,8 @@
                 "How are you",
                 "What's up",
                 "hello chatbot",
-                "is anyone there",
-                "can you help me",
-                "Kumusta",
                 "Magandang araw",
-                "Helo",
-                "Tulungan mo ako",
-                "Nandiyan ka ba"
+                "Helo"
             ],
             "responses": [
                 "Hello! I'm here to answer your questions about Northwestern University's history.",
@@ -138,3 +133,4 @@
         }
     ]
 }
+
