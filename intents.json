@@ -21,6 +21,24 @@
                 "Welcome! I am the Northwestern University History Chatbot. What can I tell you about?"
             ]
         },
+           {
+            "tag": "general_info",
+            "patterns": [
+                "What is Northwestern University?",
+                "Tell me about the university",
+                "Northwestern University",
+                "university",
+                "northwestern",
+                "Ano ang Northwestern University?",
+                "Tungkol saan ang unibersidad?",
+                "Ano ang Northwestern?"
+            ],
+            "responses": [
+                "Northwestern University has a rich history, beginning as Northwestern Academy, Inc. in 1932. It transitioned to Northwestern College in 1949 and was granted University Status in 1993. What specific historical detail are you interested in?",
+                "I can tell you about Northwestern University's history, from its founding in 1932 to its University Status in 1993. Do you want to know about its founders, major programs, or accreditations?",
+                "To give you the best information, could you ask a specific question? For example, 'When was the nursing program started?' or 'Sino ang unang university president?'"
+            ]
+        },
         {
             "tag": "founding_and_early_years",
             "patterns": [
@@ -133,4 +151,5 @@
         }
     ]
 }
+
 
