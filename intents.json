@@ -17,27 +17,27 @@
       ]
     },
     {
-  "tag": "thank_you",
-  "patterns": [
-    "Thank you",
-    "Thanks",
-    "Thanks a lot",
-    "Thank you very much",
-    "Thanks for the help",
-    "Appreciate it",
-    "Salamat",
-    "Maraming salamat",
-    "Ayos, salamat",
-    "Thanks chatbot"
+      "tag": "thank_you",
+      "patterns": [
+        "Thank you",
+        "Thanks",
+        "Thanks a lot",
+        "Thank you very much",
+        "Thanks for the help",
+        "Appreciate it",
+        "Salamat",
+        "Maraming salamat",
+        "Ayos, salamat",
+        "Thanks chatbot"
   ],
-  "responses": [
-    "You're very welcome! I'm happy to help.",
-    "No problem! Glad I could assist.",
-    "You're welcome! Let me know if you have more questions about Northwestern University.",
-    "Walang anuman! Nandito lang ako para tumulong.",
-    "Anytime! Feel free to ask me more about NU’s history and programs."
-  ]
-},
+      "responses": [
+        "You're very welcome! I'm happy to help.",
+        "No problem! Glad I could assist.",
+        "You're welcome! Let me know if you have more questions about Northwestern University.",
+        "Walang anuman! Nandito lang ako para tumulong.",
+        "Anytime! Feel free to ask me more about NU’s history and programs."
+      ]
+    },
     {
       "tag": "northwestern_logo_symbolism",
       "patterns": [
