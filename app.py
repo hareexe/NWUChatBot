@@ -116,7 +116,7 @@ def get_response_by_keywords(user_input, intents_data):
         return "I'm sorry, I don't have information on that specific topic for Northwestern University."
 
 
-st.title("Northwestern University History Chatbot")
+st.title("NWU History Chatbot")
 st.subheader("Ask questions about the founding, courses, and history.")
 
 if 'history' not in st.session_state:
@@ -141,3 +141,4 @@ if user_prompt:
     st.session_state['history'].append({"role": "assistant", "content": bot_response})
     with st.chat_message("assistant"):
         st.write(bot_response)
+
