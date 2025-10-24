@@ -1,272 +1,868 @@
 {
-    "intents": [
-        {
-            "tag": "greeting",
-            "patterns": [
-                "Hi", "Hello", "Hey there", "Good day", "Greetings",
-                "How are you", "What's up", "Hello chatbot",
-                "Is anyone there", "Can you help me",
-                "Kumusta", "Magandang araw", "Helo",
-                "Tulungan mo ako", "Nandiyan ka ba"
-            ],
-            "responses": [
-                "Hello! I'm here to answer your questions about Northwestern University's history.",
-                "Hi there! How can I help you learn about Northwestern University?",
-                "Greetings! Ask me anything about Northwestern University's past.",
-                "Welcome! I’m the Northwestern University History Chatbot. What would you like to know?"
-            ]
-        },
-        {
-            "tag": "general_info",
-            "patterns": [
-                "What is Northwestern University?",
-                "Tell me about the university",
-                "Northwestern University",
-                "University",
-                "Northwestern",
-                "Ano ang Northwestern University?",
-                "Tungkol saan ang unibersidad?",
-                "Ano ang Northwestern?"
-            ],
-            "responses": [
-                "Northwestern University has a rich history that began as Northwestern Academy, Inc. in 1932. It became Northwestern College in 1949 and achieved University Status in 1993.",
-                "Founded in 1932, Northwestern University evolved from an academy to a full-fledged university. Would you like to know more about its founders, major programs, or accreditations?",
-                "To give you the best details, could you ask a specific question—such as 'When was the nursing program started?' or 'Who was the first university president?'"
-            ]
-        },
-        {
-            "tag": "founding_and_early_years",
-            "patterns": [
-                "When was Northwestern founded?",
-                "What was the school originally called?",
-                "When did Northwestern Academy become a college?",
-                "What was the first year of operation?",
-                "What happened in 1932?",
-                "Kailan itinatag ang Northwestern?",
-                "Ano ang orihinal na pangalan ng paaralan?",
-                "Kailan naging kolehiyo ang Northwestern Academy?",
-                "Anong taon nagsimula ang operasyon?"
-            ],
-            "responses": [
-                "Northwestern Academy, Inc. was incorporated in 1932 and began operations that same year, offering General Secondary, Commercial Secondary, and Home Economics programs.",
-                "The institution was originally called Northwestern Academy, Inc. when it was founded in 1932.",
-                "It became Northwestern College in 1949."
-            ]
-        },
-        {
-            "tag": "major_transitions",
-            "patterns": [
-                "When did the school become a university?",
-                "What year did they get university status?",
-                "When was the official confirmation of university status?",
-                "What year was the 50th anniversary?",
-                "Kailan naging unibersidad ang paaralan?",
-                "Anong taon nakuha ang university status?",
-                "Kailan ang opisyal na kumpirmasyon ng university status?",
-                "Anong taon ang ika-50 anibersaryo?"
-            ],
-            "responses": [
-                "Northwestern College was granted University Status in 1993. The official confirmation was issued by the Ministry of Education, Culture and Sports on January 13, 1994.",
-                "The 50th founding anniversary of Northwestern College was celebrated in 1982."
-            ]
-        },
-        {
-            "tag": "university_incorporators",
-            "patterns": [
-                "Who were the incorporators of Northwestern University?",
-                "List the incorporators of Northwestern University.",
-                "Who are the original incorporators of Northwestern?",
-                "Who helped establish Northwestern University?",
-                "Who were part of the group that incorporated Northwestern?",
-                "Sino ang mga nag-incorporate ng Northwestern University?",
-                "Ilista ang mga incorporator ng Northwestern.",
-                "Sino ang mga tumulong magtatag ng Northwestern University?"
-            ],
-            "responses": [
-                "The incorporators of Northwestern University were Marcelino G. Ligot, Manuel E. Pintado, Angel A. Albano, Manuela A. Castisimo, Encarnacion L. Ruiz, Marcelo A. Tajon, and Rufina S. Mariano."
-            ]
-        },
-        {
-            "tag": "angel_albano_history",
-            "patterns": [
-                "Who was Angel A. Albano?",
-                "Tell me about Angel A. Albano’s contribution to Northwestern University.",
-                "What was Angel A. Albano’s role in Northwestern University?",
-                "Who was one of the founders named Angel A. Albano?",
-                "Who was Angel Albano in the history of Northwestern University?",
-                "Sino si Angel A. Albano?",
-                "Ano ang kontribusyon ni Angel A. Albano sa Northwestern?",
-                "Ano ang papel ni Angel A. Albano?"
-            ],
-            "responses": [
-                "Angel A. Albano was one of the founders of Northwestern University. He was known for his diligence and was instrumental in establishing the institution during its formative years."
-            ]
-        },
-        {
-            "tag": "cresencio_barangan_history",
-            "patterns": [
-                "Who was Cresencio J. Barangan?",
-                "Tell me about Cresencio J. Barangan’s contribution to Northwestern University.",
-                "What was Cresencio J. Barangan’s role in Northwestern University?",
-                "Who was known as the faithful steward of Northwestern University?",
-                "Who managed the university funds during the early years?",
-                "Sino si Cresencio J. Barangan?",
-                "Ano ang kontribusyon ni Cresencio J. Barangan?",
-                "Sino ang tapat na tagapamahala ng pondo ng unibersidad?"
-            ],
-            "responses": [
-                "Cresencio J. Barangan was one of the founding fathers and served as the university’s cashier. He was known for his honesty and dedication in managing Northwestern’s funds and ensuring financial integrity."
-            ]
-        },
-        {
-            "tag": "nicolas_contribution",
-            "patterns": [
-                "What did Nicolas N. Nicolas do for Northwestern University?",
-                "What were the contributions of Nicolas N. Nicolas to Northwestern?",
-                "How did Nicolas N. Nicolas help the school?",
-                "Nicolas N. Nicolas contributions",
-                "What did the founder do for Northwestern?",
-                "Ano ang ginawa ni Nicolas N. Nicolas para sa Northwestern University?",
-                "Ano ang mga kontribusyon ni Nicolas N. Nicolas?"
-            ],
-            "responses": [
-                "Nicolas N. Nicolas played a major role in expanding Northwestern University’s academic offerings, particularly in law, engineering, nursing, business, education, and criminology."
-            ]
-        },
-        {
-            "tag": "nicolas_role",
-            "patterns": [
-                "What position did Nicolas N. Nicolas hold at Northwestern?",
-                "Was Nicolas N. Nicolas the chairman of the board?",
-                "What leadership role did Nicolas N. Nicolas have?",
-                "What was Nicolas N. Nicolas's role in Northwestern University?",
-                "What office did the founder hold at Northwestern?",
-                "Ano ang posisyon ni Nicolas N. Nicolas?",
-                "Siya ba ang chairman ng board?",
-                "Ano ang leadership role ni Nicolas N. Nicolas?"
-            ],
-            "responses": [
-                "Nicolas N. Nicolas was the longest-serving Chairman of the Board of Directors of Northwestern University, providing strong leadership during its key development years."
-            ]
-        },
-        {
-            "tag": "nicolas_title",
-            "patterns": [
-                "Why was Nicolas N. Nicolas called 'Mr. Northwestern'?",
-                "Who was called Mr. Northwestern?",
-                "How did Nicolas N. Nicolas earn the title Mr. Northwestern?",
-                "Why is the founder referred to as Mr. Northwestern?",
-                "Who earned the title Mr. Northwestern at the school?",
-                "Bakit tinawag si Nicolas N. Nicolas na 'Mr. Northwestern'?",
-                "Sino ang tinawag na Mr. Northwestern?"
-            ],
-            "responses": [
-                "Nicolas N. Nicolas was called 'Mr. Northwestern' because of his lifelong dedication and major contributions to the university’s growth and development."
-            ]
-        },
-        {
-            "tag": "northwestern_fiat_lux_meaning",
-            "patterns": [
-                "What does Fiat Lux mean in Northwestern University?",
-                "What is the meaning of Northwestern University's motto?",
-                "What does the phrase Fiat Lux represent for Northwestern?",
-                "Explain the symbolism of Fiat Lux in Northwestern University history.",
-                "Ano ang ibig sabihin ng Fiat Lux sa Northwestern University?",
-                "Ano ang kahulugan ng motto ng Northwestern University?",
-                "Ano ang kinakatawan ng Fiat Lux?"
-            ],
-            "responses": [
-                "The phrase 'Fiat Lux' means 'Let there be light'. It is Northwestern University’s motto, symbolizing enlightenment through education and the pursuit of knowledge."
-            ]
-        },
-        {
-            "tag": "northwestern_logo_symbolism",
-            "patterns": [
-                "What is the logo of Northwestern University?",
-                "Why is the owl used in Northwestern University’s logo?",
-                "What does the owl represent in Northwestern University?",
-                "What is the meaning of the Northwestern University symbol?",
-                "Ano ang logo ng Northwestern University?",
-                "Bakit owl ang ginamit sa logo?",
-                "Ano ang sinisimbolo ng owl sa Northwestern?"
-            ],
-            "responses": [
-                "The owl is the official logo of Northwestern University. It symbolizes wisdom, knowledge, and insight—values that guide the university’s mission to enlighten learners."
-            ]
-        },
-        {
-            "tag": "key_infrastructure_and_land",
-            "patterns": [
-                "When was the Nalbo campus lot acquired?",
-                "Where is the main campus located?",
-                "When was the first computer center established?",
-                "When was the Alumni House completed?",
-                "Kailan nakuha ang lupa sa Nalbo campus?",
-                "Nasaan ang main campus?",
-                "Kailan itinatag ang unang computer center?",
-                "Kailan natapos ang Alumni House?"
-            ],
-            "responses": [
-                "The 8.9-hectare lot in Barangay Nalbo, Laoag City was purchased in 1962. Relocation of courses to the new campus began in 1969.",
-                "The first computer center in Region I (Ilocos Region) was inaugurated in 1983.",
-                "The Alumni House was completed in 2007."
-            ]
-        },
-        {
-            "tag": "program_pioneering",
-            "patterns": [
-                "When was the Nursing program started?",
-                "What about the Criminology program?",
-                "When did the College of Law reopen?",
-                "When did they first offer engineering courses?",
-                "What new programs opened in 2005?",
-                "Kailan nagsimula ang Nursing program?",
-                "Kailan nagsimula ang Criminology program?",
-                "Kailan muling binuksan ang College of Law?",
-                "Kailan sila unang nag-alok ng engineering courses?"
-            ],
-            "responses": [
-                "The BS in Nursing program started in 1973.",
-                "The BS in Criminology program (now Criminal Justice) was first offered in 1969.",
-                "The College of Law was reopened in 1984.",
-                "Engineering programs began in the 1970s. Civil Engineering was added in 1960, Mechanical Engineering in 1971, and Electrical Engineering in 1978. BS Computer Engineering and BS Electronics and Communication Engineering followed in 1990.",
-                "In 2005, new programs included BS in Library and Information Science, BS in Actuarial Science, BS in Statistics, and BS in Commerce major in E-Business."
-            ]
-        },
-        {
-            "tag": "accreditation_and_distinctions",
-            "patterns": [
-                "What is the ISO certification status?",
-                "When did the programs get Level II accreditation?",
-                "What major awards did the university receive in 2004?",
-                "When did Northwestern get Deregulated Status?",
-                "Ano ang ISO certification status?",
-                "Kailan nakakuha ng Level II accreditation?",
-                "Ano ang mga pangunahing parangal noong 2004?",
-                "Kailan nakuha ng Northwestern ang Deregulated Status?"
-            ],
-            "responses": [
-                "Northwestern University received ISO 9001:1994 certification in 2000 and ISO 9001:2000 certification in 2004.",
-                "Initial Level II accreditation for major programs such as Arts and Sciences, Commerce, and Education was granted in 1991.",
-                "In 2004, Northwestern University ranked 3rd nationwide by PACUCOA for having the most accredited programs and was number one in Region I.",
-                "The university was granted Deregulated Status by CHED in 2003."
-            ]
-        },
-        {
-            "tag": "leadership_and_presidents",
-            "patterns": [
-                "Who was the first university president?",
-                "Who was Ben A. Nicolas?",
-                "When was Ben A. Nicolas first appointed president?",
-                "Sino ang unang university president?",
-                "Sino si Ben A. Nicolas?",
-                "Kailan unang na-appoint si Ben A. Nicolas bilang presidente?"
-            ],
-            "responses": [
-                "Jose G. Castro was the first University President, appointed in 1989.",
-                "Ben A. Nicolas was a key leader who served as president and chairman in 1982 and later as university president in 1997. He was known for his visionary leadership and reforms.",
-                "Ben A. Nicolas was first appointed president of Northwestern College in 1982 and formally invested in 1983."
-            ]
-        }
-    ]
+  "intents": [
+    {
+      "tag": "northwestern_fiat_lux_meaning",
+      "patterns": [
+        "Ano ang ibig sabihin ng Fiat Lux sa Northwestern University?",
+        "Ano ang kahulugan ng motto ng Northwestern University?",
+        "Ano ang kinakatawan ng Fiat Lux?",
+        "Explain the symbolism of Fiat Lux in Northwestern University history.",
+        "What does Fiat Lux mean in Northwestern University?",
+        "What does the phrase Fiat Lux represent for Northwestern?",
+        "What is the meaning of Northwestern University's motto?"
+      ],
+      "responses": [
+        "The phrase 'Fiat Lux' means 'Let there be light'. It is Northwestern University’s motto, symbolizing enlightenment through education and the pursuit of knowledge.",
+        "The phrase 'Fiat Lux', which means 'Let there be light', serves as Northwestern University's guiding motto. It symbolizes the founders’ mission to bring enlightenment through education, spreading the flame of knowledge to future generations and inspiring the institution’s continued growth and resilience."
+      ]
+    },
+    {
+      "tag": "northwestern_logo_symbolism",
+      "patterns": [
+        "Ano ang logo ng Northwestern University?",
+        "Ano ang sinisimbolo ng owl sa Northwestern?",
+        "Bakit owl ang ginamit sa logo?",
+        "What does the owl represent in Northwestern University?",
+        "What is the logo of Northwestern University?",
+        "What is the meaning of the Northwestern University symbol?",
+        "Why is the owl used in Northwestern University’s logo?"
+      ],
+      "responses": [
+        "The owl is the official logo of Northwestern University. It symbolizes wisdom, knowledge, and insight—values that guide the university’s mission to enlighten learners.",
+        "The owl is the official logo of Northwestern University. It was chosen because it symbolizes wisdom, knowledge, and insight. The founders selected the owl to represent their mission of developing human potential and guiding learners to see clearly through the darkness of ignorance."
+      ]
+    },
+    {
+      "tag": "cresencio_barangan_history",
+      "patterns": [
+        "Ano ang kontribusyon ni Cresencio J. Barangan?",
+        "Sino ang tapat na tagapamahala ng pondo ng unibersidad?",
+        "Sino si Cresencio J. Barangan?",
+        "Tell me about Cresencio J. Barangan’s contribution to Northwestern University.",
+        "What was Cresencio J. Barangan’s role in Northwestern University?",
+        "Who managed the university funds during the early years of Northwestern University?",
+        "Who managed the university funds during the early years?",
+        "Who was Cresencio J. Barangan?",
+        "Who was known as the faithful steward of Northwestern University?"
+      ],
+      "responses": [
+        "Cresencio J. Barangan was one of the founding fathers and served as the university’s cashier. He was known for his honesty and dedication in managing Northwestern’s funds and ensuring financial integrity.",
+        "Cresencio J. Barangan was one of the founding fathers of Northwestern University and served as its cashier. He was known for his honesty and faithfulness in protecting the university’s funds and ensuring proper financial management. He earned his degree from Washington State College in the United States while working to support his studies, and later devoted his life to serving Northwestern University."
+      ]
+    },
+    {
+      "tag": "angel_albano_history",
+      "patterns": [
+        "Ano ang kontribusyon ni Angel A. Albano sa Northwestern?",
+        "Ano ang papel ni Angel A. Albano?",
+        "Sino si Angel A. Albano?",
+        "Tell me about Angel A. Albano’s contribution to Northwestern University.",
+        "What was Angel A. Albano’s role in Northwestern University?",
+        "Who was Angel A. Albano?",
+        "Who was Angel Albano in the history of Northwestern University?",
+        "Who was one of the founders named Angel A. Albano?"
+      ],
+      "responses": [
+        "Angel A. Albano was one of the founders of Northwestern University. He is remembered as a model of diligence and was among the key figures who helped establish the institution during its humble beginnings.",
+        "Angel A. Albano was one of the founders of Northwestern University. He was known for his diligence and was instrumental in establishing the institution during its formative years."
+      ]
+    },
+    {
+      "tag": "northwestern_academy_incorporators",
+      "patterns": [
+        "Who were the incorporators of Northwestern Academy?",
+        "List all incorporators of Northwestern Academy.",
+        "Who were the co-founders of Northwestern Academy?",
+        "Name everyone who helped establish Northwestern Academy.",
+        "Who were the ten incorporators of Northwestern Academy?"
+      ],
+      "responses": [
+        "The ten incorporators of Northwestern Academy, Inc. were Nicolas N. Nicolas, Maximo A. Caday, Cresencio J. Barangan, Marcelino G. Ligot, Manuel E. Pintado, Angel A. Albano, Manuela A. Castisimo, Encarnacion L. Ruiz, Marcelo A. Tajon, and Rufina S. Mariano. These individuals founded the school in 1932 and laid the foundation for what would become Northwestern University."
+      ]
+    },
+    {
+      "tag": "nicolas_contribution",
+      "patterns": [
+        "Ano ang ginawa ni Nicolas N. Nicolas para sa Northwestern University?",
+        "Ano ang mga kontribusyon ni Nicolas N. Nicolas?",
+        "How did Nicolas N. Nicolas help the school?",
+        "How did the founder Nicolas N. Nicolas help the school?",
+        "Nicolas N. Nicolas contributions",
+        "What did Nicolas N. Nicolas do for Northwestern University?",
+        "What did the founder do for Northwestern?",
+        "What were the contributions of Nicolas N. Nicolas to Northwestern?"
+      ],
+      "responses": [
+        "Nicolas N. Nicolas laid a strong foundation for Northwestern University. He led the institution in its early growth, expanding opportunities for students who wanted to pursue careers in law, engineering, nursing, business, education, and criminology.",
+        "Nicolas N. Nicolas played a major role in expanding Northwestern University’s academic offerings, particularly in law, engineering, nursing, business, education, and criminology."
+      ]
+    },
+    {
+      "tag": "nicolas_role",
+      "patterns": [
+        "Ano ang leadership role ni Nicolas N. Nicolas?",
+        "Ano ang posisyon ni Nicolas N. Nicolas?",
+        "Siya ba ang chairman ng board?",
+        "Was Nicolas N. Nicolas the chairman of the board?",
+        "What leadership role did Nicolas N. Nicolas have?",
+        "What leadership role did the founder Nicolas N. Nicolas have?",
+        "What office did the founder hold at Northwestern?",
+        "What position did Nicolas N. Nicolas hold at Northwestern?",
+        "What was Nicolas N. Nicolas's role in Northwestern University?"
+      ],
+      "responses": [
+        "Nicolas N. Nicolas served as the longest-serving Chairman of the Board of Directors of Northwestern University. He provided leadership and direction during the institution’s formative years.",
+        "Nicolas N. Nicolas was the longest-serving Chairman of the Board of Directors of Northwestern University, providing strong leadership during its key development years."
+      ]
+    },
+    {
+      "tag": "nicolas_title",
+      "patterns": [
+        "Bakit tinawag si Nicolas N. Nicolas na 'Mr. Northwestern'?",
+        "How did Nicolas N. Nicolas earn the title Mr. Northwestern?",
+        "Sino ang tinawag na Mr. Northwestern?",
+        "Who earned the title Mr. Northwestern at the school?",
+        "Who was called Mr. Northwestern?",
+        "Why is the founder referred to as Mr. Northwestern?",
+        "Why was Nicolas N. Nicolas called 'Mr. Northwestern'?"
+      ],
+      "responses": [
+        "Nicolas N. Nicolas earned the title 'Mr. Northwestern' because of his unmatched dedication and major role in building and shaping the university. His colleagues, students, and the community gave him this recognition for his lifelong service.",
+        "Nicolas N. Nicolas was called 'Mr. Northwestern' because of his lifelong dedication and major contributions to the university’s growth and development."
+      ]
+    },
+    {
+      "tag": "manuel_pintado_history",
+      "patterns": [
+        "Who was Manuel E. Pintado?",
+        "Tell me about Manuel E. Pintado’s contribution to Northwestern University.",
+        "What was Manuel E. Pintado’s role in Northwestern University?",
+        "Who was the first treasurer of Northwestern University?",
+        "Was Manuel Pintado one of the founders of Northwestern University?"
+      ],
+      "responses": [
+        "Manuel E. Pintado was one of the founders of Northwestern University and served as the institution’s first treasurer. He earned his bachelor’s degree in the United States as a government pensionado. Upon returning to the Philippines, he joined Marcelino G. Ligot and Angel A. Albano in opening a vocational school before helping establish Northwestern Academy, Inc. He also taught at the school during its early years and passed away during World War II."
+      ]
+    },
+    {
+      "tag": "filomena_nicolas_history",
+      "patterns": [
+        "Who was Filomena A. Nicolas?",
+        "Tell me about Mrs. Filomena A. Nicolas’ role in Northwestern University.",
+        "Who was known as the Mother of All Mothers in Northwestern University?",
+        "What was Filomena Nicolas’ contribution to Northwestern University?"
+      ],
+      "responses": [
+        "Mrs. Filomena A. Nicolas, often called 'The Mother of All Mothers', was a respected figure in Northwestern University’s history. She served as principal of the high school department for 37 years and also held the concurrent position of elementary principal for a time. She was the wife of Nicolas N. Nicolas and played a vital supportive role in the growth and administration of the institution."
+      ]
+    },
+    {
+      "tag": "northwestern_academy_world_war_ii",
+      "patterns": [
+        "What happened to Northwestern Academy during World War II?",
+        "How did the Japanese-American war affect Northwestern Academy?",
+        "Was Northwestern Academy open during the war?",
+        "Tell me about Northwestern Academy during World War II.",
+        "What was the situation of the school in 1941?"
+      ],
+      "responses": [
+        "When World War II broke out in 1941 and Japanese forces invaded the Philippines, all schools, including Northwestern Academy, were forced to close. Bombings and looting were widespread, and many towns and villages were burned. The founders and administrators evacuated for safety and faced the challenge of protecting important school documents. To prevent destruction, they distributed records and books among themselves and carried them to evacuation areas."
+      ]
+    },
+    {
+      "tag": "northwestern_academy_teaching_during_war",
+      "patterns": [
+        "Did Mr. Nicolas continue teaching during World War II?",
+        "What did Nicolas N. Nicolas do during the war?",
+        "How did Northwestern Academy continue education during the Japanese invasion?",
+        "Who continued teaching while the school was closed?",
+        "Did the founders continue to teach during the war?"
+      ],
+      "responses": [
+        "During World War II, while hiding in Padong, a small barrio in Dingras, Ilocos Norte, Mr. Nicolas N. Nicolas continued his passion for education. With the help of the local leader, he organized school-age children in the area and conducted informal lessons. He was assisted by teacher-relatives who had also evacuated, including Mrs. Filomena Nicolas and Rebecca. Even in the midst of war, their dedication to education remained unwavering."
+      ]
+    },
+    {
+      "tag": "northwestern_academy_early_sacrifices",
+      "patterns": [
+        "How did Northwestern Academy start operating?",
+        "What sacrifices did the founders make?",
+        "Who helped establish the school in its early years?",
+        "What was the goal of Northwestern Academy when it started?",
+        "Tell me about the early vision of the founders."
+      ],
+      "responses": [
+        "In its early years, the founders of Northwestern Academy offered not only their services but also their personal belongings like tables, chairs, books, and typewriters. They were united by a common desire to make education available to everyone, even the poor and overaged. Despite financial struggles, they remained devoted to teaching and lived by the mission of 'Education for All' long before it became a national goal."
+      ]
+    },
+    {
+      "tag": "northwestern_academy_open_admission",
+      "patterns": [
+        "Did Northwestern Academy have open admission?",
+        "Who could study in Northwestern Academy in the 1930s?",
+        "Was Northwestern Academy only for rich students?",
+        "What kind of students were accepted at Northwestern Academy?",
+        "How did Northwestern Academy help the poor?"
+      ],
+      "responses": [
+        "Northwestern Academy practiced what we now call 'open admission' as early as the 1930s. Anyone who wanted to study was allowed to enroll, even if they could not immediately submit all requirements. The school became known as a place where poor students, overaged learners, and dropouts could continue their education."
+      ]
+    },
+    {
+      "tag": "northwestern_academy_facility_challenges",
+      "patterns": [
+        "Where was Northwestern Academy located when it started?",
+        "Did Northwestern Academy have its own building?",
+        "Why did Northwestern Academy move from one place to another?",
+        "Where were classes held in the early years?",
+        "What was the Llanes building?"
+      ],
+      "responses": [
+        "In its early years, Northwestern Academy had no permanent building. The school rented private houses to accommodate students. One of these was the Llanes building, which became a temporary home for new students. The founders endured embarrassment and hardship as they moved from one rented place to another to keep classes going."
+      ]
+    },
+    {
+      "tag": "northwestern_academy_legal_challenges",
+      "patterns": [
+        "Was Northwestern Academy ever sued?",
+        "Did the school face any problems in its early years?",
+        "Who filed a case against Northwestern Academy?",
+        "Was the school threatened with closure?",
+        "What legal issue did Northwestern Academy face?"
+      ],
+      "responses": [
+        "During its early years, a rival school head filed a case against Nicolas N. Nicolas and the other incorporators for operating a course without a permit. This legal challenge became a baptism of fire for the institution. Despite the threat of closure, the founders persevered, and the academy continued its operations."
+      ]
+    },
+    {
+      "tag": "northwestern_academy_commonwealth_era",
+      "patterns": [
+        "How did the Commonwealth period affect Northwestern Academy?",
+        "What happened to education in 1935?",
+        "When did Northwestern Academy start planning for college courses?",
+        "Why did Northwestern Academy expand its programs?",
+        "What was the effect of the new constitution on education?"
+      ],
+      "responses": [
+        "When the Philippines became a Commonwealth in 1935, the new constitution emphasized education for all citizens. This caused a surge of enrolment in both public and private schools. Seeing the growing demand for higher education, Northwestern Academy’s board of directors began planning to expand and offer tertiary courses to help high school graduates pursue college degrees."
+      ]
+    },
+    {
+      "tag": "founder_maximo_caday",
+      "patterns": [
+        "Who was Maximo A. Caday?",
+        "What was the role of Maximo Caday in Northwestern?",
+        "Tell me about Mr. Maximo Caday",
+        "What contribution did Maximo A. Caday make to Northwestern Academy?",
+        "Was Maximo A. Caday a founder of Northwestern University?"
+      ],
+      "responses": [
+        "Mr. Maximo A. Caday was one of the founders of Northwestern Academy, which later became Northwestern University. Known for his integrity and dedication, he served as the school’s treasurer and was deeply committed to safeguarding its finances. He was strict in disbursing funds and made sure no action could be mistaken as misuse of corporate money. His life was centered on the school, and he even risked his safety during storms to protect important documents from floods."
+      ]
+    },
+    {
+      "tag": "maximo_caday_background",
+      "patterns": [
+        "Where did Maximo A. Caday study?",
+        "What was Maximo Caday's background?",
+        "Where did Maximo Caday go to school?",
+        "How did Maximo Caday get his education?",
+        "Did Maximo Caday study in the United States?"
+      ],
+      "responses": [
+        "Maximo A. Caday was a determined and hardworking man who sought education in the United States. In 1919, he traveled to Washington, where he worked as a houseboy while studying at night. He finished high school at Puyallup High School in 1925 and earned his college degree from the University of Puget Sound in 1928. After completing his studies, he returned to the Philippines to serve his country and help build Northwestern Academy."
+      ]
+    },
+    {
+      "tag": "maximo_caday_character",
+      "patterns": [
+        "What was Maximo Caday like as a person?",
+        "How was Maximo Caday described?",
+        "What were the traits of Maximo A. Caday?",
+        "Was Maximo Caday honest?",
+        "How did people remember Maximo Caday?"
+      ],
+      "responses": [
+        "Maximo A. Caday was remembered as an honest, disciplined, and selfless man. His son, Alva A. Caday, described him as someone who valued honesty above all and avoided any act that could cast doubt on his integrity. He was a strict but loving father who taught his children to save, work hard, and avoid extravagance. His commitment to Northwestern was remarkable — he would even wake up during storms to check and protect school records from flood damage."
+      ]
+    },
+    {
+      "tag": "maximo_caday_relationship_with_founders",
+      "patterns": [
+        "Who were Maximo Caday’s close colleagues in Northwestern?",
+        "Did Maximo Caday work closely with other founders?",
+        "How was Maximo Caday’s relationship with other founders?",
+        "Who did Maximo Caday work with in Northwestern?",
+        "Did Maximo Caday and Nicolas N. Nicolas get along?"
+      ],
+      "responses": [
+        "Maximo A. Caday shared a strong and respectful working relationship with his fellow founders, Nicolas N. Nicolas and Cresencio J. Barangan. The three men admired each other’s dedication and worked hand in hand to sustain the growth of Northwestern Academy during its early years."
+      ]
+    },
+    {
+      "tag": "northwestern_college_establishment",
+      "patterns": [
+        "When did Northwestern become a college?",
+        "When was Northwestern College established?",
+        "What is the history of Northwestern College?",
+        "When did Northwestern Academy become Northwestern College?",
+        "How did Northwestern transition into a college?"
+      ],
+      "responses": [
+        "Northwestern Academy was elevated to college status and became Northwestern College, Inc. under the leadership of its first president, whose academic qualifications and dedication helped expand the school’s programs. During this transition, new courses were offered to help students with limited resources earn degrees, marking the beginning of Northwestern’s glorious years."
+      ]
+    },
+    {
+      "tag": "northwestern_college_president",
+      "patterns": [
+        "Who was the first president of Northwestern College?",
+        "Who became the first president of Northwestern College?",
+        "Who led Northwestern when it became a college?",
+        "Who was Northwestern College’s first leader?",
+        "Who was the first head of Northwestern College?"
+      ],
+      "responses": [
+        "The first president of Northwestern College was a man of academic excellence and leadership who worked closely with Mr. Nicolas N. Nicolas in expanding the school’s programs and securing government permits to operate courses such as BS Commerce, Associate in Arts, Education, and Law. Under his stewardship, the institution experienced academic growth and the expansion of related services."
+      ]
+    },
+    {
+      "tag": "northwestern_college_courses",
+      "patterns": [
+        "What courses were first offered at Northwestern College?",
+        "Which programs did Northwestern College initially have?",
+        "What were the first courses available when Northwestern became a college?",
+        "Which college programs did Northwestern start with?",
+        "What degree programs did Northwestern College open?"
+      ],
+      "responses": [
+        "When Northwestern Academy became Northwestern College, it began offering BS Commerce, Associate in Arts, Education, and Law. Later, additional courses such as Junior Secretarial, Civil Engineering (first two years), and Associate in Surveying were introduced as part of its expanding academic programs."
+      ]
+    },
+    {
+      "tag": "northwestern_college_building",
+      "patterns": [
+        "When was the first building of Northwestern College built?",
+        "What was the first building of Northwestern College?",
+        "Where was the first college building of Northwestern constructed?",
+        "When was the three-storey building of Northwestern built?",
+        "What was the significance of the 1951 building in Northwestern?"
+      ],
+      "responses": [
+        "In 1951, Northwestern College built a three-storey building after purchasing land from the Medina family. It became one of the tallest buildings in Laoag at the time and symbolized the school’s growth and progress. The board’s ability to raise funds for its construction reflected their faith, resourcefulness, and self-sacrifice."
+      ]
+    },
+    {
+      "tag": "northwestern_college_glorious_years",
+      "patterns": [
+        "What were the glorious years of Northwestern?",
+        "Why were the 1950s important for Northwestern?",
+        "When did Northwestern experience its glorious years?",
+        "How did Northwestern College grow during its glorious years?",
+        "What was Northwestern College known for during its glorious years?"
+      ],
+      "responses": [
+        "Northwestern College’s glorious years began after it gained college status. Under the leadership of Mr. Nicolas N. Nicolas and the first president, the school expanded its programs, built new facilities, and strengthened its mission of education for all. Despite internal challenges, the administrators remained united under the guiding principle that 'What is good for Northwestern is good for me.'"
+      ]
+    },
+    {
+      "tag": "northwestern_college_engineering_program",
+      "patterns": [
+        "When did Northwestern start offering engineering?",
+        "What was Northwestern College’s first engineering program?",
+        "Who was the first dean of the Engineering Department at Northwestern?",
+        "What is Northwestern College known for in the 1960s?",
+        "Which programs became Northwestern’s flagship in the 1960s?"
+      ],
+      "responses": [
+        "Northwestern College achieved a major milestone when it received a government permit to operate the Civil Engineering program, becoming the first private institution in Luzon to do so. The program quickly became one of the school’s flagship offerings in the mid-1960s, alongside Education. Engr. Pablo Pascua served as the first dean of the Engineering Department, supported by a strong faculty lineup known for their strict academic standards. The department produced many board passers, and Northwestern graduates soon dominated engineering positions in both public and private sectors."
+      ]
+    },
+    {
+      "tag": "northwestern_engineering_success_and_impact",
+      "patterns": [
+        "How successful was Northwestern’s engineering program?",
+        "What made Northwestern engineers known?",
+        "Who are some notable engineering graduates from Northwestern?",
+        "Did Northwestern engineers receive any honors?",
+        "How did Northwestern engineers perform in board exams?"
+      ],
+      "responses": [
+        "The Engineering Department at Northwestern College became one of the most respected in the region. Although professors were known for their strict grading and no one graduated with academic honors such as summa cum laude or magna cum laude, the department consistently produced competent professionals. One notable graduate, Renato A. Balintec, topped the 1981 Electrical Engineering Board Exam and later became the general manager of the Ilocos Norte Electric Cooperative (INEC). Many other alumni went on to occupy key positions in government, private firms, and even abroad."
+      ]
+    },
+    {
+      "tag": "northwestern_college_graduate_school",
+      "patterns": [
+        "When did Northwestern open its graduate school?",
+        "What is the highest degree offered at Northwestern College?",
+        "When did Northwestern start offering master's degrees?",
+        "Who was the first dean of the graduate school at Northwestern?",
+        "What program did Northwestern add in 1960?"
+      ],
+      "responses": [
+        "In 1960, Northwestern College recognized the need for advanced studies and established the Graduate School, offering the degree of Master of Arts in Education. The program was considered the apex of all academic offerings and was granted government recognition the same year. The first dean of the Graduate School was Dr. Vedasto J. Samonte Jr., who played a vital role in shaping its early years. The graduate program was later named in honor of the institution’s founder, Mr. Nicolas N. Nicolas."
+      ]
+    },
+    {
+      "tag": "northwestern_college_enrollment_growth",
+      "patterns": [
+        "How did Northwestern’s enrollment change in the 1960s and 1970s?",
+        "Why did many students enroll in Northwestern during the 1970s?",
+        "What contributed to the increase in Northwestern’s engineering enrollment?",
+        "Did Northwestern have many students in the 1970s?",
+        "What factors boosted Northwestern’s enrollment?"
+      ],
+      "responses": [
+        "Enrollment in Northwestern College, particularly in the College of Engineering, grew steadily through the 1960s and 1970s. The construction boom during the administration of President Ferdinand Marcos created a high demand for engineers, encouraging many students from the Ilocos region and nearby provinces to study at Northwestern. The institution expanded by constructing new buildings, including a mini-theater known as the Little Theater, to accommodate its growing student population and various student activities."
+      ]
+    },
+    {
+      "tag": "northwestern_classroom_icons",
+      "patterns": [
+        "Who were the classroom icons of Northwestern College?",
+        "Who were the great teachers remembered at Northwestern?",
+        "What did Aida Agustin-Cuanang say about Northwestern’s teachers?",
+        "What was the article 'Classroom Icons Missed' about?",
+        "Who were remembered as mentors at Northwestern College?"
+      ],
+      "responses": [
+        "Dr. Aida Agustin-Cuanang, a former student leader and later dean of the College of Arts and Sciences, paid tribute to the classroom icons of Northwestern College in her article 'Classroom Icons Missed' published in April 2007. She remembered the dedicated mentors who molded generations of students through their discipline, intellect, and moral values. These mentors instilled the dignity of labor, love of country, and respect for education, leaving a legacy that continues to inspire Northwestern alumni."
+      ]
+    },
+    {
+      "tag": "northwestern_faculty_mentors",
+      "patterns": [
+        "Who was Mr. Nicolas Nicolas in Northwestern College?",
+        "What was Mr. Nicolas Nicolas known for as a teacher?",
+        "Who were the male professors remembered at Northwestern?",
+        "Who were the respected mentors during the 1970s at Northwestern?",
+        "Who were the 'tro-V men' mentioned by Aida Agustin-Cuanang?"
+      ],
+      "responses": [
+        "Mr. Nicolas N. Nicolas, then president of the board and registrar of Northwestern College, was remembered as a disciplined and excellent Psychology instructor. Trained at the University of Oregon, he was admired for his neat grooming, countless neckties, and military haircut, symbolizing order and professionalism. He was often seen with his circle known as the 'tro-V men' — Mr. Apolinario Aquino, Mr. Cecilio Burigsay, Dr. Agapito Factora, and Mr. Carmelo Taylan — who were also respected faculty members known for their sharp intellect and refined demeanor."
+      ]
+    },
+    {
+      "tag": "northwestern_respected_faculty",
+      "patterns": [
+        "Who were the other respected male professors of Northwestern?",
+        "Who were the faculty members remembered for strong personalities?",
+        "Which faculty wore embroidered polo barongs?",
+        "Who were the engineering and science professors at Northwestern?"
+      ],
+      "responses": [
+        "Respected professors such as Mr. Severino Caridad, Mr. Bartolome Monje, Dean Agapito Mangapit, and Mr. Fernando Taggaoa were admired for their commanding presence and articulate teaching. They were known to lecture without notes and engage students with authority and passion. Another group known for their refined dress and distinction included (Ret.) Consul Doreteo Vite, Ph.D., Col. Mariano Ruiz, Mr. Jaime Foronda, Engr. Pablo Pascua, and Engr. Adriano Lucas Sr. — all remembered for their professionalism and excellence in their fields."
+      ]
+    },
+    {
+      "tag": "northwestern_women_professors",
+      "patterns": [
+        "Who were the women professors remembered at Northwestern College?",
+        "What were women faculty members like at Northwestern in the 1970s?",
+        "Who were some notable female professors of Northwestern?",
+        "How were the women teachers described by Aida Agustin-Cuanang?"
+      ],
+      "responses": [
+        "The women professors of Northwestern College were known for their mastery of subject matter, punctuality, and dedication. Among them were Prof. Justina Monje, Prof. Magdalena Taggaoa, Prof. Lourdes Domingo, and Mrs. Filomena Nicolas. They were highly respected for their intelligence and perfect attendance, rain or shine. Others, such as Mrs. Aurora Mayor, Miss Teodora Gee, Mrs. Leonila Jose, Mrs. Erlinda Gloria, and Mrs. Lourdes Domingo, brought elegance and modernity to the campus with their fashionable style in the 1970s."
+      ]
+    },
+    {
+      "tag": "northwestern_faculty_culture",
+      "patterns": [
+        "What was the dress code like at Northwestern College in the 1970s?",
+        "How did the faculty of Northwestern influence student discipline?",
+        "What values did Northwestern teachers instill?",
+        "What was campus life like in the 1970s at Northwestern?"
+      ],
+      "responses": [
+        "During the 1970s, Northwestern College faculty set high standards for professionalism, grooming, and discipline. The dress code was unwritten — faculty led by example through neat and stylish attire. Teachers instilled values such as dedication to work, discipline, fear of God, and love of country. Their influence shaped students’ character, confidence, and respect for education, defining the campus culture of Northwestern during that era."
+      ]
+    },
+    {
+      "tag": "northwestern_college_of_law",
+      "patterns": [
+        "When was the College of Law opened at Northwestern?",
+        "Who was the first dean of the College of Law at Northwestern?",
+        "Why is the College of Law considered the crown jewel of Northwestern?",
+        "What made Northwestern College known in the field of law?",
+        "What was the impact of Northwestern’s College of Law?"
+      ],
+      "responses": [
+        "The College of Law of Northwestern College was one of its greatest milestones and became known as the crown jewel of the institution. Its opening was part of the school’s expansion program, providing opportunities for Ilocano youth to pursue legal education without leaving the province. The late Judge Felix Domingo, a successful practicing lawyer, served as its first dean and was joined by a roster of brilliant professors who molded some of the best legal minds in Ilocandia. The College of Law gained prestige nationwide when its graduates achieved high passing rates in bar examinations."
+      ]
+    },
+    {
+      "tag": "northwestern_catalina_peralta",
+      "patterns": [
+        "Who is Mrs. Catalina Peralta?",
+        "What was Catalina Peralta’s contribution to Northwestern?",
+        "What recognition did Catalina Peralta receive from Northwestern?",
+        "Who received the posthumous award for Judge Elviro Peralta?"
+      ],
+      "responses": [
+        "Mrs. Catalina Peralta, known for her grace and positive outlook, played a vital role in shaping students’ values and education at Northwestern. During the 75th Foundation Anniversary, she and her daughter Vissia received a posthumous award in honor of her late husband, Judge Elviro Peralta, for exemplary service to Northwestern College and for his distinguished career in law. Mrs. Peralta herself was honored for her dedication and commitment to molding alumni who became achievers in the Philippines and abroad."
+      ]
+    },
+    {
+      "tag": "northwestern_zoilo_aguinaldo",
+      "patterns": [
+        "Who was the first bar topnotcher from Northwestern?",
+        "Who is Zoilo C. Aguinaldo?",
+        "When did Northwestern produce a bar topnotcher?",
+        "What was Northwestern’s achievement in the 1952 bar exam?"
+      ],
+      "responses": [
+        "Zoilo C. Aguinaldo was a brilliant law graduate of Northwestern College who brought prestige to his alma mater by placing among the top ten in the 1952 bar examinations — the institution’s first and only bar topnotcher. His success placed Northwestern on the national map as one of the leading private law schools in northern Luzon. Despite his achievement, Zoilo remained humble, advocating for the oppressed and embodying the integrity and compassion instilled by his education at Northwestern."
+      ]
+    },
+    {
+      "tag": "northwestern_law_legacy",
+      "patterns": [
+        "How did Northwestern gain prestige in legal education?",
+        "What events made Northwestern famous in law circles?",
+        "How did the community celebrate Northwestern’s success in the bar exams?",
+        "What was the reaction to Northwestern’s bar topnotcher?"
+      ],
+      "responses": [
+        "Northwestern College gained national recognition when its law graduates achieved an exceptional performance in the bar examinations. The 1952 success of Zoilo Aguinaldo brought great pride to the community — celebrations included a motorcade around Laoag complete with a brass band. This triumph marked a golden moment for Northwestern, earning it respect from other educational institutions and establishing its reputation as a cradle of competent and principled lawyers."
+      ]
+    },
+    {
+      "tag": "northwestern_founders_values",
+      "patterns": [
+        "What motivated Northwestern’s founders to open new programs?",
+        "What was the guiding philosophy of Northwestern’s founders?",
+        "What did the founders value more than profit?",
+        "How did Northwestern’s founders view education?"
+      ],
+      "responses": [
+        "The founders of Northwestern were guided by a deep sense of service and integrity. Profit was never their primary motive — their goal was to make education accessible to the youth of Ilocos Norte and nearby provinces. They believed that the true reward was not in wealth but in the joy of serving others faithfully. Their selflessness and commitment to public welfare became the moral foundation that shaped Northwestern’s enduring legacy."
+      ]
+    },
+    {
+      "tag": "transition_process",
+      "patterns": [
+        "How did the academy become a college?",
+        "What steps led to the conversion to Northwestern College?",
+        "Who initiated the transition from academy to college?",
+        "How did Northwestern apply to become a college?"
+      ],
+      "responses": [
+        "The conversion from Northwestern Academy to Northwestern College was initiated by Mr. Nicolas N. Nicolas. He proposed the idea to the Board of Directors, and the school applied for permits to offer courses in Education, Commerce, and Liberal Arts in 1946. After securing government approval, it officially became Northwestern College in 1949."
+      ]
+    },
+    {
+      "tag": "accessibility_policy",
+      "patterns": [
+        "How did Northwestern help poor students?",
+        "Why was Northwestern called a compassionate school?",
+        "Did Northwestern allow promissory notes?",
+        "How did Northwestern make education affordable?"
+      ],
+      "responses": [
+        "Northwestern became known for its compassion and accessibility. Students who could not pay tuition on time were allowed to sign promissory notes. The administration and teachers shared a passion for making education affordable, proving that poverty was never a deterrent to learning."
+      ]
+    },
+    {
+      "tag": "teacher_dedication",
+      "patterns": [
+        "What were the teachers like in Northwestern’s early years?",
+        "Did low tuition affect teaching quality?",
+        "How did teachers show dedication?",
+        "Were the teachers paid well before?"
+      ],
+      "responses": [
+        "Despite low tuition fees and modest salaries, Northwestern’s teachers were admired for their dedication and strong sense of service. They maintained high teaching standards and showed genuine care for students, ensuring quality education even during financially challenging times."
+      ]
+    },
+    {
+      "tag": "student_activism",
+      "patterns": [
+        "Was Northwestern involved in activism?",
+        "Did Northwestern students protest during martial law?",
+        "Who were some student leaders during Marcos’ time?",
+        "What role did Northwestern play in political movements?"
+      ],
+      "responses": [
+        "During the Martial Law era under President Ferdinand Marcos, Northwestern College students were active in protests advocating freedom and justice. Leaders like Gervacio Velasco, Pete Salenda, Samuel Bangloy, Raymund Liongson, Juliet Pascual, and Rafaela Bumanglag were among those who stood at the forefront. Some were even detained as political prisoners, but Mr. Nicolas N. Nicolas welcomed them back after their release, showing Northwestern’s enduring spirit of compassion and courage."
+      ]
+    },
+    {
+      "tag": "distinguished_professors",
+      "patterns": [
+        "Who were the notable professors of Northwestern College?",
+        "Who were some respected teachers during Northwestern’s early years?",
+        "Tell me about the professors who shaped Northwestern’s excellence."
+      ],
+      "responses": [
+        "Northwestern attracted the brightest teachers and students during its college years. Esteemed educators included Prof. Severino Caridad, dean of the Graduate School; Prof. Bartolome Monje of the College of Education; Prof. Domingo Mangapit of Commerce; and Professors Doroteo Vite and Bernardo Romero. Younger mentors like Prof. Guillerma Sambrano, Celso and Lourdes Domingo, Alma and Eden Blanco, Amelita Ramiro, and Alex Rabbon also left lasting marks through their dedication, intellect, and patriotism."
+      ]
+    },
+    {
+      "tag": "family_culture",
+      "patterns": [
+        "What was the culture like at Northwestern?",
+        "How was the relationship among teachers and staff?",
+        "What made Northwestern unique as a community?",
+        "Did Northwestern have a family-like environment?"
+      ],
+      "responses": [
+        "Northwestern College was known for its strong 'kapamilya culture'—a deep sense of family and caring among teachers, staff, and students. Despite modest salaries, everyone supported one another and celebrated each other's successes. This kinship fostered a positive, secure, and harmonious work environment that made many hesitant to leave even for better-paying jobs elsewhere."
+      ]
+    },
+    {
+      "tag": "nurturing_years",
+      "patterns": [
+        "What were the early years of Northwestern like?",
+        "Tell me about the beginnings of Northwestern.",
+        "How did Northwestern start?",
+        "Where were the first classes held?",
+        "Did Northwestern face challenges in its early days?"
+      ],
+      "responses": [
+        "In its early years, Northwestern faced skepticism from locals who doubted that it could survive. Without its own building, the founders rented several structures such as the Llanes, Ruiz, Inez, Albano, and later the Agcaoili buildings to conduct classes. Despite the lack of resources and the presence of cynics, the founders persevered with determination and faith in their mission to make education accessible to all."
+      ]
+    },
+    {
+      "tag": "postwar_recovery",
+      "patterns": [
+        "How did Northwestern recover after World War II?",
+        "What happened to the school during and after the war?",
+        "Did the Japanese occupation affect Northwestern?",
+        "How did the academy rebuild after the war?",
+        "Tell me how Northwestern rose after the war."
+      ],
+      "responses": [
+        "After World War II, Northwestern Academy rose from the ruins with almost nothing — no building, no furniture, and no equipment, as most had been taken or destroyed during the Japanese occupation. The founders restarted operations in June 1946 using only ₱5,000 withdrawn from the school’s postal savings bank. Through sacrifice, frugality, and hard work, the academy gradually recovered and grew, paving the way for the birth of Northwestern College."
+      ]
+    },
+    {
+      "tag": "apolinario_aquino",
+      "patterns": [
+        "Who was Apolinario L. Aquino?",
+        "Tell me about the first college president.",
+        "Who led Northwestern when it became a college?",
+        "What was Apolinario Aquino known for?"
+      ],
+      "responses": [
+        "Apolinario L. Aquino was the first president of Northwestern College. A principled and humble servant-leader, he earned his master’s degree in Education from Illinois University in the U.S. as one of the early Filipino pensionados. Known for his integrity, Christian values, and dedication to education, he helped rebuild the institution after World War II and led it with sincerity and hard work."
+      ]
+    },
+    {
+      "tag": "northwestern_new_school_site",
+      "patterns": [
+        "Where is Northwestern University's new campus located?",
+        "What is notable about Northwestern University's 8.9-hectare site?",
+        "Who envisioned the new campus at Northwestern University?"
+      ],
+      "responses": [
+        "The new campus is along Airport Avenue on an 8.9-hectare lot, purchased by Mr. Nicolas N. Nicolas, who foresaw the institution's growth despite initial skepticism."
+      ]
+    },
+    {
+      "tag": "northwestern_academic_freedom",
+      "patterns": [
+        "How does Northwestern University uphold academic freedom?",
+        "What makes Northwestern University unique in student rights?",
+        "What did Professor Irma Mariano say about academic freedom at Northwestern?"
+      ],
+      "responses": [
+        "Northwestern University respects students' and faculty's freedom of expression, allowing open disagreement and critical thinking without fear, creating a distinctive environment of academic freedom."
+      ]
+    },
+    {
+      "tag": "northwestern_martial_law",
+      "patterns": [
+        "How did Martial Law affect Northwestern College?",
+        "What happened to students and activism at Northwestern during Martial Law?",
+        "How did the administration respond to political repression?",
+        "How did Northwestern address internal institutional challenges in the 1970s?",
+        "What role did leadership play in sustaining Northwestern during Martial Law?"
+      ],
+      "responses": [
+        "During Martial Law, Northwestern College faced political repression, internal challenges, and socio-political changes. Student activists were arrested, but Mr. Nicolas N. Nicolas intervened to readmit them, upholding education and press freedom. Students protested issues like low teacher pay and inadequate facilities, with 'The Review' and the Supreme Student Council leading activism. Internally, a 1977 study identified weaknesses and threats to the institution, which Mr. Nicolas acknowledged and took seriously despite constraints, demonstrating his commitment to sustaining Northwestern. The liberal environment, combined with strong leadership, allowed both student activism and institutional resilience to flourish during this difficult period."
+      ]
+    },
+    {
+      "tag": "northwestern_student_activists",
+      "patterns": [
+        "Who were notable Northwestern students during Martial Law?",
+        "What became of Gervacio Velasco and Juliet Pascual?",
+        "How did Northwestern support its students under Martial Law?"
+      ],
+      "responses": [
+        "Gervacio Velasco, a student leader, later became dean and Vice President for Development at Northwestern. Juliet Pascual became a respected journalist and instructor. Their readmission during Martial Law demonstrated the college's support for student growth and leadership despite political risks."
+      ]
+    },
+    {
+      "tag": "greeting",
+      "patterns": [
+        "Hi",
+        "Hello",
+        "Hey there",
+        "Good day",
+        "Greetings",
+        "How are you",
+        "What's up",
+        "Hello chatbot",
+        "Is anyone there",
+        "Can you help me",
+        "Kumusta",
+        "Magandang araw",
+        "Helo",
+        "Tulungan mo ako",
+        "Nandiyan ka ba"
+      ],
+      "responses": [
+        "Hello! I'm here to answer your questions about Northwestern University's history.",
+        "Hi there! How can I help you learn about Northwestern University?",
+        "Greetings! Ask me anything about Northwestern University's past.",
+        "Welcome! I’m the Northwestern University History Chatbot. What would you like to know?"
+      ]
+    },
+    {
+      "tag": "general_info",
+      "patterns": [
+        "What is Northwestern University?",
+        "Tell me about the university",
+        "Northwestern University",
+        "University",
+        "Northwestern",
+        "Ano ang Northwestern University?",
+        "Tungkol saan ang unibersidad?",
+        "Ano ang Northwestern?"
+      ],
+      "responses": [
+        "Northwestern University has a rich history that began as Northwestern Academy, Inc. in 1932. It became Northwestern College in 1949 and achieved University Status in 1993.",
+        "Founded in 1932, Northwestern University evolved from an academy to a full-fledged university. Would you like to know more about its founders, major programs, or accreditations?",
+        "To give you the best details, could you ask a specific question—such as 'When was the nursing program started?' or 'Who was the first university president?'"
+      ]
+    },
+    {
+      "tag": "founding_and_early_years",
+      "patterns": [
+        "When was Northwestern founded?",
+        "What was the school originally called?",
+        "When did Northwestern Academy become a college?",
+        "What was the first year of operation?",
+        "What happened in 1932?",
+        "Kailan itinatag ang Northwestern?",
+        "Ano ang orihinal na pangalan ng paaralan?",
+        "Kailan naging kolehiyo ang Northwestern Academy?",
+        "Anong taon nagsimula ang operasyon?"
+      ],
+      "responses": [
+        "Northwestern Academy, Inc. was incorporated in 1932 and began operations that same year, offering General Secondary, Commercial Secondary, and Home Economics programs.",
+        "The institution was originally called Northwestern Academy, Inc. when it was founded in 1932.",
+        "It became Northwestern College in 1949."
+      ]
+    },
+    {
+      "tag": "major_transitions",
+      "patterns": [
+        "When did the school become a university?",
+        "What year did they get university status?",
+        "When was the official confirmation of university status?",
+        "What year was the 50th anniversary?",
+        "Kailan naging unibersidad ang paaralan?",
+        "Anong taon nakuha ang university status?",
+        "Kailan ang opisyal na kumpirmasyon ng university status?",
+        "Anong taon ang ika-50 anibersaryo?"
+      ],
+      "responses": [
+        "Northwestern College was granted University Status in 1993. The official confirmation was issued by the Ministry of Education, Culture and Sports on January 13, 1994.",
+        "The 50th founding anniversary of Northwestern College was celebrated in 1982."
+      ]
+    },
+    {
+      "tag": "university_incorporators",
+      "patterns": [
+        "Who were the incorporators of Northwestern University?",
+        "List the incorporators of Northwestern University.",
+        "Who are the original incorporators of Northwestern?",
+        "Who helped establish Northwestern University?",
+        "Who were part of the group that incorporated Northwestern?",
+        "Sino ang mga nag-incorporate ng Northwestern University?",
+        "Ilista ang mga incorporator ng Northwestern.",
+        "Sino ang mga tumulong magtatag ng Northwestern University?"
+      ],
+      "responses": [
+        "The incorporators of Northwestern University were Marcelino G. Ligot, Manuel E. Pintado, Angel A. Albano, Manuela A. Castisimo, Encarnacion L. Ruiz, Marcelo A. Tajon, and Rufina S. Mariano."
+      ]
+    },
+    {
+      "tag": "key_infrastructure_and_land",
+      "patterns": [
+        "When was the Nalbo campus lot acquired?",
+        "Where is the main campus located?",
+        "When was the first computer center established?",
+        "When was the Alumni House completed?",
+        "Kailan nakuha ang lupa sa Nalbo campus?",
+        "Nasaan ang main campus?",
+        "Kailan itinatag ang unang computer center?",
+        "Kailan natapos ang Alumni House?"
+      ],
+      "responses": [
+        "The 8.9-hectare lot in Barangay Nalbo, Laoag City was purchased in 1962. Relocation of courses to the new campus began in 1969.",
+        "The first computer center in Region I (Ilocos Region) was inaugurated in 1983.",
+        "The Alumni House was completed in 2007."
+      ]
+    },
+    {
+      "tag": "program_pioneering",
+      "patterns": [
+        "When was the Nursing program started?",
+        "What about the Criminology program?",
+        "When did the College of Law reopen?",
+        "When did they first offer engineering courses?",
+        "What new programs opened in 2005?",
+        "Kailan nagsimula ang Nursing program?",
+        "Kailan nagsimula ang Criminology program?",
+        "Kailan muling binuksan ang College of Law?",
+        "Kailan sila unang nag-alok ng engineering courses?"
+      ],
+      "responses": [
+        "The BS in Nursing program started in 1973.",
+        "The BS in Criminology program (now Criminal Justice) was first offered in 1969.",
+        "The College of Law was reopened in 1984.",
+        "Engineering programs began in the 1970s. Civil Engineering was added in 1960, Mechanical Engineering in 1971, and Electrical Engineering in 1978. BS Computer Engineering and BS Electronics and Communication Engineering followed in 1990.",
+        "In 2005, new programs included BS in Library and Information Science, BS in Actuarial Science, BS in Statistics, and BS in Commerce major in E-Business."
+      ]
+    },
+    {
+      "tag": "accreditation_and_distinctions",
+      "patterns": [
+        "What is the ISO certification status?",
+        "When did the programs get Level II accreditation?",
+        "What major awards did the university receive in 2004?",
+        "When did Northwestern get Deregulated Status?",
+        "Ano ang ISO certification status?",
+        "Kailan nakakuha ng Level II accreditation?",
+        "Ano ang mga pangunahing parangal noong 2004?",
+        "Kailan nakuha ng Northwestern ang Deregulated Status?"
+      ],
+      "responses": [
+        "Northwestern University received ISO 9001:1994 certification in 2000 and ISO 9001:2000 certification in 2004.",
+        "Initial Level II accreditation for major programs such as Arts and Sciences, Commerce, and Education was granted in 1991.",
+        "In 2004, Northwestern University ranked 3rd nationwide by PACUCOA for having the most accredited programs and was number one in Region I.",
+        "The university was granted Deregulated Status by CHED in 2003."
+      ]
+    },
+    {
+      "tag": "leadership_and_presidents",
+      "patterns": [
+        "Who was the first university president?",
+        "Who was Ben A. Nicolas?",
+        "When was Ben A. Nicolas first appointed president?",
+        "Sino ang unang university president?",
+        "Sino si Ben A. Nicolas?",
+        "Kailan unang na-appoint si Ben A. Nicolas bilang presidente?"
+      ],
+      "responses": [
+        "Jose G. Castro was the first University President, appointed in 1989.",
+        "Ben A. Nicolas was a key leader who served as president and chairman in 1982 and later as university president in 1997. He was known for his visionary leadership and reforms.",
+        "Ben A. Nicolas was first appointed president of Northwestern College in 1982 and formally invested in 1983."
+      ]
+    }
+  ]
 }
