@@ -1,2 +1,2 @@
 nltk
-sci-kit learn
+scikit-learn
