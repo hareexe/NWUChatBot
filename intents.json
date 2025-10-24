@@ -1,5 +1,5 @@
 {
-    "intents": [
+    "intents": [
         {
             "tag": "greeting",
             "patterns": [
@@ -16,7 +16,8 @@
                 "Kumusta",
                 "Magandang araw",
                 "Helo",
-                "Tulungan mo ako"
+                "Tulungan mo ako",
+                "Nandiyan ka ba"
             ],
             "responses": [
                 "Hello! I'm here to answer your questions about Northwestern University's history.",
@@ -25,177 +26,115 @@
                 "Welcome! I am the Northwestern University History Chatbot. What can I tell you about?"
             ]
         },
-        {
-            "tag": "founding_year",
-            "patterns": [
-                "When was the university founded?",
-                "What year was Northwestern University established?",
-                "What is the founding year?",
-                "Kailan itinatag ang unibersidad?",
-                "Anong taon naitatag ang Northwestern?"
-            ],
-            "responses": [
-                "The university was founded in 1932."
-            ]
-        },
-        {
-            "tag": "founder_name",
-            "patterns": [
-                "Who founded the university?",
-                "Tell me about the founder.",
-                "Who is the founder?",
-                "founder",
-                "Sino ang nagtatag ng unibersidad?",
-                "Sino ang founder?",
-                "Sabihin mo sa akin tungkol sa nagtatag"
-            ],
-            "responses": [
-                "Northwestern University was founded by Nicolas N. Nicolas.",
-                "The main founder of the university is Nicolas N. Nicolas."
-            ]
-        },
-        {
-            "tag": "operation_interruption",
-            "patterns": [
-                "When did the school operation stop?",
-                "Why was the school closed?",
-                "Was there a time that the university closed?",
-                "Was there a time the school paused?",
-                "Kailan tumigil ang operasyon?",
-                "Bakit nagsara ang paaralan?",
-                "Nagkaroon ba ng paghinto sa operasyon?"
-            ],
-            "responses": [
-                "The operation of the school was interrupted between 1945 and 1948 due to World War II."
-            ]
-        },
-        {
-            "tag": "college_status",
-            "patterns": [
-                "When did it become Northwestern College?",
-                "What year was it recognized as a college?",
-                "Who was the first president when it became a college?",
-                "Kailan ito naging Northwestern College?",
-                "Anong taon naging kolehiyo?",
-                "Sino ang unang presidente noong naging kolehiyo ito?"
-            ],
-            "responses": [
-                "In 1949, the academy became Northwestern College with Apolinario Aquino as President."
-            ]
-        },
-        {
-            "tag": "criminology_course",
-            "patterns": [
-                "When was BS Criminology offered?",
-                "What year did the criminology program start?",
-                "criminology",
-                "When did they add criminology?",
-                "Kailan inalok ang BS Criminology?",
-                "Anong taon nagsimula ang criminology?",
-                "Criminology"
-            ],
-            "responses": [
-                "The Bachelor of Science in Criminology was opened in 1969."
-            ]
-        },
-        {
-            "tag": "nursing_course",
-            "patterns": [
-                "When was the nursing program offered?",
-                "When did BS Nursing start?",
-                "nursing",
-                "What year was nursing introduced?",
-                "Kailan inalok ang nursing program?",
-                "Kailan nagsimula ang BS Nursing?",
-                "Nursing"
-            ],
-            "responses": [
-                "The BS in Nursing Program was opened in 1973."
-            ]
-        },
-        {
-            "tag": "ben_nicolas_presidency",
-            "patterns": [
-                "Who became president in 1982?",
-                "When did Ben A. Nicolas become president?",
-                "Who was the new leader after Nicolas Nicolas?",
-                "Sino ang naging presidente noong 1982?",
-                "Kailan naging presidente si Ben A. Nicolas?",
-                "Bagong lider pagkatapos ni Nicolas Nicolas?"
-            ],
-            "responses": [
-                "In 1982, Ben A. Nicolas became President of the College and Chairman of the Board, succeeding his father Nicolas Nicolas."
-            ]
-        },
-        {
-            "tag": "computer_center",
-            "patterns": [
-                "When was the computer center opened?",
-                "What was the first computer center north of Metro Manila?",
-                "Did Northwestern have a computer center?",
-                "Kailan binuksan ang computer center?",
-                "May computer center ba ang Northwestern?",
-                "Ano ang unang computer center sa hilaga ng Metro Manila?"
-            ],
-            "responses": [
-                "In 1982, Northwestern opened its Computer Center, the first of its kind north of Metro Manila."
-            ]
-        },
-        {
-            "tag": "university_status",
-            "patterns": [
-                "When did it become a university?",
-                "What year did Northwestern gain university status?",
-                "Who was the first university president?",
-                "Kailan ito naging unibersidad?",
-                "Anong taon naging unibersidad?",
-                "Sino ang unang university president?"
-            ],
-            "responses": [
-                "On November 3, 1992, Northwestern was granted university status, with Jose G. Castro as the first University President."
-            ]
-        },
-        {
-            "tag": "iso_certification",
-            "patterns": [
-                "Did Northwestern get ISO certified?",
-                "When did NWU receive ISO 9001 certification?",
-                "Is the school ISO accredited?",
-                "Na-ISO certified ba ang Northwestern?",
-                "Kailan nakuha ang ISO 9001 certification?",
-                "ISO accredited ba ang paaralan?"
-            ],
-            "responses": [
-                "Northwestern was granted ISO-9001/1994 certification and later ISO 9001-2000 certification, becoming the first educational institution in the province to achieve this."
-            ]
-        },
-        {
-            "tag": "deregulated_status",
-            "patterns": [
-                "When did Northwestern get deregulated status?",
-                "Was it granted deregulated status?",
-                "What year did it become deregulated?",
-                "Kailan nakuha ang deregulated status?",
-                "Naging deregulated status ba ito?",
-                "Anong taon naging deregulated?"
-            ],
-            "responses": [
-                "In 2003, Northwestern University was granted Deregulated Status by the Commission on Higher Education."
-            ]
-        },
-        {
-            "tag": "sister_university",
-            "patterns": [
-                "Does Northwestern have an international sister school?",
-                "Which university in Korea is partnered with Northwestern?",
-                "When did it forge an international relationship?",
-                "May international sister school ba ang Northwestern?",
-                "Sino ang partner university sa Korea?",
-                "Kailan nagkaroon ng international relationship?"
-            ],
-            "responses": [
-                "In 2003, Northwestern forged an international sisterhood relationship with Sangmyung University in Korea."
-            ]
-        }
-    ]
+        {
+            "tag": "founding_and_early_years",
+            "patterns": [
+                "When was Northwestern founded?",
+                "What was the school originally called?",
+                "When did Northwestern Academy become a College?",
+                "What was the first year of operation?",
+                "What happened in 1932?",
+                "Kailan itinatag ang Northwestern?",
+                "Ano ang orihinal na pangalan ng paaralan?",
+                "Kailan naging Kolehiyo ang Northwestern Academy?",
+                "Anong taon nagsimula ang operasyon?"
+            ],
+            "responses": [
+                "Northwestern Academy, Inc. was incorporated in *1932*. It gained government permit to offer General Secondary, Commercial Secondary, and Home Economics in the same year.",
+                "The institution was originally founded as *Northwestern Academy, Inc.* in 1932.",
+                "The conversion from Northwestern Academy to *Northwestern College* occurred in *1949*."
+            ]
+        },
+        {
+            "tag": "major_transitions",
+            "patterns": [
+                "When did the school become a University?",
+                "What year did they get University Status?",
+                "When was the official confirmation of University Status?",
+                "What year was the 50th anniversary?",
+                "Kailan naging Unibersidad ang paaralan?",
+                "Anong taon nakuha ang University Status?",
+                "Kailan ang opisyal na kumpirmasyon ng University Status?",
+                "Anong taon ang ika-50 anibersaryo?"
+            ],
+            "responses": [
+                "Northwestern College was granted *University Status* in *1993*. The official confirmation was issued by the Ministry of Education, Culture and Sports on *January 13, 1994*.",
+                "The 50th founding anniversary of Northwestern College was celebrated in *1982*."
+            ]
+        },
+        {
+            "tag": "key_infrastructure_and_land",
+            "patterns": [
+                "When was the Nalbo campus lot acquired?",
+                "Where is the main campus located?",
+                "When was the first computer center established?",
+                "When was the Alumni House completed?",
+                "Kailan nakuha ang lupa sa Nalbo campus?",
+                "Nasaan ang main campus?",
+                "Kailan itinatag ang unang computer center?",
+                "Kailan natapos ang Alumni House?"
+            ],
+            "responses": [
+                "The *8.9-hectare lot in Barangay Nalbo, Laoag City* was purchased in *1962*, and the relocation of some courses to the new campus began in 1969.",
+                "The *first computer center in Region I/Ilocos Region* was inaugurated and blessed in *1983*.",
+                "The *Alumni House* was completed in *2007*."
+            ]
+        },
+        {
+            "tag": "program_pioneering",
+            "patterns": [
+                "When was the Nursing program started?",
+                "What about the Criminology program?",
+                "When did the College of Law reopen?",
+                "When did they first offer engineering courses?",
+                "What new programs opened in 2005?",
+                "Kailan nagsimula ang Nursing program?",
+                "Kailan nagsimula ang Criminology program?",
+                "Kailan muling binuksan ang College of Law?",
+                "Kailan sila unang nag-alok ng engineering courses?"
+            ],
+            "responses": [
+                "The *BS in Nursing* program was first offered in *1973*.",
+                "The *BS in Criminology* program (now Criminal Justice) was first permitted in *1969*.",
+                "The *College of Law was reopened* (allowed to resume operation) in *1984*.",
+                "Initial Engineering programs were recognized in the 1970s, but Civil Engineering was added in 1960. Mechanical Engineering got government recognition in 1971, and Electrical Engineering in 1978. In 1990, BS Computer Engineering and BS in Electronics and Communication Engineering were added.",
+                "In 2005, new programs included BS in Library and Information Science, BS in Actuarial Science, BS in Statistics, and BS in Commerce major in E-Business."
+            ]
+        },
+        {
+            "tag": "accreditation_and_distinctions",
+            "patterns": [
+                "What is the ISO certification status?",
+                "When did the programs get Level II accreditation?",
+                "What major awards did the university receive in 2004?",
+                "When did Northwestern get Deregulated Status?",
+                "Ano ang ISO certification status?",
+                "Kailan nakakuha ng Level II accreditation?",
+                "Ano ang mga pangunahing parangal noong 2004?",
+                "Kailan nakuha ng Northwestern ang Deregulated Status?"
+            ],
+            "responses": [
+                "The university received *ISO 9001:1994* certification in *2000* and *ISO 9001:2000* certification in *2004*.",
+                "Initial Level II accreditation for major programs (Arts and Sciences, Commerce, Education) was granted in *1991*.",
+                "In *2004*, Northwestern University was ranked *3rd place nationally* by PACUCOA for the most accredited programs and *number one in Region I*.",
+                "The university was granted *Deregulated Status* by CHED in *2003*."
+            ]
+        },
+        {
+            "tag": "leadership_and_presidents",
+            "patterns": [
+                "Who was the first university president?",
+                "Who was Ben A. Nicolas?",
+                "When was Ben A. Nicolas first appointed president?",
+                "Sino ang unang university president?",
+                "Sino si Ben A. Nicolas?",
+                "Kailan unang na-appoint si Ben A. Nicolas bilang presidente?"
+            ],
+            "responses": [
+                "*Jose G. Castro* is recognized as the *First University President* (appointed in 1989).",
+                "*Ben A. Nicolas* was a key leader, appointed president and chairman in 1982. He was later appointed university president in *1997* and was a visionary leader who pushed for university status and reforms.",
+                "Ben A. Nicolas was first appointed president of Northwestern College in *1982* and formally invested in 1983."
+            ]
+        }
+    ]
 }
