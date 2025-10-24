@@ -1,6 +1,27 @@
 {
     "intents": [
         {
+            "tag": "greeting",
+            "patterns": [
+                "Hi",
+                "Hello",
+                "Hey there",
+                "Good day",
+                "Greetings",
+                "How are you",
+                "What's up",
+                "hello chatbot",
+                "is anyone there",
+                "can you help me"
+            ],
+            "responses": [
+                "Hello! I'm here to answer your questions about Northwestern University's history.",
+                "Hi there! How can I help you learn about Northwestern?",
+                "Greetings! Ask me anything about the university's history.",
+                "Welcome! I am the Northwestern University History Chatbot. What can I tell you about?"
+            ]
+        },
+        {
             "tag": "founding_year",
             "patterns": [
                 "When was the university founded?",
@@ -138,4 +159,5 @@
             ]
         }
     ]
+
 }
