@@ -53,7 +53,7 @@ def load_data():
 intents_data = load_data()
 
 
-@st.cache_resource(show_spinner="Loading AI model (this may take a few seconds)...")
+@st.cache_resource(show_spinner="Loading model (this may take a few seconds)...")
 def load_embedding_model():
     return SentenceTransformer('all-MiniLM-L6-v2')
 
@@ -139,7 +139,7 @@ def get_semantic_response(user_input, intents_data):
     return best_response
 
 st.title("NWU History Chatbot")
-st.subheader("Ask questions about Northwestern University's history, founders, and more!")
+st.subheader("Northwestern University's history chatmate")
 
 if 'history' not in st.session_state:
     st.session_state['history'] = [
@@ -165,5 +165,3 @@ if user_prompt:
     st.session_state['history'].append({"role": "assistant", "content": bot_reply})
     with st.chat_message("assistant", avatar=None):
         st.write(bot_reply)
-
-
