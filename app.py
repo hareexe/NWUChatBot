@@ -3,6 +3,7 @@ import nltk
 import os
 import json
 import random
+import torch
 from nltk.tokenize import RegexpTokenizer
 from nltk.corpus import stopwords
 from nltk.stem import WordNetLemmatizer
@@ -164,4 +165,5 @@ if user_prompt:
     st.session_state['history'].append({"role": "assistant", "content": bot_reply})
     with st.chat_message("assistant", avatar=None):
         st.write(bot_reply)
+
 
