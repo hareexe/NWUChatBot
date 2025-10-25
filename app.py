@@ -18,7 +18,7 @@ def initialize_nltk_data():
     NLTK_DATA_DIR = os.path.join(base_dir, ".nltk_data")
 
     if NLTK_DATA_DIR not in nltk.data.path:
-        nltk.data.path.insert(0, NTOK_DATA_DIR)
+        nltk.data.path.insert(0, NLTK_DATA_DIR)
 
     os.makedirs(NLTK_DATA_DIR, exist_ok=True)
 
@@ -135,53 +135,6 @@ def get_semantic_response(user_input, intents_data):
 
     return best_response
 
-
-# --- Streamlit UI ---
-
-# Inject custom CSS for chat bubbles
-st.markdown("""
-<style>
-/* MODIFIED: We re-added the rule to hide the icon/image part, 
-since we want to display the NAME (header), but not the image holder.
-The name is displayed in the header container that is NOT hidden by this selector.
-*/
-[data-testid^="stChatMessage"] div[data-testid="stAvatar"] {
-    display: none;
-}
-
-/* Base styling for all message content boxes (the bubble itself) */
-[data-testid="stChatMessageContent"] {
-    max-width: 70%;
-    padding: 12px 16px;
-    border-radius: 20px;
-    font-size: 16px;
-    margin-top: 5px;
-    margin-bottom: 5px; 
-    line-height: 1.5;
-    text-align: left; 
-    box-shadow: 0 1px 1px rgba(0,0,0,0.1); 
-    color: white !important; /* FORCED white text for high visibility in dark mode */
-}
-
-/* Styles for User - Right/Blue bubble */
-[data-testid^="stChatMessage"] [role="user"] ~ [data-testid="stChatMessageContent"] {
-    background-color: #0056b3; /* Darker Blue */
-    border-top-right-radius: 5px; /* Pointy corner */
-    margin-left: auto; 
-    margin-right: 0;
-}
-
-/* Styles for Assistant (Bot) - Left/Grey bubble */
-[data-testid^="stChatMessage"] [role="assistant"] ~ [data-testid="stChatMessageContent"] {
-    background-color: #444444; /* Dark grey for contrast against white text in dark theme */
-    border-top-left-radius: 5px; /* Pointy corner */
-    margin-right: auto;
-    margin-left: 0; 
-}
-</style>
-""", unsafe_allow_html=True)
-
-
 st.title("NWU History Chatbot")
 st.subheader("Ask questions about Northwestern University's history, founders, and more!")
 
@@ -196,9 +149,8 @@ if 'last_intent' not in st.session_state:
 
 # Display chat history
 for msg in st.session_state['history']:
-    # FIX: Use 'name' parameter for the label, and set 'avatar=None' to hide the icon.
-    name = "You" if msg["role"] == "user" else "Owl"
-    with st.chat_message(msg["role"], name=name, avatar=None):
+    # Set avatar=None to explicitly hide the icon/avatar
+    with st.chat_message(msg["role"], avatar=None):
         st.write(msg["content"])
 
 # Get user input
@@ -206,9 +158,8 @@ user_prompt = st.chat_input("Ask something...")
 
 if user_prompt:
     st.session_state['history'].append({"role": "user", "content": user_prompt})
-    
-    # FIX: Use 'name' parameter for the label, and set 'avatar=None' to hide the icon.
-    with st.chat_message("user", name="You", avatar=None):
+    # Set avatar=None to explicitly hide the icon/avatar
+    with st.chat_message("user", avatar=None):
         st.write(user_prompt)
 
     # REMOVED context retrieval as we are no longer using it for simple intent matching
@@ -217,7 +168,6 @@ if user_prompt:
         bot_reply = get_semantic_response(user_prompt, intents_data)
 
     st.session_state['history'].append({"role": "assistant", "content": bot_reply})
-    
-    # FIX: Use 'name' parameter for the label, and set 'avatar=None' to hide the icon.
-    with st.chat_message("assistant", name="Owl", avatar=None):
+    # Set avatar=None to explicitly hide the icon/avatar
+    with st.chat_message("assistant", avatar=None):
         st.write(bot_reply)
