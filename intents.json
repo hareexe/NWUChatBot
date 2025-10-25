@@ -763,7 +763,7 @@
       "tag": "foundation",
       "patterns": [
         "When was Northwestern founded?",
-        "What was NWU founded?",
+        "When was NWU founded?",
         "What happened in 1932?"
       ],
       "responses": [
@@ -890,3 +890,4 @@
     }
   ]
 }
+
