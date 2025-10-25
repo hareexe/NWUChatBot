@@ -18,7 +18,7 @@ def initialize_nltk_data():
     NLTK_DATA_DIR = os.path.join(base_dir, ".nltk_data")
 
     if NLTK_DATA_DIR not in nltk.data.path:
-        nltk.data.path.insert(0, NLTK_DATA_DIR)
+        nltk.data.path.insert(0, NTOK_DATA_DIR)
 
     os.makedirs(NLTK_DATA_DIR, exist_ok=True)
 
@@ -141,9 +141,13 @@ def get_semantic_response(user_input, intents_data):
 # Inject custom CSS for chat bubbles
 st.markdown("""
 <style>
-/* MODIFIED: Removed rule that hid the chat message header.
-    We are now allowing the header (where the name/avatar goes) to display.
+/* MODIFIED: We re-added the rule to hide the icon/image part, 
+since we want to display the NAME (header), but not the image holder.
+The name is displayed in the header container that is NOT hidden by this selector.
 */
+[data-testid^="stChatMessage"] div[data-testid="stAvatar"] {
+    display: none;
+}
 
 /* Base styling for all message content boxes (the bubble itself) */
 [data-testid="stChatMessageContent"] {
@@ -160,7 +164,6 @@ st.markdown("""
 }
 
 /* Styles for User - Right/Blue bubble */
-/* NOTE: The bubble will still be pushed right because it's wrapped in a user message role */
 [data-testid^="stChatMessage"] [role="user"] ~ [data-testid="stChatMessageContent"] {
     background-color: #0056b3; /* Darker Blue */
     border-top-right-radius: 5px; /* Pointy corner */
@@ -175,10 +178,6 @@ st.markdown("""
     margin-right: auto;
     margin-left: 0; 
 }
-
-/* Optional: You can add CSS here to style the name text if needed, 
-    but Streamlit handles the label alignment by default.
-*/
 </style>
 """, unsafe_allow_html=True)
 
@@ -197,9 +196,9 @@ if 'last_intent' not in st.session_state:
 
 # Display chat history
 for msg in st.session_state['history']:
-    # MODIFIED: Pass custom avatar (name) instead of None/icon
-    name = "you" if msg["role"] == "user" else "owl"
-    with st.chat_message(msg["role"], avatar=name):
+    # FIX: Use 'name' parameter for the label, and set 'avatar=None' to hide the icon.
+    name = "You" if msg["role"] == "user" else "Owl"
+    with st.chat_message(msg["role"], name=name, avatar=None):
         st.write(msg["content"])
 
 # Get user input
@@ -208,8 +207,8 @@ user_prompt = st.chat_input("Ask something...")
 if user_prompt:
     st.session_state['history'].append({"role": "user", "content": user_prompt})
     
-    # MODIFIED: Pass custom avatar (name) instead of None/icon
-    with st.chat_message("user", avatar="you"):
+    # FIX: Use 'name' parameter for the label, and set 'avatar=None' to hide the icon.
+    with st.chat_message("user", name="You", avatar=None):
         st.write(user_prompt)
 
     # REMOVED context retrieval as we are no longer using it for simple intent matching
@@ -219,6 +218,6 @@ if user_prompt:
 
     st.session_state['history'].append({"role": "assistant", "content": bot_reply})
     
-    # MODIFIED: Pass custom avatar (name) instead of None/icon
-    with st.chat_message("assistant", avatar="owl"):
+    # FIX: Use 'name' parameter for the label, and set 'avatar=None' to hide the icon.
+    with st.chat_message("assistant", name="Owl", avatar=None):
         st.write(bot_reply)
