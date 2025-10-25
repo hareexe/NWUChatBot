@@ -2,3 +2,4 @@ streamlit
 nltk
 scikit-learn
 sentence-transformers
+torch
