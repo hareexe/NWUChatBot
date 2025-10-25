@@ -807,7 +807,7 @@
         "In 2005, new programs included BS in Library and Information Science, BS in Actuarial Science, BS in Statistics, and BS in Commerce major in E-Business."
       ]
     },
-     {
+    {
       "tag": "law_program",
       "patterns": [
         "When did the college of law started?",
@@ -818,14 +818,14 @@
         "The College of Law was reopened in 1984."
       ]
     },
-       {
+    {
       "tag": "engineering_program",
       "patterns": [
         "When did they first offer engineering courses?",
         "When did they first offer engineering courses?"
       ],
       "responses": [
-          "Engineering programs began in the 1970s. Civil Engineering was added in 1960, Mechanical Engineering in 1971, and Electrical Engineering in 1978. BS Computer Engineering and BS Electronics and Communication Engineering followed in 1990."
+        "Engineering programs began in the 1970s. Civil Engineering was added in 1960, Mechanical Engineering in 1971, and Electrical Engineering in 1978. BS Computer Engineering and BS Electronics and Communication Engineering followed in 1990."
       ]
     },
     {
