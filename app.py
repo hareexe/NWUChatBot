@@ -135,52 +135,6 @@ def get_semantic_response(user_input, intents_data):
 
     return best_response
 
-
-# --- Streamlit UI ---
-
-# Inject custom CSS for chat bubbles
-st.markdown("""
-<style>
-/* Hide the default role header (User/Assistant) and avatars */
-[data-testid^="stChatMessage"] > div:first-child {
-    display: none;
-}
-
-/* Base styling for all message content boxes (the bubble itself) */
-[data-testid="stChatMessageContent"] {
-    max-width: 70%;
-    padding: 12px 16px;
-    border-radius: 20px;
-    font-size: 16px;
-    margin-top: 5px;
-    margin-bottom: 5px; 
-    line-height: 1.5;
-    text-align: left; 
-    box-shadow: 0 1px 1px rgba(0,0,0,0.1); 
-    color: white !important; /* FORCED white text for high visibility in dark mode */
-}
-
-/* Styles for User - Right/Blue bubble */
-[data-testid^="stChatMessage"] [role="user"] ~ [data-testid="stChatMessageContent"] {
-    background-color: #0056b3; /* Darker Blue */
-    /* color: white; is now set globally above, ensuring white text */
-    border-top-right-radius: 5px; /* Pointy corner */
-    margin-left: auto; 
-    margin-right: 0;
-}
-
-/* Styles for Assistant (Bot) - Left/Grey bubble */
-[data-testid^="stChatMessage"] [role="assistant"] ~ [data-testid="stChatMessageContent"] {
-    background-color: #444444; /* Changed to a dark grey for contrast against white text in dark theme */
-    /* color: #333; is now set globally to white above */
-    border-top-left-radius: 5px; /* Pointy corner */
-    margin-right: auto;
-    margin-left: 0; 
-}
-</style>
-""", unsafe_allow_html=True)
-
-
 st.title("NWU History Chatbot")
 st.subheader("Ask questions about Northwestern University's history, founders, and more!")
 
