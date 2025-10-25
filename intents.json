@@ -756,8 +756,7 @@
       ],
       "responses": [
         "Northwestern University has a rich history that began as Northwestern Academy, Inc. in 1932. It became Northwestern College in 1949 and achieved University Status in 1993.",
-        "Founded in 1932, Northwestern University evolved from an academy to a full-fledged university. Would you like to know more about its founders, major programs, or accreditations?",
-        "To give you the best details, could you ask a specific question—such as 'When was the nursing program started?' or 'Who was the first university president?'"
+        "Founded in 1932, Northwestern University evolved from an academy to a full-fledged university. Would you like to know more about its founders, major programs, or accreditations?"
       ]
     },
     {
@@ -817,17 +816,11 @@
       "patterns": [
         "When was the Nalbo campus lot acquired?",
         "Where is the main campus located?",
-        "When was the first computer center established?",
-        "When was the Alumni House completed?",
         "Kailan nakuha ang lupa sa Nalbo campus?",
-        "Nasaan ang main campus?",
-        "Kailan itinatag ang unang computer center?",
-        "Kailan natapos ang Alumni House?"
+        "Nasaan ang main campus?"
       ],
       "responses": [
-        "The 8.9-hectare lot in Barangay Nalbo, Laoag City was purchased in 1962. Relocation of courses to the new campus began in 1969.",
-        "The first computer center in Region I (Ilocos Region) was inaugurated in 1983.",
-        "The Alumni House was completed in 2007."
+        "The 8.9-hectare lot in Barangay Nalbo, Laoag City was purchased in 1962. Relocation of courses to the new campus began in 1969."
       ]
     },
     {
@@ -888,4 +881,3 @@
     }
   ]
 }
-
