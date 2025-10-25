@@ -135,6 +135,54 @@ def get_semantic_response(user_input, intents_data):
 
     return best_response
 
+
+# --- Streamlit UI ---
+
+# Inject custom CSS for chat bubbles
+st.markdown("""
+<style>
+/* MODIFIED: Removed rule that hid the chat message header.
+    We are now allowing the header (where the name/avatar goes) to display.
+*/
+
+/* Base styling for all message content boxes (the bubble itself) */
+[data-testid="stChatMessageContent"] {
+    max-width: 70%;
+    padding: 12px 16px;
+    border-radius: 20px;
+    font-size: 16px;
+    margin-top: 5px;
+    margin-bottom: 5px; 
+    line-height: 1.5;
+    text-align: left; 
+    box-shadow: 0 1px 1px rgba(0,0,0,0.1); 
+    color: white !important; /* FORCED white text for high visibility in dark mode */
+}
+
+/* Styles for User - Right/Blue bubble */
+/* NOTE: The bubble will still be pushed right because it's wrapped in a user message role */
+[data-testid^="stChatMessage"] [role="user"] ~ [data-testid="stChatMessageContent"] {
+    background-color: #0056b3; /* Darker Blue */
+    border-top-right-radius: 5px; /* Pointy corner */
+    margin-left: auto; 
+    margin-right: 0;
+}
+
+/* Styles for Assistant (Bot) - Left/Grey bubble */
+[data-testid^="stChatMessage"] [role="assistant"] ~ [data-testid="stChatMessageContent"] {
+    background-color: #444444; /* Dark grey for contrast against white text in dark theme */
+    border-top-left-radius: 5px; /* Pointy corner */
+    margin-right: auto;
+    margin-left: 0; 
+}
+
+/* Optional: You can add CSS here to style the name text if needed, 
+    but Streamlit handles the label alignment by default.
+*/
+</style>
+""", unsafe_allow_html=True)
+
+
 st.title("NWU History Chatbot")
 st.subheader("Ask questions about Northwestern University's history, founders, and more!")
 
@@ -149,8 +197,9 @@ if 'last_intent' not in st.session_state:
 
 # Display chat history
 for msg in st.session_state['history']:
-    # Set avatar=None to explicitly hide the icon/avatar
-    with st.chat_message(msg["role"], avatar=None):
+    # MODIFIED: Pass custom avatar (name) instead of None/icon
+    name = "you" if msg["role"] == "user" else "owl"
+    with st.chat_message(msg["role"], avatar=name):
         st.write(msg["content"])
 
 # Get user input
@@ -158,8 +207,9 @@ user_prompt = st.chat_input("Ask something...")
 
 if user_prompt:
     st.session_state['history'].append({"role": "user", "content": user_prompt})
-    # Set avatar=None to explicitly hide the icon/avatar
-    with st.chat_message("user", avatar=None):
+    
+    # MODIFIED: Pass custom avatar (name) instead of None/icon
+    with st.chat_message("user", avatar="you"):
         st.write(user_prompt)
 
     # REMOVED context retrieval as we are no longer using it for simple intent matching
@@ -168,6 +218,7 @@ if user_prompt:
         bot_reply = get_semantic_response(user_prompt, intents_data)
 
     st.session_state['history'].append({"role": "assistant", "content": bot_reply})
-    # Set avatar=None to explicitly hide the icon/avatar
-    with st.chat_message("assistant", avatar=None):
+    
+    # MODIFIED: Pass custom avatar (name) instead of None/icon
+    with st.chat_message("assistant", avatar="owl"):
         st.write(bot_reply)
