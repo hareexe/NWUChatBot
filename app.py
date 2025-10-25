@@ -9,6 +9,7 @@ from nltk.corpus import stopwords
 from nltk.stem import WordNetLemmatizer
 from sentence_transformers import SentenceTransformer, util
 
+
 @st.cache_resource(show_spinner="Initializing NLTK resources...")
 def initialize_nltk_data():
     base_dir = os.path.abspath(os.path.dirname(__file__))
@@ -28,8 +29,8 @@ def initialize_nltk_data():
     lemmatizer = WordNetLemmatizer()
     stop_words = set(stopwords.words('english'))
     regexp_word_tokenizer = RegexpTokenizer(r'\w+')
-
     return lemmatizer, stop_words, regexp_word_tokenizer
+
 
 lemmatizer, stop_words, regexp_word_tokenizer = initialize_nltk_data()
 
@@ -38,13 +39,9 @@ lemmatizer, stop_words, regexp_word_tokenizer = initialize_nltk_data()
 def load_data():
     base_dir = os.path.abspath(os.path.dirname(__file__))
     filepath = os.path.join(base_dir, "intents.json")
-
     try:
         with open(filepath, 'r', encoding='utf-8') as f:
             return json.load(f)
-    except FileNotFoundError:
-        st.error(f"Error: intents.json not found at {filepath}. Please ensure it is present.")
-        return {"intents": []}
     except Exception as e:
         st.error(f"Error loading intents.json: {e}")
         return {"intents": []}
@@ -53,70 +50,70 @@ def load_data():
 intents_data = load_data()
 
 
-@st.cache_resource(show_spinner="Loading model (this may take a few seconds)...")
+@st.cache_resource(show_spinner="Loading sentence transformer model...")
 def load_embedding_model():
     return SentenceTransformer('all-MiniLM-L6-v2')
+
 
 model = load_embedding_model()
 
 def preprocess(text):
-    """Tokenize, lowercase, remove stop words, and lemmatize the input text."""
     words = regexp_word_tokenizer.tokenize(text.lower())
     tokens = [lemmatizer.lemmatize(w) for w in words if w not in stop_words]
     return " ".join(tokens)
 
-def get_semantic_response(user_input, intents_data):
-    """
-    Finds the best matching intent (tag) using semantic similarity (cosine similarity) 
-    based on individual pattern embeddings for all intents.
-    """
-    if not intents_data.get('intents'):
+
+@st.cache_resource(show_spinner="Encoding all chatbot patterns...")
+def build_intent_embeddings(intents_data):
+    all_texts = []
+    meta_data = []  # holds (tag, response_list, original_pattern)
+
+    for intent in intents_data.get("intents", []):
+        tag = intent.get("tag")
+        responses = intent.get("responses", [])
+        for pattern in intent.get("patterns", []):
+            processed = preprocess(pattern)
+            if processed.strip():
+                all_texts.append(processed)
+                meta_data.append((tag, responses, pattern))
+
+    if not all_texts:
+        return [], [], None
+
+    embeddings = model.encode(all_texts, convert_to_tensor=True)
+    return all_texts, embeddings, meta_data
+
+
+all_pattern_texts, pattern_embeddings, pattern_meta = build_intent_embeddings(intents_data)
+
+
+def get_semantic_response(user_input):
+    if not intents_data.get("intents"):
         return "Chatbot data is unavailable. Please check intents.json."
 
     user_processed = preprocess(user_input)
-    
-    if len(user_processed.split()) < 1 and len(user_input.strip()) > 0:
-        return "That's interesting! Could you elaborate on that, or ask a question about NWU?"
 
-    all_pattern_texts = []
-    pattern_map = {}
-    
-    for intent in intents_data['intents']:
-        tag = intent['tag']
-        responses = intent['responses']
-        for pattern in intent['patterns']:
-            processed_pattern = preprocess(pattern)
-            if processed_pattern:
-                if processed_pattern not in pattern_map:
-                    all_pattern_texts.append(processed_pattern)
-           
-                pattern_map[processed_pattern] = (tag, responses)
-
-    if not all_pattern_texts:
-        return "No usable patterns found in the chatbot data."
-
-    pattern_embeddings = model.encode(all_pattern_texts, convert_to_tensor=True)
+    # Handle empty or non-informative input
+    if not user_processed.strip():
+        return "Could you please rephrase that question about Northwestern University?"
 
     user_embedding = model.encode([user_processed], convert_to_tensor=True)
-
     similarities = util.cos_sim(user_embedding, pattern_embeddings)[0]
-    
+
     best_index = similarities.argmax().item()
     best_score = similarities[best_index].item()
-    best_pattern = all_pattern_texts[best_index]
+    best_tag, responses, original_pattern = pattern_meta[best_index]
 
-    CONFIDENCE_THRESHOLD = 0.65 
-    
-    if best_score < CONFIDENCE_THRESHOLD: 
+    CONFIDENCE_THRESHOLD = 0.60  # adjustable
+
+    if best_score < CONFIDENCE_THRESHOLD:
         st.session_state['last_intent'] = None
-        return "I'm not sure about that topic related to Northwestern University. Can you rephrase your question?"
+        return "Hmm, I’m not entirely sure about that topic. Could you rephrase your question about Northwestern University?"
 
-    best_tag, responses = pattern_map[best_pattern]
     best_response = random.choice(responses)
-
     st.session_state['last_intent'] = best_tag
-
     return best_response
+
 
 st.title("NWU History Chatbot")
 st.subheader("Northwestern University's history chatmate")
@@ -128,20 +125,22 @@ if 'history' not in st.session_state:
 if 'last_intent' not in st.session_state:
     st.session_state['last_intent'] = None
 
+# Display conversation history
 for msg in st.session_state['history']:
-    with st.chat_message(msg["role"], avatar=None):
+    with st.chat_message(msg["role"]):
         st.write(msg["content"])
 
+# Input handling
 user_prompt = st.chat_input("Ask something...")
 
 if user_prompt:
     st.session_state['history'].append({"role": "user", "content": user_prompt})
-    with st.chat_message("user", avatar=None):
+    with st.chat_message("user"):
         st.write(user_prompt)
 
     with st.spinner("Thinking..."):
-        bot_reply = get_semantic_response(user_prompt, intents_data)
+        bot_reply = get_semantic_response(user_prompt)
 
     st.session_state['history'].append({"role": "assistant", "content": bot_reply})
-    with st.chat_message("assistant", avatar=None):
+    with st.chat_message("assistant"):
         st.write(bot_reply)
