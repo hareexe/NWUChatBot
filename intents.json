@@ -109,7 +109,7 @@
         "The ten incorporators of Northwestern Academy, Inc. were Nicolas N. Nicolas, Maximo A. Caday, Cresencio J. Barangan, Marcelino G. Ligot, Manuel E. Pintado, Angel A. Albano, Manuela A. Castisimo, Encarnacion L. Ruiz, Marcelo A. Tajon, and Rufina S. Mariano. These individuals founded the school in 1932 and laid the foundation for what would become Northwestern University."
       ]
     },
-    {
+       {
       "tag": "nicolas_contribution",
       "patterns": [
         "How did Nicolas N. Nicolas help the school?",
@@ -120,8 +120,7 @@
         "What were the contributions of Nicolas N. Nicolas to Northwestern?"
       ],
       "responses": [
-        "Nicolas N. Nicolas laid a strong foundation for Northwestern University. He led the institution in its early growth, expanding opportunities for students who wanted to pursue careers in law, engineering, nursing, business, education, and criminology.",
-        "Nicolas N. Nicolas played a major role in expanding Northwestern University’s academic offerings, particularly in law, engineering, nursing, business, education, and criminology."
+        "Nicolas N. Nicolas laid a strong foundation for Northwestern University. He led the institution in its early growth, expanding opportunities for students who wanted to pursue careers in law, engineering, nursing, business, education, and criminology. Nicolas N. Nicolas played a major role in expanding Northwestern University’s academic offerings, particularly in law, engineering, nursing, business, education, and criminology."
       ]
     },
     {
@@ -135,8 +134,7 @@
         "What was Nicolas N. Nicolas's role in Northwestern University?"
       ],
       "responses": [
-        "Nicolas N. Nicolas served as the longest-serving Chairman of the Board of Directors of Northwestern University. He provided leadership and direction during the institution’s formative years.",
-        "Nicolas N. Nicolas was the longest-serving Chairman of the Board of Directors of Northwestern University, providing strong leadership during its key development years."
+        "Nicolas N. Nicolas served as the longest-serving Chairman of the Board of Directors of Northwestern University. He provided leadership and direction during the institution’s formative years."
       ]
     },
     {
@@ -149,8 +147,7 @@
         "Why was Nicolas N. Nicolas called 'Mr. Northwestern'?"
       ],
       "responses": [
-        "Nicolas N. Nicolas earned the title 'Mr. Northwestern' because of his unmatched dedication and major role in building and shaping the university. His colleagues, students, and the community gave him this recognition for his lifelong service.",
-        "Nicolas N. Nicolas was called 'Mr. Northwestern' because of his lifelong dedication and major contributions to the university’s growth and development."
+        "Nicolas N. Nicolas earned the title 'Mr. Northwestern' because of his unmatched dedication and major role in building and shaping the university. His colleagues, students, and the community gave him this recognition for his lifelong service."
       ]
     },
     {
@@ -881,6 +878,7 @@
       "tag": "leadership_and_presidents",
       "patterns": [
         "Who was the first university president?",
+        "Who is the first university president?",
         "Who was Ben A. Nicolas?",
         "When was Ben A. Nicolas first appointed president?"
       ],
@@ -892,5 +890,3 @@
     }
   ]
 }
-
-
