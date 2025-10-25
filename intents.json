@@ -878,16 +878,11 @@
       "tag": "leadership_and_presidents",
       "patterns": [
         "Who was the first university president?",
-        "Who is the first university president?",
-        "Who was Ben A. Nicolas?",
-        "When was Ben A. Nicolas first appointed president?"
+        "Who is the first university president?"
       ],
       "responses": [
-        "Jose G. Castro was the first University President, appointed in 1989.",
-        "Ben A. Nicolas was a key leader who served as president and chairman in 1982 and later as university president in 1997. He was known for his visionary leadership and reforms.",
-        "Ben A. Nicolas was first appointed president of Northwestern College in 1982 and formally invested in 1983."
+        "Jose G. Castro was the first University President, appointed in 1989."
       ]
     }
   ]
 }
-
