@@ -3,9 +3,6 @@
     {
       "tag": "northwestern_fiat_lux_meaning",
       "patterns": [
-        "Ano ang ibig sabihin ng Fiat Lux sa Northwestern University?",
-        "Ano ang kahulugan ng motto ng Northwestern University?",
-        "Ano ang kinakatawan ng Fiat Lux?",
         "Explain the symbolism of Fiat Lux in Northwestern University history.",
         "What does Fiat Lux mean in Northwestern University?",
         "What does the phrase Fiat Lux represent for Northwestern?",
@@ -24,26 +21,18 @@
         "Thanks a lot",
         "Thank you very much",
         "Thanks for the help",
-        "Appreciate it",
-        "Salamat",
-        "Maraming salamat",
-        "Ayos, salamat",
-        "Thanks chatbot"
+        "Appreciate it"
   ],
       "responses": [
         "You're very welcome! I'm happy to help.",
         "No problem! Glad I could assist.",
         "You're welcome! Let me know if you have more questions about Northwestern University.",
-        "Walang anuman! Nandito lang ako para tumulong.",
         "Anytime! Feel free to ask me more about NU’s history and programs."
       ]
     },
     {
       "tag": "northwestern_logo_symbolism",
       "patterns": [
-        "Ano ang logo ng Northwestern University?",
-        "Ano ang sinisimbolo ng owl sa Northwestern?",
-        "Bakit owl ang ginamit sa logo?",
         "What does the owl represent in Northwestern University?",
         "What is the logo of Northwestern University?",
         "What is the meaning of the Northwestern University symbol?",
@@ -57,9 +46,6 @@
     {
       "tag": "cresencio_barangan_history",
       "patterns": [
-        "Ano ang kontribusyon ni Cresencio J. Barangan?",
-        "Sino ang tapat na tagapamahala ng pondo ng unibersidad?",
-        "Sino si Cresencio J. Barangan?",
         "Tell me about Cresencio J. Barangan’s contribution to Northwestern University.",
         "What was Cresencio J. Barangan’s role in Northwestern University?",
         "Who managed the university funds during the early years of Northwestern University?",
@@ -75,9 +61,6 @@
     {
       "tag": "angel_albano_history",
       "patterns": [
-        "Ano ang kontribusyon ni Angel A. Albano sa Northwestern?",
-        "Ano ang papel ni Angel A. Albano?",
-        "Sino si Angel A. Albano?",
         "Tell me about Angel A. Albano’s contribution to Northwestern University.",
         "What was Angel A. Albano’s role in Northwestern University?",
         "Who was Angel A. Albano?",
@@ -105,8 +88,6 @@
     {
       "tag": "nicolas_contribution",
       "patterns": [
-        "Ano ang ginawa ni Nicolas N. Nicolas para sa Northwestern University?",
-        "Ano ang mga kontribusyon ni Nicolas N. Nicolas?",
         "How did Nicolas N. Nicolas help the school?",
         "How did the founder Nicolas N. Nicolas help the school?",
         "Nicolas N. Nicolas contributions",
@@ -122,9 +103,6 @@
     {
       "tag": "nicolas_role",
       "patterns": [
-        "Ano ang leadership role ni Nicolas N. Nicolas?",
-        "Ano ang posisyon ni Nicolas N. Nicolas?",
-        "Siya ba ang chairman ng board?",
         "Was Nicolas N. Nicolas the chairman of the board?",
         "What leadership role did Nicolas N. Nicolas have?",
         "What leadership role did the founder Nicolas N. Nicolas have?",
@@ -140,9 +118,7 @@
     {
       "tag": "nicolas_title",
       "patterns": [
-        "Bakit tinawag si Nicolas N. Nicolas na 'Mr. Northwestern'?",
         "How did Nicolas N. Nicolas earn the title Mr. Northwestern?",
-        "Sino ang tinawag na Mr. Northwestern?",
         "Who earned the title Mr. Northwestern at the school?",
         "Who was called Mr. Northwestern?",
         "Why is the founder referred to as Mr. Northwestern?",
@@ -751,8 +727,7 @@
         "University",
         "Northwestern",
         "Ano ang Northwestern University?",
-        "Tungkol saan ang unibersidad?",
-        "Ano ang Northwestern?"
+        "Tungkol saan ang unibersidad?"
       ],
       "responses": [
         "Northwestern University has a rich history that began as Northwestern Academy, Inc. in 1932. It became Northwestern College in 1949 and achieved University Status in 1993.",
@@ -766,11 +741,7 @@
         "What was the school originally called?",
         "When did Northwestern Academy become a college?",
         "What was the first year of operation?",
-        "What happened in 1932?",
-        "Kailan itinatag ang Northwestern?",
-        "Ano ang orihinal na pangalan ng paaralan?",
-        "Kailan naging kolehiyo ang Northwestern Academy?",
-        "Anong taon nagsimula ang operasyon?"
+        "What happened in 1932?"
       ],
       "responses": [
         "Northwestern Academy, Inc. was incorporated in 1932 and began operations that same year, offering General Secondary, Commercial Secondary, and Home Economics programs.",
@@ -785,10 +756,7 @@
         "What year did they get university status?",
         "When was the official confirmation of university status?",
         "What year was the 50th anniversary?",
-        "Kailan naging unibersidad ang paaralan?",
-        "Anong taon nakuha ang university status?",
-        "Kailan ang opisyal na kumpirmasyon ng university status?",
-        "Anong taon ang ika-50 anibersaryo?"
+        "Kailan naging unibersidad ang paaralan?"
       ],
       "responses": [
         "Northwestern College was granted University Status in 1993. The official confirmation was issued by the Ministry of Education, Culture and Sports on January 13, 1994.",
@@ -802,10 +770,7 @@
         "List the incorporators of Northwestern University.",
         "Who are the original incorporators of Northwestern?",
         "Who helped establish Northwestern University?",
-        "Who were part of the group that incorporated Northwestern?",
-        "Sino ang mga nag-incorporate ng Northwestern University?",
-        "Ilista ang mga incorporator ng Northwestern.",
-        "Sino ang mga tumulong magtatag ng Northwestern University?"
+        "Who were part of the group that incorporated Northwestern?"
       ],
       "responses": [
         "The incorporators of Northwestern University were Marcelino G. Ligot, Manuel E. Pintado, Angel A. Albano, Manuela A. Castisimo, Encarnacion L. Ruiz, Marcelo A. Tajon, and Rufina S. Mariano."
@@ -815,9 +780,7 @@
       "tag": "key_infrastructure_and_land",
       "patterns": [
         "When was the Nalbo campus lot acquired?",
-        "Where is the main campus located?",
-        "Kailan nakuha ang lupa sa Nalbo campus?",
-        "Nasaan ang main campus?"
+        "Where is the main campus located?"
       ],
       "responses": [
         "The 8.9-hectare lot in Barangay Nalbo, Laoag City was purchased in 1962. Relocation of courses to the new campus began in 1969."
@@ -830,11 +793,7 @@
         "What about the Criminology program?",
         "When did the College of Law reopen?",
         "When did they first offer engineering courses?",
-        "What new programs opened in 2005?",
-        "Kailan nagsimula ang Nursing program?",
-        "Kailan nagsimula ang Criminology program?",
-        "Kailan muling binuksan ang College of Law?",
-        "Kailan sila unang nag-alok ng engineering courses?"
+        "What new programs opened in 2005?"
       ],
       "responses": [
         "The BS in Nursing program started in 1973.",
@@ -850,11 +809,7 @@
         "What is the ISO certification status?",
         "When did the programs get Level II accreditation?",
         "What major awards did the university receive in 2004?",
-        "When did Northwestern get Deregulated Status?",
-        "Ano ang ISO certification status?",
-        "Kailan nakakuha ng Level II accreditation?",
-        "Ano ang mga pangunahing parangal noong 2004?",
-        "Kailan nakuha ng Northwestern ang Deregulated Status?"
+        "When did Northwestern get Deregulated Status?"
       ],
       "responses": [
         "Northwestern University received ISO 9001:1994 certification in 2000 and ISO 9001:2000 certification in 2004.",
@@ -868,10 +823,7 @@
       "patterns": [
         "Who was the first university president?",
         "Who was Ben A. Nicolas?",
-        "When was Ben A. Nicolas first appointed president?",
-        "Sino ang unang university president?",
-        "Sino si Ben A. Nicolas?",
-        "Kailan unang na-appoint si Ben A. Nicolas bilang presidente?"
+        "When was Ben A. Nicolas first appointed president?"
       ],
       "responses": [
         "Jose G. Castro was the first University President, appointed in 1989.",
