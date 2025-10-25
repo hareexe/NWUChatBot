@@ -749,19 +749,29 @@
         "Founded in 1932, Northwestern University evolved from an academy to a full-fledged university. Would you like to know more about its founders, major programs, or accreditations?"
       ]
     },
-    {
-      "tag": "founding_and_early_years",
+     {
+      "tag": "early_years",
       "patterns": [
-        "When was Northwestern founded?",
         "What was the school originally called?",
         "When did Northwestern Academy become a college?",
-        "What was the first year of operation?",
         "What happened in 1932?"
       ],
       "responses": [
         "Northwestern Academy, Inc. was incorporated in 1932 and began operations that same year, offering General Secondary, Commercial Secondary, and Home Economics programs.",
         "The institution was originally called Northwestern Academy, Inc. when it was founded in 1932.",
         "It became Northwestern College in 1949."
+      ]
+    },
+    {
+      "tag": "foundation",
+      "patterns": [
+        "When was Northwestern founded?",
+        "What was NWU founded?",
+        "What happened in 1932?"
+      ],
+      "responses": [
+        "Northwestern Academy, Inc. was incorporated in 1932 and began operations that same year, offering General Secondary, Commercial Secondary, and Home Economics programs.",
+        "The institution was originally called Northwestern Academy, Inc. when it was founded in 1932.",
       ]
     },
     {
@@ -882,3 +892,4 @@
     }
   ]
 }
+
