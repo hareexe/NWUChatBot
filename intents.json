@@ -23,6 +23,7 @@
       ],
       "responses": [
         "The present university president is Atty. Ferdinand Nicolas"
+      ]
     }, 
     {
       "tag": "thank_you",
@@ -844,4 +845,3 @@
     }
   ]
 }
-
