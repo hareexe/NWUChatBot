@@ -14,6 +14,18 @@
       ]
     },
     {
+      "tag": "end_chat",
+      "patterns": [
+        "bye",
+        "goodbye",
+        "see you",
+        "thats all"
+      ],
+      "responses": [
+        "thank you for using the chatbot!"
+      ]
+    }, 
+    {
       "tag": "northwestern_current_president",
       "patterns": [
         "Who is the current president?",
@@ -878,3 +890,4 @@
     }
   ]
 }
+
