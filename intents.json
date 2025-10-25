@@ -13,6 +13,17 @@
         "The phrase 'Fiat Lux', which means 'Let there be light', serves as Northwestern University's guiding motto. It symbolizes the founders’ mission to bring enlightenment through education, spreading the flame of knowledge to future generations and inspiring the institution’s continued growth and resilience."
       ]
     },
+        {
+      "tag": "northwestern_current_president",
+      "patterns": [
+        "Who is the current president?",
+        "Current president",
+        "Present president",
+        "Who is the university president now?"
+      ],
+      "responses": [
+        "The present university president is Atty. Ferdinand Nicolas"
+    }, 
     {
       "tag": "thank_you",
       "patterns": [
@@ -833,3 +844,4 @@
     }
   ]
 }
+
