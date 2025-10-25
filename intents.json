@@ -23,6 +23,7 @@
       ],
       "responses": [
         "The present university president is Atty. Ferdinand Nicolas"
+      ]
     }, 
     {
       "tag": "thank_you",
@@ -812,7 +813,7 @@
         "In 2005, new programs included BS in Library and Information Science, BS in Actuarial Science, BS in Statistics, and BS in Commerce major in E-Business."
       ]
     },
-      {
+    {
       "tag": "nursing_program",
       "patterns": [
         "When was the Nursing program started?",
