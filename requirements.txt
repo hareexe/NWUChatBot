@@ -1,2 +1,3 @@
 nltk
 scikit-learn
+streamlit nltk sentence-transformers scikit-learn
