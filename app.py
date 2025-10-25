@@ -8,7 +8,6 @@ from nltk.corpus import stopwords
 from nltk.stem import WordNetLemmatizer
 from sentence_transformers import SentenceTransformer, util
 
-
 @st.cache_resource(show_spinner="Initializing NLTK resources...")
 def initialize_nltk_data():
     base_dir = os.path.abspath(os.path.dirname(__file__))
@@ -57,7 +56,6 @@ intents_data = load_data()
 def load_embedding_model():
     return SentenceTransformer('all-MiniLM-L6-v2')
 
-
 model = load_embedding_model()
 
 
@@ -84,13 +82,12 @@ def get_semantic_response(user_input, intents_data):
     all_patterns, all_responses, all_tags = [], [], []
     for intent in intents_data['intents']:
         for pattern in intent['patterns']:
-    
             processed_pattern = preprocess(pattern)
             if processed_pattern:
                 all_patterns.append(processed_pattern)
                 all_responses.append(intent['responses'])
                 all_tags.append(intent['tag'])
-
+            
     if not all_patterns:
         return "No usable patterns found in the chatbot data."
 
@@ -112,6 +109,48 @@ def get_semantic_response(user_input, intents_data):
 
     return best_response
 
+st.markdown("""
+<style>
+/* Hide the default role header (User/Assistant) and avatars */
+/* Targeting the first child div of the chat message container (which holds the icon/name) */
+[data-testid^="stChatMessage"] > div:first-child {
+    display: none;
+}
+
+/* Base styling for all message content boxes (the bubble itself) */
+[data-testid="stChatMessageContent"] {
+    max-width: 70%;
+    padding: 12px 16px;
+    border-radius: 20px;
+    font-size: 16px;
+    margin-top: 5px;
+    margin-bottom: 5px; 
+    line-height: 1.5;
+    text-align: left; 
+    box-shadow: 0 1px 1px rgba(0,0,0,0.1); /* Subtle shadow for depth */
+}
+
+/* Styles for User - Right/Blue bubble */
+/* Using the role attribute to target the message and applying right alignment */
+[data-testid^="stChatMessage"] [role="user"] ~ [data-testid="stChatMessageContent"] {
+    background-color: #007bff; /* Bright Blue */
+    color: white;
+    border-top-right-radius: 5px; /* Pointy corner */
+    margin-left: auto; /* Push right */
+    margin-right: 0;
+}
+
+/* Styles for Assistant (Bot) - Left/Grey bubble */
+/* Using the role attribute to target the message and applying left alignment */
+[data-testid^="stChatMessage"] [role="assistant"] ~ [data-testid="stChatMessageContent"] {
+    background-color: #e0e0e0; /* Light Grey */
+    color: #333;
+    border-top-left-radius: 5px; /* Pointy corner */
+    margin-right: auto;
+    margin-left: 0; /* Push left */
+}
+</style>
+""", unsafe_allow_html=True)
 
 st.title("NWU History Chatbot")
 st.subheader("Ask questions about Northwestern University's history, founders, and more!")
@@ -123,20 +162,21 @@ if 'history' not in st.session_state:
 if 'last_intent' not in st.session_state:
     st.session_state['last_intent'] = None
 
+
 for msg in st.session_state['history']:
-    with st.chat_message(msg["role"]):
+    with st.chat_message(msg["role"], avatar=None):
         st.write(msg["content"])
 
 user_prompt = st.chat_input("Ask something...")
 
 if user_prompt:
     st.session_state['history'].append({"role": "user", "content": user_prompt})
-    with st.chat_message("user"):
+    with st.chat_message("user", avatar=None):
         st.write(user_prompt)
 
     with st.spinner("Thinking..."):
         bot_reply = get_semantic_response(user_prompt, intents_data)
 
     st.session_state['history'].append({"role": "assistant", "content": bot_reply})
-    with st.chat_message("assistant"):
+    with st.chat_message("assistant", avatar=None):
         st.write(bot_reply)
