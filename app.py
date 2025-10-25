@@ -127,7 +127,7 @@ def get_semantic_response(user_input, intents_data):
     best_index = similarities.argmax().item()
     best_score = similarities[best_index].item()
 
-    if best_score < 0.75:
+    if best_score < 0.6:
         st.session_state['last_intent'] = None
         return "I'm not sure about that topic related to Northwestern University. Can you rephrase your question?"
 
@@ -165,5 +165,3 @@ if user_prompt:
     st.session_state['history'].append({"role": "assistant", "content": bot_reply})
     with st.chat_message("assistant", avatar=None):
         st.write(bot_reply)
-
-
