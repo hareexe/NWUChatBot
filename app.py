@@ -157,12 +157,13 @@ st.markdown("""
     line-height: 1.5;
     text-align: left; 
     box-shadow: 0 1px 1px rgba(0,0,0,0.1); 
+    color: white !important; /* FORCED white text for high visibility in dark mode */
 }
 
 /* Styles for User - Right/Blue bubble */
 [data-testid^="stChatMessage"] [role="user"] ~ [data-testid="stChatMessageContent"] {
-    background-color: #0056b3; /* Darker Blue for better contrast on dark themes */
-    color: white;
+    background-color: #0056b3; /* Darker Blue */
+    /* color: white; is now set globally above, ensuring white text */
     border-top-right-radius: 5px; /* Pointy corner */
     margin-left: auto; 
     margin-right: 0;
@@ -170,8 +171,8 @@ st.markdown("""
 
 /* Styles for Assistant (Bot) - Left/Grey bubble */
 [data-testid^="stChatMessage"] [role="assistant"] ~ [data-testid="stChatMessageContent"] {
-    background-color: #dcdcdc; /* Slightly darker grey for visibility on light themes */
-    color: #333; /* Dark text for contrast */
+    background-color: #444444; /* Changed to a dark grey for contrast against white text in dark theme */
+    /* color: #333; is now set globally to white above */
     border-top-left-radius: 5px; /* Pointy corner */
     margin-right: auto;
     margin-left: 0; 
