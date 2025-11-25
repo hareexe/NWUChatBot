@@ -25,6 +25,16 @@
         "thank you for using the chatbot!"
       ]
     }, 
+     {
+      "tag": "presidents",
+      "patterns": [
+        "who is the first president?",
+        "first president"
+      ],
+      "responses": [
+        "Jose G. Castro was the first University President, appointed in 1989. While the first college president was Apolinario L. Aquino."
+      ]
+    }, 
     {
       "tag": "northwestern_current_president",
       "patterns": [
