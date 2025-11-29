@@ -149,5 +149,6 @@ if user_prompt:
         bot_reply = get_semantic_response(user_prompt)
 
     st.session_state['history'].append({"role": "assistant", "content": bot_reply})
-    with st.chat_message("assistant", avatar=None)
+    with st.chat_message("assistant", avatar=None):
         st.write(bot_reply)
+
