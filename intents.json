@@ -785,10 +785,11 @@
       "tag": "major_transitions",
       "patterns": [
         "When did the school become a university?",
+        "When did northwestern become a university?",
         "What year did they get university status?",
+        "when did it become a university?",
         "When was the official confirmation of university status?",
-        "What year was the 50th anniversary?",
-        "Kailan naging unibersidad ang paaralan?"
+        "What year was the 50th anniversary?"
       ],
       "responses": [
         "Northwestern College was granted University Status in 1993. The official confirmation was issued by the Ministry of Education, Culture and Sports on January 13, 1994.",
