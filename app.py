@@ -134,23 +134,20 @@ st.markdown("""
 if 'last_intent' not in st.session_state:
     st.session_state['last_intent'] = None
 
-# Display conversation history
 for msg in st.session_state['history']:
-    with st.chat_message(msg["role"]):
+    with st.chat_message(msg["role"], avatar=None): 
         st.write(msg["content"])
 
-# Input handling
 user_prompt = st.chat_input("Ask something...")
 
 if user_prompt:
     st.session_state['history'].append({"role": "user", "content": user_prompt})
-    with st.chat_message("user"):
+    with st.chat_message("user", avatar=None):
         st.write(user_prompt)
 
     with st.spinner("Thinking..."):
         bot_reply = get_semantic_response(user_prompt)
 
     st.session_state['history'].append({"role": "assistant", "content": bot_reply})
-    with st.chat_message("assistant"):
+    with st.chat_message("assistant", avatar=None)
         st.write(bot_reply)
-
