@@ -104,7 +104,7 @@ def get_semantic_response(user_input):
     best_score = similarities[best_index].item()
     best_tag, responses, original_pattern = pattern_meta[best_index]
 
-    CONFIDENCE_THRESHOLD = 0.60  # adjustable
+    CONFIDENCE_THRESHOLD = 0.60 
 
     if best_score < CONFIDENCE_THRESHOLD:
         st.session_state['last_intent'] = None
@@ -120,8 +120,17 @@ st.subheader("Northwestern University's history chatmate")
 
 if 'history' not in st.session_state:
     st.session_state['history'] = [
-        {"role": "assistant", "content": "Hello! I can answer questions about Northwestern University. Try asking, 'When was NWU founded?'"}
+        {"role": "assistant", "content": "Hello! I can answer questions about Northwestern University."}
     ]
+st.markdown("Try asking questions like:")
+st.markdown("""
+* Who is the first president?
+* When did Northwestern become a university?
+* Who is the current president?
+* When is Northwestern University Founded?
+* Who is the founder of Northwestern University?
+""")
+
 if 'last_intent' not in st.session_state:
     st.session_state['last_intent'] = None
 
@@ -144,3 +153,4 @@ if user_prompt:
     st.session_state['history'].append({"role": "assistant", "content": bot_reply})
     with st.chat_message("assistant"):
         st.write(bot_reply)
+
