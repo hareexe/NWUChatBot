@@ -63,6 +63,18 @@ def preprocess(text):
     return " ".join(tokens)
 
 
+@st.cache_data
+def get_all_patterns(intents_data):
+    """Extracts a unique list of pattern strings from all intents."""
+    patterns = set()
+    for intent in intents_data.get("intents", []):
+        patterns.update(intent.get("patterns", []))
+    
+    # Select the first few unique patterns for suggestions
+    return list(patterns)[:10] 
+# ---------------------------------------------
+
+
 @st.cache_resource(show_spinner="Encoding all chatbot patterns...")
 def build_intent_embeddings(intents_data):
     all_texts = []
@@ -122,22 +134,31 @@ if 'history' not in st.session_state:
     st.session_state['history'] = [
         {"role": "assistant", "content": "Hello! I can answer questions about Northwestern University."}
     ]
+
+# --- DYNAMICALLY GENERATED SUGGESTIONS ---
+suggestions = get_all_patterns(intents_data)
+
 st.markdown("Try asking questions like:")
-st.markdown("""
-* Who is the first president?
-* When did Northwestern become a university?
-* Who is the current president?
-* When is Northwestern University Founded?
-* Who is the founder of Northwestern University?
-""")
+suggestion_markdown = "\n".join([f"* {s}" for s in suggestions])
+st.markdown(suggestion_markdown)
 
 if 'last_intent' not in st.session_state:
     st.session_state['last_intent'] = None
 
+# Display conversation history
 for msg in st.session_state['history']:
     with st.chat_message(msg["role"], avatar=None): 
         st.write(msg["content"])
 
+# ---  FOOTER   ---
+st.markdown("""
+---
+<p style='font-size: 0.75rem; color: #808080;'>
+Source Information: Northwestern University Portal, and the book: LEGACY, The people, events, ideas and amazing faith that built Northwestern University by Erlinda Magbual-Gloria.
+</p>
+""", unsafe_allow_html=True)
+
+# Input handling
 user_prompt = st.chat_input("Ask something...")
 
 if user_prompt:
@@ -151,11 +172,3 @@ if user_prompt:
     st.session_state['history'].append({"role": "assistant", "content": bot_reply})
     with st.chat_message("assistant", avatar=None):
         st.write(bot_reply)
-
-# --- FOOTER  ---
-st.markdown("""
----
-<p style='font-size: 0.75rem; color: #808080;'>
-Source Information: Northwestern University Portal, and the book: LEGACY, The people, events, ideas and amazing faith that built Northwestern University by Erlinda Magbual-Gloria.
-</p>
-""", unsafe_allow_html=True)
