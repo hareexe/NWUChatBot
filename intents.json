@@ -895,6 +895,184 @@
         "Jose G. Castro was the first University President, appointed in 1989."
       ]
     },
+        {
+  "university_name": "Northwestern University",
+  "data_type": "Historical Milestones",
+  "milestones_by_decade": [
+    {
+      "decade": "1930s",
+      "summary": "Founding and Early Years",
+      "events": [
+        {
+          "year": 1932,
+          "description": "Incorporation of **Northwestern Academy, Inc.** and issuance of government permits for General Secondary, Commercial Secondary, and Home Economics courses."
+        }
+      ]
+    },
+    {
+      "decade": "1940s",
+      "summary": "War and Recovery",
+      "events": [
+        {
+          "year": 1941,
+          "description": "Classes were temporarily closed due to the outbreak of **World War II**."
+        },
+        {
+          "year": 1945,
+          "description": "Classes resumed following the liberation of the Philippines from Japanese forces."
+        },
+        {
+          "year": 1946,
+          "description": "The corporation purchased its first piece of property and opened collegiate courses."
+        },
+        {
+          "year": 1949,
+          "description": "Institution was converted to **Northwestern College**; received permits for Associate in Arts and Junior Normal courses."
+        }
+      ]
+    },
+    {
+      "decade": "1950s",
+      "summary": "Expansion of Programs",
+      "events": [
+        {
+          "year": 1950,
+          "description": "Construction of a **3-story building** on a lot fronting Primo Lazaro St."
+        },
+        {
+          "year": 1952,
+          "description": "Government permits issued for **Bachelor of Laws**, Technical Engineering, Industrial Education, Associates in Surveying, Bachelor of Science in Commerce, and Elementary programs."
+        }
+      ]
+    },
+    {
+      "decade": "1960s",
+      "summary": "Relocation and Growth",
+      "events": [
+        {
+          "year": 1960,
+          "description": "Permits issued for **Master of Arts in Education** and the **Civil Engineering** program."
+        },
+        {
+          "year": 1962,
+          "description": "An **8.9-hectare lot** was purchased in Barangay Nalbo, Laoag City."
+        },
+        {
+          "year": 1969,
+          "description": "Selected college courses relocated to the new **Nalbo campus**; permit issued for **BS Criminology** (Police Science Technology)."
+        }
+      ]
+    },
+    {
+      "decade": "1970s",
+      "summary": "Recognition of Technical Courses",
+      "events": [
+        {
+          "year": 1971,
+          "description": "Government recognition granted to the **BS Mechanical Engineering** program."
+        },
+        {
+          "year": 1972,
+          "description": "The marker of the Administration Building in Nalbo was unveiled."
+        },
+        {
+          "year": 1973,
+          "description": "Permit issued for the **BS Nursing** program; government recognition granted to the **BS Electrical Engineering** program."
+        }
+      ]
+    },
+    {
+      "decade": "1980s",
+      "summary": "Golden Jubilee and Leadership Changes",
+      "events": [
+        {
+          "year": 1982,
+          "description": "Celebration of the **50th founding anniversary**. **Ben A. Nicolas** appointed president and chairman of the board of directors."
+        },
+        {
+          "year": 1983,
+          "description": "Formal investiture of President Ben A. Nicolas; blessing of the first **computer center in Region I**; organization of the Alumni Association."
+        },
+        {
+          "year": 1985,
+          "description": "Ernesto Asuncion took over as chairman and president."
+        },
+        {
+          "year": 1989,
+          "description": "Ben A. Nicolas elected chairman; **Jose G. Castro** appointed president."
+        }
+      ]
+    },
+    {
+      "decade": "1990s",
+      "summary": "University Status and Accreditation",
+      "events": [
+        {
+          "year": 1990,
+          "description": "Permits obtained for new programs: BS Accountancy, Library Science, Computer Science, Computer Engineering, and Electronics and Communication Engineering."
+        },
+        {
+          "year": 1991,
+          "description": "PACUCOA granted **Level II accreditation** to Arts and Sciences, Commerce, and Education; Aquino Multi-purpose Building completed."
+        },
+        {
+          "year": 1992,
+          "description": "Level II Accreditation granted to Civil, Electronics, and Mechanical Engineering, as well as Criminology programs."
+        },
+        {
+          "year": 1993,
+          "description": "Grant of **University Status**; inauguration of the Angel A. Albano and Manuela A. Castisimo Building; permits issued for various doctoral/master's degrees (e.g., Doctor of Education, MBA) and new bachelor’s degrees (e.g., Mass Communication, Physical Therapy)."
+        },
+        {
+          "year": 1996,
+          "description": "New management team took over: **Ben A. Nicolas** as board chairman and Wilfred A. Nicolas as Executive Committee chairman."
+        },
+        {
+          "year": 1997,
+          "description": "**Ben A. Nicolas** appointed university president."
+        },
+        {
+          "year": 1999,
+          "description": "Permits issued for **BS Architecture and BS Medical Technology**; buildings dedicated to founders, including the unveiling of the Nicolas N. Nicolas bust."
+        }
+      ]
+    },
+    {
+      "decade": "2000s",
+      "summary": "International Standards and Linkages",
+      "events": [
+        {
+          "year": 2000,
+          "description": "Received the **International Standard Organization Certificate (ISO 9001:1994)** by AJA Registrars, Inc."
+        },
+        {
+          "year": 2002,
+          "description": "Graduate programs received **Level II accreditation** status; MOA signed with TESDA; Worship Center completed."
+        },
+        {
+          "year": 2003,
+          "description": "MOA with Sangmyung University (Korea); designated as a **Center of Human Rights**; granted **Deregulated Status by CHED**; purchase of a 1.5-hectare lot in Nalbo."
+        },
+        {
+          "year": 2004,
+          "description": "MOA signed with St. Stephen University (Canada); received **ISO 9001:2000 certification**; recognized by PACUCOA for having the 3rd highest number of accredited programs nationwide."
+        },
+        {
+          "year": 2005,
+          "description": "Permits issued for **BS Library and Information Science**, Actuarial Science, Statistics, and Commerce major in E-Business."
+        },
+        {
+          "year": 2006,
+          "description": "Blessing of a 4-story paramedical building."
+        },
+        {
+          "year": 2007,
+          "description": "Completion of the Alumni House; celebration of the **75th foundation anniversary**; linkage established with the Chinese Consulate in San Nicolas."
+        }
+      ]
+    }
+  ]
+},
    {
   "tag": "northwestern_corporate_war",
   "patterns": [
@@ -910,3 +1088,4 @@
   }
 ]
 }
+
