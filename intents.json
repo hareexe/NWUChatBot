@@ -895,25 +895,17 @@
         "Jose G. Castro was the first University President, appointed in 1989."
       ]
     },
-    {
-      "tag": "northwestern_corporate_war",
-      "patterns": [
-        "Tell me about the 'Quest for Power' conflict at Northwestern University.",
-        "What was the corporate war in Northwestern's history?",
-        "Who was President Jose G. Castro and what did he do?",
-        "What was the 'Coup d’etat' in Northwestern University?",
-        "Who was Josephine G. Bolusan?",
-        "Was there a corruption before?",
-        "Tell me about the restoration period after the conflict."
-      ],
-      "responses": [
-        "The conflict, known as the 'Quest for Power' (1990s), centered on President Jose G. Castro's alleged attempt to seize total control and ownership of Northwestern University through 'fabricated documents' and the establishment of a 'De Facto' board.",
-        "The corporate war involved mass protests and civil unrest led by faculty (like Margarita Dagdagan and Eliezer Erice) and students against the Castro administration, who faced severe allegations of financial corruption and malpractice, which was exposed by whistleblower Josephine G. Bolusan.",
-        "The conflict concluded with a 'Coup d’etat' on October 26, 1996, when the legitimate stockholders, the Nicolas brothers (Ben, Wilfred, and Roy), executed a 'lightning strike' takeover using a Temporary Restraining Order (TRO), physically ousting the Castro group.",
-        "Following the takeover, Ben A. Nicolas became the new Chairman, inheriting a financially depleted and deteriorated institution. The subsequent period, known as the 'Renaissance Years,' involved a major revamp, reinstatement of dismissed employees, and new constructions dedicated to the university’s founders."
-      ]
-    }
+   {
+  "tag": "northwestern_corporate_war",
+  "patterns": [
+    "Tell me about the 'Quest for Power' conflict at Northwestern University.",
+    "What was the corporate war in Northwestern's history?",
+    "Was there a political conflict before?",
+    "What was the 'Coup d’etat' in Northwestern University?",
+    "Tell me about the restoration period after the conflict."
+  ],
+  "responses": [
+    "The conflict, known as the 'Quest for Power' (1990s), began with President Jose G. Castro's alleged attempt to seize total control and ownership of the university, resulting in the establishment of a 'De Facto' board and severe allegations of financial corruption exposed by whistleblower Josephine G. Bolusan. This led to a 'corporate war' involving mass protests and civil unrest by faculty and students (including Margarita Dagdagan and Eliezer Erice). The crisis concluded with a 'Coup d’etat' on October 26, 1996, when the legitimate stockholders, the Nicolas brothers (Ben, Wilfred, and Roy), executed a 'lightning strike' takeover. Following the ousting, Ben A. Nicolas led the 'Renaissance Years' to rebuild the financially depleted institution."]
+   }
   ]
 }
-
-
