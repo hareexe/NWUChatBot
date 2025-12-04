@@ -843,6 +843,7 @@
         "List all the presidents of Northwestern University.",
         "Who are the past and present presidents?",
         "Give me the list of NU presidents and their terms.",
+        "Tell me all the presidents.",
         "List of all presidents.",
         "Presidents of Northwestern"
   ],
@@ -964,9 +965,3 @@
   }
 ]
 }
-
-
-
-
-
-
