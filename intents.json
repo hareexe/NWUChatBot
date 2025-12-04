@@ -115,7 +115,7 @@
         "The ten incorporators of Northwestern Academy, Inc. were Nicolas N. Nicolas, Maximo A. Caday, Cresencio J. Barangan, Marcelino G. Ligot, Manuel E. Pintado, Angel A. Albano, Manuela A. Castisimo, Encarnacion L. Ruiz, Marcelo A. Tajon, and Rufina S. Mariano. These individuals founded the school in 1932 and laid the foundation for what would become Northwestern University."
       ]
     },
-       {
+    {
       "tag": "nicolas_contribution",
       "patterns": [
         "How did Nicolas N. Nicolas help the school?",
@@ -154,6 +154,63 @@
       ],
       "responses": [
         "Nicolas N. Nicolas earned the title 'Mr. Northwestern' because of his unmatched dedication and major role in building and shaping the university. His colleagues, students, and the community gave him this recognition for his lifelong service."
+      ]
+    },
+    {
+      "tag": "buildings",
+      "patterns": [
+        "Buildings of northwestern",
+        "What are the major buildings on campus?",
+        "When were the university buildings completed?",
+        "List key campus structures",
+        "What buildings were completed in the early 2000s?",
+        "Tell me about the building completion history"
+      ],
+      "responses": [
+        "Key building completions include the Aquino Multipurpose Building (Student Center) in 1991, the Worship Center in 2002, the Ben A. Nicolas (BAN) Building in 2006, and the Alumni House in 2007.",
+        "The Aquino Multipurpose Building (Student Center) was completed in 1991. Later additions include the Worship Center (2002), the BAN Building (2006), and the Alumni House (2007).",
+        "The timeline for building completions includes the Aquino Multipurpose Building (Student Center) in 1991, followed by the Worship Center in 2002. More recently, the Ben A. Nicolas (BAN) Building was inaugurated in 2006, and the Alumni House was finished in 2007."
+      ]
+    },
+    {
+      "tag": "building_1991",
+      "patterns": [
+        "When was the Aquino Multipurpose Building completed?",
+        "Tell me about the Student Center building",
+        "When was the Student Center finished?"
+      ],
+      "responses": [
+        "The Aquino Multipurpose Building, also known as the Student Center (SC), was completed in 1991."
+      ]
+    },
+    {
+      "tag": "building_2002",
+      "patterns": [
+        "When was the Worship Center finished?",
+        "Worship Center completion date"
+      ],
+      "responses": [
+        "The Worship Center was completed in 2002."
+      ]
+    },
+    {
+      "tag": "building_2006",
+      "patterns": [
+        "When was the BAN Building inaugurated?",
+        "Ben A Nicolas Building completion"
+      ],
+      "responses": [
+        "The Ben A. Nicolas (BAN) Building was inaugurated in 2006."
+      ]
+    },
+    {
+      "tag": "building_2007",
+      "patterns": [
+        "When was the Alumni House completed?",
+        "Alumni House finish date"
+      ],
+      "responses": [
+        "The Alumni House was completed in 2007."
       ]
     },
     {
@@ -917,6 +974,7 @@
   }
 ]
 }
+
 
 
 
