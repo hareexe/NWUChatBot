@@ -204,16 +204,6 @@
       ]
     },
     {
-      "tag": "building_2007",
-      "patterns": [
-        "When was the Alumni House completed?",
-        "Alumni House finish date"
-      ],
-      "responses": [
-        "The Alumni House was completed in 2007."
-      ]
-    },
-    {
       "tag": "manuel_pintado_history",
       "patterns": [
         "Who was Manuel E. Pintado?",
@@ -974,6 +964,7 @@
   }
 ]
 }
+
 
 
 
