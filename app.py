@@ -152,3 +152,10 @@ if user_prompt:
     with st.chat_message("assistant", avatar=None):
         st.write(bot_reply)
 
+# --- FOOTER  ---
+st.markdown("""
+---
+<p style='font-size: 0.75rem; color: #808080;'>
+Source Information: Northwestern University Portal, and the book: LEGACY, The people, events, ideas and amazing faith that built Northwestern University by Erlinda Magbual-Gloria.
+</p>
+""", unsafe_allow_html=True)
