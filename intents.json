@@ -894,7 +894,7 @@
       "responses": [
         "Jose G. Castro was the first University President, appointed in 1989."
       ]
-    }
+    },
     {
       "tag": "northwestern_corporate_war",
       "patterns": [
@@ -915,4 +915,5 @@
     }
   ]
 }
+
 
