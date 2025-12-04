@@ -804,13 +804,7 @@
         "Presidents of Northwestern"
   ],
       "responses": [
-        "Here is the chronological list of Northwestern's presidents:",
-        "* **1949 (First College President):** Apolinario Aquino",
-        "* **1982 (Second College President):** Ben Nicolas",
-        "* **1985 (Third College President):** Ernesto Asuncion",
-        "* **1989 (Fourth President/First University President):** Jose G. Castro",
-        "* **1997 (Fifth President):** Ben Nicolas",
-        "* **2014 (Sixth President/Current President):** Atty. Ferdinand S. Nicolas"
+        "Here is the chronological list of Northwestern University's presidents:\n\n* **1949 (First College President):** Apolinario Aquino\n* **1982 (Second College President):** Ben Nicolas\n* **1985 (Third College President):** Ernesto Asuncion\n* **1989 (Fourth President / First University President):** Jose G. Castro\n* **1997 (Fifth President):** Ben Nicolas\n* **2014 (Sixth President / Current President):** Atty. Ferdinand S. Nicolas"
       ]
     },
     {
@@ -927,3 +921,4 @@
   }
 ]
 }
+
