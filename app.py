@@ -62,23 +62,27 @@ def preprocess(text):
     tokens = [lemmatizer.lemmatize(w) for w in words if w not in stop_words]
     return " ".join(tokens)
 
-
 @st.cache_data
 def get_all_patterns(intents_data):
-    """Extracts a unique list of pattern strings from all intents."""
+ 
     patterns = set()
-    for intent in intents_data.get("intents", []):
-        patterns.update(intent.get("patterns", []))
+    EXCLUDED_TAGS = {"end_chat", "thank_you", "greeting"}
     
-    # Select the first few unique patterns for suggestions
-    return list(patterns)[:10] 
-# ---------------------------------------------
+    for intent in intents_data.get("intents", []):
+        tag = intent.get("tag")
+        if tag not in EXCLUDED_TAGS:
+            patterns.update(intent.get("patterns", []))
+
+    pattern_list = list(patterns)
+    random.shuffle(pattern_list)
+    
+    return pattern_list[:8]  
 
 
 @st.cache_resource(show_spinner="Encoding all chatbot patterns...")
 def build_intent_embeddings(intents_data):
     all_texts = []
-    meta_data = []  # holds (tag, response_list, original_pattern)
+    meta_data = []  
 
     for intent in intents_data.get("intents", []):
         tag = intent.get("tag")
@@ -135,7 +139,6 @@ if 'history' not in st.session_state:
         {"role": "assistant", "content": "Hello! I can answer questions about Northwestern University."}
     ]
 
-# --- DYNAMICALLY GENERATED SUGGESTIONS ---
 suggestions = get_all_patterns(intents_data)
 
 st.markdown("Try asking questions like:")
