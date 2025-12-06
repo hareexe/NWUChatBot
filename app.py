@@ -120,7 +120,7 @@ def get_semantic_response(user_input):
     best_score = similarities[best_index].item()
     best_tag, responses, original_pattern = pattern_meta[best_index]
 
-    CONFIDENCE_THRESHOLD = 0.75 
+    CONFIDENCE_THRESHOLD = 0.65 
 
     if best_score < CONFIDENCE_THRESHOLD:
         st.session_state['last_intent'] = None
@@ -175,5 +175,6 @@ if user_prompt:
     st.session_state['history'].append({"role": "assistant", "content": bot_reply})
     with st.chat_message("assistant", avatar=None):
         st.write(bot_reply)
+
 
 
