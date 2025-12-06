@@ -111,7 +111,14 @@ def get_retrieval_context(user_input):
     if not intents_data.get("intents"):
         return None, "Chatbot data is unavailable. Please check intents.json."
 
-    user_processed = preprocess(user_input)
+    user_input_modified = user_input
+   
+    if len(user_input.split()) < 5: 
+        user_input_modified = user_input + " Northwestern University history"
+    
+    user_processed = preprocess(user_input_modified)
+    # --- END CONTEXT INJECTION LOGIC ---
+    
     if not user_processed.strip():
         return None, "Could you please rephrase that question about Northwestern University?"
 
@@ -147,8 +154,9 @@ def generate_llm_response(user_prompt, retrieved_context):
     User Question: {user_prompt}
     Answer the question using ONLY the context provided above.
     """
+
     response_text = random.choice(retrieved_context)
-    # --------------------------------------------------------------------
+
     
     return response_text
 
@@ -192,13 +200,14 @@ if user_prompt:
     with st.chat_message("user", avatar=None):
         st.write(user_prompt)
 
-    retrieved_context, error_msg = get_retrieval_context(user_prompt)
-    
-    if error_msg:
-        bot_reply = error_msg
-    else:
-               bot_reply = generate_llm_response(user_prompt, retrieved_context) 
+    with st.spinner("Thinking..."):
+        retrieved_context, error_msg = get_retrieval_context(user_prompt)
         
-    st.session_state['history'].append({"role": "assistant", "content": bot_reply})
-    with st.chat_message("assistant", avatar=None):
-        st.write(bot_reply)
+        if error_msg:
+            bot_reply = error_msg
+        else:
+            bot_reply = generate_llm_response(user_prompt, retrieved_context) 
+            
+        st.session_state['history'].append({"role": "assistant", "content": bot_reply})
+        with st.chat_message("assistant", avatar=None):
+            st.write(bot_reply)
