@@ -969,7 +969,7 @@
     {
       "tag": "Accrediation",
       "patterns": [
-        "When did the programs get Level II accreditation?"
+        "When did the programs get Level II accreditation?",
         "Accreditation Status"
       ],
       "responses": [
@@ -992,4 +992,3 @@
   }
 ]
 }
-
