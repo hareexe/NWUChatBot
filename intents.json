@@ -34,6 +34,17 @@
         "Jose G. Castro was the first University President, appointed in 1989. While the first college president was Apolinario L. Aquino."
       ]
     }, 
+     {
+      "tag": "founder",
+      "patterns": [
+        "who is the the founder?",
+        "who are the founders of NWU?",
+        "who is the founder of NWU?"
+      ],
+      "responses": [
+        "Northwestern University (NWU) in Laoag was founded in 1932 as the Northwestern Academy by a group of pioneering educators, including Angel Albano, Cresencio Barangan, Maximo Caday, Manuela Romero, Encarnacion L. Ruiz, Rufina Mariano, and Nicolas Nicolas, who pooled their savings to establish the first private non-sectarian school in Ilocos Norte. Nicolas Nicolas is often highlighted as a key figure, with NWU even holding ceremonies honoring him as the founding father."
+      ]
+    }, 
     {
       "tag": "northwestern_current_president",
       "patterns": [
@@ -95,8 +106,7 @@
         "Tell me about Angel A. Albano’s contribution to Northwestern University.",
         "What was Angel A. Albano’s role in Northwestern University?",
         "Who was Angel A. Albano?",
-        "Who was Angel Albano in the history of Northwestern University?",
-        "Who was one of the founders named Angel A. Albano?"
+        "Who was Angel Albano in the history of Northwestern University?"
       ],
       "responses": [
         "Angel A. Albano was one of the founders of Northwestern University. He is remembered as a model of diligence and was among the key figures who helped establish the institution during its humble beginnings."
@@ -107,7 +117,6 @@
       "patterns": [
         "Who were the incorporators of Northwestern Academy?",
         "List all incorporators of Northwestern Academy.",
-        "Who were the co-founders of Northwestern Academy?",
         "Name everyone who helped establish Northwestern Academy.",
         "Who were the ten incorporators of Northwestern Academy?"
       ],
@@ -119,10 +128,9 @@
       "tag": "nicolas_contribution",
       "patterns": [
         "How did Nicolas N. Nicolas help the school?",
-        "How did the founder Nicolas N. Nicolas help the school?",
+        "How did Nicolas N. Nicolas help the school?",
         "Nicolas N. Nicolas contributions",
         "What did Nicolas N. Nicolas do for Northwestern University?",
-        "What did the founder do for Northwestern?",
         "What were the contributions of Nicolas N. Nicolas to Northwestern?"
       ],
       "responses": [
@@ -134,8 +142,8 @@
       "patterns": [
         "Was Nicolas N. Nicolas the chairman of the board?",
         "What leadership role did Nicolas N. Nicolas have?",
-        "What leadership role did the founder Nicolas N. Nicolas have?",
-        "What office did the founder hold at Northwestern?",
+        "What leadership role did Nicolas N. Nicolas have?",
+        "What office did the Nicolas N. Nicolas hold at Northwestern?",
         "What position did Nicolas N. Nicolas hold at Northwestern?",
         "What was Nicolas N. Nicolas's role in Northwestern University?"
       ],
@@ -149,7 +157,6 @@
         "How did Nicolas N. Nicolas earn the title Mr. Northwestern?",
         "Who earned the title Mr. Northwestern at the school?",
         "Who was called Mr. Northwestern?",
-        "Why is the founder referred to as Mr. Northwestern?",
         "Why was Nicolas N. Nicolas called 'Mr. Northwestern'?"
       ],
       "responses": [
@@ -219,8 +226,7 @@
         "Who was Manuel E. Pintado?",
         "Tell me about Manuel E. Pintado’s contribution to Northwestern University.",
         "What was Manuel E. Pintado’s role in Northwestern University?",
-        "Who was the first treasurer of Northwestern University?",
-        "Was Manuel Pintado one of the founders of Northwestern University?"
+        "Who was the first treasurer of Northwestern University?"
       ],
       "responses": [
         "Manuel E. Pintado was one of the founders of Northwestern University and served as the institution’s first treasurer. He earned his bachelor’s degree in the United States as a government pensionado. Upon returning to the Philippines, he joined Marcelino G. Ligot and Angel A. Albano in opening a vocational school before helping establish Northwestern Academy, Inc. He also taught at the school during its early years and passed away during World War II."
@@ -257,8 +263,7 @@
         "Did Mr. Nicolas continue teaching during World War II?",
         "What did Nicolas N. Nicolas do during the war?",
         "How did Northwestern Academy continue education during the Japanese invasion?",
-        "Who continued teaching while the school was closed?",
-        "Did the founders continue to teach during the war?"
+        "Who continued teaching while the school was closed?"
       ],
       "responses": [
         "During World War II, while hiding in Padong, a small barrio in Dingras, Ilocos Norte, Mr. Nicolas N. Nicolas continued his passion for education. With the help of the local leader, he organized school-age children in the area and conducted informal lessons. He was assisted by teacher-relatives who had also evacuated, including Mrs. Filomena Nicolas and Rebecca. Even in the midst of war, their dedication to education remained unwavering."
@@ -335,8 +340,7 @@
         "Who was Maximo A. Caday?",
         "What was the role of Maximo Caday in Northwestern?",
         "Tell me about Mr. Maximo Caday",
-        "What contribution did Maximo A. Caday make to Northwestern Academy?",
-        "Was Maximo A. Caday a founder of Northwestern University?"
+        "What contribution did Maximo A. Caday make to Northwestern Academy?"
       ],
       "responses": [
         "Mr. Maximo A. Caday was one of the founders of Northwestern Academy, which later became Northwestern University. Known for his integrity and dedication, he served as the school’s treasurer and was deeply committed to safeguarding its finances. He was strict in disbursing funds and made sure no action could be mistaken as misuse of corporate money. His life was centered on the school, and he even risked his safety during storms to protect important documents from floods."
@@ -366,19 +370,6 @@
       ],
       "responses": [
         "Maximo A. Caday was remembered as an honest, disciplined, and selfless man. His son, Alva A. Caday, described him as someone who valued honesty above all and avoided any act that could cast doubt on his integrity. He was a strict but loving father who taught his children to save, work hard, and avoid extravagance. His commitment to Northwestern was remarkable — he would even wake up during storms to check and protect school records from flood damage."
-      ]
-    },
-    {
-      "tag": "maximo_caday_relationship_with_founders",
-      "patterns": [
-        "Who were Maximo Caday’s close colleagues in Northwestern?",
-        "Did Maximo Caday work closely with other founders?",
-        "How was Maximo Caday’s relationship with other founders?",
-        "Who did Maximo Caday work with in Northwestern?",
-        "Did Maximo Caday and Nicolas N. Nicolas get along?"
-      ],
-      "responses": [
-        "Maximo A. Caday shared a strong and respectful working relationship with his fellow founders, Nicolas N. Nicolas and Cresencio J. Barangan. The three men admired each other’s dedication and worked hand in hand to sustain the growth of Northwestern Academy during its early years."
       ]
     },
     {
@@ -614,7 +605,6 @@
       "patterns": [
         "What motivated Northwestern’s founders to open new programs?",
         "What was the guiding philosophy of Northwestern’s founders?",
-        "What did the founders value more than profit?",
         "How did Northwestern’s founders view education?"
       ],
       "responses": [
@@ -804,8 +794,7 @@
         "Tell me about the university"
       ],
       "responses": [
-        "Northwestern University has a rich history that began as Northwestern Academy, Inc. in 1932. It became Northwestern College in 1949 and achieved University Status in 1993.",
-        "Founded in 1932, Northwestern University evolved from an academy to a full-fledged university. Would you like to know more about its founders, major programs, or accreditations?"
+        "Founded in 1932, Northwestern University evolved from an academy to a full-fledged university."
       ]
     },
      {
