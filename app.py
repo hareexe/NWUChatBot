@@ -62,9 +62,10 @@ def preprocess(text):
     tokens = [lemmatizer.lemmatize(w) for w in words if w not in stop_words]
     return " ".join(tokens)
 
+
 @st.cache_data
 def get_all_patterns(intents_data):
- 
+    
     patterns = set()
     EXCLUDED_TAGS = {"end_chat", "thank_you", "greeting"}
     
@@ -102,16 +103,17 @@ def build_intent_embeddings(intents_data):
 
 all_pattern_texts, pattern_embeddings, pattern_meta = build_intent_embeddings(intents_data)
 
-
-def get_semantic_response(user_input):
+def get_retrieval_context(user_input):
+    """
+    Simulates the retrieval step: finds the best matching intent and 
+    returns its associated responses as context.
+    """
     if not intents_data.get("intents"):
-        return "Chatbot data is unavailable. Please check intents.json."
+        return None, "Chatbot data is unavailable. Please check intents.json."
 
     user_processed = preprocess(user_input)
-
-    # Handle empty or non-informative input
     if not user_processed.strip():
-        return "Could you please rephrase that question about Northwestern University?"
+        return None, "Could you please rephrase that question about Northwestern University?"
 
     user_embedding = model.encode([user_processed], convert_to_tensor=True)
     similarities = util.cos_sim(user_embedding, pattern_embeddings)[0]
@@ -124,11 +126,31 @@ def get_semantic_response(user_input):
 
     if best_score < CONFIDENCE_THRESHOLD:
         st.session_state['last_intent'] = None
-        return "Hmm, I’m not entirely sure about that topic. Could you rephrase your question about Northwestern University?"
+        return None, "Hmm, I’m not entirely sure about that topic. Could you rephrase your question about Northwestern University?"
 
-    best_response = random.choice(responses)
     st.session_state['last_intent'] = best_tag
-    return best_response
+
+    return responses, None
+
+def generate_llm_response(user_prompt, retrieved_context):
+    """
+    Conceptual function to simulate the LLM call using the RAG pattern.
+    NOTE: The actual LLM API call is commented out.
+    """
+    if not retrieved_context:
+        return "Error: Context was not retrieved correctly."
+
+    SYSTEM_INSTRUCTION = "You are a helpful and concise chatbot for Northwestern University. Base your answer STRICTLY on the provided facts."
+    
+    prompt = f"""
+    Context: {chr(10).join(retrieved_context)}
+    User Question: {user_prompt}
+    Answer the question using ONLY the context provided above.
+    """
+    response_text = random.choice(retrieved_context)
+    # --------------------------------------------------------------------
+    
+    return response_text
 
 
 st.title("NWU History Chatbot")
@@ -153,13 +175,14 @@ for msg in st.session_state['history']:
     with st.chat_message(msg["role"], avatar=None): 
         st.write(msg["content"])
 
-# ---  FOOTER   ---
+# --- SOURCE FOOTER ADDED HERE ---
 st.markdown("""
 ---
 <p style='font-size: 0.75rem; color: #808080;'>
 Source Information: Northwestern University Portal, and the book: LEGACY, The people, events, ideas and amazing faith that built Northwestern University by Erlinda Magbual-Gloria.
 </p>
 """, unsafe_allow_html=True)
+
 
 # Input handling
 user_prompt = st.chat_input("Ask something...")
@@ -169,10 +192,13 @@ if user_prompt:
     with st.chat_message("user", avatar=None):
         st.write(user_prompt)
 
-    with st.spinner("Thinking..."):
-        bot_reply = get_semantic_response(user_prompt)
-
+    retrieved_context, error_msg = get_retrieval_context(user_prompt)
+    
+    if error_msg:
+        bot_reply = error_msg
+    else:
+               bot_reply = generate_llm_response(user_prompt, retrieved_context) 
+        
     st.session_state['history'].append({"role": "assistant", "content": bot_reply})
     with st.chat_message("assistant", avatar=None):
         st.write(bot_reply)
-
