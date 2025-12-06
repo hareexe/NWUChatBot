@@ -789,13 +789,12 @@
      {
       "tag": "phases",
       "patterns": [
-        "Major transitions",
-        "Tell me the transformation of NWU",
-        "NWU Chronological events",
-        "NWU Phases"
+        "What is the timeline of the school's name change?",
+        "Tell me the transition of NWU",
+        "Timeline of School Name"
       ],
       "responses": [
-        "**Northwestern Academy (1932) \n* **Northwestern College (1949) \n* **Northwestern University (1994)"
+        "The institution underwent several key transitions:\n\n* **Northwestern Academy (1932)**\n* **Northwestern College (1949)**\n* **Northwestern University (1994)**"
       ]
     },
      {
@@ -995,3 +994,4 @@
   }
 ]
 }
+
