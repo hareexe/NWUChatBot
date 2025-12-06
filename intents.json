@@ -204,6 +204,16 @@
       ]
     },
     {
+      "tag": "building_2007",
+      "patterns": [
+        "When was the Alumni House completed?",
+        "Alumni House finish date"
+      ],
+      "responses": [
+        "The Alumni House was completed in 2007."
+      ]
+    },
+    {
       "tag": "manuel_pintado_history",
       "patterns": [
         "Who was Manuel E. Pintado?",
@@ -816,7 +826,7 @@
       "tag": "foundation",
       "patterns": [
         "When was Northwestern founded?",
-        "When was the university founded?",
+        "When was founded?",
         "What happened in 1932?"
       ],
       "responses": [
@@ -843,7 +853,6 @@
         "List all the presidents of Northwestern University.",
         "Who are the past and present presidents?",
         "Give me the list of NU presidents and their terms.",
-        "Tell me all the presidents.",
         "List of all presidents.",
         "Presidents of Northwestern"
   ],
@@ -926,17 +935,11 @@
       ]
     },
     {
-      "tag": "accreditation_and_distinctions",
+      "tag": "Deregulated_Status",
       "patterns": [
-        "What is the ISO certification status?",
-        "When did the programs get Level II accreditation?",
-        "What major awards did the university receive in 2004?",
         "When did Northwestern get Deregulated Status?"
       ],
       "responses": [
-        "Northwestern University received ISO 9001:1994 certification in 2000 and ISO 9001:2000 certification in 2004.",
-        "Initial Level II accreditation for major programs such as Arts and Sciences, Commerce, and Education was granted in 1991.",
-        "In 2004, Northwestern University ranked 3rd nationwide by PACUCOA for having the most accredited programs and was number one in Region I.",
         "The university was granted Deregulated Status by CHED in 2003."
       ]
     },
@@ -948,6 +951,33 @@
       ],
       "responses": [
         "Jose G. Castro was the first University President, appointed in 1989."
+      ]
+    },
+    {
+      "tag": "ISO_Certification",
+      "patterns": [
+        "What is the ISO certification status?"
+      ],
+      "responses": [
+        "Northwestern University received ISO 9001:1994 certification in 2000 and ISO 9001:2000 certification in 2004."
+      ]
+    },
+    {
+      "tag": "2004_Award",
+      "patterns": [
+          "What major awards did the university receive in 2004?"
+      ],
+      "responses":[
+        "In 2004, Northwestern University ranked 3rd nationwide by PACUCOA for having the most accredited programs and was number one in Region I."
+      ]
+    },
+    {
+      "tag": "Accrediation",
+      "patterns": [
+        "When did the programs get Level II accreditation?"
+      ],
+      "responses": [
+          "Initial Level II accreditation for major programs such as Arts and Sciences, Commerce, and Education was granted in 1991."
       ]
     },
    {
@@ -965,4 +995,3 @@
   }
 ]
 }
-
