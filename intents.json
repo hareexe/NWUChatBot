@@ -37,7 +37,7 @@
     {
       "tag": "northwestern_current_president",
       "patterns": [
-        "Who is the current president?",
+        "Who is the current president of NWU?",
         "Current president",
         "Present president",
         "Who is the university president now?"
@@ -995,3 +995,4 @@
   }
 ]
 }
+
