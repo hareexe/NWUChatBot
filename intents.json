@@ -732,17 +732,6 @@
       ]
     },
     {
-      "tag": "northwestern_academic_freedom",
-      "patterns": [
-        "How does Northwestern University uphold academic freedom?",
-        "What makes Northwestern University unique in student rights?",
-        "What did Professor Irma Mariano say about academic freedom at Northwestern?"
-      ],
-      "responses": [
-        "Northwestern University respects students' and faculty's freedom of expression, allowing open disagreement and critical thinking without fear, creating a distinctive environment of academic freedom."
-      ]
-    },
-    {
       "tag": "northwestern_martial_law",
       "patterns": [
         "How did Martial Law affect Northwestern College?",
@@ -992,3 +981,4 @@
   }
 ]
 }
+
