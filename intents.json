@@ -787,9 +787,23 @@
       ]
     },
      {
+      "tag": "phases",
+      "patterns": [
+        "Major transitions",
+        "Tell me the transformation of NWU",
+        "NWU Chronological events",
+        "NWU Phases"
+      ],
+      "responses": [
+        "**Northwestern Academy (1932) \n* **Northwestern College (1949) \n* **Northwestern University (1994)"
+      ]
+    },
+     {
       "tag": "college",
       "patterns": [
-        "When did Northwestern Academy become a college?"
+        "When did Northwestern Academy become a college?",
+        "When did NWU a college?",
+        "When did the school become a college?"
       ],
       "responses": [
         "It became Northwestern College in 1949."
@@ -936,7 +950,7 @@
       "tag": "ISO_Certification",
       "patterns": [
         "What is the ISO certification status?",
-        " ISO certification",
+        "ISO certification",
         "What is the ISO certification status of NWU?"
       ],
       "responses": [
@@ -981,4 +995,3 @@
   }
 ]
 }
-
