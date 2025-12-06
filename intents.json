@@ -827,7 +827,7 @@
         "When did northwestern become a university?",
         "What year did they get university status?",
         "when did it become a university?",
-        "When was the official confirmation of university status?"
+        "when did NWU become a university?"
       ],
       "responses": [
         "Northwestern College was granted University Status in 1993. The official confirmation was issued by the Ministry of Education, Culture and Sports on January 13, 1994."
@@ -923,6 +923,8 @@
     {
       "tag": "Deregulated_Status",
       "patterns": [
+        "When did the university get Deregulated Status?",
+        "When did NWU get Deregulated Status?",
         "When did Northwestern get Deregulated Status?"
       ],
       "responses": [
@@ -933,6 +935,8 @@
       "tag": "leadership_and_presidents",
       "patterns": [
         "Who was the first university president?",
+        "Who was the first NWU president?",
+        "Who was the first president of NWU?",
         "Who is the first university president?"
       ],
       "responses": [
@@ -942,7 +946,9 @@
     {
       "tag": "ISO_Certification",
       "patterns": [
-        "What is the ISO certification status?"
+        "What is the ISO certification status?",
+        " ISO certification",
+        "What is the ISO certification status of NWU?"
       ],
       "responses": [
         "Northwestern University received ISO 9001:1994 certification in 2000 and ISO 9001:2000 certification in 2004."
@@ -951,7 +957,10 @@
     {
       "tag": "2004_Award",
       "patterns": [
-          "What major awards did the university receive in 2004?"
+        "What major awards did the university receive in 2004?",
+        "What major awards did the NWU receive in 2004?",
+        "NWU 2004 award.",
+        "NWU award."
       ],
       "responses":[
         "In 2004, Northwestern University ranked 3rd nationwide by PACUCOA for having the most accredited programs and was number one in Region I."
@@ -961,6 +970,7 @@
       "tag": "Accrediation",
       "patterns": [
         "When did the programs get Level II accreditation?"
+        "Accreditation Status"
       ],
       "responses": [
           "Initial Level II accreditation for major programs such as Arts and Sciences, Commerce, and Education was granted in 1991."
@@ -973,6 +983,7 @@
     "What was the corporate war in Northwestern's history?",
     "Was there a political conflict before?",
     "What was the 'Coup d’etat' in Northwestern University?",
+    "NWU corruption or politics",
     "Tell me about the restoration period after the conflict."
   ],
   "responses": [
@@ -981,3 +992,4 @@
   }
 ]
 }
+
