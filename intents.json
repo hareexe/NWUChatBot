@@ -801,8 +801,7 @@
       "tag": "general_info",
       "patterns": [
         "What is Northwestern University?",
-        "Tell me about the university",
-        "Northwestern University"
+        "Tell me about the university"
       ],
       "responses": [
         "Northwestern University has a rich history that began as Northwestern Academy, Inc. in 1932. It became Northwestern College in 1949 and achieved University Status in 1993.",
@@ -810,15 +809,11 @@
       ]
     },
      {
-      "tag": "early_years",
+      "tag": "college",
       "patterns": [
-        "What was the school originally called?",
-        "When did Northwestern Academy become a college?",
-        "What happened in 1932?"
+        "When did Northwestern Academy become a college?"
       ],
       "responses": [
-        "Northwestern Academy, Inc. was incorporated in 1932 and began operations that same year, offering General Secondary, Commercial Secondary, and Home Economics programs.",
-        "The institution was originally called Northwestern Academy, Inc. when it was founded in 1932.",
         "It became Northwestern College in 1949."
       ]
     },
@@ -827,6 +822,8 @@
       "patterns": [
         "When was Northwestern founded?",
         "When was founded?",
+        "When was NWU founded?",
+        "Foundation of NWU",
         "What happened in 1932?"
       ],
       "responses": [
@@ -995,4 +992,3 @@
   }
 ]
 }
-
