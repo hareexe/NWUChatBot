@@ -1,174 +1,152 @@
 import streamlit as st
-import nltk
-import os
 import json
 import random
 import torch
-from nltk.tokenize import RegexpTokenizer
-from nltk.corpus import stopwords
-from nltk.stem import WordNetLemmatizer
-from sentence_transformers import SentenceTransformer, util
+import hashlib
+import os
 
+# Replace in-file implementations with imports
+from modules.nlp_utils import initialize_nltk_data, preprocess, expand_with_synonyms, regexp_word_tokenizer
+from modules.data_store import load_data, build_intent_embeddings, _hash_intents, load_embedding_model
+from modules.eval_utils import build_all_tests_from_intents, run_offline_eval
+from modules.matcher import get_semantic_response_debug, keyword_fallback, get_all_patterns
 
+# --------------------------
+# --- NLTK Initialization ---
+# --------------------------
 @st.cache_resource(show_spinner="Initializing NLTK resources...")
-def initialize_nltk_data():
-    base_dir = os.path.abspath(os.path.dirname(__file__))
-    NLTK_DATA_DIR = os.path.join(base_dir, ".nltk_data")
+def _initialize_nltk_data():
+    return initialize_nltk_data()
 
-    if NLTK_DATA_DIR not in nltk.data.path:
-        nltk.data.path.insert(0, NLTK_DATA_DIR)
+# Safely handle return value from NLTK init
+_nltk_init = _initialize_nltk_data()
+try:
+    lemmatizer, stop_words, regexp_word_tokenizer = _nltk_init  # expect a tuple
+except Exception:
+    # Fallback: use the tokenizer exported by modules.nlp_utils; lemmatizer/stop_words optional
+    lemmatizer, stop_words = None, None
+    from modules.nlp_utils import regexp_word_tokenizer as _exported_tokenizer
+    regexp_word_tokenizer = _exported_tokenizer
 
-    os.makedirs(NLTK_DATA_DIR, exist_ok=True)
-
-    for r in ['punkt', 'stopwords', 'wordnet']:
-        try:
-            nltk.data.find(r)
-        except LookupError:
-            nltk.download(r, download_dir=NLTK_DATA_DIR, quiet=True)
-
-    lemmatizer = WordNetLemmatizer()
-    stop_words = set(stopwords.words('english'))
-    regexp_word_tokenizer = RegexpTokenizer(r'\w+')
-    return lemmatizer, stop_words, regexp_word_tokenizer
-
-
-lemmatizer, stop_words, regexp_word_tokenizer = initialize_nltk_data()
-
-
+# --------------------------
+# --- Load intents.json ----
+# --------------------------
 @st.cache_resource(show_spinner="Loading chatbot data...")
-def load_data():
-    base_dir = os.path.abspath(os.path.dirname(__file__))
-    filepath = os.path.join(base_dir, "intents.json")
+def _load_data():
+    return load_data()
+
+intents_data = _load_data()
+
+# Fallback: ensure intents.json is loaded from the app root if the module returned empty
+if not intents_data or not intents_data.get("intents"):
     try:
-        with open(filepath, 'r', encoding='utf-8') as f:
-            return json.load(f)
+        app_dir = os.path.abspath(os.path.dirname(__file__))
+        intents_path = os.path.join(app_dir, "intents.json")
+        with open(intents_path, "r", encoding="utf-8") as f:
+            intents_data = json.load(f)
     except Exception as e:
-        st.error(f"Error loading intents.json: {e}")
-        return {"intents": []}
+        st.error(f"Failed to load intents.json from app root: {e}")
+        intents_data = {"intents": []}
 
-
-intents_data = load_data()
-
-
+# --------------------------
+# --- Embedding model  -----
+# --------------------------
 @st.cache_resource(show_spinner="Loading sentence transformer model...")
-def load_embedding_model():
-    return SentenceTransformer('all-MiniLM-L6-v2')
+def _load_embedding_model():
+    return load_embedding_model()
 
+model = _load_embedding_model()
 
-model = load_embedding_model()
+# --------------------------
+# --- Build embeddings ----
+# --------------------------
+@st.cache_data(show_spinner="Encoding all chatbot patterns...")
+def _build_intent_embeddings(intents_data_hash: str, intents_data_serialized: str):
+    # pass the loaded model into the module function
+    return build_intent_embeddings(intents_data_hash, intents_data_serialized, model=model)
 
-def preprocess(text):
-    words = regexp_word_tokenizer.tokenize(text.lower())
-    tokens = [lemmatizer.lemmatize(w) for w in words if w not in stop_words]
-    return " ".join(tokens)
+# Ensure model is available before building embeddings
+if model is None:
+    model = _load_embedding_model()
 
+intents_hash = _hash_intents(intents_data)
+intents_serialized = json.dumps(intents_data, sort_keys=True)
+all_pattern_texts, pattern_embeddings, pattern_meta = _build_intent_embeddings(intents_hash, intents_serialized)
 
-@st.cache_data
-def get_all_patterns(intents_data):
-    """Extracts a unique list of pattern strings from all intents."""
-    patterns = set()
-    for intent in intents_data.get("intents", []):
-        patterns.update(intent.get("patterns", []))
-    
-    # Select the first few unique patterns for suggestions
-    return list(patterns)[:10] 
-# ---------------------------------------------
+# Wire globals to matcher (minimal DI)
+from modules.matcher import set_runtime_handles
+set_runtime_handles(
+    model=model,
+    intents_data=intents_data,
+    pattern_embeddings=pattern_embeddings,
+    pattern_meta=pattern_meta,
+    preprocess=preprocess,
+    tokenizer=regexp_word_tokenizer
+)
 
-
-@st.cache_resource(show_spinner="Encoding all chatbot patterns...")
-def build_intent_embeddings(intents_data):
-    all_texts = []
-    meta_data = []  # holds (tag, response_list, original_pattern)
-
-    for intent in intents_data.get("intents", []):
-        tag = intent.get("tag")
-        responses = intent.get("responses", [])
-        for pattern in intent.get("patterns", []):
-            processed = preprocess(pattern)
-            if processed.strip():
-                all_texts.append(processed)
-                meta_data.append((tag, responses, pattern))
-
-    if not all_texts:
-        return [], [], None
-
-    embeddings = model.encode(all_texts, convert_to_tensor=True)
-    return all_texts, embeddings, meta_data
-
-
-all_pattern_texts, pattern_embeddings, pattern_meta = build_intent_embeddings(intents_data)
-
-
-def get_semantic_response(user_input):
-    if not intents_data.get("intents"):
-        return "Chatbot data is unavailable. Please check intents.json."
-
-    user_processed = preprocess(user_input)
-
-    # Handle empty or non-informative input
-    if not user_processed.strip():
-        return "Could you please rephrase that question about Northwestern University?"
-
-    user_embedding = model.encode([user_processed], convert_to_tensor=True)
-    similarities = util.cos_sim(user_embedding, pattern_embeddings)[0]
-
-    best_index = similarities.argmax().item()
-    best_score = similarities[best_index].item()
-    best_tag, responses, original_pattern = pattern_meta[best_index]
-
-    CONFIDENCE_THRESHOLD = 0.60 
-
-    if best_score < CONFIDENCE_THRESHOLD:
-        st.session_state['last_intent'] = None
-        return "Hmm, I’m not entirely sure about that topic. Could you rephrase your question about Northwestern University?"
-
-    best_response = random.choice(responses)
-    st.session_state['last_intent'] = best_tag
-    return best_response
-
-
+# --------------------------
+# --- Streamlit UI ---------
+# --------------------------
+st.set_page_config(page_title="NWU History Chatbot", layout="centered")
 st.title("NWU History Chatbot")
-st.subheader("Northwestern University's history chatmate")
+st.subheader("Ask about the history of Northwestern University (Laoag City)")
 
 if 'history' not in st.session_state:
-    st.session_state['history'] = [
-        {"role": "assistant", "content": "Hello! I can answer questions about Northwestern University."}
-    ]
-
-# --- DYNAMICALLY GENERATED SUGGESTIONS ---
-suggestions = get_all_patterns(intents_data)
-
-st.markdown("Try asking questions like:")
-suggestion_markdown = "\n".join([f"* {s}" for s in suggestions])
-st.markdown(suggestion_markdown)
-
+    st.session_state['history'] = [{"role": "assistant", "content": "Hello! I can answer questions about Northwestern University."}]
 if 'last_intent' not in st.session_state:
     st.session_state['last_intent'] = None
+if 'recent_questions' not in st.session_state:
+    st.session_state['recent_questions'] = []
+
+# Suggestions
+patterns = get_all_patterns(intents_data, limit=5)
+if patterns:
+    st.markdown("**Try asking:**")
+    st.markdown("\n".join([f"* {s}" for s in patterns]))
+
+# --- Quick eval button ---
+# col1, col2 = st.columns(2)
+# with col2:
+#     if st.button("Run quick evaluation"):
+#         acc, res = run_offline_eval(intents_data)
+#         st.markdown(f"<small>Accuracy: {round(acc*100,1)}%</small>", unsafe_allow_html=True)
+#         # Show only misses
+#         misses = [r for r in res if not r["ok"]]
+#         for r in misses:
+#             st.markdown(
+#                 f"<small>- [MISS] {r['query']} → expected={r['expected']} predicted={r['predicted']} score={r['score']} reason={r['reason']}</small>",
+#                 unsafe_allow_html=True
+#             )
 
 # Display conversation history
 for msg in st.session_state['history']:
-    with st.chat_message(msg["role"], avatar=None): 
+    with st.chat_message(msg["role"], avatar=None):
         st.write(msg["content"])
 
-# ---  FOOTER   ---
+# Footer
 st.markdown("""
 ---
-<p style='font-size: 0.75rem; color: #808080;'>
-Source Information: Northwestern University Portal, and the book: LEGACY, The people, events, ideas and amazing faith that built Northwestern University by Erlinda Magbual-Gloria.
+<p style='font-size:0.75rem;color:#808080;'>
+Source: Northwestern University Portal and <em>LEGACY</em> by Erlinda Magbual-Gloria.
 </p>
 """, unsafe_allow_html=True)
 
-# Input handling
-user_prompt = st.chat_input("Ask something...")
+# Input
+user_prompt = st.chat_input("Ask something about NWU history...")
 
 if user_prompt:
     st.session_state['history'].append({"role": "user", "content": user_prompt})
+    st.session_state['recent_questions'].append(user_prompt)
+    st.session_state['recent_questions'] = st.session_state['recent_questions'][-6:]
+
     with st.chat_message("user", avatar=None):
         st.write(user_prompt)
 
     with st.spinner("Thinking..."):
-        bot_reply = get_semantic_response(user_prompt)
+        bot_reply, debug_info = get_semantic_response_debug(user_prompt)
 
     st.session_state['history'].append({"role": "assistant", "content": bot_reply})
     with st.chat_message("assistant", avatar=None):
         st.write(bot_reply)
+        if debug_info:
+            st.markdown(f"<small style='color:gray'>Debug Info: {debug_info}</small>", unsafe_allow_html=True)
