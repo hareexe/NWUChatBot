@@ -51,9 +51,8 @@
         "initial president",
         "maiden president"
       ],
-      "aliases": ["nwu president", "northwestern uni president", "nu laoag president"],
+      "aliases": ["nwu first president", "northwestern first president", "nu laoag first president"],
       "examples": [
-        "who is the first president of northwestern university?",
         "who was the first university president?",
         "first president of NWU",
         "who was the first president?",
@@ -84,6 +83,8 @@
       "aliases": ["who is nwu president now", "current nwu president", "northwestern current pres"],
       "examples": [
         "Who is the current president?",
+        "Who is the president?",
+        "Who is the current president of NWU?",
         "Current president",
         "Present president",
         "Who is the university president now?",
@@ -1790,4 +1791,5 @@
     }
   ]
 }
+
 
