@@ -38,20 +38,14 @@
       "responses": ["thank you for using the chatbot!"]
     },
     {
-      "tag": "presidents",
-      "intent_description": "Intent describing: presidents.",
+      "tag": "first_presidents",
+      "intent_description": "Intent describing: first presidents.",
       "context": "Northwestern University Laoag City, Ilocos Norte, Philippines. Founded 1932.",
-      "boost_keywords": ["president", "university president", "first president", "founding president", "chairman"],
+      "boost_keywords": ["first president", "first college president", "first university president", "first president"],
       "keywords": [
         "first president",
         "first university president",
-        "founding president",
-        "university president",
-        "who led nwu",
-        "who led northwestern university",
         "first college president",
-        "who is the president of northwestern university",
-        "who was the president of northwestern university",
         "who was the first president",
         "who is the first president",
         "initial president",
@@ -62,22 +56,16 @@
         "who is the first president of northwestern university?",
         "who was the first university president?",
         "first president of NWU",
-        "university president",
-        "who is the founding president of northwestern university?",
-        "who led NWU?",
-        "who led northwestern university?",
         "who was the first president?",
         "who is the first president?",
         "who is the first president of northwestern?",
         "who was the first president of nwu?",
         "nwu first president",
-        "who first led the university?",
         "who is the first university president of northwestern?",
         "who was the first university president of nwu?"
       ],
       "responses": [
-        "Jose G. Castro was the first University President, appointed in 1989. While the first college president was Apolinario L. Aquino.",
-        "The first president of Northwestern University was Jose G. Castro, who served from 1989. The initial college president was Apolinario L. Aquino."
+        "Jose G. Castro was the first University President, appointed in 1989. While the first college president was Apolinario L. Aquino."
       ]
     },
     {
@@ -169,10 +157,7 @@
         "cashier",
         "finance",
         "steward",
-        "funds",
-        "faithful",
-        "role",
-        "contribution"
+        "funds"
       ],
       "examples": [
         "Tell me about Cresencio J. Barangan\u2019s contribution to Northwestern University.",
@@ -191,21 +176,11 @@
       "intent_description": "Intent describing: angel albano history.",
       "context": "Northwestern University Laoag City, Ilocos Norte, Philippines. Founded 1932.",
       "keywords": [
-        "northwestern",
         "albano?",
-        "contribution",
         "angel",
-        "what",
         "founders",
-        "tell",
-        "history",
-        "role",
-        "university.",
-        "university?",
         "albano\u2019s",
-        "named",
-        "albano",
-        "about"
+        "albano"
       ],
       "examples": [
         "Tell me about Angel A. Albano\u2019s contribution to Northwestern University.",
@@ -368,25 +343,12 @@
       "tag": "northwestern_academy_open_admission",
       "intent_description": "Intent describing: northwestern academy open admission.",
       "context": "Northwestern University Laoag City, Ilocos Norte, Philippines. Founded 1932.",
-      "boost_keywords": ["open admission", "accepted", "could", "admission", "help poor"],
+      "boost_keywords": ["open admission", "accepted", "admission", "help poor"],
       "keywords": [
         "accepted",
         "students",
-        "academy?",
-        "rich",
         "academy",
         "1930s?",
-        "what",
-        "kind",
-        "have",
-        "northwestern",
-        "were",
-        "only",
-        "poor?",
-        "study",
-        "open",
-        "could",
-        "students?",
         "help",
         "admission?",
         "open admission"
@@ -415,14 +377,9 @@
         "education?",
         "academy?",
         "commonwealth",
-        "when",
         "academy",
-        "start",
-        "what",
         "college",
         "courses?",
-        "planning",
-        "northwestern",
         "happened",
         "affect",
         "constitution",
@@ -447,8 +404,6 @@
       "context": "Northwestern University Laoag City, Ilocos Norte, Philippines. Founded 1932.",
       "boost_keywords": ["colleagues", "work", "closely", "relationship", "founders", "worked"],
       "keywords": [
-        "other",
-        "were",
         "close",
         "caday's",
         "caday",
@@ -460,7 +415,6 @@
         "founders?",
         "northwestern?",
         "colleagues",
-        "with",
         "along?",
         "worked with"
       ],
@@ -1836,3 +1790,4 @@
     }
   ]
 }
+
