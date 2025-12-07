@@ -30,6 +30,25 @@
       ]
     },
     {
+      "tag": "complete_northwestern_presidents_list",
+      "intent_description": "List of all presidents",
+      "keywords": ["all presidents", "list presidents", "list of presidents"],
+      "context": "Northwestern University Laoag City, Ilocos Norte, Philippines. Founded 1932.",
+    },
+    {
+      "aliases": ["all nwu president", "northwestern complete presidents", "nu laoag list of all presidents"],
+      "examples": [
+        "List all the presidents of Northwestern University.",
+        "Who are the past and present presidents?",
+        "Give me the list of NU presidents and their terms.",
+        "List of all presidents.",
+        "Presidents of Northwestern"
+      ],
+       "responses": [
+        "Northwestern University's presidents:\n\n* **1949 (First College President):** Apolinario L. Aquino\n* **1982 (Second College President):** Ben A. Nicolas\n* **1985 (Third College President):** Ernesto Asuncion\n* **1989 (Fourth President / First University President):** Jose G. Castro\n* **1997 (Fifth President):** Ben A. Nicolas\n* **2014 (Sixth President / Current President):** Atty. Ferdinand S. Nicolas"
+       ]
+    },
+    {
       "tag": "end_chat",
       "intent_description": "Intent describing: end chat.",
       "context": "Northwestern University Laoag City, Ilocos Norte, Philippines. Founded 1932.",
@@ -1791,5 +1810,6 @@
     }
   ]
 }
+
 
 
