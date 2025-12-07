@@ -32,10 +32,8 @@
     {
       "tag": "complete_northwestern_presidents_list",
       "intent_description": "List of all presidents",
-      "keywords": ["all presidents", "list presidents", "list of presidents"],
       "context": "Northwestern University Laoag City, Ilocos Norte, Philippines. Founded 1932.",
-    },
-    {
+      "keywords": ["all presidents", "list presidents", "list of presidents"],
       "aliases": ["all nwu president", "northwestern complete presidents", "nu laoag list of all presidents"],
       "examples": [
         "List all the presidents of Northwestern University.",
@@ -1810,6 +1808,7 @@
     }
   ]
 }
+
 
 
 
