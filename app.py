@@ -99,6 +99,8 @@ if 'recent_questions' not in st.session_state:
     st.session_state['recent_questions'] = []
 
 # Suggestions
+patterns = set()
+EXCLUDED_TAGS = {"end_chat", "thank_you", "greeting"}
 patterns = get_all_patterns(intents_data, limit=5)
 if patterns:
     st.markdown("**Try asking:**")
@@ -150,3 +152,4 @@ if user_prompt:
         st.write(bot_reply)
         if debug_info:
             st.markdown(f"<small style='color:gray'>Debug Info: {debug_info}</small>", unsafe_allow_html=True)
+
