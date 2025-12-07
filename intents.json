@@ -109,9 +109,10 @@
       "tag": "northwestern_president",
       "intent_description": "Intent describing: northwestern current president.",
       "context": "Northwestern University Laoag City, Ilocos Norte, Philippines. Founded 1932.",
-      "boost_keywords": ["president", "current", "present", "incumbent", "sitting"],
+      "boost_keywords": ["who is the president", "president", "current", "present", "incumbent", "sitting"],
       "keywords": [
         "current president",
+        "who is the president",
         "present president",
         "president now",
         "incumbent president",
@@ -1829,6 +1830,7 @@
     }
   ]
 }
+
 
 
 
