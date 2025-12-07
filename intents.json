@@ -82,8 +82,6 @@
       "boost_keywords": ["first president", "first college president", "first university president", "first president"],
       "keywords": [
         "first president",
-        "first university president",
-        "first college president",
         "who was the first president",
         "who is the first president",
         "initial president",
@@ -91,15 +89,12 @@
       ],
       "aliases": ["nwu first president", "northwestern first president", "nu laoag first president"],
       "examples": [
-        "who was the first university president?",
         "first president of NWU",
         "who was the first president?",
         "who is the first president?",
         "who is the first president of northwestern?",
         "who was the first president of nwu?",
-        "nwu first president",
-        "who is the first university president of northwestern?",
-        "who was the first university president of nwu?"
+        "nwu first president"
       ],
       "responses": [
         "Jose G. Castro was the first University President, appointed in 1989. While the first college president was Apolinario L. Aquino."
@@ -1830,6 +1825,7 @@
     }
   ]
 }
+
 
 
 
