@@ -31,7 +31,7 @@
     },
     {
       "tag": "complete_northwestern_presidents_list",
-      "intent_description": "List of all presidents",
+      "intent_description": "Intent describing: List of all presidents",
       "context": "Northwestern University Laoag City, Ilocos Norte, Philippines. Founded 1932.",
       "keywords": ["all presidents", "list presidents", "list of presidents"],
       "aliases": ["all nwu president", "northwestern complete presidents", "nu laoag list of all presidents"],
@@ -53,6 +53,27 @@
       "keywords": ["goodbye", "thats"],
       "examples": ["bye", "goodbye", "see you", "thats all"],
       "responses": ["thank you for using the chatbot!"]
+    },
+     {
+      "tag": "school_name",
+      "intent_description": "Intent describing: names of the school.",
+      "context": "Northwestern University Laoag City, Ilocos Norte, Philippines. Founded 1932.",
+      "boost_keywords": ["school names", "timeline of school name", "school transition", "name phases"],
+      "keywords": [
+        "list of school names",
+        "transition of names",
+        "timeline of school name",
+        "old name of the school"
+      ],
+      "aliases": ["nwu school names", "northwestern old names", "nu laoag name transitions"],
+      "examples": [
+        "What is the timeline of the school's name change?",
+        "Tell me the transition of NWU",
+        "Timeline of School Name"
+      ],
+      "responses": [
+        "The institution underwent several key transitions:\n\n* **Northwestern Academy (1932)**\n* **Northwestern College (1949)**\n* **Northwestern University (1994)**"
+      ]
     },
     {
       "tag": "first_presidents",
@@ -1808,6 +1829,7 @@
     }
   ]
 }
+
 
 
 
