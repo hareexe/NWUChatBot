@@ -1,12 +1,11 @@
 from modules.matcher import get_semantic_response_debug
 
-# Assuming the structure is /root/modules/eval_utils.py and /root/modules/matcher.py
 from modules.matcher import get_semantic_response_debug
 import random
 
 def build_all_tests_from_intents(intents_data):
     tests = []
-    excluded_tags = {"end_chat", "thank_you", "greeting"}  # exclude utility + greeting intents from eval
+    excluded_tags = {"end_chat", "thank_you", "greeting"}  
     for intent in intents_data.get("intents", []):
         tag = intent.get("tag")
         if tag in excluded_tags:
@@ -17,7 +16,6 @@ def build_all_tests_from_intents(intents_data):
                 tests.append({"q": ex.strip(), "tag": tag})
     return tests
 
-# Define evaluator BEFORE UI code
 def run_offline_eval(intents_data):
     # Deterministic sampling for consistent eval
     random.seed(42)
