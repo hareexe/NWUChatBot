@@ -937,7 +937,7 @@ def get_semantic_response_debug(user_input: str, eval_mode: bool = False):
 
 
     if (is_presidents_query or is_first_president_query or is_generic_leadership_phrase): pick_if_present({"complete_northwestern_presidents_list"}, max_gap=0.25) 
-    if (is_founders_query or is_founders_list_query): pick_if_present({"northwestern_academy_incorporators"}, max_gap=0.22)
+    if (is_founders_query or is_founders_list_query): pick_if_present({"northwestern_academy_incorporators"}, max_gap=0.4)
     if is_general_info_query: pick_if_present({"general_info"}, max_gap=0.22)
     if is_greeting_query: pick_if_present({"greeting"}, max_gap=0.22)
     if is_buildings_overview_query: pick_if_present({"buildings"}, max_gap=0.22)
