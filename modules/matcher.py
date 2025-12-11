@@ -11,6 +11,11 @@ _pattern_meta = None
 _preprocess = None
 _tokenizer = None
 
+def get_semantic_response_debug(user_input: str, eval_mode: bool = False):
+    if _preprocess is None: # <--- Added check
+         raise ValueError("Preprocessor not initialized.") 
+    user_processed = _preprocess(user_input)
+    
 def set_runtime_handles(model, intents_data, pattern_embeddings, pattern_meta, preprocess, tokenizer):
     global _model, _intents, _pattern_embeddings, _pattern_meta, _preprocess, _tokenizer
     _model = model
