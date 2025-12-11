@@ -22,7 +22,7 @@ def set_runtime_handles(model, intents_data, pattern_embeddings, pattern_meta, p
 
 def get_all_patterns(intents_data, limit=5):
     # one example per intent, exclude utility intents
-    excluded_tags = {"end_chat", "thank_you", "greeting"}
+    excluded_tags = {"end_chat", "thank_you"}
     per_intent = []
     for intent in intents_data.get("intents", []):
         tag = intent.get("tag")
@@ -460,15 +460,19 @@ def get_semantic_response_debug(user_input: str, eval_mode: bool = False):
         any(t in user_tokens for t in {"northwestern","nwu"})
     )
 
-   # Nicolas-specific detectors
+    # Nicolas-specific detectors
     is_nicolas_title_like = any(t in user_tokens for t in {"mr","mr.","referred","called","known"})
     is_nicolas_who_in_college = (("nicolas" in user_tokens) and any(t in user_tokens for t in {"who","was"}) and ("college" in user_tokens))
+    # UPDATED: More robust for contribution
     is_nicolas_contrib_like = any(t in user_tokens for t in {"nicolas","founder"}) and any(t in user_tokens for t in {"contribution", "contributions", "do", "did", "help", "impact", "expansion"})
     is_nicolas_what_did_do = ("what" in user_tokens) and ("did" in user_tokens or "do" in user_tokens) and is_nicolas_contrib_like # NEW DETECTOR
-    is_academy_sacrifices_like = any(t in user_tokens for t in {"sacrifices", "goal", "vision"}) and ("academy" in user_tokens or "founders" in user_tokens) # ADDED MISSING DETECTOR
+    # NEW: academy early sacrifices like
+    is_academy_sacrifices_like = any(t in user_tokens for t in {"sacrifices", "goal", "vision"}) and ("academy" in user_tokens or "founders" in user_tokens)
 
+    # Academy phase/program detectors
+    # UPDATED: for nurturing_years
     is_nurturing_years_like = (any(t in user_tokens for t in {"early","beginnings","like","where","held","challenges","face"}) and ("northwestern" in user_tokens or "nwu" in user_tokens))
-    is_operating_like = any(t in user_tokens for t in {"operating","operate","start","started","begin","began","location","located","establish","established"}) and not any(t in user_tokens for t in {"sacrifices", "goal", "vision"})
+    is_operating_like = any(t in user_tokens for t in {"operating","operate","start","started","begin","began","location","located","held"}) and not any(t in user_tokens for t in {"sacrifices", "goal", "vision"})
     is_helped_establish_like = ("helped" in user_tokens and "establish" in user_tokens)
     is_commonwealth_planning_like = any(t in user_tokens for t in {"planning","expand","expansion","programs","courses","why"})
 
@@ -476,6 +480,7 @@ def get_semantic_response_debug(user_input: str, eval_mode: bool = False):
     is_flagship_like = any(t in user_tokens for t in {"flagship","1960s","1960","sixties"})
     is_first_engineering_program_like = ("first" in user_tokens and "engineering" in user_tokens and "program" in user_tokens)
     is_engineering_dean_like = ("engineering" in user_tokens) and ("dean" in user_tokens or "department" in user_tokens) # NEW DETECTOR
+    is_engineering_program_like = "engineering" in user_tokens and any(t in user_tokens for t in {"program", "courses", "dean", "flagship"}) # ADDED MISSING DETECTOR
 
     # Access policy disambiguator
     is_access_poor_like = any(t in user_tokens for t in {"poor","needy","scholarship","scholarships","help","assist","students"})
