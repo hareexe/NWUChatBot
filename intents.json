@@ -90,9 +90,8 @@
         "list of presidents"
       ],
       "aliases": [
-        "all nwu presidents",
-        "northwestern complete presidents",
-        "nu laoag list of all presidents"
+        "all presidents",
+        "northwestern complete presidents"
       ],
       "examples": [
         "List all the presidents of Northwestern University.",
@@ -356,41 +355,6 @@
       ],
       "responses": [
         "The ten incorporators of Northwestern Academy, Inc. (the forerunner of Northwestern University, NWU) were Nicolas N. Nicolas, Maximo A. Caday, Cresencio J. Barangan, Marcelino G. Ligot, Manuel E. Pintado, Angel A. Albano, Manuela A. Castisimo, Encarnacion L. Ruiz, Marcelo A. Tajon, and Rufina S. Mariano. These individuals founded the school in 1932 and laid the foundation for what would become Northwestern University (NWU)."
-      ]
-    },
-    {
-      "tag": "northwestern_college_president",
-      "intent_description": "Intent describing: northwestern college president.",
-      "context": "Northwestern University Laoag City, Ilocos Norte, Philippines. Founded 1932.",
-      "boost_keywords": [
-        "college president",
-        "first college president",
-        "1949",
-        "not university"
-      ],
-      "keywords": [
-        "college's",
-        "college?",
-        "leader?",
-        "head",
-        "became",
-        "first",
-        "when",
-        "northwestern",
-        "college leader",
-        "college head",
-        "college president",
-        "first college president",
-        "aquino",
-        "college establishment",
-        "1949"
-      ],
-      "examples": [
-        "Who was the first president of Northwestern College (not university)?",
-        "Who led Northwestern when it became a college (1949)?"
-      ],
-      "responses": [
-        "The first president of Northwestern College was Apolinario L. Aquino, a man of academic excellence and leadership who worked closely with Mr. Nicolas N. Nicolas in expanding the school's programs and securing government permits to operate courses such as BS Commerce, Associate in Arts, Education, and Law. Under his stewardship, the institution experienced academic growth and the expansion of related services."
       ]
     },
     {
@@ -1067,49 +1031,6 @@
         "Hi there! How can I help you learn about Northwestern University?",
         "Greetings! Ask me anything about Northwestern University's past.",
         "Welcome! I'm the Northwestern University History Chatbot. What would you like to know?"
-      ]
-    },
-    {
-      "tag": "general_info",
-      "intent_description": "Intent describing: general info.",
-      "context": "Northwestern University Laoag City, Ilocos Norte, Philippines. Founded 1932.",
-      "boost_keywords": [
-        "what is",
-        "tell me",
-        "about",
-        "northwestern",
-        "university",
-        "overview",
-        "history"
-      ],
-      "keywords": [
-        "info",
-        "overview",
-        "about nwu",
-        "about northwestern",
-        "history overview",
-        "what is nwu",
-        "what is northwestern",
-        "tell me about",
-        "northwestern university",
-        "nwu",
-        "all about",
-        "background"
-      ],
-      "aliases": [
-        "what is nwu",
-        "tell me about northwestern"
-      ],
-      "examples": [
-        "What is Northwestern University?",
-        "Tell me about the university",
-        "Northwestern University",
-        "What is NWU?",
-        "All about Northwestern"
-      ],
-      "responses": [
-        "Northwestern University has a rich history that began as Northwestern Academy, Inc. in 1932. It became Northwestern College in 1949 and achieved University Status in 1993.",
-        "Founded in 1932, Northwestern University evolved from an academy to a full-fledged university. Would you like to know more about its founders, major programs, or accreditations?"
       ]
     },
     {
@@ -2293,5 +2214,6 @@
     }
   ]
 }
+
 
 
