@@ -6,9 +6,9 @@ import hashlib
 import os
 
 from modules.nlp_utils import initialize_nltk_data, preprocess, expand_with_synonyms, regexp_word_tokenizer
-from modules.data_store import load_data, build_intent_embeddings, _hash_intents, load_embedding_model
+from modules.data_store import load_data, build_intent_embeddings, _hash_intents, load_embedding_model # This imports the function
 from modules.eval_utils import build_all_tests_from_intents, run_offline_eval
-from modules.matcher import get_semantic_response_debug, keyword_fallback, get_all_patterns
+from modules.matcher import get_semantic_response_debug, keyword_fallback, get_all_patterns, set_runtime_handles # Added set_runtime_handles for completeness
 
 # --- NLTK Initialization ---
 @st.cache_resource(show_spinner="Initializing NLTK resources...")
@@ -44,6 +44,7 @@ if not intents_data or not intents_data.get("intents"):
         intents_data = {"intents": []}
 
 # --- Embedding model  -----
+# Note: _load_embedding_model() just calls the imported function and applies @st.cache_resource
 @st.cache_resource(show_spinner="Loading sentence transformer model...")
 def _load_embedding_model():
     return load_embedding_model()
@@ -88,8 +89,8 @@ if 'recent_questions' not in st.session_state:
     st.session_state['recent_questions'] = []
 
 # Suggestions
-EXCLUDED_TAGS = {"end_chat", "thank_you", "greeting"}
-suggestions = get_all_patterns(intents_data, exclude_tags=EXCLUDED_TAGS, limit=5)
+
+suggestions = get_all_patterns(intents_data, limit=5)
 if suggestions:
     st.markdown("**Try asking:**")
     st.markdown("\n".join([f"* {s}" for s in suggestions]))
@@ -97,16 +98,16 @@ if suggestions:
 # --- Quick eval button ---
 col1, col2 = st.columns(2)
 with col2:
-     if st.button("Run quick evaluation"):
-         acc, res = run_offline_eval(intents_data)
-         st.markdown(f"<small>Accuracy: {round(acc*100,1)}%</small>", unsafe_allow_html=True)
-         # Show only misses
-         misses = [r for r in res if not r["ok"]]
-         for r in misses:
-             st.markdown(
-                 f"<small>- [MISS] {r['query']} → expected={r['expected']} predicted={r['predicted']} score={r['score']} reason={r['reason']}</small>",
-                 unsafe_allow_html=True
-             )
+    if st.button("Run quick evaluation"):
+        acc, res = run_offline_eval(intents_data)
+        st.markdown(f"<small>Accuracy: {round(acc*100,1)}%</small>", unsafe_allow_html=True)
+        # Show only misses
+        misses = [r for r in res if not r["ok"]]
+        for r in misses:
+            st.markdown(
+                f"<small>- [MISS] {r['query']} → expected={r['expected']} predicted={r['predicted']} score={r['score']} reason={r['reason']}</small>",
+                unsafe_allow_html=True
+            )
 
 # Display conversation history
 for msg in st.session_state['history']:
@@ -140,5 +141,3 @@ if user_prompt:
         st.write(bot_reply)
         if debug_info:
             st.markdown(f"<small style='color:gray'>Debug Info: {debug_info}</small>", unsafe_allow_html=True)
-
-
