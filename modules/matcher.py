@@ -22,7 +22,7 @@ def set_runtime_handles(model, intents_data, pattern_embeddings, pattern_meta, p
 
 def get_all_patterns(intents_data, limit=5):
     # one example per intent, exclude utility intents
-    excluded_tags = {"end_chat", "thank_you"}
+    excluded_tags = {"end_chat", "thank_you, greeting"}
     per_intent = []
     for intent in intents_data.get("intents", []):
         tag = intent.get("tag")
