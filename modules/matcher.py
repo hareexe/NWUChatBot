@@ -258,7 +258,8 @@ def keyword_fallback(user_input: str, intents_data, min_overlap=2):
 
 def build_all_tests_from_intents(intents_data):
     tests = []
-    excluded_tags = {"end_chat", "thank_you", "greeting"}  # exclude utility + greeting intents from eval
+    # REMOVED nicolas_title from excluded tags since it is removed from intents, but keep utility tags
+    excluded_tags = {"end_chat", "thank_you", "greeting"}  
     for intent in intents_data.get("intents", []):
         tag = intent.get("tag")
         if tag in excluded_tags:
@@ -329,8 +330,7 @@ def get_semantic_response_debug(user_input: str, eval_mode: bool = False):
             if greet_intent:
                 return random.choice(greet_intent.get("responses", [])), {"best_tag":"greeting","reason":"Early greeting route.","best_score":None}
         
-        # REMOVED: Early general info/award route to stop misclassification of short high-value noun queries (FIXED MISS 3, 4, 20, 21)
-        # Note: Short award queries will now rely on the final low-confidence fallback logic (L1134)
+        # REMOVED: Early general info/award route to stop misclassification of short high-value noun queries
         pass # Intentional removal of the old `is_simple_general_or_award` block
 
     # Basic detectors used downstream
@@ -472,7 +472,7 @@ def get_semantic_response_debug(user_input: str, eval_mode: bool = False):
         {"northwestern_new_school_site","campus_historical_landmarks"},
         {"early_years","major_transitions"},
         {"northwestern_academy_early_sacrifices", "nurturing_years", "early_years"}, # NEW CONFLICT SET
-        {"nicolas_contribution", "northwestern_faculty_mentors", "nicolas_title"} # NEW CONFLICT SET
+        {"nicolas_contribution", "northwestern_faculty_mentors"} # UPDATED CONFLICT SET (removed nicolas_title)
     ]
 
     # Missing disambiguators used later (define them here)
@@ -490,7 +490,9 @@ def get_semantic_response_debug(user_input: str, eval_mode: bool = False):
     )
 
     # Nicolas-specific detectors
-    is_nicolas_title_like = any(t in user_tokens for t in {"mr","mr.","referred","called","known"})
+    # UPDATED: Combined title/dedication keywords into contribution role
+    nicolas_dedication_keywords = {"mr", "title", "called", "referred", "earned", "dedication", "unmatched", "'mr."}
+    is_nicolas_title_like = any(t in user_tokens for t in nicolas_dedication_keywords)
     is_nicolas_who_in_college = (("nicolas" in user_tokens) and any(t in user_tokens for t in {"who","was"}) and ("college" in user_tokens))
     # UPDATED: More robust for contribution
     is_nicolas_contrib_like = any(t in user_tokens for t in {"nicolas","founder"}) and any(t in user_tokens for t in {"contribution", "contributions", "do", "did", "help", "impact", "expansion"})
@@ -503,7 +505,8 @@ def get_semantic_response_debug(user_input: str, eval_mode: bool = False):
     is_nurturing_years_like = (any(t in user_tokens for t in {"early","beginnings","like","where","held","challenges","face"}) and ("northwestern" in user_tokens or "nwu" in user_tokens))
     is_operating_like = any(t in user_tokens for t in {"operating","operate","start","started","begin","began","location","located","held"}) and not any(t in user_tokens for t in {"sacrifices", "goal", "vision"})
     is_helped_establish_like = ("helped" in user_tokens and "establish" in user_tokens)
-    is_commonwealth_planning_like = any(t in user_tokens for t in {"planning","expand","expansion","programs","courses","why"})
+    # INCREASED KEYWORDS FOR COMMONWEALTH (FIXED MISS 5, 6)
+    is_commonwealth_planning_like = any(t in user_tokens for t in {"planning","expand","expansion","programs","courses","why", "commonwealth", "1935", "constitution", "surge"})
 
     # Programs alignment
     is_flagship_like = any(t in user_tokens for t in {"flagship","1960s","1960","sixties"})
@@ -624,7 +627,7 @@ def get_semantic_response_debug(user_input: str, eval_mode: bool = False):
         # NEW: Nicolas contribution routing
         if is_nicolas_contrib_like:
             if tag == "nicolas_contribution": score += 8
-            elif tag in {"northwestern_academy_incorporators", "northwestern_faculty_mentors", "nicolas_title"}: score = max(0, score - 4)
+            elif tag in {"northwestern_academy_incorporators", "northwestern_faculty_mentors"}: score = max(0, score - 4)
         # NEW: Sacrifices routing
         if is_academy_sacrifices_like:
             if tag == "northwestern_academy_early_sacrifices": score += 8
@@ -771,30 +774,22 @@ def get_semantic_response_debug(user_input: str, eval_mode: bool = False):
             if tag == "cresencio_barangan_history": score += 0.34
             if tag in {"major_transitions","northwestern_academy_incorporators"}: score -= 0.28 # UPDATED PENALTY
 
+        # NEW: Nicolas contribution/role routing (MISS 3, 8, 11)
+        if is_nicolas_contrib_like or is_nicolas_title_like: # Check for contribution or title keywords
+            if tag == "nicolas_contribution": score += 0.45
+            if tag == "northwestern_faculty_mentors" and is_nicolas_who_in_college: score += 0.2 # Small boost if seeking teacher in college
+            elif tag == "northwestern_faculty_mentors": score -= 0.3 
+            elif tag == "northwestern_academy_incorporators": score -= 0.3
+        
+        # FINAL NICOLAS ROLE FILTER
+        if is_nicolas_who_in_college and tag == "nicolas_contribution": score -= 0.4 # Penalty if asking "who in college" but landing on contribution
+        if is_nicolas_who_in_college and tag == "northwestern_faculty_mentors": score += 0.4 # Strong boost for faculty mentor when asked "who in college"
+
         if not is_new_site_query and tag == "northwestern_new_school_site": score -= 0.34
         if is_new_site_query and tag == "northwestern_new_school_site": score += 0.26
 
         if not is_status_query and tag == "major_transitions": score -= 0.34
         if is_status_query and tag == "major_transitions": score += 0.26
-
-        # Nicolas/NW guards
-        nicolas_help_terms = {"contribution","contributions","role","did","help","impact","do","during","war"}
-        nicolas_title_terms = {"mr","title","called"}
-        if tag == "nicolas_title" and any(t in user_tokens for t in nicolas_help_terms): score -= 0.32
-        if tag in {"nicolas_contribution","nicolas_role"} and any(t in user_tokens for t in nicolas_title_terms): score -= 0.28
-        # NEW: Nicolas contribution vs faculty mentors
-        if is_nicolas_contrib_like and tag == "nicolas_contribution": score += 0.45
-        if is_nicolas_contrib_like and tag == "northwestern_faculty_mentors": score -= 0.3
-        # NEW: Nicolas Title vs Contribution/Founders
-        if is_nicolas_title_like:
-            if tag == "nicolas_title": score += 0.4
-            if tag in {"nicolas_contribution", "northwestern_academy_incorporators"}: score -= 0.3
-        # NEW: Faculty mentors fix
-        if is_nicolas_who_in_college and tag == "northwestern_faculty_mentors": score += 0.4 
-        if is_nicolas_who_in_college and tag == "nicolas_title": score -= 0.2
-        # NEW: Faculty mentors - teaching/teacher focus
-        if tag == "northwestern_faculty_mentors" and any(t in user_tokens for t in ["teacher", "teaching", "known for"]): score += 0.4 
-
 
         # Early years stealers guard
         if tag == "northwestern_college_graduate_school" and any(t in user_tokens for t in {"college","establishment","established","become","became","transition","courses","programs","degree","engineering"}):
@@ -807,7 +802,7 @@ def get_semantic_response_debug(user_input: str, eval_mode: bool = False):
         if any(t in user_tokens for t in {"sacrifices", "goal", "vision"}) and tag in {"early_years", "nurturing_years"}:
             score -= 0.3
 
-        # Maximo Caday separation (FIXED MISS 8)
+        # Maximo Caday separation
         if tag == "maximo_caday_relationship_with_founders" and is_nicolas_contrib_like and not any(t in user_tokens for t in ["maximo", "caday", "relationship", "colleagues"]):
             score -= 0.4 # Increased penalty
         
@@ -818,6 +813,9 @@ def get_semantic_response_debug(user_input: str, eval_mode: bool = False):
             score -= 0.34
 
         # Academy phases (FIXED MISS 5, 6)
+        # STRONG BOOST if any commonwealth planning keywords are present, to overcome generic early_years steal
+        if is_commonwealth_planning_like and tag == "northwestern_academy_commonwealth_era":
+             score += 0.5
         if tag == "northwestern_academy_commonwealth_era" and any(t in user_tokens for t in {"establishment","become","college","established"}):
             score -= 0.45
         if tag == "northwestern_academy_early_sacrifices" and any(t in user_tokens for t in {"operating","start","location","located","held"}):
@@ -920,7 +918,7 @@ def get_semantic_response_debug(user_input: str, eval_mode: bool = False):
     # HIGH PRIORITY PICK: Current President if time word is used (to counter list steal)
     if is_current_president_query: 
         pick_if_present({"northwestern_current_president"}, max_gap=0.35) 
-    # HIGH PRIORITY PICK: Complete List if "all" or "past" used (FIXED MISS 2)
+    # HIGH PRIORITY PICK: Complete List if "all" or "past" used
     if is_all_presidents_like:
         pick_if_present({"complete_northwestern_presidents_list"}, max_gap=0.35)
     # NEW: Generic President Query falls back to current (FIXED MISS 1)
@@ -952,9 +950,14 @@ def get_semantic_response_debug(user_input: str, eval_mode: bool = False):
     if strong_academy_become_college:
         # Prefer transition_process or early_years
         pick_if_present({"transition_process", "early_years"}, max_gap=0.42)
-    # NEW: explicit pick for Nicolas contribution
-    if is_nicolas_contrib_like:
-        pick_if_present({"nicolas_contribution"}, max_gap=0.3)
+    # NEW: explicit pick for Nicolas contribution/role
+    if is_nicolas_contrib_like or is_nicolas_title_like:
+        # Prefer faculty_mentors if question is about "who in college" (MISS 11)
+        if is_nicolas_who_in_college:
+            pick_if_present({"northwestern_faculty_mentors"}, max_gap=0.35)
+        else: # Otherwise prefer the broader contribution intent (MISS 3)
+            pick_if_present({"nicolas_contribution"}, max_gap=0.3)
+            
     # NEW: explicit pick for early sacrifices
     if is_academy_sacrifices_like:
         pick_if_present({"northwestern_academy_early_sacrifices"}, max_gap=0.3)
@@ -967,9 +970,6 @@ def get_semantic_response_debug(user_input: str, eval_mode: bool = False):
     # NEW: explicit pick for student activists
     if is_activist_details_query:
         pick_if_present({"northwestern_student_activists"}, max_gap=0.3)
-    # NEW: explicit pick for nicolas title
-    if is_nicolas_title_like:
-        pick_if_present({"nicolas_title"}, max_gap=0.3)
     # NEW: explicit pick for apolinario aquino name query
     if any(t in user_tokens for t in {"apolinario","aquino"}) and not is_first_college_president_query:
         pick_if_present({"apolinario_aquino"}, max_gap=0.3)
@@ -1027,18 +1027,10 @@ def get_semantic_response_debug(user_input: str, eval_mode: bool = False):
         best_score = max(-1.0, best_score - 0.36)
     if best_tag == "northwestern_faculty_mentors" and is_nicolas_what_did_do:
         best_score = max(-1.0, best_score - 0.36)
-    if best_tag == "northwestern_faculty_mentors" and is_nicolas_title_like:
-        best_score = max(-1.0, best_score - 0.36)
-    # NEW: Nicolas Title vs Contribution/Founders fix
-    if best_tag == "nicolas_contribution" and is_nicolas_title_like:
-        best_score = max(-1.0, best_score - 0.36)
-    if best_tag == "northwestern_academy_incorporators" and is_nicolas_title_like:
-        best_score = max(-1.0, best_score - 0.36)
-    # NEW: Faculty mentors vs title/contribution final hammer
-    if best_tag == "nicolas_title" and any(t in user_tokens for t in ["teacher", "college", "known for"]):
-        best_score = max(-1.0, best_score - 0.45)
-    if best_tag == "nicolas_contribution" and any(t in user_tokens for t in ["teacher", "college", "known for"]):
-        best_score = max(-1.0, best_score - 0.45)
+    
+    # NEW: Final hammer for Nicolas who/what role (MISS 11)
+    if is_nicolas_who_in_college and best_tag == "nicolas_contribution":
+         best_score = max(-1.0, best_score - 0.5)
     # NEW: Penalize non-nicolas_title/non-faculty_mentors if asking about nicolas as teacher/college
     if best_tag in ["early_years", "foundation"] and any(t in user_tokens for t in ["nicolas", "teacher"]):
          best_score = max(-1.0, best_score - 0.5)
