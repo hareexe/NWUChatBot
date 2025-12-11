@@ -113,24 +113,20 @@ Source: Northwestern University Portal and <em>LEGACY</em> by Erlinda Magbual-Gl
 user_prompt = st.chat_input("Ask something about NWU history...")
 
 if user_prompt:
+    # --- Start of user message handling ---
     st.session_state['history'].append({"role": "user", "content": user_prompt})
     st.session_state['recent_questions'].append(user_prompt)
     st.session_state['recent_questions'] = st.session_state['recent_questions'][-6:]
 
+    # Display user message in the current chat area
     with st.chat_message("user", avatar=None):
         st.write(user_prompt)
 
-  if user_prompt:
-    st.session_state['history'].append({"role": "user", "content": user_prompt})
-    st.session_state['recent_questions'].append(user_prompt)
-    st.session_state['recent_questions'] = st.session_state['recent_questions'][-6:]
-
-    with st.chat_message("user", avatar=None):
-        st.write(user_prompt)
-
+    # --- Start of model processing ---
     with st.spinner("Thinking..."):
         bot_reply, debug_info = get_semantic_response_debug(user_prompt)
 
+    # Display bot response
     st.session_state['history'].append({"role": "assistant", "content": bot_reply})
     with st.chat_message("assistant", avatar=None):
         st.write(bot_reply)
