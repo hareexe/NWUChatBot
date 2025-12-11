@@ -63,19 +63,6 @@ def build_intent_embeddings(intents_data_hash: str, intents_data_serialized: str
                     "description": description
                 })
 
-    def build_all_tests_from_intents(intents_data):
-
-    tests = []
-    
-    for intent in intents_data.get("intents", []):
-        tag = intent.get("tag")
-        # Use 'examples' first, falling back to 'patterns'
-        examples = intent.get("examples") or intent.get("patterns", [])
-        for ex in examples:
-            if isinstance(ex, str) and ex.strip():
-                tests.append({"q": ex.strip(), "tag": tag})
-    return tests
-
     if not all_texts:
         return [], None, []
 
