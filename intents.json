@@ -30,7 +30,7 @@
         "What is the meaning of Northwestern University's motto?"
       ],
       "responses": [
-        "The phrase 'Fiat Lux', which means 'Let there be light', serves as Northwestern University's guiding motto. It symbolizes the founders\u2019 mission to bring enlightenment through education, spreading the flame of knowledge to future generations and inspiring the institution\u2019s continued growth and resilience."
+        "The phrase 'Fiat Lux', which means 'Let there be light', serves as Northwestern University's guiding motto. It symbolizes the founders’ mission to bring enlightenment through education, spreading the flame of knowledge to future generations and inspiring the institution’s continued growth and resilience."
       ]
     },
     {
@@ -38,12 +38,15 @@
       "intent_description": "Intent describing: northwestern current president.",
       "context": "Northwestern University Laoag City, Ilocos Norte, Philippines. Founded 1932.",
       "boost_keywords": [
+        "who",
+        "is",
         "president",
         "nwu president",
         "current",
         "present",
         "incumbent",
-        "sitting"
+        "sitting",
+        "head"
       ],
       "keywords": [
         "current president",
@@ -87,21 +90,39 @@
       "keywords": [
         "all presidents",
         "list presidents",
-        "list of presidents"
+        "list of presidents",
+        "past president",
+        "past and present",
+        "first president",
+        "first university president",
+        "first college president",
+        "who was the first president",
+        "who is the first president"
       ],
       "aliases": [
         "all presidents",
-        "northwestern complete presidents"
+        "northwestern complete presidents",
+        "nwu first president",
+        "northwestern first president"
       ],
       "examples": [
         "List all the presidents of Northwestern University.",
         "Who are the past and present presidents?",
         "Give me the list of NU presidents and their terms.",
         "List of all presidents.",
-        "Presidents of Northwestern"
+        "Presidents of Northwestern",
+        "who was the first university president?",
+        "first president of NWU",
+        "who was the first president?",
+        "who is the first president?",
+        "who is the first president of northwestern?",
+        "who was the first president of nwu?",
+        "nwu first president",
+        "who is the first university president of northwestern?",
+        "who was the first university president of nwu?"
       ],
       "responses": [
-        "Northwestern University's presidents:\n\n* **1949 (First College President):** Apolinario L. Aquino\n* **1982 (Second College President):** Ben A. Nicolas\n* **1985 (Third College President):** Ernesto Asuncion\n* **1989 (Fourth President / First University President):** Jose G. Castro\n* **1997 (Fifth President):** Ben A. Nicolas\n* **2014 (Sixth President / Current President):** Atty. Ferdinand S. Nicolas"
+        "Northwestern University's presidents, from first to present:\n\n* **1949 (First College President):** Apolinario L. Aquino\n* **1982 (Second College President):** Ben A. Nicolas\n* **1985 (Third College President):** Ernesto Asuncion\n* **1989 (Fourth President / First University President):** Jose G. Castro\n* **1997 (Fifth President):** Ben A. Nicolas\n* **2014 (Sixth President / Current President):** Atty. Ferdinand S. Nicolas"
       ]
     },
     {
@@ -153,42 +174,6 @@
       ]
     },
     {
-      "tag": "first_presidents",
-      "intent_description": "Intent describing: first presidents.",
-      "context": "Northwestern University Laoag City, Ilocos Norte, Philippines. Founded 1932.",
-      "boost_keywords": [
-        "first president",
-        "first college president",
-        "first university president",
-        "first president"
-      ],
-      "keywords": [
-        "first president",
-        "first university president",
-        "first college president",
-        "who was the first president",
-        "who is the first president"
-      ],
-      "aliases": [
-        "nwu first president",
-        "northwestern first president"
-      ],
-      "examples": [
-        "who was the first university president?",
-        "first president of NWU",
-        "who was the first president?",
-        "who is the first president?",
-        "who is the first president of northwestern?",
-        "who was the first president of nwu?",
-        "nwu first president",
-        "who is the first university president of northwestern?",
-        "who was the first university president of nwu?"
-      ],
-      "responses": [
-        "Jose G. Castro was the first University President, appointed in 1989. While the first college president was Apolinario L. Aquino."
-      ]
-    },
-    {
       "tag": "thank_you",
       "intent_description": "Intent describing: thank you.",
       "context": "Northwestern University Laoag City, Ilocos Norte, Philippines. Founded 1932.",
@@ -212,7 +197,7 @@
         "You're very welcome! I'm happy to help.",
         "No problem! Glad I could assist.",
         "You're welcome! Let me know if you have more questions about Northwestern University.",
-        "Anytime! Feel free to ask me more about NU\u2019s history and programs."
+        "Anytime! Feel free to ask me more about NU’s history and programs."
       ]
     },
     {
@@ -239,7 +224,7 @@
         "What does the owl represent in Northwestern University?",
         "What is the logo of Northwestern University?",
         "What is the meaning of the Northwestern University symbol?",
-        "Why is the owl used in Northwestern University\u2019s logo?"
+        "Why is the owl used in Northwestern University’s logo?"
       ],
       "responses": [
         "The owl is the official logo of Northwestern University. It was chosen because it symbolizes wisdom, knowledge, and insight. The founders selected the owl to represent their mission of developing human potential and guiding learners to see clearly through the darkness of ignorance."
@@ -255,18 +240,19 @@
         "cashier",
         "finance",
         "steward",
-        "funds"
+        "funds",
+        "managed funds"
       ],
       "examples": [
-        "Tell me about Cresencio J. Barangan\u2019s contribution to Northwestern University.",
-        "What was Cresencio J. Barangan\u2019s role in Northwestern University?",
+        "Tell me about Cresencio J. Barangan’s contribution to Northwestern University.",
+        "What was Cresencio J. Barangan’s role in Northwestern University?",
         "Who managed the university funds during the early years of Northwestern University?",
         "Who managed the university funds during the early years?",
         "Who was Cresencio J. Barangan?",
         "Who was known as the faithful steward of Northwestern University?"
       ],
       "responses": [
-        "Cresencio J. Barangan was one of the founding fathers of Northwestern University and served as its cashier. He was known for his honesty and faithfulness in protecting the university\u2019s funds and ensuring proper financial management. He earned his degree from Washington State College in the United States while working to support his studies, and later devoted his life to serving Northwestern University."
+        "Cresencio J. Barangan was one of the founding fathers of Northwestern University and served as its cashier. He was known for his honesty and faithfulness in protecting the university’s funds and ensuring proper financial management. He earned his degree from Washington State College in the United States while working to support his studies, and later devoted his life to serving Northwestern University."
       ]
     },
     {
@@ -277,12 +263,12 @@
         "albano?",
         "angel",
         "founders",
-        "albano\u2019s",
+        "albano’s",
         "albano"
       ],
       "examples": [
-        "Tell me about Angel A. Albano\u2019s contribution to Northwestern University.",
-        "What was Angel A. Albano\u2019s role in Northwestern University?",
+        "Tell me about Angel A. Albano’s contribution to Northwestern University.",
+        "What was Angel A. Albano’s role in Northwestern University?",
         "Who was Angel A. Albano?",
         "Who was Angel Albano in the history of Northwestern University?",
         "Who was one of the founders named Angel A. Albano?"
@@ -368,7 +354,9 @@
         "did",
         "help",
         "impact",
-        "founder"
+        "founder",
+        "what did",
+        "expansion"
       ],
       "keywords": [
         "nicolas n. nicolas",
@@ -400,8 +388,9 @@
         "make",
         "helped",
         "early",
-        "start",
-        "operating"
+        "vision",
+        "goal",
+        "devoted to teaching"
       ],
       "keywords": [
         "make?",
@@ -409,25 +398,18 @@
         "about",
         "academy",
         "school",
-        "start",
         "founders.",
         "what",
         "founders",
         "tell",
-        "years?",
         "early",
         "northwestern",
         "sacrifices",
         "vision",
         "establish",
-        "goal",
-        "started?",
-        "operating?",
-        "when",
-        "how did start"
+        "goal"
       ],
       "examples": [
-        "How did Northwestern Academy start operating?",
         "What sacrifices did the founders make?",
         "Who helped establish the school in its early years?",
         "What was the goal of Northwestern Academy when it started?",
@@ -526,7 +508,9 @@
         "degree",
         "first",
         "initial",
-        "engineering"
+        "bs commerce",
+        "law",
+        "education"
       ],
       "keywords": [
         "initial college courses",
@@ -563,7 +547,8 @@
         "civil engineering",
         "first engineering",
         "1960s",
-        "flagship"
+        "flagship",
+        "dean"
       ],
       "keywords": [
         "engineering programs",
@@ -575,7 +560,8 @@
         "when engineering",
         "first engineering",
         "1960s",
-        "flagship"
+        "flagship",
+        "dean"
       ],
       "examples": [
         "When did Northwestern start offering engineering?",
@@ -598,7 +584,9 @@
         "academy to college",
         "become",
         "apply",
-        "how"
+        "how",
+        "steps",
+        "conversion"
       ],
       "keywords": [
         "from",
@@ -632,7 +620,8 @@
         "title",
         "mr. northwestern",
         "earned",
-        "called"
+        "called",
+        "referred"
       ],
       "keywords": [
         "northwestern",
@@ -714,7 +703,8 @@
         "nicolas nicolas",
         "teacher",
         "psychology",
-        "tro-v"
+        "tro-v",
+        "mr nicolas"
       ],
       "keywords": [
         "remembered",
@@ -758,7 +748,9 @@
         "promissory notes",
         "poor students",
         "help",
-        "accessibility"
+        "accessibility",
+        "affordable",
+        "compassionate"
       ],
       "keywords": [
         "education",
@@ -794,7 +786,7 @@
         "student activism",
         "protest",
         "martial law",
-        "protest"
+        "political movements"
       ],
       "keywords": [
         "movements?",
@@ -836,7 +828,12 @@
         "student activists",
         "martial law",
         "notable",
-        "during"
+        "during",
+        "gervacio",
+        "velasco",
+        "juliet",
+        "pascual",
+        "became"
       ],
       "keywords": [
         "support",
@@ -872,7 +869,9 @@
         "martial law",
         "during",
         "leadership",
-        "institution"
+        "institution",
+        "repression",
+        "challenges"
       ],
       "keywords": [
         "institutional",
@@ -966,10 +965,13 @@
       "intent_description": "Intent describing: early years.",
       "context": "Northwestern University Laoag City, Ilocos Norte, Philippines. Founded 1932.",
       "boost_keywords": [
-        "early years",
+        "original name",
+        "1932 events",
+        "founding year",
+        "academy founding",
         "beginnings",
         "start",
-        "how did",
+        "early",
         "first"
       ],
       "keywords": [
@@ -994,9 +996,7 @@
         "Tell me about the beginnings"
       ],
       "responses": [
-        "Northwestern Academy, Inc. was incorporated in 1932 and began operations that same year, offering General Secondary, Commercial Secondary, and Home Economics programs.",
-        "The institution was originally called Northwestern Academy, Inc. when it was founded in 1932.",
-        "Northwestern Academy Becomed become Northwestern College in 1949."
+        "The institution was originally called Northwestern Academy, Inc. when it was founded in 1932. It began operations that same year, offering General Secondary, Commercial Secondary, and Home Economics programs."
       ]
     },
     {
@@ -1027,8 +1027,7 @@
         "When was Northwestern incorporated?"
       ],
       "responses": [
-        "Northwestern Academy, Inc. was incorporated in 1932 and began operations that same year, offering General Secondary, Commercial Secondary, and Home Economics programs.",
-        "The institution was originally called Northwestern Academy, Inc. when it was founded in 1932."
+        "Northwestern Academy, Inc. was incorporated in 1932 and began operations that same year. It laid the foundation for what would become Northwestern University."
       ]
     },
     {
@@ -1130,72 +1129,6 @@
       ]
     },
     {
-      "tag": "northwestern_academy_incorporators",
-      "intent_description": "Intent describing: northwestern academy incorporators.",
-      "context": "Northwestern University Laoag City, Ilocos Norte, Philippines. Founded 1932.",
-      "boost_keywords": [
-        "founder",
-        "co-founder",
-        "incorporator",
-        "founding member",
-        "founders",
-        "cofounders",
-        "founded",
-        "who founded",
-        "founders of",
-        "incorporators"
-      ],
-      "keywords": [
-        "incorporators",
-        "co-founders",
-        "co founders",
-        "cofounders",
-        "founders",
-        "who founded nwu",
-        "academy incorporators",
-        "founding members",
-        "original incorporators",
-        "ten incorporators",
-        "founders of northwestern university",
-        "founders of northwestern college",
-        "northwestern college founders",
-        "northwestern university founders",
-        "nwu cofounders",
-        "nwu co founders",
-        "founders list",
-        "who founded northwestern university",
-        "who founded northwestern university in the philippines",
-        "who founded nwu in the philippines",
-        "founders of nwu philippines",
-        "northwestern founders philippines",
-        "founding",
-        "founded nwu"
-      ],
-      "aliases": [
-        "nwu founders",
-        "northwestern founders",
-        "founders of northwestern"
-      ],
-      "examples": [
-        "Who were the incorporators of Northwestern Academy?",
-        "List all incorporators of Northwestern Academy.",
-        "Who were the co-founders of Northwestern Academy?",
-        "Name everyone who helped establish Northwestern Academy.",
-        "Who were the ten incorporators of Northwestern Academy?",
-        "Who were the co founders of NWU?",
-        "Who are the cofounders of Northwestern University?",
-        "Who founded NWU?",
-        "Who are the founders of Northwestern?",
-        "Founders of NWU",
-        "List of founding members",
-        "Name the ten incorporators",
-        "Who founded NWU?"
-      ],
-      "responses": [
-        "The ten incorporators of Northwestern Academy, Inc. (the forerunner of Northwestern University, NWU) were Nicolas N. Nicolas, Maximo A. Caday, Cresencio J. Barangan, Marcelino G. Ligot, Manuel E. Pintado, Angel A. Albano, Manuela A. Castisimo, Encarnacion L. Ruiz, Marcelo A. Tajon, and Rufina S. Mariano. These individuals founded the school in 1932 and laid the foundation for what would become Northwestern University (NWU)."
-      ]
-    },
-    {
       "tag": "northwestern_college_president",
       "intent_description": "Intent describing: northwestern college president.",
       "context": "Northwestern University Laoag City, Ilocos Norte, Philippines. Founded 1932.",
@@ -1203,7 +1136,7 @@
         "college president",
         "first college president",
         "1949",
-        "not university"
+        "apolinario aquino"
       ],
       "keywords": [
         "college's",
@@ -1228,86 +1161,6 @@
       ],
       "responses": [
         "The first president of Northwestern College was Apolinario L. Aquino, a man of academic excellence and leadership who worked closely with Mr. Nicolas N. Nicolas in expanding the school's programs and securing government permits to operate courses such as BS Commerce, Associate in Arts, Education, and Law. Under his stewardship, the institution experienced academic growth and the expansion of related services."
-      ]
-    },
-    {
-      "tag": "nicolas_contribution",
-      "intent_description": "Intent describing: nicolas contribution.",
-      "context": "Northwestern University Laoag City, Ilocos Norte, Philippines. Founded 1932.",
-      "boost_keywords": [
-        "contribution",
-        "contributions",
-        "role",
-        "did",
-        "help",
-        "impact",
-        "founder"
-      ],
-      "keywords": [
-        "nicolas n. nicolas",
-        "nicolas contribution",
-        "nicolas role in expansion",
-        "nicolas impact on programs",
-        "about nicolas",
-        "what did nicolas",
-        "founder contribution",
-        "help the school"
-      ],
-      "examples": [
-        "How did Nicolas N. Nicolas help the school?",
-        "How did the founder Nicolas N. Nicolas help the school?",
-        "Nicolas N. Nicolas contributions",
-        "What did Nicolas N. Nicolas do for Northwestern University?",
-        "What did the founder do for Northwestern?"
-      ],
-      "responses": [
-        "Nicolas N. Nicolas laid a strong foundation for Northwestern University. He led the institution in its early growth, expanding opportunities for students who wanted to pursue careers in law, engineering, nursing, business, education, and criminology. Nicolas N. Nicolas played a major role in expanding Northwestern University's academic offerings, particularly in law, engineering, nursing, business, education, and criminology."
-      ]
-    },
-    {
-      "tag": "northwestern_academy_early_sacrifices",
-      "intent_description": "Intent describing: northwestern academy early sacrifices.",
-      "context": "Northwestern University Laoag City, Ilocos Norte, Philippines. Founded 1932.",
-      "boost_keywords": [
-        "sacrifices",
-        "make",
-        "helped",
-        "early",
-        "start",
-        "operating"
-      ],
-      "keywords": [
-        "make?",
-        "helped",
-        "about",
-        "academy",
-        "school",
-        "start",
-        "founders.",
-        "what",
-        "founders",
-        "tell",
-        "years?",
-        "early",
-        "northwestern",
-        "sacrifices",
-        "vision",
-        "establish",
-        "goal",
-        "started?",
-        "operating?",
-        "when",
-        "how did start"
-      ],
-      "examples": [
-        "How did Northwestern Academy start operating?",
-        "What sacrifices did the founders make?",
-        "Who helped establish the school in its early years?",
-        "What was the goal of Northwestern Academy when it started?",
-        "Tell me about the early vision of the founders."
-      ],
-      "responses": [
-        "In its early years, the founders of Northwestern Academy offered not only their services but also their personal belongings like tables, chairs, books, and typewriters. They were united by a common desire to make education available to everyone, even the poor and overaged. Despite financial struggles, they remained devoted to teaching and lived by the mission of 'Education for All' long before it became a national goal."
       ]
     },
     {
@@ -1355,333 +1208,6 @@
       ]
     },
     {
-      "tag": "northwestern_academy_commonwealth_era",
-      "intent_description": "Intent describing: northwestern academy commonwealth era.",
-      "context": "Northwestern University Laoag City, Ilocos Norte, Philippines. Founded 1932.",
-      "boost_keywords": [
-        "expand",
-        "planning",
-        "programs",
-        "college courses",
-        "commonwealth",
-        "1935"
-      ],
-      "keywords": [
-        "education",
-        "period",
-        "1935?",
-        "expand",
-        "education?",
-        "academy?",
-        "commonwealth",
-        "when",
-        "academy",
-        "start",
-        "what",
-        "college",
-        "courses?",
-        "planning",
-        "northwestern",
-        "happened",
-        "affect",
-        "constitution",
-        "effect",
-        "programs?",
-        "planning for college"
-      ],
-      "examples": [
-        "How did the Commonwealth period affect Northwestern Academy?",
-        "What happened to education in 1935?",
-        "When did Northwestern Academy start planning for college courses?",
-        "Why did Northwestern Academy expand its programs?",
-        "What was the effect of the new constitution on education?"
-      ],
-      "responses": [
-        "When the Philippines became a Commonwealth in 1935, the new constitution emphasized education for all citizens. This caused a surge of enrolment in both public and private schools. Seeing the growing demand for higher education, Northwestern Academy's board of directors began planning to expand and offer tertiary courses to help high school graduates pursue college degrees."
-      ]
-    },
-    {
-      "tag": "maximo_caday_relationship_with_founders",
-      "intent_description": "Intent describing: maximo caday relationship with founders.",
-      "context": "Northwestern University Laoag City, Ilocos Norte, Philippines. Founded 1932.",
-      "boost_keywords": [
-        "colleagues",
-        "work",
-        "closely",
-        "relationship",
-        "founders",
-        "worked"
-      ],
-      "keywords": [
-        "other",
-        "were",
-        "close",
-        "caday's",
-        "caday",
-        "closely",
-        "maximo",
-        "nicolas",
-        "work",
-        "relationship",
-        "founders?",
-        "northwestern?",
-        "colleagues",
-        "with",
-        "along?",
-        "worked with"
-      ],
-      "examples": [
-        "Who were Maximo Caday's close colleagues in Northwestern?",
-        "Did Maximo Caday work closely with other founders?",
-        "How was Maximo Caday's relationship with other founders?",
-        "Who did Maximo Caday work with in Northwestern?",
-        "Did Maximo Caday and Nicolas N. Nicolas get along?"
-      ],
-      "responses": [
-        "Maximo A. Caday shared a strong and respectful working relationship with his fellow founders, Nicolas N. Nicolas and Cresencio J. Barangan. The three men admired each other's dedication and worked hand in hand to sustain the growth of Northwestern Academy during its early years."
-      ]
-    },
-    {
-      "tag": "northwestern_college_courses",
-      "intent_description": "Intent describing: northwestern college courses.",
-      "context": "Northwestern University Laoag City, Ilocos Norte, Philippines. Founded 1932.",
-      "boost_keywords": [
-        "courses",
-        "programs",
-        "degree",
-        "first",
-        "initial",
-        "engineering"
-      ],
-      "keywords": [
-        "initial college courses",
-        "first college programs",
-        "bs commerce",
-        "associate in arts",
-        "education program",
-        "law program",
-        "junior secretarial",
-        "civil engineering first two years",
-        "associate in surveying",
-        "first offered",
-        "programs",
-        "courses"
-      ],
-      "examples": [
-        "What courses were first offered at Northwestern College?",
-        "Which programs did Northwestern College initially have?",
-        "What were the first courses available when Northwestern became a college?",
-        "Which college programs did Northwestern start with?",
-        "What degree programs did Northwestern College open?",
-        "What was Northwestern College's first engineering program?"
-      ],
-      "responses": [
-        "When Northwestern Academy became Northwestern College, it began offering BS Commerce, Associate in Arts, Education, and Law. Later, additional courses such as Junior Secretarial, Civil Engineering (first two years), and Associate in Surveying were introduced as part of its expanding academic programs."
-      ]
-    },
-    {
-      "tag": "transition_process",
-      "intent_description": "Intent describing: transition process.",
-      "context": "Northwestern University Laoag City, Ilocos Norte, Philippines. Founded 1932.",
-      "boost_keywords": [
-        "transition",
-        "academy to college",
-        "become",
-        "apply",
-        "how"
-      ],
-      "keywords": [
-        "from",
-        "academy",
-        "college?",
-        "become",
-        "apply",
-        "what",
-        "steps",
-        "conversion",
-        "transition",
-        "initiated",
-        "northwestern",
-        "how did"
-      ],
-      "examples": [
-        "How did the academy become a college?",
-        "What steps led to the conversion to Northwestern College?",
-        "Who initiated the transition from academy to college?",
-        "How did Northwestern apply to become a college?"
-      ],
-      "responses": [
-        "The conversion from Northwestern Academy to Northwestern College was initiated by Mr. Nicolas N. Nicolas. He proposed the idea to the Board of Directors, and the school applied for permits to offer courses in Education, Commerce, and Liberal Arts in 1946. After securing government approval, it officially became Northwestern College in 1949."
-      ]
-    },
-    {
-      "tag": "northwestern_classroom_icons",
-      "intent_description": "Intent describing: northwestern classroom icons.",
-      "context": "Northwestern University Laoag City, Ilocos Norte, Philippines. Founded 1932.",
-      "boost_keywords": [
-        "classroom icons",
-        "great teachers",
-        "mentors",
-        "remembered"
-      ],
-      "keywords": [
-        "remembered",
-        "missed'",
-        "'classroom",
-        "northwestern?",
-        "about",
-        "what",
-        "mentors",
-        "aida",
-        "classroom",
-        "northwestern",
-        "great",
-        "article",
-        "were",
-        "about?",
-        "teachers",
-        "teachers?",
-        "agustin-cuanang",
-        "icons",
-        "college?",
-        "northwestern's",
-        "great teachers"
-      ],
-      "examples": [
-        "Who were the classroom icons of Northwestern College?",
-        "Who were the great teachers remembered at Northwestern?",
-        "What did Aida Agustin-Cuanang say about Northwestern's teachers?",
-        "What was the article 'Classroom Icons Missed' about?",
-        "Who were remembered as mentors at Northwestern College?"
-      ],
-      "responses": [
-        "Dr. Aida Agustin-Cuanang, a former student leader and later dean of the College of Arts and Sciences, paid tribute to the classroom icons of Northwestern College in her article 'Classroom Icons Missed' published in April 2007. She remembered the dedicated mentors who molded generations of students through their discipline, intellect, and moral values. These mentors instilled the dignity of labor, love of country, and respect for education, leaving a legacy that continues to inspire Northwestern alumni."
-      ]
-    },
-    {
-      "tag": "northwestern_faculty_mentors",
-      "intent_description": "Intent describing: northwestern faculty mentors.",
-      "context": "Northwestern University Laoag City, Ilocos Norte, Philippines. Founded 1932.",
-      "boost_keywords": [
-        "faculty mentors",
-        "nicolas nicolas",
-        "teacher",
-        "psychology",
-        "tro-v"
-      ],
-      "keywords": [
-        "remembered",
-        "teacher?",
-        "agustin-cuanang?",
-        "northwestern?",
-        "nicolas",
-        "what",
-        "mentors",
-        "aida",
-        "professors",
-        "northwestern",
-        "1970s",
-        "male",
-        "were",
-        "known",
-        "during",
-        "college?",
-        "mentioned",
-        "'tro-v",
-        "respected",
-        "men'",
-        "faculty mentors"
-      ],
-      "examples": [
-        "Who was Mr. Nicolas Nicolas in Northwestern College?",
-        "What was Mr. Nicolas Nicolas known for as a teacher?",
-        "Who were the male professors remembered at Northwestern?",
-        "Who were the respected mentors during the 1970s at Northwestern?",
-        "Who were the 'tro-V men' mentioned by Aida Agustin-Cuanang?"
-      ],
-      "responses": [
-        "Mr. Nicolas N. Nicolas, then president of the board and registrar of Northwestern College, was remembered as a disciplined and excellent Psychology instructor. Trained at the University of Oregon, he was admired for his neat grooming, countless neckties, and military haircut, symbolizing order and professionalism. He was often seen with his circle known as the 'tro-V men' — Mr. Apolinario Aquino, Mr. Cecilio Burigsay, Dr. Agapito Factora, and Mr. Carmelo Taylan — who were also respected faculty members known for their sharp intellect and refined demeanor."
-      ]
-    },
-    {
-      "tag": "accessibility_policy",
-      "intent_description": "Intent describing: accessibility policy.",
-      "context": "Northwestern University Laoag City, Ilocos Norte, Philippines. Founded 1932.",
-      "boost_keywords": [
-        "promissory notes",
-        "poor students",
-        "help",
-        "accessibility"
-      ],
-      "keywords": [
-        "education",
-        "affordable?",
-        "school?",
-        "promissory",
-        "make",
-        "notes?",
-        "help",
-        "compassionate",
-        "called",
-        "poor",
-        "students?",
-        "allow",
-        "northwestern",
-        "help poor"
-      ],
-      "examples": [
-        "How did Northwestern help poor students?",
-        "Why was Northwestern called a compassionate school?",
-        "Did Northwestern allow promissory notes?",
-        "How did Northwestern make education affordable?"
-      ],
-      "responses": [
-        "Northwestern became known for its compassion and accessibility. Students who could not pay tuition on time were allowed to sign promissory notes. The administration and teachers shared a passion for making education affordable, proving that poverty was never a deterrent to learning."
-      ]
-    },
-    {
-      "tag": "student_activism",
-      "intent_description": "Intent describing: student activism.",
-      "context": "Northwestern University Laoag City, Ilocos Norte, Philippines. Founded 1932.",
-      "boost_keywords": [
-        "student activism",
-        "protest",
-        "martial law",
-        "protest"
-      ],
-      "keywords": [
-        "movements?",
-        "students",
-        "involved",
-        "student",
-        "what",
-        "leaders",
-        "play",
-        "some",
-        "political",
-        "marcos'",
-        "northwestern",
-        "time?",
-        "activism?",
-        "were",
-        "during",
-        "role",
-        "martial",
-        "protest",
-        "law?",
-        "student activism"
-      ],
-      "examples": [
-        "Was Northwestern involved in activism?",
-        "Did Northwestern students protest during martial law?",
-        "Who were some student leaders during Marcos' time?",
-        "What role did Northwestern play in political movements?"
-      ],
-      "responses": [
-        "During the Martial Law era under President Ferdinand Marcos, Northwestern College students were active in protests advocating freedom and justice. Leaders like Gervacio Velasco, Pete Salenda, Samuel Bangloy, Raymund Liongson, Juliet Pascual, and Rafaela Bumanglag were among those who stood at the forefront. Some were even detained as political prisoners, but Mr. Nicolas N. Nicolas welcomed them back after their release, showing Northwestern's enduring spirit of compassion and courage."
-      ]
-    },
-    {
       "tag": "nurturing_years",
       "intent_description": "Intent describing: nurturing years.",
       "context": "Northwestern University Laoag City, Ilocos Norte, Philippines. Founded 1932.",
@@ -1689,7 +1215,11 @@
         "early years",
         "beginnings",
         "how did",
-        "tell me"
+        "tell me",
+        "first classes",
+        "challenges",
+        "skepticism",
+        "rented structures"
       ],
       "keywords": [
         "years",
@@ -1731,7 +1261,9 @@
         "apolinario",
         "aquino",
         "first college president",
-        "led"
+        "led",
+        "character",
+        "master's degree"
       ],
       "keywords": [
         "apolinario",
@@ -1761,139 +1293,6 @@
       ]
     },
     {
-      "tag": "northwestern_student_activists",
-      "intent_description": "Intent describing: northwestern student activists.",
-      "context": "Northwestern University Laoag City, Ilocos Norte, Philippines. Founded 1932.",
-      "boost_keywords": [
-        "student activists",
-        "martial law",
-        "notable",
-        "during"
-      ],
-      "keywords": [
-        "support",
-        "under",
-        "juliet",
-        "pascual?",
-        "during",
-        "what",
-        "students",
-        "notable",
-        "gervacio",
-        "became",
-        "velasco",
-        "martial",
-        "law?",
-        "northwestern",
-        "student activists"
-      ],
-      "examples": [
-        "Who were notable Northwestern students during Martial Law?",
-        "What became of Gervacio Velasco and Juliet Pascual?",
-        "How did Northwestern support its students under Martial Law?"
-      ],
-      "responses": [
-        "Gervacio Velasco, a student leader, later became dean and Vice President for Development at Northwestern. Juliet Pascual became a respected journalist and instructor. Their readmission during Martial Law demonstrated the college's support for student growth and leadership despite political risks."
-      ]
-    },
-    {
-      "tag": "northwestern_martial_law",
-      "intent_description": "Intent describing: northwestern martial law.",
-      "context": "Northwestern University Laoag City, Ilocos Norte, Philippines. Founded 1932.",
-      "boost_keywords": [
-        "martial law",
-        "during",
-        "leadership",
-        "institution"
-      ],
-      "keywords": [
-        "institutional",
-        "leadership",
-        "students",
-        "administration",
-        "internal",
-        "what",
-        "play",
-        "activism",
-        "political",
-        "northwestern",
-        "happened",
-        "during",
-        "role",
-        "repression?",
-        "sustaining",
-        "martial",
-        "affect",
-        "college?",
-        "challenges",
-        "respond",
-        "address",
-        "law?"
-      ],
-      "examples": [
-        "How did Martial Law affect Northwestern College?",
-        "What happened to students and activism at Northwestern during Martial Law?",
-        "How did the administration respond to political repression?",
-        "How did Northwestern address internal institutional challenges in the 1970s?"
-      ],
-      "responses": [
-        "During Martial Law, Northwestern College faced political repression, internal challenges, and socio-political changes. Student activists were arrested, but Mr. Nicolas N. Nicolas intervened to readmit them, upholding education and press freedom. Students protested issues like low teacher pay and inadequate facilities, with 'The Review' and the Supreme Student Council leading activism. Internally, a 1977 study identified weaknesses and threats to the institution, which Mr. Nicolas acknowledged and took seriously despite constraints, demonstrating his commitment to sustaining Northwestern. The liberal environment, combined with strong leadership, allowed both student activism and institutional resilience to flourish during this difficult period."
-      ]
-    },
-    {
-      "tag": "greeting",
-      "intent_description": "Intent describing: greeting.",
-      "context": "Northwestern University Laoag City, Ilocos Norte, Philippines. Founded 1932.",
-      "boost_keywords": [
-        "hi",
-        "hello",
-        "hey",
-        "greetings",
-        "good day",
-        "how are you",
-        "what's up",
-        "is anyone there"
-      ],
-      "keywords": [
-        "greetings",
-        "there",
-        "good",
-        "what's",
-        "hello",
-        "help",
-        "chatbot",
-        "anyone",
-        "hi",
-        "hey",
-        "how",
-        "are",
-        "you",
-        "up",
-        "ask",
-        "question"
-      ],
-      "examples": [
-        "Hi",
-        "Hello",
-        "Hey there",
-        "Good day",
-        "Greetings",
-        "How are you",
-        "What's up",
-        "Hello chatbot",
-        "Is anyone there",
-        "Can you help me",
-        "How are you",
-        "What's up"
-      ],
-      "responses": [
-        "Hello! I'm here to answer your questions about Northwestern University's history.",
-        "Hi there! How can I help you learn about Northwestern University?",
-        "Greetings! Ask me anything about Northwestern University's past.",
-        "Welcome! I'm the Northwestern University History Chatbot. What would you like to know?"
-      ]
-    },
-    {
       "tag": "ISO_Certification",
       "intent_description": "Intent describing: ISO certification status of the university.",
       "context": "ISO 9001 certification status of Northwestern University (NWU).",
@@ -1901,7 +1300,8 @@
         "iso",
         "certification",
         "status",
-        "nwu"
+        "nwu",
+        "9001"
       ],
       "keywords": [
         "iso certification",
@@ -1932,7 +1332,8 @@
         "award",
         "ranking",
         "pacucoa",
-        "accredited programs"
+        "accredited programs",
+        "number one region 1"
       ],
       "keywords": [
         "2004 award",
@@ -2043,64 +1444,6 @@
       ],
       "responses": [
         "The university was granted Deregulated Status by CHED in 2003."
-      ]
-    },
-    {
-      "tag": "campus_historical_landmarks",
-      "intent_description": "Intent describing: historical landmarks inside campus.",
-      "context": "Northwestern University Laoag City, Ilocos Norte, Philippines. Founded 1932.",
-      "priority": 10,
-      "boost_keywords": [
-        "landmark",
-        "historical",
-        "historic",
-        "inside campus",
-        "campus",
-        "buildings",
-        "sites"
-      ],
-      "keywords": [
-        "landmarks",
-        "historical landmarks",
-        "campus landmarks",
-        "sites inside",
-        "heritage sites",
-        "notable places",
-        "historic buildings",
-        "student center",
-        "aquino multipurpose building",
-        "worship center",
-        "ban building",
-        "ben a. nicolas",
-        "alumni house",
-        "campus",
-        "inside northwestern",
-        "historic site",
-        "historic sites",
-        "inside the campus",
-        "buildings inside"
-      ],
-      "aliases": [
-        "nwu landmarks",
-        "northwestern landmarks",
-        "landmarks inside nwu",
-        "historic sites in nwu",
-        "campus historic sites"
-      ],
-      "examples": [
-        "What are some historical landmarks inside Northwestern University?",
-        "List campus landmarks of Northwestern.",
-        "Notable historical sites inside NWU",
-        "Historic buildings inside the campus",
-        "Landmarks inside Northwestern University",
-        "Give me landmarks inside the campus",
-        "What historic sites are inside Northwestern University campus?",
-        "Historic buildings inside the campus",
-        "List campus landmarks"
-      ],
-      "responses": [
-        "Key campus landmarks include the Aquino Multipurpose Building (Student Center, 1991), the Worship Center (2002), the Ben A. Nicolas (BAN) Building (2006), and the Alumni House (2007).",
-        "Notable sites on campus: Student Center (Aquino Multipurpose Building, 1991), Worship Center (2002), BAN Building (2006), Alumni House (2007)."
       ]
     }
   ]
