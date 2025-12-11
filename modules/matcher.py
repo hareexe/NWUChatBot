@@ -244,38 +244,67 @@ def keyword_fallback(user_input: str, intents_data, min_overlap=2):
                 score -= 1.5
         if is_barangan_like and tag == "cresencio_barangan_history":
             score += 2.0
-        # NEW: nicolas contribution boost
+            
+        # NEW: nicolas contribution routing (Fixed dangling elif to separate if blocks)
         if is_nicolas_contrib_like and tag == "nicolas_contribution":
             score += 2.5
-        # NEW: nicolas teacher boost
+        if is_nicolas_contrib_like and tag == "nicolas_contribution":
+             score += 8
+        if is_nicolas_contrib_like and tag in {"northwestern_academy_incorporators", "northwestern_faculty_mentors"}: 
+            score = max(0, score - 4)
+            
+        # NEW: nicolas teacher routing (Fixed dangling elif to separate if blocks)
         if is_nicolas_teacher_like and tag == "northwestern_faculty_mentors":
             score += 2.5
-        # NEW: academy sacrifices boost
-        if is_academy_sacrifices_like and tag == "northwestern_academy_early_sacrifices":
-            score += 2.5
-        # DELETED: if is_engineering_program_like and tag == "northwestern_college_engineering_program": score += 2.5
-        # DELETED: elif tag == "northwestern_college_courses": score = max(0, score - 6)
-        # NEW: commonwealth era boost
-        if is_commonwealth_planning_like and tag == "northwestern_academy_commonwealth_era":
-            score += 2.5
-        # NEW: transition process boost
-        if is_transition_process_like and tag == "transition_process":
-            score += 2.5
-        # NEW: nurturing years boost
-        if is_nurturing_years_like and tag == "nurturing_years":
-            score += 2.5
-        # NEW: student activism boost
-        if is_activist_details_query and tag == "northwestern_student_activists":
-            score += 2.5
-        if tag == "student_activism" and any(t in user_tokens for t in {"students", "leaders", "protest"}):
-             score += 1.5
-        # NEW: generic course query
-        if is_generic_course_query and tag == "northwestern_college_courses":
-             score += 2.5
+        if is_nicolas_teacher_like and tag == "northwestern_faculty_mentors":
+            score += 8
+        if is_nicolas_teacher_like and tag in {"nicolas_contribution", "northwestern_academy_incorporators"}: 
+            score = max(0, score - 4)
 
+        # NEW: Maximo Caday routing (Fixed dangling elif to separate if blocks)
+        if is_caday_relationship_like:
+            if tag == "maximo_caday_relationship_with_founders": 
+                score += 8
+            elif tag == "nicolas_contribution": 
+                score = max(0, score - 6)
+
+        # NEW: Sacrifices routing (Fixed dangling elif to separate if blocks)
+        if is_academy_sacrifices_like and tag == "northwestern_academy_early_sacrifices":
+            score += 8
+        elif is_academy_sacrifices_like and tag in {"early_years", "nurturing_years"}: 
+            score = max(0, score - 4)
+
+        # NEW: Commonwealth Era routing (Fixed dangling elif to separate if blocks)
+        if is_commonwealth_planning_like and tag == "northwestern_academy_commonwealth_era":
+            score += 8
+        elif is_commonwealth_planning_like and tag in {"early_years", "northwestern_college_courses", "Accreditation"}: 
+            score = max(0, score - 6)
+
+        # NEW: Transition Process routing (Fixed dangling elif to separate if blocks)
+        if is_transition_process_like and tag == "transition_process":
+            score += 8
+        elif is_transition_process_like and tag in {"early_years", "northwestern_college_courses", "Accreditation"}: 
+            score = max(0, score - 6)
+            
+        # NEW: Nurturing Years routing (Fixed dangling elif to separate if blocks)
+        if is_nurturing_years_like and tag == "nurturing_years":
+            score += 8
+        elif is_nurturing_years_like and tag == "early_years": 
+            score = max(0, score - 6)
+
+        # NEW: Student Activism routing (Fixed dangling elif to separate if blocks)
+        if is_activist_details_query and tag == "northwestern_student_activists":
+            score += 8
+        elif is_activist_details_query and tag == "northwestern_martial_law": 
+            score = max(0, score - 4)
 
         if is_landmark_like and tag == "campus_historical_landmarks":
             score += 2.0
+        
+        # NEW: generic course query
+        if is_generic_course_query and tag == "northwestern_college_courses":
+            score += 2.5
+            
         # NEW: who/when/what intent-aware boosts - INCREASED PENALTIES/BOOSTS
         if is_who_query:
             if tag in {"complete_northwestern_presidents_list","northwestern_current_president","northwestern_academy_incorporators", "cresencio_barangan_history", "northwestern_student_activists", "northwestern_faculty_mentors", "northwestern_classroom_icons"}:
@@ -705,50 +734,68 @@ def get_semantic_response_debug(user_input: str, eval_mode: bool = False):
         if is_barangan_query:
             if tag == "cresencio_barangan_history": score += 8
             elif tag in {"angel_albano_history","northwestern_academy_incorporators"}: score = max(0, score - 6)
+            
+        # FIX START: Replaced dangling elifs with proper if/elif blocks
         # NEW: Nicolas contribution routing
         if is_nicolas_contrib_like and tag == "nicolas_contribution":
             score += 8
-            elif tag in {"northwestern_academy_incorporators", "northwestern_faculty_mentors"}: score = max(0, score - 4)
+        elif is_nicolas_contrib_like and tag in {"northwestern_academy_incorporators", "northwestern_faculty_mentors"}:
+            score = max(0, score - 4)
+
         # NEW: Nicolas teacher routing
         if is_nicolas_teacher_like and tag == "northwestern_faculty_mentors":
             score += 8
-            elif tag in {"nicolas_contribution", "northwestern_academy_incorporators"}: score = max(0, score - 4)
+        elif is_nicolas_teacher_like and tag in {"nicolas_contribution", "northwestern_academy_incorporators"}:
+            score = max(0, score - 4)
+
         # NEW: Maximo Caday routing
         if is_caday_relationship_like:
-             if tag == "maximo_caday_relationship_with_founders": score += 8
-             elif tag == "nicolas_contribution": score = max(0, score - 6)
-             
+            if tag == "maximo_caday_relationship_with_founders": 
+                score += 8
+            elif tag == "nicolas_contribution": 
+                score = max(0, score - 6)
+
         # NEW: Sacrifices routing
         if is_academy_sacrifices_like and tag == "northwestern_academy_early_sacrifices":
             score += 8
-            elif tag in {"early_years", "nurturing_years"}: score = max(0, score - 4)
-        # DELETED: if is_engineering_program_like and tag == "northwestern_college_engineering_program": score += 8
-        # DELETED: elif tag == "northwestern_college_courses": score = max(0, score - 6)
+        elif is_academy_sacrifices_like and tag in {"early_years", "nurturing_years"}: 
+            score = max(0, score - 4)
+
         # NEW: Commonwealth Era routing
         if is_commonwealth_planning_like and tag == "northwestern_academy_commonwealth_era":
-             score += 8
-             elif tag in {"early_years", "northwestern_college_courses", "Accreditation"}: score = max(0, score - 6)
+            score += 8
+        elif is_commonwealth_planning_like and tag in {"early_years", "northwestern_college_courses", "Accreditation"}: 
+            score = max(0, score - 6)
+
         # NEW: Transition Process routing
         if is_transition_process_like and tag == "transition_process":
             score += 8
-            elif tag in {"early_years", "northwestern_college_courses", "Accreditation"}: score = max(0, score - 6)
+        elif is_transition_process_like and tag in {"early_years", "northwestern_college_courses", "Accreditation"}: 
+            score = max(0, score - 6)
+            
         # NEW: Nurturing Years routing
         if is_nurturing_years_like and tag == "nurturing_years":
             score += 8
-            elif tag == "early_years": score = max(0, score - 6)
+        elif is_nurturing_years_like and tag == "early_years": 
+            score = max(0, score - 6)
+
         # NEW: Student Activism routing
         if is_activist_details_query and tag == "northwestern_student_activists":
             score += 8
-            elif tag == "northwestern_martial_law": score = max(0, score - 4)
+        elif is_activist_details_query and tag == "northwestern_martial_law": 
+            score = max(0, score - 4)
+            
         if any(t in user_tokens for t in {"student", "leaders", "marcos", "protest"}):
-             if tag == "student_activism": score += 4
-             elif tag == "northwestern_faculty_mentors": score = max(0, score - 4)
+            if tag == "student_activism": score += 4
+            elif tag == "northwestern_faculty_mentors": score = max(0, score - 4)
+        
         # NEW: Generic Courses routing
         if is_generic_course_query and tag == "northwestern_college_courses":
-             score += 8
-             # Penalty logic for generic courses stealing specific engineering is removed as the specific engineering intent is removed.
-             elif tag in {"Accreditation", "Deregulated_Status"}: score = max(0, score - 6)
-
+            score += 8
+            # Penalty logic for generic courses stealing specific engineering is removed as the specific engineering intent is removed.
+            elif tag in {"Accreditation", "Deregulated_Status"}: score = max(0, score - 6)
+        # FIX END
+            
         # NEW: Massive penalty for Commonwealth stealing Incorporators
         if (is_founders_like or "incorporator" in user_tokens) and tag == "northwestern_academy_commonwealth_era":
              score -= 5.0
@@ -760,11 +807,435 @@ def get_semantic_response_debug(user_input: str, eval_mode: bool = False):
              score -= 5.0
 
 
-        if is_new_site_query:
-            if tag == "northwestern_new_school_site": score += 8
+        # Pick best
+        if score > best_score:
+            best_score = score
+            best_match = intent
+
+    if best_match and best_score >= min_overlap:
+        # return response AND tag selected by fallback
+        return random.choice(best_match.get("responses", [])), (best_match.get("tag") or "")
+    return None, None
+
+def build_all_tests_from_intents(intents_data):
+    tests = []
+    # EXCLUDED TAGS REMOVED as per request.
+    
+    for intent in intents_data.get("intents", []):
+        tag = intent.get("tag")
+        examples = intent.get("examples") or intent.get("patterns", [])
+        for ex in examples:
+            if isinstance(ex, str) and ex.strip():
+                tests.append({"q": ex.strip(), "tag": tag})
+    return tests
+
+# Define evaluator BEFORE UI code
+def run_offline_eval():
+    # Deterministic sampling for consistent eval
+    random.seed(42)
+    # Use ALL examples from intents.json
+    tests = build_all_tests_from_intents(_intents) # Use global _intents
+
+    results = []
+    correct = 0
+    total = len(tests)
+
+    for t in tests:
+        # call matcher in evaluation mode to ignore session context and avoid state mutations
+        reply, dbg = get_semantic_response_debug(t["q"], eval_mode=True)
+        best_tag = (dbg or {}).get("best_tag")
+        ok = best_tag == t["tag"]
+        correct += 1 if ok else 0
+        results.append({
+            "query": t["q"],
+            "expected": t["tag"],
+            "predicted": best_tag,
+            "ok": ok,
+            "reason": (dbg or {}).get("reason"),
+            "score": (dbg or {}).get("best_score")
+        })
+
+    accuracy = correct / total if total else 0.0
+    return accuracy, results
+
+# --------------------------
+# --- Semantic matcher with debug ---
+# --------------------------
+def get_semantic_response_debug(user_input: str, eval_mode: bool = False):
+    if not _intents.get("intents"):
+        return "Chatbot data is unavailable.", None
+
+    user_processed = _preprocess(user_input)
+    if not user_processed.strip():
+        return "Could you rephrase your question?", None
+
+    if _pattern_embeddings is None or len(_pattern_meta) == 0:
+        return "No knowledge available at the moment.", None
+
+    user_tokens = set(_tokenizer.tokenize(user_input.lower()))
+
+    # NEW: question-word detectors (must be defined before later use)
+    is_who_query = "who" in user_tokens
+    is_when_query = any(t in user_tokens for t in {"when","year","date"})
+    is_what_query = "what" in user_tokens
+
+    # --- Early short-circuit for greetings/general info/awards ---
+    # Replace permissive greeting with robust combos
+    early_greet = (any(t in user_tokens for t in {"hi","hello","hey","greetings"})
+                    or ({"how","are","you"} <= user_tokens)
+                    or ("whats" in user_tokens) or (("what" in user_tokens) and ("up" in user_tokens)))
+    if len(user_tokens) <= 3:
+        if early_greet:
+            greet_intent = next((i for i in _intents.get("intents", []) if i.get("tag")=="greeting"), None)
+            if greet_intent:
+                return random.choice(greet_intent.get("responses", [])), {"best_tag":"greeting","reason":"Early greeting route.","best_score":None}
+        
+        # REMOVED: Early general info/award route to stop misclassification of short high-value noun queries
+        pass # Intentional removal of the old `is_simple_general_or_award` block
+
+    # Basic detectors used downstream
+    mentions_university = "university" in user_tokens
+    mentions_president = "president" in user_tokens
+    # Broaden institution mention for founders/presidents
+    mentions_institution_for_founders = any(t in user_tokens for t in {"university","northwestern","nwu","academy"})
+    mentions_institution_for_president = any(t in user_tokens for t in {"university","northwestern","nwu","college"})
+    founder_query_tokens = {"founder","founders","founded","find","cofounder","co-founder","incorporator"}
+    is_founder_query_base = any(t in user_tokens for t in founder_query_tokens)
+    status_core = {"become","became","status","recognized","recognition","confirmation","confirm","year"}
+    is_university_status_query = ("university" in user_tokens) and any(t in user_tokens for t in status_core)
+
+    # Site/status/building/general detectors (also used by fallback later)
+    is_status_like = ("university" in user_tokens) and any(t in user_tokens for t in status_core)
+    site_terms = {"site","campus","airport","avenue","hectare","new"}
+    is_new_site_like = any(t in user_tokens for t in site_terms) and ("site" in user_tokens or "campus" in user_tokens)
+    is_president_like = ("president" in user_tokens) or ("led" in user_tokens) or ("leader" in user_tokens) or ("head" in user_tokens)
+    is_current_time_like = any(t in user_tokens for t in {"current","present","incumbent","sitting","now","today","right"})
+    is_founders_like = any(t in user_tokens for t in {"founder","founders","incorporators","cofounders","co-founders"})
+    is_greeting_like = any(t in user_tokens for t in {"hi","hello","hey","greetings","good","day","help"})
+    # Make greeting robust: "how are you", "what's up/whats"
+    if ({"how","are","you"} <= user_tokens) or (("what" in user_tokens) and ("up" in user_tokens)) or ("whats" in user_tokens):
+        is_greeting_like = True
+    is_general_info_like = (("what" in user_tokens and "university" in user_tokens) or ("tell" in user_tokens and "university" in user_tokens) or ("northwestern" in user_tokens and "university" in user_tokens))
+    is_buildings_like = any(t in user_tokens for t in {"buildings","structures","timeline","completed","major","campus"}) and not any(t in user_tokens for t in {"student","worship","aquino","sc"})
+    is_barangan_like = any(t in user_tokens for t in {"barangan","cresencio","cashier","funds","finance"})
+    # NEW: landmark-like
+    is_landmark_like = any(t in user_tokens for t in {"landmark","landmarks","historical","historic","site","sites"})
+
+    # NEW: detector that targets college leadership specifically (used to route to complete list)
+    college_leadership_focus = (
+        ("college" in user_tokens) and
+        any(t in user_tokens for t in {"who","led","leader","head", "first"})
+    )
+
+    # NEW: add missing detectors used later
+    is_albano_query = any(t in user_tokens for t in {"angel","albano"})
+    process_terms = {"convert","conversion","transition","process","steps","petition","apply","application","recognition","recognized","approval","approved","sec","decs","ched"}
+    is_transition_process_like = any(t in user_tokens for t in process_terms) and any(t in user_tokens for t in {"college","university","northwestern","nwu", "academy", "how"})
+
+    # NEW: add missing detectors used below
+    # Buildings
+    is_landmark_query = is_landmark_like
+    
+    # Motto, logo
+    is_motto_query = ("fiat" in user_tokens and "lux" in user_tokens) or ("motto" in user_tokens) or ("let" in user_tokens and "light" in user_tokens)
+    is_logo_query = any(t in user_tokens for t in {"logo", "symbol", "seal", "emblem", "mascot", "owl"})
+    buildings_overview_tokens = {"buildings", "structures", "timeline", "completed", "major", "campus"}
+    is_buildings_overview_query = any(t in user_tokens for t in buildings_overview_tokens)
+    is_new_site_query = (("site" in user_tokens or "campus" in user_tokens) and any(t in user_tokens for t in {"airport", "avenue", "hectare", "new"}))
+
+    # Greeting/general/status aliases + barangan alias
+    is_greeting_query = early_greet or is_greeting_like
+    is_general_info_query = is_general_info_like
+    is_status_query = is_university_status_query
+    
+    # NEW Early History Flags for MISS 1, 2, 3, 4
+    is_foundation_phrase = any(t in user_tokens for t in {"founded", "foundation"})
+    is_beginnings_query = any(t in user_tokens for t in {"beginnings", "about"}) and ("northwestern" in user_tokens or "nwu" in user_tokens) and len(user_tokens) < 6
+    
+    # NEW: barangan alias to avoid NameError in later routing
+    is_barangan_query = is_barangan_like
+
+    # NEW: strong detector for "what year did NWU become a university" (punctuation-insensitive)
+    strong_univ_year_status = (
+        ("university" in user_tokens) and
+        ("year" in user_tokens) and
+        any(t in user_tokens for t in {"become","became","recognized","recognition","status","confirmation","confirm"})
+    )
+    # NEW: support "when did ... become a university" phrasing (punctuation-insensitive)
+    strong_univ_when_status = (
+        ("university" in user_tokens) and
+        ("when" in user_tokens) and
+        any(t in user_tokens for t in {"become","became","recognized","recognition","status","confirmation","confirm"})
+    )
+    # NEW: unified detector for both variants
+    strong_univ_status = strong_univ_year_status or strong_univ_when_status
+
+    # NEW: strong detector for founders establish list phrasing
+    strong_founders_establish_list = (
+        any(t in user_tokens for t in {"name","everyone","all","list"}) and
+        any(t in user_tokens for t in {"helped","establish","established","incorporators","founders"}) and
+        any(t in user_tokens for t in {"academy","northwestern","nwu"})
+    )
+
+    # NEW: strong detector for “When did Northwestern Academy become a college”
+    strong_academy_become_college = (
+        ("academy" in user_tokens) and
+        ("college" in user_tokens) and
+        any(t in user_tokens for t in {"become","became","becoming","transition","convert","conversion","when","year","date"})
+    )
+
+    # NEW: detector for “Who led NWU when it became a college”
+    leadership_during_college_transition = (
+        any(t in user_tokens for t in {"led","leader","head","who", "first"}) and
+        ("college" in user_tokens) and
+        any(t in user_tokens for t in {"became","become","transition","when","year","date"})
+    )
+
+    # Founders/presidents composed (extend current-president to head/leader)
+    is_current_president_query = (
+        ("president" in user_tokens) and any(t in user_tokens for t in {"current","present","incumbent","sitting","now","today","right"}) and mentions_institution_for_president
+    ) or (
+        any(t in user_tokens for t in {"current","present","incumbent","sitting","now","today","right"}) and
+        any(t in user_tokens for t in {"head","leader"}) and
+        any(t in user_tokens for t in {"university","northwestern","nwu"})
+    )
+    # UPDATED: is_presidents_query now targets complete list
+    is_presidents_query = (("president" in user_tokens) or ("presidents" in user_tokens)) and mentions_institution_for_president and not is_current_president_query
+    is_all_presidents_like = any(t in user_tokens for t in {"all", "list", "past", "first", "college"}) and is_president_like
+    is_founders_query = is_founder_query_base and mentions_institution_for_founders
+    founders_list_terms = {"list", "name", "founders", "incorporators", "co-founders", "cofounders", "ten"}
+    is_founders_list_query = any(t in user_tokens for t in founders_list_terms) and is_founders_query
+
+    # Add missing first-president and leadership phrase detectors (now route to complete list)
+    is_first_president_query = (("first" in user_tokens and "president" in user_tokens) or ("founding" in user_tokens and "president" in user_tokens))
+    generic_leader_terms = {"led", "leader", "head"}
+    is_generic_leadership_phrase = any(t in user_tokens for t in generic_leader_terms) and any(t in user_tokens for t in {"university","nwu","northwestern","college"})
+    # NEW: generic president query (for "Who is the president?" to push to current)
+    is_generic_president_query = is_president_like and is_who_query and not is_current_time_like and not is_all_presidents_like and not any(t in user_tokens for t in {"first", "past", "list", "all", "of", "college"})
+
+
+    # Stronger founders/founded detector and conflict sets
+    is_founded_nwu_like = (
+        any(t in user_tokens for t in {"founded","founder","founders","incorporators"}) and
+        not any(t in user_tokens for t in {"college","establishment"})
+    )
+    CONFLICT_INTENT_SETS = [
+        {"northwestern_academy_incorporators","foundation"},
+        {"complete_northwestern_presidents_list", "northwestern_current_president"},
+        {"northwestern_classroom_icons","northwestern_faculty_mentors"},
+        {"northwestern_student_activists","northwestern_martial_law", "student_activism"},
+        {"early_years","major_transitions"},
+        {"northwestern_academy_early_sacrifices", "nurturing_years", "early_years"},
+        {"nicolas_contribution", "northwestern_faculty_mentors", "northwestern_academy_incorporators"},
+        {"transition_process", "northwestern_college_courses", "northwestern_academy_commonwealth_era"},
+        {"northwestern_college_courses", "Accreditation", "Deregulated_Status", "major_transitions"}, # For course/status confusion
+        {"general_info", "northwestern_academy_incorporators", "northwestern_college_courses", "northwestern_academy_open_admission"} # For general info confusion
+    ]
+
+    # Missing disambiguators used later (define them here)
+    is_foundation_when_query = is_foundation_phrase and is_when_query
+    is_founders_who_query = is_founder_query_base and is_who_query
+    
+    # Nicolas-specific detectors
+    nicolas_dedication_keywords = {"mr", "title", "called", "referred", "earned", "dedication", "unmatched", "'mr.", "teacher", "instructor", "faculty", "known"}
+    is_nicolas_teacher_like = any(t in user_tokens for t in {"teacher", "instructor", "faculty", "known"}) and ("nicolas" in user_tokens)
+    is_nicolas_who_in_college = (("nicolas" in user_tokens) and is_who_query and ("college" in user_tokens))
+    is_nicolas_contrib_like = any(t in user_tokens for t in {"nicolas","founder"}) and any(t in user_tokens for t in {"contribution", "contributions", "do", "did", "help", "impact", "expansion", "role"})
+    is_nicolas_what_did_do = is_what_query and any(t in user_tokens for t in ["did", "do"]) and is_nicolas_contrib_like # NEW DETECTOR
+    is_caday_relationship_like = any(t in user_tokens for t in ["maximo", "caday", "relationship", "colleagues", "get along"])
+
+    # NEW: academy early sacrifices like
+    is_academy_sacrifices_like = any(t in user_tokens for t in {"sacrifices", "goal", "vision"}) and ("academy" in user_tokens or is_founders_like)
+
+    # Academy phase/program detectors
+    is_nurturing_years_like = (any(t in user_tokens for t in {"early","beginnings","like","where","held","challenges","face"}) and (mentions_institution_for_founders)) and not is_academy_sacrifices_like
+    is_operating_like = any(t in user_tokens for t in {"operating","operate","start","started","begin","began","location","located","held"}) and not any(t in user_tokens for t in {"sacrifices", "goal", "vision"})
+    is_commonwealth_planning_like = any(t in user_tokens for t in {"planning","expand","expansion","programs","courses","why", "commonwealth", "1935", "constitution", "surge", "affect"})
+    is_engineering_program_like = "engineering" in user_tokens and any(t in user_tokens for t in {"program", "courses", "dean", "flagship", "engineering"})
+    is_generic_course_query = any(t in user_tokens for t in {"courses", "programs", "degree", "associate"}) and (mentions_institution_for_president) and not is_engineering_program_like
+    is_transition_process_like = any(t in user_tokens for t in process_terms) and any(t in user_tokens for t in {"college","university","northwestern","nwu", "academy", "how"})
+
+    # Access policy disambiguator
+    is_access_poor_like = any(t in user_tokens for t in {"poor","needy","scholarship","scholarships","help","assist","students"})
+
+    # Nurturing years/date hint
+    has_1932 = "1932" in user_tokens
+
+    # Alias to avoid NameError later
+    is_barangan_query = is_barangan_like
+
+    # NEW: strong detector for activism details
+    is_activist_details_query = any(t in user_tokens for t in {"velasco", "pascual", "became", "support", "notable", "leaders", "marcos"})
+
+    # 1) Hard keyword override scoring (soft preference)
+    forced_index = None
+    max_overlap = 0
+    preferred_forced_tag = None
+    for i, meta in enumerate(_pattern_meta):
+        try:
+            orig_intent = next((it for it in _intents.get("intents", []) if it.get("tag") == meta["tag"]), {})
+            boost_keywords = set([k.lower() for k in orig_intent.get("boost_keywords", [])])
+            base_keywords = set([k.lower() for k in orig_intent.get("keywords", [])])
+            priority = int(orig_intent.get("priority", 0))
+        except Exception:
+            boost_keywords, base_keywords = set(), set()
+            priority = 0
+
+        overlap_boost = len(user_tokens.intersection(boost_keywords))
+        overlap_base = len(user_tokens.intersection(base_keywords))
+
+        has_specific_detector = False
+        tag = meta.get("tag")
+        
+        if tag in {"northwestern_fiat_lux_meaning"} and is_motto_query: has_specific_detector = True
+        if tag in {"northwestern_current_president"} and is_current_president_query: has_specific_detector = True
+        if tag in {"complete_northwestern_presidents_list"} and is_all_presidents_like: has_specific_detector = True
+        if tag in {"northwestern_academy_incorporators"} and (is_founders_query or is_founders_list_query): has_specific_detector = True
+        if tag in {"major_transitions"} and is_status_query: has_specific_detector = True
+        effective_priority = priority if (overlap_base + overlap_boost > 0 or has_specific_detector) else 0
+
+        score = overlap_boost * 2 + overlap_base + effective_priority
+
+        # Tight routing rules
+        if is_current_president_query:
+            if tag == "northwestern_current_president": score += 9
+            elif tag in {"complete_northwestern_presidents_list","major_transitions"}: score = max(0, score - 6)
+        elif is_presidents_query or is_first_president_query or is_generic_leadership_phrase:
+            if tag == "complete_northwestern_presidents_list": score += 9
+            elif tag in {"northwestern_current_president","major_transitions"}: score = max(0, score - 6)
+
+        # NEW: Route generic "president" queries to current president
+        if is_generic_president_query:
+            if tag == "northwestern_current_president": score += 8
+            if tag == "complete_northwestern_presidents_list": score -= 5
+            
+        if is_founders_query or is_founders_list_query:
+            if tag == "northwestern_academy_incorporators": score += 9
+            elif tag in {"major_transitions","northwestern_academy_open_admission","northwestern_academy_early_sacrifices"}: score = max(0, score - 6)
+
+        if is_status_query:
+            if tag == "major_transitions": score += 8
         else:
-            if tag == "northwestern_new_school_site": score = max(0, score - 5)
-        # Track best keyword-hit candidate for hard override
+            if tag == "major_transitions" and (is_presidents_query or is_current_president_query or is_first_president_query or is_generic_leadership_phrase or is_founders_query or is_founders_list_query or is_logo_query or is_greeting_query or is_general_info_query):
+                score = max(0, score - 7)
+        
+        # Removed individual building logic, now covered by campus_historical_landmarks
+
+        if is_motto_query:
+            if tag == "northwestern_fiat_lux_meaning": score += 7
+            elif tag in {"angel_albano_history","nicolas_contribution","northwestern_academy_incorporators"}: score = max(0, score - 5)
+
+        if is_landmark_query:
+            if tag == "campus_historical_landmarks" and not (is_motto_query or is_current_president_query or is_presidents_query or is_founders_query or is_founders_list_query or is_status_query):
+                score += 4
+            if tag == "northwestern_engineering_success_and_impact": score = max(0, score - 6)
+        else:
+            if tag == "campus_historical_landmarks": score = max(0, score - 4)
+
+        if ("first" in user_tokens and "president" in user_tokens) or any(t in user_tokens for t in generic_leader_terms):
+            if tag == "complete_northwestern_presidents_list": score += 7
+            elif tag in {"major_transitions","northwestern_current_president"}: score = max(0, score - 5)
+
+        if tag == "major_transitions" and not is_status_query:
+            score = max(0, score - 6)
+
+        if is_general_info_query:
+            if tag == "general_info": score += 8
+            elif tag in {"northwestern_new_school_site","major_transitions", "northwestern_academy_incorporators", "northwestern_college_courses"}: score = max(0, score - 6)
+
+        if is_greeting_query:
+            if tag == "greeting": score += 9
+            elif tag in {"northwestern_new_school_site","major_transitions"}: score = max(0, score - 6)
+
+        if is_buildings_overview_query:
+            if tag == "buildings": score += 7
+            elif tag == "campus_historical_landmarks": score = max(0, score - 5)
+
+        if is_barangan_query:
+            if tag == "cresencio_barangan_history": score += 8
+            elif tag in {"angel_albano_history","northwestern_academy_incorporators"}: score = max(0, score - 6)
+            
+        # FIX START: Converted dangling elif blocks to proper if/elif
+        # NEW: Nicolas contribution routing
+        if is_nicolas_contrib_like:
+            if tag == "nicolas_contribution":
+                score += 8
+            elif tag in {"northwestern_academy_incorporators", "northwestern_faculty_mentors"}:
+                 score = max(0, score - 4)
+
+        # NEW: Nicolas teacher routing
+        if is_nicolas_teacher_like:
+            if tag == "northwestern_faculty_mentors":
+                score += 8
+            elif tag in {"nicolas_contribution", "northwestern_academy_incorporators"}: 
+                score = max(0, score - 4)
+
+        # NEW: Maximo Caday routing
+        if is_caday_relationship_like:
+            if tag == "maximo_caday_relationship_with_founders": 
+                score += 8
+            elif tag == "nicolas_contribution": 
+                score = max(0, score - 6)
+
+        # NEW: Sacrifices routing
+        if is_academy_sacrifices_like:
+            if tag == "northwestern_academy_early_sacrifices":
+                score += 8
+            elif tag in {"early_years", "nurturing_years"}: 
+                score = max(0, score - 4)
+
+        # NEW: Commonwealth Era routing
+        if is_commonwealth_planning_like:
+            if tag == "northwestern_academy_commonwealth_era":
+                score += 8
+            elif tag in {"early_years", "northwestern_college_courses", "Accreditation"}: 
+                score = max(0, score - 6)
+
+        # NEW: Transition Process routing
+        if is_transition_process_like:
+            if tag == "transition_process":
+                score += 8
+            elif tag in {"early_years", "northwestern_college_courses", "Accreditation"}: 
+                score = max(0, score - 6)
+            
+        # NEW: Nurturing Years routing
+        if is_nurturing_years_like:
+            if tag == "nurturing_years":
+                score += 8
+            elif tag == "early_years": 
+                score = max(0, score - 6)
+
+        # NEW: Student Activism routing
+        if is_activist_details_query:
+            if tag == "northwestern_student_activists":
+                score += 8
+            elif tag == "northwestern_martial_law": 
+                score = max(0, score - 4)
+            
+        if any(t in user_tokens for t in {"student", "leaders", "marcos", "protest"}):
+            if tag == "student_activism": score += 4
+            elif tag == "northwestern_faculty_mentors": score = max(0, score - 4)
+        
+        # NEW: Generic Courses routing
+        if is_generic_course_query:
+            if tag == "northwestern_college_courses":
+                score += 8
+                # Penalty logic for generic courses stealing specific engineering is removed as the specific engineering intent is removed.
+            elif tag in {"Accreditation", "Deregulated_Status"}: score = max(0, score - 6)
+        # FIX END
+            
+        # NEW: Massive penalty for Commonwealth stealing Incorporators
+        if (is_founders_like or "incorporator" in user_tokens) and tag == "northwestern_academy_commonwealth_era":
+             score -= 5.0
+        # NEW: Massive penalty for Incorporators stealing Commonwealth
+        if is_commonwealth_planning_like and tag == "northwestern_academy_incorporators":
+             score -= 5.0
+        # NEW: Penalty for Presidents List stealing Founders
+        if (is_founders_like or "incorporator" in user_tokens) and tag == "complete_northwestern_presidents_list":
+             score -= 5.0
+
+
+        # Pick best
         if score > max_overlap:
             max_overlap = score
             forced_index = i
