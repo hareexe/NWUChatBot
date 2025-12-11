@@ -397,47 +397,6 @@ def keyword_fallback(user_input: str, intents_data, min_overlap=2):
         return random.choice(best_match.get("responses", [])), (best_match.get("tag") or "")
     return None, None
 
-def build_all_tests_from_intents(intents_data):
-    tests = []
-    # EXCLUDED TAGS REMOVED as per request.
-    
-    for intent in intents_data.get("intents", []):
-        tag = intent.get("tag")
-        examples = intent.get("examples") or intent.get("patterns", [])
-        for ex in examples:
-            if isinstance(ex, str) and ex.strip():
-                tests.append({"q": ex.strip(), "tag": tag})
-    return tests
-
-# Define evaluator BEFORE UI code
-def run_offline_eval():
-    # Deterministic sampling for consistent eval
-    random.seed(42)
-    # Use ALL examples from intents.json
-    tests = build_all_tests_from_intents(_intents) # Use global _intents
-
-    results = []
-    correct = 0
-    total = len(tests)
-
-    for t in tests:
-        # call matcher in evaluation mode to ignore session context and avoid state mutations
-        reply, dbg = get_semantic_response_debug(t["q"], eval_mode=True)
-        best_tag = (dbg or {}).get("best_tag")
-        ok = best_tag == t["tag"]
-        correct += 1 if ok else 0
-        results.append({
-            "query": t["q"],
-            "expected": t["tag"],
-            "predicted": best_tag,
-            "ok": ok,
-            "reason": (dbg or {}).get("reason"),
-            "score": (dbg or {}).get("best_score")
-        })
-
-    accuracy = correct / total if total else 0.0
-    return accuracy, results
-
 # --------------------------
 # --- Semantic matcher with debug ---
 # --------------------------
@@ -806,7 +765,6 @@ def get_semantic_response_debug(user_input: str, eval_mode: bool = False):
         if (is_founders_like or "incorporator" in user_tokens) and tag == "complete_northwestern_presidents_list":
              score -= 5.0
 
-
         # Pick best
         if score > best_score:
             best_score = score
@@ -816,63 +774,6 @@ def get_semantic_response_debug(user_input: str, eval_mode: bool = False):
         # return response AND tag selected by fallback
         return random.choice(best_match.get("responses", [])), (best_match.get("tag") or "")
     return None, None
-
-def build_all_tests_from_intents(intents_data):
-    tests = []
-    # EXCLUDED TAGS REMOVED as per request.
-    
-    for intent in intents_data.get("intents", []):
-        tag = intent.get("tag")
-        examples = intent.get("examples") or intent.get("patterns", [])
-        for ex in examples:
-            if isinstance(ex, str) and ex.strip():
-                tests.append({"q": ex.strip(), "tag": tag})
-    return tests
-
-# Define evaluator BEFORE UI code
-def run_offline_eval():
-    # Deterministic sampling for consistent eval
-    random.seed(42)
-    # Use ALL examples from intents.json
-    tests = build_all_tests_from_intents(_intents) # Use global _intents
-
-    results = []
-    correct = 0
-    total = len(tests)
-
-    for t in tests:
-        # call matcher in evaluation mode to ignore session context and avoid state mutations
-        reply, dbg = get_semantic_response_debug(t["q"], eval_mode=True)
-        best_tag = (dbg or {}).get("best_tag")
-        ok = best_tag == t["tag"]
-        correct += 1 if ok else 0
-        results.append({
-            "query": t["q"],
-            "expected": t["tag"],
-            "predicted": best_tag,
-            "ok": ok,
-            "reason": (dbg or {}).get("reason"),
-            "score": (dbg or {}).get("best_score")
-        })
-
-    accuracy = correct / total if total else 0.0
-    return accuracy, results
-
-# --------------------------
-# --- Semantic matcher with debug ---
-# --------------------------
-def get_semantic_response_debug(user_input: str, eval_mode: bool = False):
-    if not _intents.get("intents"):
-        return "Chatbot data is unavailable.", None
-
-    user_processed = _preprocess(user_input)
-    if not user_processed.strip():
-        return "Could you rephrase your question?", None
-
-    if _pattern_embeddings is None or len(_pattern_meta) == 0:
-        return "No knowledge available at the moment.", None
-
-    user_tokens = set(_tokenizer.tokenize(user_input.lower()))
 
     # NEW: question-word detectors (must be defined before later use)
     is_who_query = "who" in user_tokens
