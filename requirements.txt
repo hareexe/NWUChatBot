@@ -1,5 +1,5 @@
 streamlit
 nltk
 scikit-learn
-sentence-transformers==2.7.0
-torch==2.0.1
+sentence-transformers
+torch
