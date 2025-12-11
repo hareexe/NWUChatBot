@@ -23,7 +23,7 @@ def set_runtime_handles(model, intents_data, pattern_embeddings, pattern_meta, p
 def get_all_patterns(intents_data, limit=5, exclude_tags=None):
     """
     Retrieves a sample of patterns from intents_data, excluding specified tags.
-    NOTE: This signature has been updated to include 'exclude_tags' to fix the TypeError in app.py.
+    (Updated to accept exclude_tags to resolve TypeError in app.py)
     """
     if exclude_tags is None:
         exclude_tags = set()
@@ -34,7 +34,7 @@ def get_all_patterns(intents_data, limit=5, exclude_tags=None):
     for intent in intents_data.get("intents", []):
         tag = intent.get("tag")
         
-        # Apply the exclusion logic here
+        # Apply the exclusion logic
         if tag in exclude_tags:
             continue
 
@@ -111,6 +111,16 @@ def keyword_fallback(user_input: str, intents_data, min_overlap=2):
         intent = next((i for i in intents_data.get("intents", []) if i.get("tag")=="early_years" or i.get("tag")=="foundation"), None)
         if intent:
             return random.choice(intent.get("responses", [])), "early_years"
+            
+    # 1.5) FOUNDATION/EARLY YEARS direct routes (FIX for MISSED founding/date queries)
+    if (("founded" in user_tokens or "foundation" in user_tokens or "early" in user_tokens) and len(user_tokens) <= 5):
+        intent = next((i for i in intents_data.get("intents", []) if i.get("tag")=="foundation"), None)
+        if not intent:
+            intent = next((i for i in intents_data.get("intents", []) if i.get("tag")=="early_years"), None)
+
+        if intent:
+             return random.choice(intent.get("responses", [])), "foundation_or_early_years_hard_route"
+             
     # 2) Motto/logo direct routes
     if (("fiat" in user_tokens and "lux" in user_tokens) or "motto" in user_tokens or ("let" in user_tokens and "light" in user_tokens)):
         intent = next((i for i in intents_data.get("intents", []) if i.get("tag")=="northwestern_fiat_lux_meaning"), None)
@@ -139,8 +149,7 @@ def keyword_fallback(user_input: str, intents_data, min_overlap=2):
         intent = next((i for i in intents_data.get("intents", []) if i.get("tag")=="complete_northwestern_presidents_list"), None)
         if intent:
             return random.choice(intent.get("responses", [])), "complete_northwestern_presidents_list"
-    # 6) Founders of NWU short route (FIXED MISS 4: increased token limit slightly)
-    # FIX for INCORPORATORS: Add explicit hard route for short 'incorporators' query.
+    # 6) Founders of NWU short route (FIX for INCORPORATORS: Add explicit hard route for short 'incorporators' query)
     if ("incorporators" in user_tokens) and ("who" in user_tokens) and len(user_tokens) <= 5:
         intent = next((i for i in intents_data.get("intents", []) if i.get("tag")=="northwestern_academy_incorporators"), None)
         if intent:
@@ -737,18 +746,18 @@ def get_semantic_response_debug(user_input: str, eval_mode: bool = False):
         # Intent-specific reranker tuning
         if is_current_president_query:
             if tag == "northwestern_current_president": score += 0.45
-            # INCREASED PENALTY on current president for list-like queries
-            if tag in {"complete_northwestern_presidents_list","northwestern_college_president", "major_transitions"}: score -= 0.25 
+            # INCREASED PENALTY on current president for list-like queries (FIX CATEGORY A)
+            if tag in {"complete_northwestern_presidents_list","northwestern_college_president", "major_transitions"}: score -= 0.35 
         if (is_presidents_query or is_first_president_query or is_generic_leadership_phrase):
             if tag == "complete_northwestern_presidents_list": score += 0.45 
-            # INCREASED PENALTY on list-like queries when current time is present (FIXED MISS 2)
-            if tag == "northwestern_current_president": score -= 0.4 # Increased from 0.35
+            # INCREASED PENALTY on list-like queries when current time is present (FIX CATEGORY B)
+            if tag == "northwestern_current_president": score -= 0.5 
             if tag in {"major_transitions"}: score -= 0.28
             
         # NEW: All presidents boost
         if is_all_presidents_like and tag == "complete_northwestern_presidents_list":
             score += 0.35
-        # NEW: Generic president query push
+        # NEW: Generic president query push (FIX CATEGORY A)
         if is_generic_president_query:
             if tag == "northwestern_current_president": score += 0.45
             if tag == "complete_northwestern_presidents_list": score -= 0.35
@@ -936,15 +945,16 @@ def get_semantic_response_debug(user_input: str, eval_mode: bool = False):
     # HIGH PRIORITY PICK: Complete List if "all" or "past" used
     if is_all_presidents_like:
         pick_if_present({"complete_northwestern_presidents_list"}, max_gap=0.35)
-    # NEW: Generic President Query falls back to current (FIXED MISS 1)
+    # NEW: Generic President Query falls back to current (FIX CATEGORY A)
     if is_generic_president_query:
         pick_if_present({"northwestern_current_president"}, max_gap=0.3)
 
 
     if (is_presidents_query or is_first_president_query or is_generic_leadership_phrase): pick_if_present({"complete_northwestern_presidents_list"}, max_gap=0.25) 
-    # FIX: Increased max_gap for founders/incorporators to overcome semantic stealing by leadership
-    if (is_founders_query or is_founders_list_query): pick_if_present({"northwestern_academy_incorporators"}, max_gap=0.4) 
-    if is_general_info_query: pick_if_present({"general_info"}, max_gap=0.22)
+    # FIX: Increased max_gap for founders/incorporators to overcome semantic stealing by leadership (FIX CATEGORY C)
+    if (is_founders_query or is_founders_list_query): pick_if_present({"northwestern_academy_incorporators"}, max_gap=0.5) 
+    # FIX: Increased max_gap for general_info to overcome semantic stealing (FIX CATEGORY E)
+    if is_general_info_query: pick_if_present({"general_info"}, max_gap=0.35)
     if is_greeting_query: pick_if_present({"greeting"}, max_gap=0.22)
     if is_buildings_overview_query: pick_if_present({"buildings"}, max_gap=0.22)
     if is_landmark_query: pick_if_present({"campus_historical_landmarks"}, max_gap=0.22)
