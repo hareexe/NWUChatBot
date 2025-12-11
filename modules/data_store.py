@@ -64,10 +64,7 @@ def build_intent_embeddings(intents_data_hash: str, intents_data_serialized: str
                 })
 
     def build_all_tests_from_intents(intents_data):
-    """
-    Builds a list of test cases (query, expected_tag) from all examples/patterns 
-    in the intents data.
-    """
+
     tests = []
     
     for intent in intents_data.get("intents", []):
