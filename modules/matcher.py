@@ -21,11 +21,6 @@ def set_runtime_handles(model, intents_data, pattern_embeddings, pattern_meta, p
     _preprocess = preprocess
     _tokenizer = tokenizer
 
-def get_semantic_response_debug(user_input: str, eval_mode: bool = False):
-    if _preprocess is None: # <--- Added check
-         raise ValueError("Preprocessor not initialized.") 
-    user_processed = _preprocess(user_input)
-
 def get_all_patterns(intents_data, exclude_tags=None, limit=5):
     # FIX: Use the passed 'exclude_tags' parameter (required for app.py fix)
     excluded_tags_set = exclude_tags or {"end_chat", "thank_you"} 
