@@ -43,7 +43,7 @@ if not intents_data or not intents_data.get("intents"):
         st.error(f"Failed to load intents.json from app root: {e}")
         intents_data = {"intents": []}
 
-# --- Embedding model  -----
+# --- Embedding model -----
 @st.cache_resource(show_spinner="Loading sentence transformer model...")
 def _load_embedding_model():
     return load_embedding_model()
@@ -97,16 +97,16 @@ if suggestions:
 # --- Quick eval button ---
 col1, col2 = st.columns(2)
 with col2:
-     if st.button("Run quick evaluation"):
-         acc, res = run_offline_eval(intents_data)
-         st.markdown(f"<small>Accuracy: {round(acc*100,1)}%</small>", unsafe_allow_html=True)
-         # Show only misses
-         misses = [r for r in res if not r["ok"]]
-         for r in misses:
-             st.markdown(
-                 f"<small>- [MISS] {r['query']} → expected={r['expected']} predicted={r['predicted']} score={r['score']} reason={r['reason']}</small>",
-                 unsafe_allow_html=True
-             )
+    if st.button("Run quick evaluation"):
+        acc, res = run_offline_eval(intents_data)
+        st.markdown(f"<small>Accuracy: {round(acc*100,1)}%</small>", unsafe_allow_html=True)
+        # Show only misses
+        misses = [r for r in res if not r["ok"]]
+        for r in misses:
+            st.markdown(
+                f"<small>- [MISS] {r['query']} → expected={r['expected']} predicted={r['predicted']} score={r['score']} reason={r['reason']}</small>",
+                unsafe_allow_html=True
+            )
 
 # Display conversation history
 for msg in st.session_state['history']:
