@@ -782,6 +782,9 @@ def get_semantic_response_debug(user_input: str, eval_mode: bool = False):
         # NEW: Faculty mentors fix
         if is_nicolas_who_in_college and tag == "northwestern_faculty_mentors": score += 0.4 
         if is_nicolas_who_in_college and tag == "nicolas_title": score -= 0.2
+        # NEW: Faculty mentors - teaching/teacher focus
+        if tag == "northwestern_faculty_mentors" and any(t in user_tokens for t in ["teacher", "teaching", "known for"]): score += 0.4 
+
 
         # Early years stealers guard
         if tag == "northwestern_college_graduate_school" and any(t in user_tokens for t in {"college","establishment","established","become","became","transition","courses","programs","degree","engineering"}):
@@ -904,7 +907,17 @@ def get_semantic_response_debug(user_input: str, eval_mode: bool = False):
         pick_if_present({preferred_forced_tag}, max_gap=0.22)
 
     # Existing picks
-    if is_current_president_query or is_generic_president_query: pick_if_present({"northwestern_current_president"}, max_gap=0.18)
+    # HIGH PRIORITY PICK: Current President if time word is used (to counter list steal)
+    if is_current_president_query: 
+        pick_if_present({"northwestern_current_president"}, max_gap=0.35) # Increased max_gap to be more aggressive
+    # HIGH PRIORITY PICK: Complete List if "all" or "past" used
+    if is_all_presidents_like:
+        pick_if_present({"complete_northwestern_presidents_list"}, max_gap=0.35)
+    # Generic President Query falls back to current
+    if is_generic_president_query: 
+        pick_if_present({"northwestern_current_president"}, max_gap=0.18)
+
+
     if (is_presidents_query or is_first_president_query or is_generic_leadership_phrase): pick_if_present({"complete_northwestern_presidents_list"}, max_gap=0.2) # UPDATED TAG
     if (is_founders_query or is_founders_list_query): pick_if_present({"northwestern_academy_incorporators"}, max_gap=0.22)
     if is_general_info_query: pick_if_present({"general_info"}, max_gap=0.22)
@@ -1009,6 +1022,12 @@ def get_semantic_response_debug(user_input: str, eval_mode: bool = False):
         best_score = max(-1.0, best_score - 0.36)
     if best_tag == "northwestern_academy_incorporators" and is_nicolas_title_like:
         best_score = max(-1.0, best_score - 0.36)
+    # NEW: Faculty mentors vs title/contribution final hammer
+    if best_tag == "nicolas_title" and any(t in user_tokens for t in ["teacher", "college", "known for"]):
+        best_score = max(-1.0, best_score - 0.45)
+    if best_tag == "nicolas_contribution" and any(t in user_tokens for t in ["teacher", "college", "known for"]):
+        best_score = max(-1.0, best_score - 0.45)
+
 
     # Barangan vs founders fix
     if best_tag == "northwestern_academy_incorporators" and is_barangan_query:
@@ -1105,6 +1124,10 @@ def get_semantic_response_debug(user_input: str, eval_mode: bool = False):
                 if award_intent:
                     fallback_resp = random.choice(award_intent.get("responses", []))
                     fallback_tag = "2004_Award"
+            # NEW: Block short general fallback for known high-conflict terms
+            elif len(user_tokens) <= 3 and any(t in user_tokens for t in ["presidents", "founders", "nicolas"]):
+                 # If it failed semantic and contains high-value nouns, let it hit "I don't know" or the ambiguity route.
+                 pass
                     
         if fallback_resp:
             debug_info["reason"] = "Detector-driven fallback triggered."
