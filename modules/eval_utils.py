@@ -1,5 +1,5 @@
 from modules.matcher import get_semantic_response_debug
-from modules.matcher import build_all_tests_from_intents 
+from modules.data_store import build_all_tests_from_intents
 import random
 
 
