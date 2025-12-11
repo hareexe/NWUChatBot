@@ -109,19 +109,6 @@ Source: Northwestern University Portal and <em>LEGACY</em> by Erlinda Magbual-Gl
 </p>
 """, unsafe_allow_html=True)
 
-# --- Quick eval button ---
-col1, col2 = st.columns(2)
-with col2:
-    if st.button("Run quick evaluation"):
-        acc, res = run_offline_eval(intents_data)
-        st.markdown(f"<small>Accuracy: {round(acc*100,1)}%</small>", unsafe_allow_html=True)
-        # Show only misses
-        misses = [r for r in res if not r["ok"]]
-        for r in misses:
-            st.markdown(
-                f"<small>- [MISS] {r['query']} → expected={r['expected']} predicted={r['predicted']} score={r['score']} reason={r['reason']}</small>",
-                unsafe_allow_html=True
-            )
 # Input
 user_prompt = st.chat_input("Ask something about NWU history...")
 
@@ -134,14 +121,10 @@ if user_prompt:
         st.write(user_prompt)
 
     with st.spinner("Thinking..."):
-        bot_reply, debug_info = get_semantic_response_debug(user_prompt)
+        #bot_reply, debug_info = get_semantic_response_debug(user_prompt)
 
     st.session_state['history'].append({"role": "assistant", "content": bot_reply})
     with st.chat_message("assistant", avatar=None):
         st.write(bot_reply)
         if debug_info:
             st.markdown(f"<small style='color:gray'>Debug Info: {debug_info}</small>", unsafe_allow_html=True)
-
-
-
-
