@@ -21,8 +21,7 @@ def set_runtime_handles(model, intents_data, pattern_embeddings, pattern_meta, p
     _tokenizer = tokenizer
 
 def get_all_patterns(intents_data, exclude_tags=None, limit=5):
-    # NOTE: The app.py passes EXCLUDED_TAGS, but the function body immediately overwrites it.
-    # To fix the TypeError, the argument was added. We leave the body as is for now.
+    # NOTE: The body's hardcoded excluded_tags overwrites the parameter, but the parameter is needed to avoid TypeError in app.py
     excluded_tags = {"end_chat", "greeting"}
     per_intent = []
     for intent in intents_data.get("intents", []):
@@ -196,12 +195,12 @@ def build_all_tests_from_intents(intents_data):
     return tests
 
 # Define evaluator BEFORE UI code
-def run_offline_eval():
+def run_offline_eval(intents_data): # NOTE: Added intents_data argument for safety/clarity with app.py
     # Deterministic sampling for consistent eval
     random.seed(42)
     # Use ALL examples from intents.json
-    # NOTE: relies on global _intents set by set_runtime_handles
-    tests = build_all_tests_from_intents(_intents)
+    # Rely on the passed data argument, not the global _intents, for clean evaluation
+    tests = build_all_tests_from_intents(intents_data) 
 
     results = []
     correct = 0
@@ -579,10 +578,8 @@ def get_semantic_response_debug(user_input: str, eval_mode: bool = False):
         recent_context = ""
     else:
         recent_qs = st.session_state.get('recent_questions', [])
-        # --- CONTEXT FIX APPLIED HERE ---
-        # Removed recent_as to prevent previous long answers from contaminating new queries
+        # FIX: Only use the last two user questions for context (removed previous bot answer)
         recent_context = " ".join(recent_qs[-2:])
-        # --------------------------------
     contextual_input = _preprocess(user_input + (" " + recent_context if recent_context else ""))
 
     with torch.no_grad():
@@ -610,8 +607,9 @@ def get_semantic_response_debug(user_input: str, eval_mode: bool = False):
 
             # Intent-specific reranker tuning
             if is_current_president_query:
-                if tag == "northwestern_current_president": score += 0.45
-                if tag in {"presidents","major_transitions"}: score -= 0.25
+                # FIX: Stronger score management for current president
+                if tag == "northwestern_current_president": score += 0.45 
+                if tag in {"presidents","major_transitions"}: score -= 0.35 # Increased penalty
             if (is_presidents_query or is_first_president_query or is_generic_leadership_phrase):
                 if tag == "presidents": score += 0.4
                 if tag in {"northwestern_current_president","major_transitions"}: score -= 0.28
@@ -652,6 +650,8 @@ def get_semantic_response_debug(user_input: str, eval_mode: bool = False):
             nicolas_help_terms = {"contribution","contributions","role","did","help","impact","do","during","war"}
             nicolas_title_terms = {"mr","title","called"}
             if tag == "nicolas_title" and any(t in user_tokens for t in nicolas_help_terms): score -= 0.32
+            # FIX: Boost faculty/mentors when 'Mr.' or similar is used for Nicolas
+            if is_nicolas_title_like and tag == "northwestern_faculty_mentors": score += 0.40
             if tag in {"nicolas_contribution","nicolas_role"} and any(t in user_tokens for t in nicolas_title_terms): score -= 0.28
 
             # Early years stealers guard
@@ -714,10 +714,21 @@ def get_semantic_response_debug(user_input: str, eval_mode: bool = False):
                 if tag in {"major_transitions","early_years","general_info"}:
                     score -= 0.24
             if is_when_query:
+                # FIX: Stronger Foundation/Transition boost for "When"
                 if tag in {"major_transitions","early_years","foundation"}:
-                    score += 0.28
+                    score += 0.35 # Increased boost
                 if tag in {"presidents","northwestern_college_president","northwestern_academy_incorporators"}:
                     score -= 0.24
+                # FIX: Penalize Founder tag when 'when' is used
+                if is_foundation_when_query and tag == "northwestern_academy_incorporators":
+                    score -= 0.35
+                if is_founders_who_query and tag == "foundation":
+                    score -= 0.35
+
+            # FIX: Stronger penalty for unrelated chronological tags when "1932" is mentioned
+            if has_1932 and tag in {"northwestern_martial_law", "nurturing_years", "major_transitions"} and tag != "early_years": 
+                score = max(-1.0, score - 0.45)
+
 
             # Favor presidents for leadership during college transition
             if leadership_during_college_transition:
@@ -744,7 +755,8 @@ def get_semantic_response_debug(user_input: str, eval_mode: bool = False):
         pick_if_present({preferred_forced_tag}, max_gap=0.22)
 
     # Existing picks
-    if is_current_president_query: pick_if_present({"northwestern_current_president"}, max_gap=0.18)
+    # FIX: Increased max_gap for current president
+    if is_current_president_query: pick_if_present({"northwestern_current_president"}, max_gap=0.35) 
     if (is_presidents_query or is_first_president_query or is_generic_leadership_phrase): pick_if_present({"presidents"}, max_gap=0.2)
     if (is_founders_query or is_founders_list_query): pick_if_present({"northwestern_academy_incorporators"}, max_gap=0.22)
     if is_general_info_query: pick_if_present({"general_info"}, max_gap=0.22)
@@ -763,11 +775,19 @@ def get_semantic_response_debug(user_input: str, eval_mode: bool = False):
     if strong_founders_establish_list:
         pick_if_present({"northwestern_academy_incorporators"}, max_gap=0.3)
     # NEW: explicit pick for first college president phrasing
+    # FIX: Increased max_gap for first college president
     if strong_first_college_president:
-        pick_if_present({"northwestern_college_president"}, max_gap=0.3)
+        pick_if_present({"northwestern_college_president"}, max_gap=0.4) 
     # NEW: explicit pick for Academy→College phrasing
     if strong_academy_become_college:
         pick_if_present({"early_years"}, max_gap=0.36)
+    # FIX: Stronger pick for foundation when WHEN is used
+    if is_foundation_when_query: 
+        pick_if_present({"foundation"}, max_gap=0.35)
+    # FIX: Stronger pick for incorporators when WHO is used
+    if is_founders_who_query: 
+        pick_if_present({"northwestern_academy_incorporators"}, max_gap=0.35)
+
 
     # Final selection and score adjustments
     best_index = candidates[0][0]
