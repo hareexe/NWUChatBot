@@ -5,6 +5,10 @@ import torch
 import hashlib
 import os
 
+from modules.nlp_utils import initialize_nltk_data, preprocess, expand_with_synonyms, regexp_word_tokenizer
+from modules.data_store import load_data, build_intent_embeddings, _hash_intents, load_embedding_model
+from modules.eval_utils import build_all_tests_from_intents, run_offline_eval
+from modules.matcher import get_semantic_response_debug, keyword_fallback, get_all_patterns
 
 # --- NLTK Initialization ---
 @st.cache_resource(show_spinner="Initializing NLTK resources...")
@@ -40,7 +44,6 @@ if not intents_data or not intents_data.get("intents"):
         intents_data = {"intents": []}
 
 # --- Embedding model  -----
-# Note: _load_embedding_model() just calls the imported function and applies @st.cache_resource
 @st.cache_resource(show_spinner="Loading sentence transformer model...")
 def _load_embedding_model():
     return load_embedding_model()
@@ -85,20 +88,25 @@ if 'recent_questions' not in st.session_state:
     st.session_state['recent_questions'] = []
 
 # Suggestions
-EXCLUDED_TAGS = ["greeting", "end_chat"] 
-
-try:
-    # Use the version of get_all_patterns with the exclusion list
-    suggestions = get_all_patterns(intents_data, limit=5, exclude_tags=EXCLUDED_TAGS)
-except TypeError:
-    # Fallback for compatibility if get_all_patterns doesn't yet support exclude_tags
-    st.warning("`get_all_patterns` is missing the `exclude_tags` parameter. Please update `modules/matcher.py` for correct filtering.")
-    suggestions = get_all_patterns(intents_data, limit=5)
-
+EXCLUDED_TAGS = {"end_chat", "thank_you", "greeting"}
+suggestions = get_all_patterns(intents_data, exclude_tags=EXCLUDED_TAGS, limit=5)
 if suggestions:
     st.markdown("**Try asking:**")
     st.markdown("\n".join([f"* {s}" for s in suggestions]))
-
+    
+# --- Quick eval button ---
+col1, col2 = st.columns(2)
+with col2:
+     if st.button("Run quick evaluation"):
+         acc, res = run_offline_eval(intents_data)
+         st.markdown(f"<small>Accuracy: {round(acc*100,1)}%</small>", unsafe_allow_html=True)
+         # Show only misses
+         misses = [r for r in res if not r["ok"]]
+         for r in misses:
+             st.markdown(
+                 f"<small>- [MISS] {r['query']} → expected={r['expected']} predicted={r['predicted']} score={r['score']} reason={r['reason']}</small>",
+                 unsafe_allow_html=True
+             )
 
 # Display conversation history
 for msg in st.session_state['history']:
@@ -117,23 +125,18 @@ Source: Northwestern University Portal and <em>LEGACY</em> by Erlinda Magbual-Gl
 user_prompt = st.chat_input("Ask something about NWU history...")
 
 if user_prompt:
-    # --- Start of user message handling ---
     st.session_state['history'].append({"role": "user", "content": user_prompt})
     st.session_state['recent_questions'].append(user_prompt)
     st.session_state['recent_questions'] = st.session_state['recent_questions'][-6:]
 
-    # Display user message in the current chat area
     with st.chat_message("user", avatar=None):
         st.write(user_prompt)
 
-    # --- Start of model processing ---
     with st.spinner("Thinking..."):
         bot_reply, debug_info = get_semantic_response_debug(user_prompt)
 
-    # Display bot response
     st.session_state['history'].append({"role": "assistant", "content": bot_reply})
     with st.chat_message("assistant", avatar=None):
         st.write(bot_reply)
-
-
-
+        if debug_info:
+            st.markdown(f"<small style='color:gray'>Debug Info: {debug_info}</small>", unsafe_allow_html=True)
