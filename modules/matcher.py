@@ -21,13 +21,18 @@ def set_runtime_handles(model, intents_data, pattern_embeddings, pattern_meta, p
     _tokenizer = tokenizer
 
 def get_all_patterns(intents_data, limit=5):
-    # one example per intent, exclude utility intents
-    excluded_tags = {"end_chat", "thank_you, greeting"}
+    # one example per intent. EXCLUDED TAGS REMOVED as per request.
+    
     per_intent = []
     for intent in intents_data.get("intents", []):
         tag = intent.get("tag")
-        if tag in excluded_tags:
-            continue
+        
+        # NOTE: All intents are now included, including 'greeting' and 'end_chat'.
+        # If you want to exclude them, uncomment the lines below and use correct set syntax:
+        # excluded_tags = {"end_chat", "thank_you", "greeting"}
+        # if tag in excluded_tags:
+        #     continue
+
         items = intent.get("examples") or intent.get("patterns", [])
         if not items:
             continue
@@ -258,12 +263,16 @@ def keyword_fallback(user_input: str, intents_data, min_overlap=2):
 
 def build_all_tests_from_intents(intents_data):
     tests = []
-    # REMOVED nicolas_title from excluded tags since it is removed from intents, but keep utility tags
-    excluded_tags = {"end_chat", "thank_you", "greeting"}  
+    # EXCLUDED TAGS REMOVED as per request.
+    # If you want to exclude them, uncomment the lines below:
+    # excluded_tags = {"end_chat", "thank_you", "greeting"}  
+    # for intent in intents_data.get("intents", []):
+    #     tag = intent.get("tag")
+    #     if tag in excluded_tags:
+    #         continue
+
     for intent in intents_data.get("intents", []):
         tag = intent.get("tag")
-        if tag in excluded_tags:
-            continue
         examples = intent.get("examples") or intent.get("patterns", [])
         for ex in examples:
             if isinstance(ex, str) and ex.strip():
@@ -322,8 +331,8 @@ def get_semantic_response_debug(user_input: str, eval_mode: bool = False):
     # --- Early short-circuit for greetings/general info/awards ---
     # Replace permissive greeting with robust combos
     early_greet = (any(t in user_tokens for t in {"hi","hello","hey","greetings"})
-                   or ({"how","are","you"} <= user_tokens)
-                   or ("whats" in user_tokens) or (("what" in user_tokens) and ("up" in user_tokens)))
+                    or ({"how","are","you"} <= user_tokens)
+                    or ("whats" in user_tokens) or (("what" in user_tokens) and ("up" in user_tokens)))
     if len(user_tokens) <= 3:
         if early_greet:
             greet_intent = next((i for i in _intents.get("intents", []) if i.get("tag")=="greeting"), None)
@@ -698,6 +707,7 @@ def get_semantic_response_debug(user_input: str, eval_mode: bool = False):
 
     with torch.no_grad():
         user_embedding = _model.encode([contextual_input], convert_to_tensor=True)
+        # Diagram: Semantic Similarity Search 
         similarities = util.cos_sim(user_embedding, _pattern_embeddings)[0]
     if similarities.numel() == 0:
         return "I don't know.", None
@@ -780,7 +790,7 @@ def get_semantic_response_debug(user_input: str, eval_mode: bool = False):
             if tag == "northwestern_faculty_mentors" and is_nicolas_who_in_college: score += 0.2 # Small boost if seeking teacher in college
             elif tag == "northwestern_faculty_mentors": score -= 0.3 
             elif tag == "northwestern_academy_incorporators": score -= 0.3
-        
+            
         # FINAL NICOLAS ROLE FILTER
         if is_nicolas_who_in_college and tag == "nicolas_contribution": score -= 0.4 # Penalty if asking "who in college" but landing on contribution
         if is_nicolas_who_in_college and tag == "northwestern_faculty_mentors": score += 0.4 # Strong boost for faculty mentor when asked "who in college"
@@ -805,7 +815,7 @@ def get_semantic_response_debug(user_input: str, eval_mode: bool = False):
         # Maximo Caday separation
         if tag == "maximo_caday_relationship_with_founders" and is_nicolas_contrib_like and not any(t in user_tokens for t in ["maximo", "caday", "relationship", "colleagues"]):
             score -= 0.4 # Increased penalty
-        
+            
         # Faculty/mentors
         if tag == "northwestern_faculty_mentors" and any(t in user_tokens for t in {"title","mr","called","why"}):
             score -= 0.36
@@ -858,7 +868,7 @@ def get_semantic_response_debug(user_input: str, eval_mode: bool = False):
                 score += 0.2
             elif tag in {"major_transitions","general_info"}:
                 score -= 0.18
-        
+            
         # NEW: push "Tell me about the university" to general_info
         if user_input.lower() == "tell me about the university" and tag == "general_info":
             score += 0.4
@@ -1148,7 +1158,7 @@ def get_semantic_response_debug(user_input: str, eval_mode: bool = False):
             elif len(user_tokens) <= 3 and any(t in user_tokens for t in ["presidents", "founders", "nicolas"]):
                  # If it failed semantic and contains high-value nouns, let it hit "I don't know" or the ambiguity route.
                  pass
-                    
+                     
         if fallback_resp:
             debug_info["reason"] = "Detector-driven fallback triggered."
             debug_info["best_tag"] = fallback_tag
