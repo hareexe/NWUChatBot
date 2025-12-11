@@ -95,9 +95,10 @@ def keyword_fallback(user_input: str, intents_data, min_overlap=2):
     is_generic_president_query = is_president_like and not is_current_time_like and not is_all_presidents_like and not any(t in user_tokens for t in {"first", "past", "list", "all"})
 
     # Quick safe routes to avoid bad fallbacks
+    # --- HARD ROUTES FOR AMBIGUOUS SHORT QUERIES ---
     # 1) Date-only early-year routing
     if "1932" in user_tokens:
-        intent = next((i for i in intents_data.get("intents", []) if i.get("tag")=="early_years"), None)
+        intent = next((i for i in intents_data.get("intents", []) if i.get("tag")=="early_years" or i.get("tag")=="foundation"), None)
         if intent:
             return random.choice(intent.get("responses", [])), "early_years"
     # 2) Motto/logo direct routes
@@ -128,6 +129,12 @@ def keyword_fallback(user_input: str, intents_data, min_overlap=2):
         intent = next((i for i in intents_data.get("intents", []) if i.get("tag")=="complete_northwestern_presidents_list"), None)
         if intent:
             return random.choice(intent.get("responses", [])), "complete_northwestern_presidents_list"
+    # 6) Founders of NWU short route
+    if any(t in user_tokens for t in {"founders", "incorporators"}) and any(t in user_tokens for t in ["nwu", "northwestern"]) and len(user_tokens) <= 4:
+        intent = next((i for i in intents_data.get("intents", []) if i.get("tag")=="northwestern_academy_incorporators"), None)
+        if intent:
+            return random.choice(intent.get("responses", [])), "northwestern_academy_incorporators"
+
 
     best_match = None
     best_score = -1.0
@@ -226,6 +233,9 @@ def keyword_fallback(user_input: str, intents_data, min_overlap=2):
         # NEW: Strong penalty for "first college president" stealing from complete list
         if tag == "complete_northwestern_presidents_list" and any(t in user_tokens for t in ["first", "college", "president"]):
             score -= 2.5
+        # NEW: Penalty for martial law stealing 1932 queries
+        if tag == "northwestern_martial_law" and any(t in user_tokens for t in ["1932", "foundation", "founded", "original name"]):
+            score -= 4.0
 
 
         # Pick best
@@ -665,6 +675,8 @@ def get_semantic_response_debug(user_input: str, eval_mode: bool = False):
             tag == "2004_Award" and any(t in user_tokens for t in ["award", "2004"]), # NEW
             # UPDATED: allow major_transitions for both 'year' and 'when' variants
             tag == "major_transitions" and strong_univ_status,
+            # NEW: Hard route for original name
+            tag == "early_years" and user_input.lower() == "what was the school originally called?",
         ])
 
     HARD_OVERRIDE_THRESHOLD = 5
