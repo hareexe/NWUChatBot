@@ -1,4 +1,7 @@
-from .matcher import get_semantic_response_debug
+from modules.matcher import get_semantic_response_debug
+
+# Assuming the structure is /root/modules/eval_utils.py and /root/modules/matcher.py
+from modules.matcher import get_semantic_response_debug
 import random
 
 def build_all_tests_from_intents(intents_data):
