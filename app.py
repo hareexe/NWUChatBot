@@ -10,6 +10,10 @@ from modules.data_store import load_data, build_intent_embeddings, _hash_intents
 from modules.eval_utils import build_all_tests_from_intents, run_offline_eval
 from modules.matcher import get_semantic_response_debug, keyword_fallback, get_all_patterns, set_runtime_handles # Added set_runtime_handles for completeness
 
+if model is None:
+    st.error("FATAL ERROR: Model failed to load.")
+    st.stop() # Ensure the app halts if the model is missing
+    
 # --- NLTK Initialization ---
 @st.cache_resource(show_spinner="Initializing NLTK resources...")
 def _initialize_nltk_data():
@@ -128,4 +132,5 @@ if user_prompt:
         st.write(bot_reply)
         if debug_info:
             st.markdown(f"<small style='color:gray'>Debug Info: {debug_info}</small>", unsafe_allow_html=True)
+
 
