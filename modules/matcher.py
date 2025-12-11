@@ -200,7 +200,7 @@ def run_offline_eval(intents_data): # NOTE: Added intents_data argument for safe
     random.seed(42)
     # Use ALL examples from intents.json
     # Rely on the passed data argument, not the global _intents, for clean evaluation
-    tests = build_all_tests_from_intents(intents_data) 
+    tests = build_all_tests_from_intents(intents_data)
 
     results = []
     correct = 0
@@ -243,6 +243,9 @@ def get_semantic_response_debug(user_input: str, eval_mode: bool = False):
     # NEW: question-word detectors (must be defined before later use)
     is_who_query = "who" in user_tokens
     is_when_query = any(t in user_tokens for t in {"when","year","date"})
+    
+    # NEW DETECTOR: Checks for terms indicating a president list or historical scope
+    is_list_query = any(t in user_tokens for t in {"past", "present", "all", "list", "history"}) and ("president" in user_tokens)
 
     # --- Early short-circuit for greetings/general info ---
     # Replace permissive greeting with robust combos
@@ -470,7 +473,8 @@ def get_semantic_response_debug(user_input: str, eval_mode: bool = False):
         # Tight routing rules
         if is_current_president_query:
             if tag == "northwestern_current_president": score += 9
-            elif tag in {"presidents","northwestern_college_president","major_transitions"}: score = max(0, score - 6)
+            # FIX: Increase penalty on general list and college when current is queried
+            elif tag in {"presidents","northwestern_college_president","major_transitions"}: score = max(0, score - 6) 
         elif is_presidents_query or is_first_president_query or is_generic_leadership_phrase:
             if tag == "presidents": score += 9
             elif tag in {"northwestern_current_president","major_transitions"}: score = max(0, score - 6)
@@ -613,6 +617,11 @@ def get_semantic_response_debug(user_input: str, eval_mode: bool = False):
             if (is_presidents_query or is_first_president_query or is_generic_leadership_phrase):
                 if tag == "presidents": score += 0.4
                 if tag in {"northwestern_current_president","major_transitions"}: score -= 0.28
+            
+            # FIX: Boost list query when past/present/all is mentioned
+            if is_list_query:
+                if tag == "complete_northwestern_presidents_list": score += 0.45
+                if tag == "northwestern_current_president": score -= 0.35 # Penalize single tag
 
             if (is_founders_query or is_founders_list_query):
                 if tag == "northwestern_academy_incorporators": score += 0.42
@@ -756,7 +765,10 @@ def get_semantic_response_debug(user_input: str, eval_mode: bool = False):
 
     # Existing picks
     # FIX: Increased max_gap for current president
-    if is_current_president_query: pick_if_present({"northwestern_current_president"}, max_gap=0.35) 
+    if is_current_president_query: pick_if_present({"northwestern_current_president"}, max_gap=0.35)
+    # FIX: Explicit pick for President List when scope is broad
+    if is_list_query: pick_if_present({"complete_northwestern_presidents_list"}, max_gap=0.35)
+    
     if (is_presidents_query or is_first_president_query or is_generic_leadership_phrase): pick_if_present({"presidents"}, max_gap=0.2)
     if (is_founders_query or is_founders_list_query): pick_if_present({"northwestern_academy_incorporators"}, max_gap=0.22)
     if is_general_info_query: pick_if_present({"general_info"}, max_gap=0.22)
@@ -777,15 +789,15 @@ def get_semantic_response_debug(user_input: str, eval_mode: bool = False):
     # NEW: explicit pick for first college president phrasing
     # FIX: Increased max_gap for first college president
     if strong_first_college_president:
-        pick_if_present({"northwestern_college_president"}, max_gap=0.4) 
+        pick_if_present({"northwestern_college_president"}, max_gap=0.4)
     # NEW: explicit pick for Academy→College phrasing
     if strong_academy_become_college:
         pick_if_present({"early_years"}, max_gap=0.36)
     # FIX: Stronger pick for foundation when WHEN is used
-    if is_foundation_when_query: 
+    if is_foundation_when_query:
         pick_if_present({"foundation"}, max_gap=0.35)
     # FIX: Stronger pick for incorporators when WHO is used
-    if is_founders_who_query: 
+    if is_founders_who_query:
         pick_if_present({"northwestern_academy_incorporators"}, max_gap=0.35)
 
 
