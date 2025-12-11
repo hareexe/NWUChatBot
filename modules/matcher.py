@@ -20,18 +20,23 @@ def set_runtime_handles(model, intents_data, pattern_embeddings, pattern_meta, p
     _preprocess = preprocess
     _tokenizer = tokenizer
 
-def get_all_patterns(intents_data, limit=5):
-    # one example per intent. EXCLUDED TAGS REMOVED as per request.
-    
+def get_all_patterns(intents_data, limit=5, exclude_tags=None):
+    """
+    Retrieves a sample of patterns from intents_data, excluding specified tags.
+    NOTE: This signature has been updated to include 'exclude_tags' to fix the TypeError in app.py.
+    """
+    if exclude_tags is None:
+        exclude_tags = set()
+    elif isinstance(exclude_tags, list):
+        exclude_tags = set(exclude_tags)
+        
     per_intent = []
     for intent in intents_data.get("intents", []):
         tag = intent.get("tag")
         
-        # NOTE: All intents are now included, including 'greeting' and 'end_chat'.
-        # If you want to exclude them, uncomment the lines below and use correct set syntax:
-        # excluded_tags = {"end_chat", "thank_you", "greeting"}
-        # if tag in excluded_tags:
-        #     continue
+        # Apply the exclusion logic here
+        if tag in exclude_tags:
+            continue
 
         items = intent.get("examples") or intent.get("patterns", [])
         if not items:
@@ -135,6 +140,12 @@ def keyword_fallback(user_input: str, intents_data, min_overlap=2):
         if intent:
             return random.choice(intent.get("responses", [])), "complete_northwestern_presidents_list"
     # 6) Founders of NWU short route (FIXED MISS 4: increased token limit slightly)
+    # FIX for INCORPORATORS: Add explicit hard route for short 'incorporators' query.
+    if ("incorporators" in user_tokens) and ("who" in user_tokens) and len(user_tokens) <= 5:
+        intent = next((i for i in intents_data.get("intents", []) if i.get("tag")=="northwestern_academy_incorporators"), None)
+        if intent:
+            return random.choice(intent.get("responses", [])), "northwestern_academy_incorporators"
+            
     if any(t in user_tokens for t in {"founders", "incorporators"}) and any(t in user_tokens for t in ["nwu", "northwestern", "academy"]) and len(user_tokens) <= 5:
         intent = next((i for i in intents_data.get("intents", []) if i.get("tag")=="northwestern_academy_incorporators"), None)
         if intent:
@@ -264,13 +275,7 @@ def keyword_fallback(user_input: str, intents_data, min_overlap=2):
 def build_all_tests_from_intents(intents_data):
     tests = []
     # EXCLUDED TAGS REMOVED as per request.
-    # If you want to exclude them, uncomment the lines below:
-    # excluded_tags = {"end_chat", "thank_you", "greeting"}  
-    # for intent in intents_data.get("intents", []):
-    #     tag = intent.get("tag")
-    #     if tag in excluded_tags:
-    #         continue
-
+    
     for intent in intents_data.get("intents", []):
         tag = intent.get("tag")
         examples = intent.get("examples") or intent.get("patterns", [])
@@ -455,7 +460,7 @@ def get_semantic_response_debug(user_input: str, eval_mode: bool = False):
     # UPDATED: is_presidents_query now targets complete list
     is_presidents_query = (("president" in user_tokens) or ("presidents" in user_tokens)) and mentions_institution_for_president and not is_current_president_query
     is_all_presidents_like = any(t in user_tokens for t in {"all", "list", "past"}) and is_president_like
-    is_founders_query = is_founder_query and mentions_institution_for_founders
+    is_founders_query = any(t in user_tokens for t in founder_query_tokens) and mentions_institution_for_founders
     founders_list_terms = {"list", "name", "founders", "incorporators", "co-founders", "cofounders"}
     is_founders_list_query = any(t in user_tokens for t in founders_list_terms) and is_founders_query
 
@@ -937,7 +942,8 @@ def get_semantic_response_debug(user_input: str, eval_mode: bool = False):
 
 
     if (is_presidents_query or is_first_president_query or is_generic_leadership_phrase): pick_if_present({"complete_northwestern_presidents_list"}, max_gap=0.25) 
-    if (is_founders_query or is_founders_list_query): pick_if_present({"northwestern_academy_incorporators"}, max_gap=0.4)
+    # FIX: Increased max_gap for founders/incorporators to overcome semantic stealing by leadership
+    if (is_founders_query or is_founders_list_query): pick_if_present({"northwestern_academy_incorporators"}, max_gap=0.4) 
     if is_general_info_query: pick_if_present({"general_info"}, max_gap=0.22)
     if is_greeting_query: pick_if_present({"greeting"}, max_gap=0.22)
     if is_buildings_overview_query: pick_if_present({"buildings"}, max_gap=0.22)
