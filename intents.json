@@ -614,44 +614,6 @@
       ]
     },
     {
-      "tag": "nicolas_title",
-      "intent_description": "Intent describing: nicolas title.",
-      "context": "Northwestern University Laoag City, Ilocos Norte, Philippines. Founded 1932.",
-      "boost_keywords": [
-        "title",
-        "mr. northwestern",
-        "earned",
-        "called",
-        "referred"
-      ],
-      "keywords": [
-        "northwestern",
-        "nicolas",
-        "school?",
-        "founder",
-        "'mr.",
-        "northwestern'?",
-        "title",
-        "referred",
-        "earned",
-        "northwestern?",
-        "called",
-        "earn",
-        "why",
-        "mr. northwestern"
-      ],
-      "examples": [
-        "How did Nicolas N. Nicolas earn the title Mr. Northwestern?",
-        "Who earned the title Mr. Northwestern at the school?",
-        "Who was called Mr. Northwestern?",
-        "Why is the founder referred to as Mr. Northwestern?",
-        "Why was Nicolas N. Nicolas called 'Mr. Northwestern'?"
-      ],
-      "responses": [
-        "Nicolas N. Nicolas earned the title 'Mr. Northwestern' because of his unmatched dedication and major role in building and shaping the university. His colleagues, students, and the community gave him this recognition for his lifelong service."
-      ]
-    },
-    {
       "tag": "northwestern_classroom_icons",
       "intent_description": "Intent describing: northwestern classroom icons.",
       "context": "Northwestern University Laoag City, Ilocos Norte, Philippines. Founded 1932.",
@@ -1449,4 +1411,3 @@
     }
   ]
 }
-
