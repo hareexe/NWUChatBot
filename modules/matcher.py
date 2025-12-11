@@ -254,6 +254,7 @@ def keyword_fallback(user_input: str, intents_data, min_overlap=2):
         if is_academy_sacrifices_like and tag == "northwestern_academy_early_sacrifices":
             score += 2.5
         # DELETED: if is_engineering_program_like and tag == "northwestern_college_engineering_program": score += 2.5
+        # DELETED: elif tag == "northwestern_college_courses": score = max(0, score - 6)
         # NEW: commonwealth era boost
         if is_commonwealth_planning_like and tag == "northwestern_academy_commonwealth_era":
             score += 2.5
@@ -764,7 +765,7 @@ def get_semantic_response_debug(user_input: str, eval_mode: bool = False):
         else:
             if tag == "northwestern_new_school_site": score = max(0, score - 5)
         # Track best keyword-hit candidate for hard override
-        if score > best_score:
+        if score > max_overlap:
             max_overlap = score
             forced_index = i
 
@@ -1034,7 +1035,7 @@ def get_semantic_response_debug(user_input: str, eval_mode: bool = False):
     # FIX: Increased max_gap for general_info to overcome semantic stealing
     if is_general_info_query: pick_if_present({"general_info"}, max_gap=0.35)
     
-    # FINAL Pick: Ambiguous Early History Terms (MISS 1, 2, 3, 4)
+    # FINAL Pick: Ambiguous Early History Terms
     if is_foundation_phrase:
         pick_if_present({"foundation"}, max_gap=0.35)
     if is_beginnings_query:
@@ -1152,9 +1153,7 @@ def get_semantic_response_debug(user_input: str, eval_mode: bool = False):
     # DELETED: if best_tag == "northwestern_college_engineering_program" and is_first_engineering_program_like: best_score += 0.15
     # NEW: courses vs engineering program fix (for the mutual steal)
     if best_tag == "northwestern_college_courses" and is_engineering_program_like:
-        # Penalize if it's generic courses and the query is very specific to the engineering tag (which is now retired). 
-        # Since the generic course intent is the target for all program questions now, only penalize for engineering *stealing* when it shouldn't.
-        # This clause remains a positive nudger for engineering questions to land on the course list.
+        # Since engineering now routes here, add a small positive nudge for specific engineering queries
         best_score += 0.1
         
     # UPDATED: extra guards for Academy→College phrasing
@@ -1202,14 +1201,14 @@ def get_semantic_response_debug(user_input: str, eval_mode: bool = False):
     if is_who_query or is_when_query or leadership_during_college_transition or strong_academy_become_college:
         ambiguous_threshold = 0.015
 
-    # NEW: Dynamic confidence threshold (define before debug_info and fallback)
+    # NEW: Dynamic confidence threshold (ADJUSTED)
     token_count = len(user_tokens)
     if token_count <= 3:
         CONFIDENCE_THRESHOLD = 0.5
     elif token_count <= 8:
-        CONFIDENCE_THRESHOLD = 0.59
+        CONFIDENCE_THRESHOLD = 0.61  # Increased from 0.59
     else:
-        CONFIDENCE_THRESHOLD = 0.63
+        CONFIDENCE_THRESHOLD = 0.65  # Increased from 0.63
 
     # Build debug info before fallback
     debug_info = {
