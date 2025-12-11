@@ -5,15 +5,12 @@ import torch
 import hashlib
 import os
 
-# Replace in-file implementations with imports
 from modules.nlp_utils import initialize_nltk_data, preprocess, expand_with_synonyms, regexp_word_tokenizer
 from modules.data_store import load_data, build_intent_embeddings, _hash_intents, load_embedding_model
 from modules.eval_utils import build_all_tests_from_intents, run_offline_eval
 from modules.matcher import get_semantic_response_debug, keyword_fallback, get_all_patterns
 
-# --------------------------
 # --- NLTK Initialization ---
-# --------------------------
 @st.cache_resource(show_spinner="Initializing NLTK resources...")
 def _initialize_nltk_data():
     return initialize_nltk_data()
@@ -28,9 +25,7 @@ except Exception:
     from modules.nlp_utils import regexp_word_tokenizer as _exported_tokenizer
     regexp_word_tokenizer = _exported_tokenizer
 
-# --------------------------
 # --- Load intents.json ----
-# --------------------------
 @st.cache_resource(show_spinner="Loading chatbot data...")
 def _load_data():
     return load_data()
@@ -48,18 +43,14 @@ if not intents_data or not intents_data.get("intents"):
         st.error(f"Failed to load intents.json from app root: {e}")
         intents_data = {"intents": []}
 
-# --------------------------
 # --- Embedding model  -----
-# --------------------------
 @st.cache_resource(show_spinner="Loading sentence transformer model...")
 def _load_embedding_model():
     return load_embedding_model()
 
 model = _load_embedding_model()
 
-# --------------------------
 # --- Build embeddings ----
-# --------------------------
 @st.cache_data(show_spinner="Encoding all chatbot patterns...")
 def _build_intent_embeddings(intents_data_hash: str, intents_data_serialized: str):
     # pass the loaded model into the module function
@@ -84,9 +75,7 @@ set_runtime_handles(
     tokenizer=regexp_word_tokenizer
 )
 
-# --------------------------
 # --- Streamlit UI ---------
-# --------------------------
 st.set_page_config(page_title="NWU History Chatbot", layout="centered")
 st.title("NWU History Chatbot")
 st.subheader("Ask about the history of Northwestern University (Laoag City)")
@@ -100,11 +89,11 @@ if 'recent_questions' not in st.session_state:
 
 # Suggestions
 EXCLUDED_TAGS = {"end_chat", "thank_you", "greeting"}
-patterns = get_all_patterns(intents_data, exclude_tags=EXCLUDED_TAGS, limit=5)
-if patterns:
+suggestions = get_all_patterns(intents_data, exclude_tags=EXCLUDED_TAGS, limit=5)
+if suggestions:
     st.markdown("**Try asking:**")
-    st.markdown("\n".join([f"* {s}" for s in patterns]))
-
+    st.markdown("\n".join([f"* {s}" for s in suggestions]))
+    
 # --- Quick eval button ---
 col1, col2 = st.columns(2)
 with col2:
@@ -151,4 +140,5 @@ if user_prompt:
         st.write(bot_reply)
         if debug_info:
             st.markdown(f"<small style='color:gray'>Debug Info: {debug_info}</small>", unsafe_allow_html=True)
+
 
