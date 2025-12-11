@@ -11,10 +11,6 @@ _pattern_meta = None
 _preprocess = None
 _tokenizer = None
 
-def get_semantic_response_debug(user_input: str, eval_mode: bool = False):
-    if _preprocess is None: # <--- Added check
-         raise ValueError("Preprocessor not initialized.") 
-    user_processed = _preprocess(user_input)
     
 def set_runtime_handles(model, intents_data, pattern_embeddings, pattern_meta, preprocess, tokenizer):
     global _model, _intents, _pattern_embeddings, _pattern_meta, _preprocess, _tokenizer
@@ -24,6 +20,11 @@ def set_runtime_handles(model, intents_data, pattern_embeddings, pattern_meta, p
     _pattern_meta = pattern_meta
     _preprocess = preprocess
     _tokenizer = tokenizer
+
+def get_semantic_response_debug(user_input: str, eval_mode: bool = False):
+    if _preprocess is None: # <--- Added check
+         raise ValueError("Preprocessor not initialized.") 
+    user_processed = _preprocess(user_input)
 
 def get_all_patterns(intents_data, exclude_tags=None, limit=5):
     # FIX: Use the passed 'exclude_tags' parameter (required for app.py fix)
