@@ -120,11 +120,17 @@ if user_prompt:
     with st.chat_message("user", avatar=None):
         st.write(user_prompt)
 
+  if user_prompt:
+    st.session_state['history'].append({"role": "user", "content": user_prompt})
+    st.session_state['recent_questions'].append(user_prompt)
+    st.session_state['recent_questions'] = st.session_state['recent_questions'][-6:]
+
+    with st.chat_message("user", avatar=None):
+        st.write(user_prompt)
+
     with st.spinner("Thinking..."):
-        #bot_reply, debug_info = get_semantic_response_debug(user_prompt)
+        bot_reply, debug_info = get_semantic_response_debug(user_prompt)
 
     st.session_state['history'].append({"role": "assistant", "content": bot_reply})
     with st.chat_message("assistant", avatar=None):
         st.write(bot_reply)
-        if debug_info:
-            st.markdown(f"<small style='color:gray'>Debug Info: {debug_info}</small>", unsafe_allow_html=True)
