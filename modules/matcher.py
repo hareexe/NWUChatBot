@@ -79,7 +79,6 @@ def keyword_fallback(user_input: str, intents_data, min_overlap=2):
     # Make greeting robust: "how are you", "what's up/whats"
     if ({"how","are","you"} <= user_tokens) or (("what" in user_tokens) and ("up" in user_tokens)) or ("whats" in user_tokens):
         is_greeting_like = True
-    is_general_info_like = (("what" in user_tokens and "university" in user_tokens) or ("tell" in user_tokens and "university" in user_tokens) or ("northwestern" in user_tokens and "university" in user_tokens))
     is_buildings_like = any(t in user_tokens for t in {"buildings","structures","timeline","completed","major","campus"}) and not any(t in user_tokens for t in {"student","worship","aquino","sc"})
     is_barangan_like = any(t in user_tokens for t in {"barangan","cresencio","cashier","funds","finance"})
     # NEW: landmark-like
