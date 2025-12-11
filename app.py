@@ -141,17 +141,3 @@ if user_prompt:
     with st.chat_message("assistant", avatar=None):
         st.write(bot_reply)
 
-# --- Quick eval button ---
-col1, col2 = st.columns(2)
-with col2:
-    if st.button("Run quick evaluation"):
-        acc, res = run_offline_eval(intents_data)
-        st.markdown(f"<small>Accuracy: {round(acc*100,1)}%</small>", unsafe_allow_html=True)
-        # Show only misses
-        misses = [r for r in res if not r["ok"]]
-        for r in misses:
-            st.markdown(
-                f"<small>- [MISS] {r['query']} → expected={r['expected']} predicted={r['predicted']} score={r['score']} reason={r['reason']}</small>",
-                unsafe_allow_html=True
-            )
-
