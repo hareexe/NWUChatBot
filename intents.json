@@ -18,7 +18,11 @@
         "represent",
         "let there be light"
       ],
-      "aliases": ["motto of nwu", "nwu motto", "northwestern motto"],
+      "aliases": [
+        "motto of nwu",
+        "nwu motto",
+        "northwestern motto"
+      ],
       "examples": [
         "Explain the symbolism of Fiat Lux in Northwestern University history.",
         "What does Fiat Lux mean in Northwestern University?",
@@ -30,91 +34,29 @@
       ]
     },
     {
-      "tag": "complete_northwestern_presidents_list",
-      "intent_description": "Intent describing: List of all presidents",
-      "context": "Northwestern University Laoag City, Ilocos Norte, Philippines. Founded 1932.",
-      "keywords": ["all presidents", "list presidents", "list of presidents"],
-      "aliases": ["all nwu president", "northwestern complete presidents", "nu laoag list of all presidents"],
-      "examples": [
-        "List all the presidents of Northwestern University.",
-        "Who are the past and present presidents?",
-        "Give me the list of NU presidents and their terms.",
-        "List of all presidents.",
-        "Presidents of Northwestern"
-      ],
-       "responses": [
-        "Northwestern University's presidents:\n\n* **1949 (First College President):** Apolinario L. Aquino\n* **1982 (Second College President):** Ben A. Nicolas\n* **1985 (Third College President):** Ernesto Asuncion\n* **1989 (Fourth President / First University President):** Jose G. Castro\n* **1997 (Fifth President):** Ben A. Nicolas\n* **2014 (Sixth President / Current President):** Atty. Ferdinand S. Nicolas"
-       ]
-    },
-    {
-      "tag": "end_chat",
-      "intent_description": "Intent describing: end chat.",
-      "context": "Northwestern University Laoag City, Ilocos Norte, Philippines. Founded 1932.",
-      "keywords": ["goodbye", "thats"],
-      "examples": ["bye", "goodbye", "see you", "thats all"],
-      "responses": ["thank you for using the chatbot!"]
-    },
-     {
-      "tag": "school_name",
-      "intent_description": "Intent describing: names of the school.",
-      "context": "Northwestern University Laoag City, Ilocos Norte, Philippines. Founded 1932.",
-      "boost_keywords": ["school names", "timeline of school name", "school transition", "name phases"],
-      "keywords": [
-        "list of school names",
-        "transition of names",
-        "timeline of school name",
-        "old name of the school"
-      ],
-      "aliases": ["nwu school names", "northwestern old names", "nu laoag name transitions"],
-      "examples": [
-        "What is the timeline of the school's name change?",
-        "Tell me the transition of NWU",
-        "Timeline of School Name"
-      ],
-      "responses": [
-        "The institution underwent several key transitions:\n\n* **Northwestern Academy (1932)**\n* **Northwestern College (1949)**\n* **Northwestern University (1994)**"
-      ]
-    },
-    {
-      "tag": "first_presidents",
-      "intent_description": "Intent describing: first presidents.",
-      "context": "Northwestern University Laoag City, Ilocos Norte, Philippines. Founded 1932.",
-      "boost_keywords": ["first president", "first college president", "first university president", "first president"],
-      "keywords": [
-        "first president",
-        "who was the first president",
-        "who is the first president",
-        "initial president",
-        "maiden president"
-      ],
-      "aliases": ["nwu first president", "northwestern first president", "nu laoag first president"],
-      "examples": [
-        "first president of NWU",
-        "who was the first president?",
-        "who is the first president?",
-        "who is the first president of northwestern?",
-        "who was the first president of nwu?",
-        "nwu first president"
-      ],
-      "responses": [
-        "Jose G. Castro was the first University President, appointed in 1989. While the first college president was Apolinario L. Aquino."
-      ]
-    },
-    {
-      "tag": "northwestern_president",
+      "tag": "northwestern_current_president",
       "intent_description": "Intent describing: northwestern current president.",
       "context": "Northwestern University Laoag City, Ilocos Norte, Philippines. Founded 1932.",
-      "boost_keywords": ["who is the president", "president", "current", "present", "incumbent", "sitting"],
+      "boost_keywords": [
+        "president",
+        "current",
+        "present",
+        "incumbent",
+        "sitting"
+      ],
       "keywords": [
         "current president",
-        "who is the president",
         "present president",
         "president now",
         "incumbent president",
         "sitting president",
         "university president now"
       ],
-      "aliases": ["who is nwu president now", "current nwu president", "northwestern current pres"],
+      "aliases": [
+        "who is nwu president now",
+        "current nwu president",
+        "northwestern current pres"
+      ],
       "examples": [
         "Who is the current president?",
         "Who is the president?",
@@ -137,10 +79,129 @@
       ]
     },
     {
+      "tag": "complete_northwestern_presidents_list",
+      "intent_description": "Intent describing: List of all presidents",
+      "context": "Northwestern University Laoag City, Ilocos Norte, Philippines. Founded 1932.",
+      "keywords": [
+        "all presidents",
+        "list presidents",
+        "list of presidents"
+      ],
+      "aliases": [
+        "all nwu president",
+        "northwestern complete presidents",
+        "nu laoag list of all presidents"
+      ],
+      "examples": [
+        "List all the presidents of Northwestern University.",
+        "Who are the past and present presidents?",
+        "Give me the list of NU presidents and their terms.",
+        "List of all presidents.",
+        "Presidents of Northwestern"
+      ],
+      "responses": [
+        "Northwestern University's presidents:\n\n* **1949 (First College President):** Apolinario L. Aquino\n* **1982 (Second College President):** Ben A. Nicolas\n* **1985 (Third College President):** Ernesto Asuncion\n* **1989 (Fourth President / First University President):** Jose G. Castro\n* **1997 (Fifth President):** Ben A. Nicolas\n* **2014 (Sixth President / Current President):** Atty. Ferdinand S. Nicolas"
+      ]
+    },
+    {
+      "tag": "end_chat",
+      "intent_description": "Intent describing: end chat.",
+      "context": "Northwestern University Laoag City, Ilocos Norte, Philippines. Founded 1932.",
+      "keywords": [
+        "goodbye",
+        "thats"
+      ],
+      "examples": [
+        "bye",
+        "goodbye",
+        "see you",
+        "thats all"
+      ],
+      "responses": [
+        "thank you for using the chatbot!"
+      ]
+    },
+    {
+      "tag": "school_name",
+      "intent_description": "Intent describing: names of the school.",
+      "context": "Northwestern University Laoag City, Ilocos Norte, Philippines. Founded 1932.",
+      "boost_keywords": [
+        "school names",
+        "timeline of school name",
+        "school transition",
+        "name phases"
+      ],
+      "keywords": [
+        "list of school names",
+        "transition of names",
+        "timeline of school name",
+        "old name of the school"
+      ],
+      "aliases": [
+        "nwu school names",
+        "northwestern old names",
+        "nu laoag name transitions"
+      ],
+      "examples": [
+        "What is the timeline of the school's name change?",
+        "Tell me the transition of NWU",
+        "Timeline of School Name"
+      ],
+      "responses": [
+        "The institution underwent several key transitions:\n\n* **Northwestern Academy (1932)**\n* **Northwestern College (1949)**\n* **Northwestern University (1994)**"
+      ]
+    },
+    {
+      "tag": "first_presidents",
+      "intent_description": "Intent describing: first presidents.",
+      "context": "Northwestern University Laoag City, Ilocos Norte, Philippines. Founded 1932.",
+      "boost_keywords": [
+        "first president",
+        "first college president",
+        "first university president",
+        "first president"
+      ],
+      "keywords": [
+        "first president",
+        "first university president",
+        "first college president",
+        "who was the first president",
+        "who is the first president",
+        "initial president",
+        "maiden president"
+      ],
+      "aliases": [
+        "nwu first president",
+        "northwestern first president",
+        "nu laoag first president"
+      ],
+      "examples": [
+        "who was the first university president?",
+        "first president of NWU",
+        "who was the first president?",
+        "who is the first president?",
+        "who is the first president of northwestern?",
+        "who was the first president of nwu?",
+        "nwu first president",
+        "who is the first university president of northwestern?",
+        "who was the first university president of nwu?"
+      ],
+      "responses": [
+        "Jose G. Castro was the first University President, appointed in 1989. While the first college president was Apolinario L. Aquino."
+      ]
+    },
+    {
       "tag": "thank_you",
       "intent_description": "Intent describing: thank you.",
       "context": "Northwestern University Laoag City, Ilocos Norte, Philippines. Founded 1932.",
-      "keywords": ["much", "thank", "help", "appreciate", "thanks", "very"],
+      "keywords": [
+        "much",
+        "thank",
+        "help",
+        "appreciate",
+        "thanks",
+        "very"
+      ],
       "examples": [
         "Thank you",
         "Thanks",
@@ -171,7 +232,11 @@
         "seal",
         "emblem"
       ],
-      "aliases": ["northwestern owl", "nwu logo", "nwu seal"],
+      "aliases": [
+        "northwestern owl",
+        "nwu logo",
+        "nwu seal"
+      ],
       "examples": [
         "What does the owl represent in Northwestern University?",
         "What is the logo of Northwestern University?",
@@ -232,7 +297,18 @@
       "tag": "northwestern_academy_incorporators",
       "intent_description": "Intent describing: northwestern academy incorporators.",
       "context": "Northwestern University Laoag City, Ilocos Norte, Philippines. Founded 1932.",
-      "boost_keywords": ["founder", "co-founder", "incorporator", "founding member", "founders", "cofounders", "founded", "who founded", "founders of", "incorporators"],
+      "boost_keywords": [
+        "founder",
+        "co-founder",
+        "incorporator",
+        "founding member",
+        "founders",
+        "cofounders",
+        "founded",
+        "who founded",
+        "founders of",
+        "incorporators"
+      ],
       "keywords": [
         "incorporators",
         "co-founders",
@@ -259,7 +335,11 @@
         "founding",
         "founded nwu"
       ],
-      "aliases": ["nwu founders", "northwestern founders", "founders of northwestern"],
+      "aliases": [
+        "nwu founders",
+        "northwestern founders",
+        "founders of northwestern"
+      ],
       "examples": [
         "Who were the incorporators of Northwestern Academy?",
         "List all incorporators of Northwestern Academy.",
@@ -283,7 +363,12 @@
       "tag": "northwestern_college_president",
       "intent_description": "Intent describing: northwestern college president.",
       "context": "Northwestern University Laoag City, Ilocos Norte, Philippines. Founded 1932.",
-      "boost_keywords": ["college president", "first college president", "1949", "not university"],
+      "boost_keywords": [
+        "college president",
+        "first college president",
+        "1949",
+        "not university"
+      ],
       "keywords": [
         "college's",
         "college?",
@@ -313,7 +398,15 @@
       "tag": "nicolas_contribution",
       "intent_description": "Intent describing: nicolas contribution.",
       "context": "Northwestern University Laoag City, Ilocos Norte, Philippines. Founded 1932.",
-      "boost_keywords": ["contribution", "contributions", "role", "did", "help", "impact", "founder"],
+      "boost_keywords": [
+        "contribution",
+        "contributions",
+        "role",
+        "did",
+        "help",
+        "impact",
+        "founder"
+      ],
       "keywords": [
         "nicolas n. nicolas",
         "nicolas contribution",
@@ -339,7 +432,14 @@
       "tag": "northwestern_academy_early_sacrifices",
       "intent_description": "Intent describing: northwestern academy early sacrifices.",
       "context": "Northwestern University Laoag City, Ilocos Norte, Philippines. Founded 1932.",
-      "boost_keywords": ["sacrifices", "make", "helped", "early", "start", "operating"],
+      "boost_keywords": [
+        "sacrifices",
+        "make",
+        "helped",
+        "early",
+        "start",
+        "operating"
+      ],
       "keywords": [
         "make?",
         "helped",
@@ -378,7 +478,12 @@
       "tag": "northwestern_academy_open_admission",
       "intent_description": "Intent describing: northwestern academy open admission.",
       "context": "Northwestern University Laoag City, Ilocos Norte, Philippines. Founded 1932.",
-      "boost_keywords": ["open admission", "accepted", "admission", "help poor"],
+      "boost_keywords": [
+        "open admission",
+        "accepted",
+        "admission",
+        "help poor"
+      ],
       "keywords": [
         "accepted",
         "students",
@@ -403,7 +508,14 @@
       "tag": "northwestern_academy_commonwealth_era",
       "intent_description": "Intent describing: northwestern academy commonwealth era.",
       "context": "Northwestern University Laoag City, Ilocos Norte, Philippines. Founded 1932.",
-      "boost_keywords": ["expand", "planning", "programs", "college courses", "commonwealth", "1935"],
+      "boost_keywords": [
+        "expand",
+        "planning",
+        "programs",
+        "college courses",
+        "commonwealth",
+        "1935"
+      ],
       "keywords": [
         "education",
         "period",
@@ -437,7 +549,14 @@
       "tag": "maximo_caday_relationship_with_founders",
       "intent_description": "Intent describing: maximo caday relationship with founders.",
       "context": "Northwestern University Laoag City, Ilocos Norte, Philippines. Founded 1932.",
-      "boost_keywords": ["colleagues", "work", "closely", "relationship", "founders", "worked"],
+      "boost_keywords": [
+        "colleagues",
+        "work",
+        "closely",
+        "relationship",
+        "founders",
+        "worked"
+      ],
       "keywords": [
         "close",
         "caday's",
@@ -468,7 +587,14 @@
       "tag": "northwestern_college_courses",
       "intent_description": "Intent describing: northwestern college courses.",
       "context": "Northwestern University Laoag City, Ilocos Norte, Philippines. Founded 1932.",
-      "boost_keywords": ["courses", "programs", "degree", "first", "initial", "engineering"],
+      "boost_keywords": [
+        "courses",
+        "programs",
+        "degree",
+        "first",
+        "initial",
+        "engineering"
+      ],
       "keywords": [
         "initial college courses",
         "first college programs",
@@ -499,7 +625,13 @@
       "tag": "northwestern_college_engineering_program",
       "intent_description": "Intent describing: northwestern college engineering program.",
       "context": "Northwestern University Laoag City, Ilocos Norte, Philippines. Founded 1932.",
-      "boost_keywords": ["engineering", "civil engineering", "first engineering", "1960s", "flagship"],
+      "boost_keywords": [
+        "engineering",
+        "civil engineering",
+        "first engineering",
+        "1960s",
+        "flagship"
+      ],
       "keywords": [
         "engineering programs",
         "civil engineering start",
@@ -528,7 +660,13 @@
       "tag": "transition_process",
       "intent_description": "Intent describing: transition process.",
       "context": "Northwestern University Laoag City, Ilocos Norte, Philippines. Founded 1932.",
-      "boost_keywords": ["transition", "academy to college", "become", "apply", "how"],
+      "boost_keywords": [
+        "transition",
+        "academy to college",
+        "become",
+        "apply",
+        "how"
+      ],
       "keywords": [
         "from",
         "academy",
@@ -557,7 +695,12 @@
       "tag": "nicolas_title",
       "intent_description": "Intent describing: nicolas title.",
       "context": "Northwestern University Laoag City, Ilocos Norte, Philippines. Founded 1932.",
-      "boost_keywords": ["title", "mr. northwestern", "earned", "called"],
+      "boost_keywords": [
+        "title",
+        "mr. northwestern",
+        "earned",
+        "called"
+      ],
       "keywords": [
         "northwestern",
         "nicolas",
@@ -589,7 +732,12 @@
       "tag": "northwestern_classroom_icons",
       "intent_description": "Intent describing: northwestern classroom icons.",
       "context": "Northwestern University Laoag City, Ilocos Norte, Philippines. Founded 1932.",
-      "boost_keywords": ["classroom icons", "great teachers", "mentors", "remembered"],
+      "boost_keywords": [
+        "classroom icons",
+        "great teachers",
+        "mentors",
+        "remembered"
+      ],
       "keywords": [
         "remembered",
         "missed'",
@@ -628,7 +776,13 @@
       "tag": "northwestern_faculty_mentors",
       "intent_description": "Intent describing: northwestern faculty mentors.",
       "context": "Northwestern University Laoag City, Ilocos Norte, Philippines. Founded 1932.",
-      "boost_keywords": ["faculty mentors", "nicolas nicolas", "teacher", "psychology", "tro-v"],
+      "boost_keywords": [
+        "faculty mentors",
+        "nicolas nicolas",
+        "teacher",
+        "psychology",
+        "tro-v"
+      ],
       "keywords": [
         "remembered",
         "teacher?",
@@ -667,7 +821,12 @@
       "tag": "accessibility_policy",
       "intent_description": "Intent describing: accessibility policy.",
       "context": "Northwestern University Laoag City, Ilocos Norte, Philippines. Founded 1932.",
-      "boost_keywords": ["promissory notes", "poor students", "help", "accessibility"],
+      "boost_keywords": [
+        "promissory notes",
+        "poor students",
+        "help",
+        "accessibility"
+      ],
       "keywords": [
         "education",
         "affordable?",
@@ -698,7 +857,12 @@
       "tag": "student_activism",
       "intent_description": "Intent describing: student activism.",
       "context": "Northwestern University Laoag City, Ilocos Norte, Philippines. Founded 1932.",
-      "boost_keywords": ["student activism", "protest", "martial law", "protest"],
+      "boost_keywords": [
+        "student activism",
+        "protest",
+        "martial law",
+        "protest"
+      ],
       "keywords": [
         "movements?",
         "students",
@@ -735,7 +899,12 @@
       "tag": "nurturing_years",
       "intent_description": "Intent describing: nurturing years.",
       "context": "Northwestern University Laoag City, Ilocos Norte, Philippines. Founded 1932.",
-      "boost_keywords": ["early years", "beginnings", "how did", "tell me"],
+      "boost_keywords": [
+        "early years",
+        "beginnings",
+        "how did",
+        "tell me"
+      ],
       "keywords": [
         "years",
         "beginnings",
@@ -772,7 +941,12 @@
       "tag": "northwestern_student_activists",
       "intent_description": "Intent describing: northwestern student activists.",
       "context": "Northwestern University Laoag City, Ilocos Norte, Philippines. Founded 1932.",
-      "boost_keywords": ["student activists", "martial law", "notable", "during"],
+      "boost_keywords": [
+        "student activists",
+        "martial law",
+        "notable",
+        "during"
+      ],
       "keywords": [
         "support",
         "under",
@@ -803,7 +977,12 @@
       "tag": "northwestern_martial_law",
       "intent_description": "Intent describing: northwestern martial law.",
       "context": "Northwestern University Laoag City, Ilocos Norte, Philippines. Founded 1932.",
-      "boost_keywords": ["martial law", "during", "leadership", "institution"],
+      "boost_keywords": [
+        "martial law",
+        "during",
+        "leadership",
+        "institution"
+      ],
       "keywords": [
         "institutional",
         "leadership",
@@ -842,7 +1021,16 @@
       "tag": "greeting",
       "intent_description": "Intent describing: greeting.",
       "context": "Northwestern University Laoag City, Ilocos Norte, Philippines. Founded 1932.",
-      "boost_keywords": ["hi", "hello", "hey", "greetings", "good day", "how are you", "what's up", "is anyone there"],
+      "boost_keywords": [
+        "hi",
+        "hello",
+        "hey",
+        "greetings",
+        "good day",
+        "how are you",
+        "what's up",
+        "is anyone there"
+      ],
       "keywords": [
         "greetings",
         "there",
@@ -886,7 +1074,15 @@
       "tag": "general_info",
       "intent_description": "Intent describing: general info.",
       "context": "Northwestern University Laoag City, Ilocos Norte, Philippines. Founded 1932.",
-      "boost_keywords": ["what is", "tell me", "about", "northwestern", "university", "overview", "history"],
+      "boost_keywords": [
+        "what is",
+        "tell me",
+        "about",
+        "northwestern",
+        "university",
+        "overview",
+        "history"
+      ],
       "keywords": [
         "info",
         "overview",
@@ -901,7 +1097,10 @@
         "all about",
         "background"
       ],
-      "aliases": ["what is nwu", "tell me about northwestern"],
+      "aliases": [
+        "what is nwu",
+        "tell me about northwestern"
+      ],
       "examples": [
         "What is Northwestern University?",
         "Tell me about the university",
@@ -918,7 +1117,13 @@
       "tag": "early_years",
       "intent_description": "Intent describing: early years.",
       "context": "Northwestern University Laoag City, Ilocos Norte, Philippines. Founded 1932.",
-      "boost_keywords": ["early years", "beginnings", "start", "how did", "first"],
+      "boost_keywords": [
+        "early years",
+        "beginnings",
+        "start",
+        "how did",
+        "first"
+      ],
       "keywords": [
         "original name",
         "1932 events",
@@ -950,7 +1155,12 @@
       "tag": "foundation",
       "intent_description": "Intent describing: foundation.",
       "context": "Northwestern University Laoag City, Ilocos Norte, Philippines. Founded 1932.",
-      "boost_keywords": ["founded", "incorporation", "1932", "when founded"],
+      "boost_keywords": [
+        "founded",
+        "incorporation",
+        "1932",
+        "when founded"
+      ],
       "keywords": [
         "founding",
         "foundation year",
@@ -1018,7 +1228,15 @@
       "intent_description": "Intent describing: historical landmarks inside campus.",
       "context": "Northwestern University Laoag City, Ilocos Norte, Philippines. Founded 1932.",
       "priority": 10,
-      "boost_keywords": ["landmark", "historical", "historic", "inside campus", "campus", "buildings", "sites"],
+      "boost_keywords": [
+        "landmark",
+        "historical",
+        "historic",
+        "inside campus",
+        "campus",
+        "buildings",
+        "sites"
+      ],
       "keywords": [
         "landmarks",
         "historical landmarks",
@@ -1067,7 +1285,18 @@
       "tag": "northwestern_academy_incorporators",
       "intent_description": "Intent describing: northwestern academy incorporators.",
       "context": "Northwestern University Laoag City, Ilocos Norte, Philippines. Founded 1932.",
-      "boost_keywords": ["founder", "co-founder", "incorporator", "founding member", "founders", "cofounders", "founded", "who founded", "founders of", "incorporators"],
+      "boost_keywords": [
+        "founder",
+        "co-founder",
+        "incorporator",
+        "founding member",
+        "founders",
+        "cofounders",
+        "founded",
+        "who founded",
+        "founders of",
+        "incorporators"
+      ],
       "keywords": [
         "incorporators",
         "co-founders",
@@ -1094,7 +1323,11 @@
         "founding",
         "founded nwu"
       ],
-      "aliases": ["nwu founders", "northwestern founders", "founders of northwestern"],
+      "aliases": [
+        "nwu founders",
+        "northwestern founders",
+        "founders of northwestern"
+      ],
       "examples": [
         "Who were the incorporators of Northwestern Academy?",
         "List all incorporators of Northwestern Academy.",
@@ -1118,7 +1351,12 @@
       "tag": "northwestern_college_president",
       "intent_description": "Intent describing: northwestern college president.",
       "context": "Northwestern University Laoag City, Ilocos Norte, Philippines. Founded 1932.",
-      "boost_keywords": ["college president", "first college president", "1949", "not university"],
+      "boost_keywords": [
+        "college president",
+        "first college president",
+        "1949",
+        "not university"
+      ],
       "keywords": [
         "college's",
         "college?",
@@ -1148,7 +1386,15 @@
       "tag": "nicolas_contribution",
       "intent_description": "Intent describing: nicolas contribution.",
       "context": "Northwestern University Laoag City, Ilocos Norte, Philippines. Founded 1932.",
-      "boost_keywords": ["contribution", "contributions", "role", "did", "help", "impact", "founder"],
+      "boost_keywords": [
+        "contribution",
+        "contributions",
+        "role",
+        "did",
+        "help",
+        "impact",
+        "founder"
+      ],
       "keywords": [
         "nicolas n. nicolas",
         "nicolas contribution",
@@ -1174,7 +1420,14 @@
       "tag": "northwestern_academy_early_sacrifices",
       "intent_description": "Intent describing: northwestern academy early sacrifices.",
       "context": "Northwestern University Laoag City, Ilocos Norte, Philippines. Founded 1932.",
-      "boost_keywords": ["sacrifices", "make", "helped", "early", "start", "operating"],
+      "boost_keywords": [
+        "sacrifices",
+        "make",
+        "helped",
+        "early",
+        "start",
+        "operating"
+      ],
       "keywords": [
         "make?",
         "helped",
@@ -1213,7 +1466,13 @@
       "tag": "northwestern_academy_open_admission",
       "intent_description": "Intent describing: northwestern academy open admission.",
       "context": "Northwestern University Laoag City, Ilocos Norte, Philippines. Founded 1932.",
-      "boost_keywords": ["open admission", "accepted", "could", "admission", "help poor"],
+      "boost_keywords": [
+        "open admission",
+        "accepted",
+        "could",
+        "admission",
+        "help poor"
+      ],
       "keywords": [
         "accepted",
         "students",
@@ -1251,7 +1510,14 @@
       "tag": "northwestern_academy_commonwealth_era",
       "intent_description": "Intent describing: northwestern academy commonwealth era.",
       "context": "Northwestern University Laoag City, Ilocos Norte, Philippines. Founded 1932.",
-      "boost_keywords": ["expand", "planning", "programs", "college courses", "commonwealth", "1935"],
+      "boost_keywords": [
+        "expand",
+        "planning",
+        "programs",
+        "college courses",
+        "commonwealth",
+        "1935"
+      ],
       "keywords": [
         "education",
         "period",
@@ -1290,7 +1556,14 @@
       "tag": "maximo_caday_relationship_with_founders",
       "intent_description": "Intent describing: maximo caday relationship with founders.",
       "context": "Northwestern University Laoag City, Ilocos Norte, Philippines. Founded 1932.",
-      "boost_keywords": ["colleagues", "work", "closely", "relationship", "founders", "worked"],
+      "boost_keywords": [
+        "colleagues",
+        "work",
+        "closely",
+        "relationship",
+        "founders",
+        "worked"
+      ],
       "keywords": [
         "other",
         "were",
@@ -1324,7 +1597,14 @@
       "tag": "northwestern_college_courses",
       "intent_description": "Intent describing: northwestern college courses.",
       "context": "Northwestern University Laoag City, Ilocos Norte, Philippines. Founded 1932.",
-      "boost_keywords": ["courses", "programs", "degree", "first", "initial", "engineering"],
+      "boost_keywords": [
+        "courses",
+        "programs",
+        "degree",
+        "first",
+        "initial",
+        "engineering"
+      ],
       "keywords": [
         "initial college courses",
         "first college programs",
@@ -1355,7 +1635,13 @@
       "tag": "transition_process",
       "intent_description": "Intent describing: transition process.",
       "context": "Northwestern University Laoag City, Ilocos Norte, Philippines. Founded 1932.",
-      "boost_keywords": ["transition", "academy to college", "become", "apply", "how"],
+      "boost_keywords": [
+        "transition",
+        "academy to college",
+        "become",
+        "apply",
+        "how"
+      ],
       "keywords": [
         "from",
         "academy",
@@ -1384,7 +1670,12 @@
       "tag": "nicolas_title",
       "intent_description": "Intent describing: nicolas title.",
       "context": "Northwestern University Laoag City, Ilocos Norte, Philippines. Founded 1932.",
-      "boost_keywords": ["title", "mr. northwestern", "earned", "called"],
+      "boost_keywords": [
+        "title",
+        "mr. northwestern",
+        "earned",
+        "called"
+      ],
       "keywords": [
         "northwestern",
         "nicolas",
@@ -1416,7 +1707,12 @@
       "tag": "northwestern_classroom_icons",
       "intent_description": "Intent describing: northwestern classroom icons.",
       "context": "Northwestern University Laoag City, Ilocos Norte, Philippines. Founded 1932.",
-      "boost_keywords": ["classroom icons", "great teachers", "mentors", "remembered"],
+      "boost_keywords": [
+        "classroom icons",
+        "great teachers",
+        "mentors",
+        "remembered"
+      ],
       "keywords": [
         "remembered",
         "missed'",
@@ -1455,7 +1751,13 @@
       "tag": "northwestern_faculty_mentors",
       "intent_description": "Intent describing: northwestern faculty mentors.",
       "context": "Northwestern University Laoag City, Ilocos Norte, Philippines. Founded 1932.",
-      "boost_keywords": ["faculty mentors", "nicolas nicolas", "teacher", "psychology", "tro-v"],
+      "boost_keywords": [
+        "faculty mentors",
+        "nicolas nicolas",
+        "teacher",
+        "psychology",
+        "tro-v"
+      ],
       "keywords": [
         "remembered",
         "teacher?",
@@ -1494,7 +1796,12 @@
       "tag": "accessibility_policy",
       "intent_description": "Intent describing: accessibility policy.",
       "context": "Northwestern University Laoag City, Ilocos Norte, Philippines. Founded 1932.",
-      "boost_keywords": ["promissory notes", "poor students", "help", "accessibility"],
+      "boost_keywords": [
+        "promissory notes",
+        "poor students",
+        "help",
+        "accessibility"
+      ],
       "keywords": [
         "education",
         "affordable?",
@@ -1525,7 +1832,12 @@
       "tag": "student_activism",
       "intent_description": "Intent describing: student activism.",
       "context": "Northwestern University Laoag City, Ilocos Norte, Philippines. Founded 1932.",
-      "boost_keywords": ["student activism", "protest", "martial law", "protest"],
+      "boost_keywords": [
+        "student activism",
+        "protest",
+        "martial law",
+        "protest"
+      ],
       "keywords": [
         "movements?",
         "students",
@@ -1562,7 +1874,12 @@
       "tag": "nurturing_years",
       "intent_description": "Intent describing: nurturing years.",
       "context": "Northwestern University Laoag City, Ilocos Norte, Philippines. Founded 1932.",
-      "boost_keywords": ["early years", "beginnings", "how did", "tell me"],
+      "boost_keywords": [
+        "early years",
+        "beginnings",
+        "how did",
+        "tell me"
+      ],
       "keywords": [
         "years",
         "beginnings",
@@ -1599,7 +1916,12 @@
       "tag": "apolinario_aquino",
       "intent_description": "Intent describing: apolinario aquino.",
       "context": "Northwestern University Laoag City, Ilocos Norte, Philippines. Founded 1932.",
-      "boost_keywords": ["apolinario", "aquino", "first college president", "led"],
+      "boost_keywords": [
+        "apolinario",
+        "aquino",
+        "first college president",
+        "led"
+      ],
       "keywords": [
         "apolinario",
         "northwestern",
@@ -1631,7 +1953,12 @@
       "tag": "northwestern_student_activists",
       "intent_description": "Intent describing: northwestern student activists.",
       "context": "Northwestern University Laoag City, Ilocos Norte, Philippines. Founded 1932.",
-      "boost_keywords": ["student activists", "martial law", "notable", "during"],
+      "boost_keywords": [
+        "student activists",
+        "martial law",
+        "notable",
+        "during"
+      ],
       "keywords": [
         "support",
         "under",
@@ -1662,7 +1989,12 @@
       "tag": "northwestern_martial_law",
       "intent_description": "Intent describing: northwestern martial law.",
       "context": "Northwestern University Laoag City, Ilocos Norte, Philippines. Founded 1932.",
-      "boost_keywords": ["martial law", "during", "leadership", "institution"],
+      "boost_keywords": [
+        "martial law",
+        "during",
+        "leadership",
+        "institution"
+      ],
       "keywords": [
         "institutional",
         "leadership",
@@ -1701,7 +2033,16 @@
       "tag": "greeting",
       "intent_description": "Intent describing: greeting.",
       "context": "Northwestern University Laoag City, Ilocos Norte, Philippines. Founded 1932.",
-      "boost_keywords": ["hi", "hello", "hey", "greetings", "good day", "how are you", "what's up", "is anyone there"],
+      "boost_keywords": [
+        "hi",
+        "hello",
+        "hey",
+        "greetings",
+        "good day",
+        "how are you",
+        "what's up",
+        "is anyone there"
+      ],
       "keywords": [
         "greetings",
         "there",
@@ -1742,10 +2083,110 @@
       ]
     },
     {
+      "tag": "ISO_Certification",
+      "intent_description": "Intent describing: ISO certification status of the university.",
+      "context": "ISO 9001 certification status of Northwestern University (NWU).",
+      "boost_keywords": [
+        "iso",
+        "certification",
+        "status",
+        "nwu"
+      ],
+      "keywords": [
+        "iso certification",
+        "what is the iso certification status",
+        "iso status of nwu",
+        "iso 9001",
+        "iso certification date"
+      ],
+      "aliases": [
+        "iso certification status",
+        "iso certification of nwu"
+      ],
+      "examples": [
+        "What is the ISO certification status?",
+        "ISO certification",
+        "What is the ISO certification status of NWU?"
+      ],
+      "responses": [
+        "Northwestern University received ISO 9001:1994 certification in 2000 and ISO 9001:2000 certification in 2004."
+      ]
+    },
+    {
+      "tag": "2004_Award",
+      "intent_description": "Intent describing: Major awards or rankings received by the university in 2004.",
+      "context": "Major awards and rankings of Northwestern University in 2004, specifically regarding PACUCOA accreditation.",
+      "boost_keywords": [
+        "2004",
+        "award",
+        "ranking",
+        "pacucoa",
+        "accredited programs"
+      ],
+      "keywords": [
+        "2004 award",
+        "major awards 2004",
+        "nwu award",
+        "northwestern university ranking 2004",
+        "pacucoa ranking"
+      ],
+      "aliases": [
+        "awards in 2004",
+        "nwu 2004 award"
+      ],
+      "examples": [
+        "What major awards did the university receive in 2004?",
+        "What major awards did the NWU receive in 2004?",
+        "NWU 2004 award.",
+        "NWU award."
+      ],
+      "responses": [
+        "In 2004, Northwestern University ranked 3rd nationwide by PACUCOA for having the most accredited programs and was number one in Region I."
+      ]
+    },
+    {
+      "tag": "Accreditation",
+      "intent_description": "Intent describing: Accreditation status and date for major university programs.",
+      "context": "Initial Level II accreditation date for major programs at Northwestern University.",
+      "boost_keywords": [
+        "accreditation",
+        "level ii",
+        "programs",
+        "date",
+        "status"
+      ],
+      "keywords": [
+        "accreditation status",
+        "level ii accreditation",
+        "when did programs get level ii accreditation",
+        "arts and sciences accreditation",
+        "education accreditation"
+      ],
+      "aliases": [
+        "accreditation status",
+        "level ii date"
+      ],
+      "examples": [
+        "When did the programs get Level II accreditation?",
+        "Accreditation Status"
+      ],
+      "responses": [
+        "Initial Level II accreditation for major programs such as Arts and Sciences, Commerce, and Education was granted in 1991."
+      ]
+    },
+    {
       "tag": "general_info",
       "intent_description": "Intent describing: general info.",
       "context": "Northwestern University Laoag City, Ilocos Norte, Philippines. Founded 1932.",
-      "boost_keywords": ["what is", "tell me", "about", "northwestern", "university", "overview", "history"],
+      "boost_keywords": [
+        "what is",
+        "tell me",
+        "about",
+        "northwestern",
+        "university",
+        "overview",
+        "history"
+      ],
       "keywords": [
         "info",
         "overview",
@@ -1760,7 +2201,10 @@
         "all about",
         "background"
       ],
-      "aliases": ["what is nwu", "tell me about northwestern"],
+      "aliases": [
+        "what is nwu",
+        "tell me about northwestern"
+      ],
       "examples": [
         "What is Northwestern University?",
         "Tell me about the university",
@@ -1774,11 +2218,36 @@
       ]
     },
     {
+      "tag": "Deregulated_Status",
+      "intent_description": "Intent describing: Deregulated status of university.",
+      "boost_keywords": [
+        "deregulated",
+        "deregulated status",
+        "CHED Deregulated Status"
+      ],
+      "examples": [
+        "When did the university get Deregulated Status?",
+        "When did NWU get Deregulated Status?",
+        "When did Northwestern get Deregulated Status?"
+      ],
+      "responses": [
+        "The university was granted Deregulated Status by CHED in 2003."
+      ]
+    },
+    {
       "tag": "campus_historical_landmarks",
       "intent_description": "Intent describing: historical landmarks inside campus.",
       "context": "Northwestern University Laoag City, Ilocos Norte, Philippines. Founded 1932.",
       "priority": 10,
-      "boost_keywords": ["landmark", "historical", "historic", "inside campus", "campus", "buildings", "sites"],
+      "boost_keywords": [
+        "landmark",
+        "historical",
+        "historic",
+        "inside campus",
+        "campus",
+        "buildings",
+        "sites"
+      ],
       "keywords": [
         "landmarks",
         "historical landmarks",
@@ -1825,11 +2294,3 @@
     }
   ]
 }
-
-
-
-
-
-
-
-
