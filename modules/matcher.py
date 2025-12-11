@@ -154,7 +154,7 @@ def keyword_fallback(user_input: str, intents_data, min_overlap=2):
         if is_president_like:
             if tag == "complete_northwestern_presidents_list":
                 score += 2.5
-            if is_current_time_like and tag == "northwestern_current_president":
+            if tag == "northwestern_current_president":
                 score += 2.5
             # NEW: strong boost for all-list
             if is_all_presidents_like and tag == "complete_northwestern_presidents_list":
@@ -220,6 +220,12 @@ def keyword_fallback(user_input: str, intents_data, min_overlap=2):
         # NEW: General info steals (Presidents of Northwestern/NWU award)
         if (tag == "general_info" or tag == "2004_Award") and any(t in user_tokens for t in {"presidents", "award", "ranking"}):
              score -= 1.5
+        # NEW: Strong penalty for current time queries stealing from list/college president
+        if is_current_time_like and tag in {"complete_northwestern_presidents_list", "northwestern_college_president"}:
+            score -= 4.0
+        # NEW: Strong penalty for "first college president" stealing from complete list
+        if tag == "complete_northwestern_presidents_list" and any(t in user_tokens for t in ["first", "college", "president"]):
+            score -= 2.5
 
 
         # Pick best
@@ -308,7 +314,7 @@ def get_semantic_response_debug(user_input: str, eval_mode: bool = False):
         # Check for simple general info/award queries to prevent misfires
         is_simple_general_or_award = (
             (("nwu" in user_tokens) or ("northwestern" in user_tokens) or ("university" in user_tokens)) and
-            not any(t in user_tokens for t in ["founder", "president", "first", "who", "when"])
+            not any(t in user_tokens for t in ["founder", "president", "first", "who", "when", "all", "list", "past"]) # UPDATED: Avoid president/founder steals
         )
         if is_simple_general_or_award:
             is_award = any(t in user_tokens for t in ["award", "2004"])
@@ -556,7 +562,7 @@ def get_semantic_response_debug(user_input: str, eval_mode: bool = False):
         if is_generic_president_query:
             if tag == "northwestern_current_president": score += 8
             if tag == "complete_northwestern_presidents_list": score -= 5
-
+            
         if is_founders_query or is_founders_list_query:
             if tag == "northwestern_academy_incorporators": score += 9
             elif tag in {"major_transitions","northwestern_academy_open_admission","northwestern_academy_early_sacrifices"}: score = max(0, score - 6)
@@ -706,10 +712,11 @@ def get_semantic_response_debug(user_input: str, eval_mode: bool = False):
         # Intent-specific reranker tuning
         if is_current_president_query:
             if tag == "northwestern_current_president": score += 0.45
-            if tag in {"complete_northwestern_presidents_list","major_transitions"}: score -= 0.25 # UPDATED TAG
+            if tag in {"complete_northwestern_presidents_list","northwestern_college_president", "major_transitions"}: score -= 0.25 # UPDATED TAGS
         if (is_presidents_query or is_first_president_query or is_generic_leadership_phrase):
             if tag == "complete_northwestern_presidents_list": score += 0.4 # UPDATED TAG
             if tag in {"northwestern_current_president","major_transitions"}: score -= 0.28
+            
         # NEW: All presidents boost
         if is_all_presidents_like and tag == "complete_northwestern_presidents_list":
             score += 0.35
@@ -717,6 +724,15 @@ def get_semantic_response_debug(user_input: str, eval_mode: bool = False):
         if is_generic_president_query:
             if tag == "northwestern_current_president": score += 0.45
             if tag == "complete_northwestern_presidents_list": score -= 0.35
+
+        # HIGH PENALTY for Current Time queries stealing from List/College
+        if is_current_time_like:
+            if tag in {"complete_northwestern_presidents_list", "northwestern_college_president"}: score -= 0.6 
+            
+        # HIGH PENALTY for First College President queries stealing from List
+        if strong_first_college_president:
+             if tag == "complete_northwestern_presidents_list": score -= 0.4
+             if tag == "northwestern_college_president": score += 0.4
 
 
         if (is_founders_query or is_founders_list_query):
@@ -763,6 +779,9 @@ def get_semantic_response_debug(user_input: str, eval_mode: bool = False):
         if is_nicolas_title_like:
             if tag == "nicolas_title": score += 0.4
             if tag in {"nicolas_contribution", "northwestern_academy_incorporators"}: score -= 0.3
+        # NEW: Faculty mentors fix
+        if is_nicolas_who_in_college and tag == "northwestern_faculty_mentors": score += 0.4 
+        if is_nicolas_who_in_college and tag == "nicolas_title": score -= 0.2
 
         # Early years stealers guard
         if tag == "northwestern_college_graduate_school" and any(t in user_tokens for t in {"college","establishment","established","become","became","transition","courses","programs","degree","engineering"}):
@@ -810,6 +829,11 @@ def get_semantic_response_debug(user_input: str, eval_mode: bool = False):
             score += 0.4
         if is_activist_details_query and tag == "northwestern_martial_law":
             score -= 0.3
+        # Martial Law vs Nurturing Years fix (for internal challenges)
+        if tag == "northwestern_martial_law" and any(t in user_tokens for t in ["internal", "challenges"]):
+            score += 0.4
+        if tag == "nurturing_years" and any(t in user_tokens for t in ["martial", "law", "1970s"]):
+            score -= 0.4
 
         # Reranker nudges
         # NEW: stronger push for “what year/when … become a university”
@@ -846,14 +870,14 @@ def get_semantic_response_debug(user_input: str, eval_mode: bool = False):
 
         # NEW: who/when semantic nudges
         if is_who_query:
-            if tag in {"complete_northwestern_presidents_list","northwestern_college_president","northwestern_academy_incorporators"}: # UPDATED TAG
+            if tag in {"complete_northwestern_presidents_list","northwestern_current_president","northwestern_college_president","northwestern_academy_incorporators"}: # UPDATED TAG
                 score += 0.28
             if tag in {"major_transitions","early_years","general_info"}:
                 score -= 0.24
         if is_when_query:
             if tag in {"major_transitions","early_years","foundation"}:
                 score += 0.28
-            if tag in {"complete_northwestern_presidents_list","northwestern_college_president","northwestern_academy_incorporators"}: # UPDATED TAG
+            if tag in {"complete_northwestern_presidents_list","northwestern_current_president","northwestern_college_president","northwestern_academy_incorporators"}: # UPDATED TAG
                 score -= 0.24
 
         # Favor presidents for leadership during college transition
