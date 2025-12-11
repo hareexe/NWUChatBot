@@ -46,7 +46,8 @@
         "present",
         "incumbent",
         "sitting",
-        "head"
+        "head",
+        "now" 
       ],
       "keywords": [
         "current president",
@@ -55,7 +56,8 @@
         "nwu president",
         "incumbent president",
         "sitting president",
-        "university president now"
+        "university president now",
+        "who is president now"
       ],
       "aliases": [
         "who is nwu president now",
@@ -97,7 +99,15 @@
         "first university president",
         "first college president",
         "who was the first president",
-        "who is the first president"
+        "who is the first president",
+        "presidents of"
+      ],
+      "boost_keywords": [
+        "all presidents",
+        "list presidents",
+        "past and present", 
+        "first president",
+        "list"
       ],
       "aliases": [
         "all presidents",
@@ -357,7 +367,8 @@
         "impact",
         "founder",
         "what did",
-        "expansion"
+        "expansion",
+        "do"
       ],
       "keywords": [
         "nicolas n. nicolas",
@@ -667,6 +678,7 @@
         "teacher",
         "psychology",
         "tro-v",
+        "mr",
         "mr nicolas"
       ],
       "keywords": [
@@ -951,10 +963,12 @@
         "how did northwestern",
         "when started"
       ],
+      "aliases": [
+        "What happened in 1932?"
+      ],
       "examples": [
         "What was the school originally called?",
         "When did Northwestern Academy become a college?",
-        "What happened in 1932?",
         "How did Northwestern start?",
         "Tell me about the beginnings"
       ],
@@ -1226,7 +1240,8 @@
         "first college president",
         "led",
         "character",
-        "master's degree"
+        "master's degree",
+        "known for"
       ],
       "keywords": [
         "apolinario",
