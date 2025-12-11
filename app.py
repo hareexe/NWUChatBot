@@ -6,8 +6,6 @@ import hashlib
 import os
 
 # --- Imports from Modules ---
-from modules.nlp_utils import initialize_nltk_data, preprocess, expand_with_synonyms, regexp_word_tokenizer
-from modules.data_store import load_data, build_intent_embeddings, _hash_intents, load_embedding_model
 from modules.matcher import get_semantic_response_debug, keyword_fallback, get_all_patterns, set_runtime_handles 
 
 # --- NLTK Initialization ---
@@ -138,4 +136,5 @@ if user_prompt:
     st.session_state['history'].append({"role": "assistant", "content": bot_reply})
     with st.chat_message("assistant", avatar=None):
         st.write(bot_reply)
+
 
