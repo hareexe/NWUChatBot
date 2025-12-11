@@ -133,12 +133,13 @@ if user_prompt:
         st.write(user_prompt)
 
     with st.spinner("Thinking..."):
-        bot_reply, debug_info = get_semantic_response_debug(user_prompt)
+
+        bot_reply, _ = get_semantic_response_debug(user_prompt) 
+        debug_info = None 
 
     st.session_state['history'].append({"role": "assistant", "content": bot_reply})
     with st.chat_message("assistant", avatar=None):
         st.write(bot_reply)
-        if debug_info:
+      
+        if debug_info: 
             st.markdown(f"<small style='color:gray'>Debug Info: {debug_info}</small>", unsafe_allow_html=True)
-
-
