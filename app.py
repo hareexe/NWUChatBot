@@ -95,19 +95,6 @@ if suggestions:
     st.markdown("**Try asking:**")
     st.markdown("\n".join([f"* {s}" for s in suggestions]))
     
-# --- Quick eval button ---
-col1, col2 = st.columns(2)
-with col2:
-    if st.button("Run quick evaluation"):
-        acc, res = run_offline_eval(intents_data)
-        st.markdown(f"<small>Accuracy: {round(acc*100,1)}%</small>", unsafe_allow_html=True)
-        # Show only misses
-        misses = [r for r in res if not r["ok"]]
-        for r in misses:
-            st.markdown(
-                f"<small>- [MISS] {r['query']} → expected={r['expected']} predicted={r['predicted']} score={r['score']} reason={r['reason']}</small>",
-                unsafe_allow_html=True
-            )
 
 # Display conversation history
 for msg in st.session_state['history']:
@@ -141,3 +128,4 @@ if user_prompt:
         st.write(bot_reply)
         if debug_info:
             st.markdown(f"<small style='color:gray'>Debug Info: {debug_info}</small>", unsafe_allow_html=True)
+
