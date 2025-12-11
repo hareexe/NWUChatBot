@@ -353,13 +353,13 @@ def keyword_fallback(user_input: str, intents_data, min_overlap=2):
              score -= 3.0
         # NEW: Massive penalty for Commonwealth stealing Incorporators
         if (is_founders_like or "incorporator" in user_tokens) and tag == "northwestern_academy_commonwealth_era":
-             score -= 5.0 # Increased penalty to counter observed miss
+             score -= 5.0
         # NEW: Massive penalty for Incorporators stealing Commonwealth
         if is_commonwealth_planning_like and tag == "northwestern_academy_incorporators":
-             score -= 5.0 # Increased penalty to counter observed miss
-        # NEW: Penalty for Presidents List stealing Founders (Example 2 Fix)
+             score -= 5.0
+        # NEW: Penalty for Presidents List stealing Founders
         if (is_founders_like or "incorporator" in user_tokens) and tag == "complete_northwestern_presidents_list":
-             score -= 5.0 # Large penalty for president list to stop founders queries landing here
+             score -= 5.0
 
 
         # Pick best
@@ -455,7 +455,7 @@ def get_semantic_response_debug(user_input: str, eval_mode: bool = False):
     mentions_institution_for_founders = any(t in user_tokens for t in {"university","northwestern","nwu","academy"})
     mentions_institution_for_president = any(t in user_tokens for t in {"university","northwestern","nwu","college"})
     founder_query_tokens = {"founder","founders","founded","find","cofounder","co-founder","incorporator"}
-    is_founder_query = any(t in user_tokens for t in founder_query_tokens)
+    is_founder_query_base = any(t in user_tokens for t in founder_query_tokens)
     status_core = {"become","became","status","recognized","recognition","confirmation","confirm","year"}
     is_university_status_query = ("university" in user_tokens) and any(t in user_tokens for t in status_core)
 
@@ -502,6 +502,11 @@ def get_semantic_response_debug(user_input: str, eval_mode: bool = False):
     is_greeting_query = early_greet or is_greeting_like
     is_general_info_query = is_general_info_like
     is_status_query = is_university_status_query
+    
+    # NEW Early History Flags for MISS 1, 2, 3, 4
+    is_foundation_phrase = any(t in user_tokens for t in {"founded", "foundation"})
+    is_beginnings_query = any(t in user_tokens for t in {"beginnings", "about"}) and ("northwestern" in user_tokens or "nwu" in user_tokens) and len(user_tokens) < 6
+    
     # NEW: barangan alias to avoid NameError in later routing
     is_barangan_query = is_barangan_like
 
@@ -552,7 +557,7 @@ def get_semantic_response_debug(user_input: str, eval_mode: bool = False):
     # UPDATED: is_presidents_query now targets complete list
     is_presidents_query = (("president" in user_tokens) or ("presidents" in user_tokens)) and mentions_institution_for_president and not is_current_president_query
     is_all_presidents_like = any(t in user_tokens for t in {"all", "list", "past", "first", "college"}) and is_president_like
-    is_founders_query = any(t in user_tokens for t in founder_query_tokens) and mentions_institution_for_founders
+    is_founders_query = is_founder_query_base and mentions_institution_for_founders
     founders_list_terms = {"list", "name", "founders", "incorporators", "co-founders", "cofounders", "ten"}
     is_founders_list_query = any(t in user_tokens for t in founders_list_terms) and is_founders_query
 
@@ -584,26 +589,26 @@ def get_semantic_response_debug(user_input: str, eval_mode: bool = False):
     ]
 
     # Missing disambiguators used later (define them here)
-    is_foundation_when_query = any(t in user_tokens for t in {"founded","foundation"}) and any(t in user_tokens for t in {"when","year","date"})
-    is_founders_who_query = (any(t in user_tokens for t in {"founder","founders","incorporators"}) and "who" in user_tokens)
+    is_foundation_when_query = is_foundation_phrase and is_when_query
+    is_founders_who_query = is_founder_query_base and is_who_query
     
     # Nicolas-specific detectors
     nicolas_dedication_keywords = {"mr", "title", "called", "referred", "earned", "dedication", "unmatched", "'mr.", "teacher", "instructor", "faculty", "known"}
     is_nicolas_teacher_like = any(t in user_tokens for t in {"teacher", "instructor", "faculty", "known"}) and ("nicolas" in user_tokens)
-    is_nicolas_who_in_college = (("nicolas" in user_tokens) and any(t in user_tokens for t in {"who","was"}) and ("college" in user_tokens))
+    is_nicolas_who_in_college = (("nicolas" in user_tokens) and is_who_query and ("college" in user_tokens))
     is_nicolas_contrib_like = any(t in user_tokens for t in {"nicolas","founder"}) and any(t in user_tokens for t in {"contribution", "contributions", "do", "did", "help", "impact", "expansion", "role"})
-    is_nicolas_what_did_do = ("what" in user_tokens) and ("did" in user_tokens or "do" in user_tokens) and is_nicolas_contrib_like # NEW DETECTOR
+    is_nicolas_what_did_do = is_what_query and any(t in user_tokens for t in ["did", "do"]) and is_nicolas_contrib_like # NEW DETECTOR
     is_caday_relationship_like = any(t in user_tokens for t in ["maximo", "caday", "relationship", "colleagues", "get along"])
 
     # NEW: academy early sacrifices like
-    is_academy_sacrifices_like = any(t in user_tokens for t in {"sacrifices", "goal", "vision"}) and ("academy" in user_tokens or "founders" in user_tokens)
+    is_academy_sacrifices_like = any(t in user_tokens for t in {"sacrifices", "goal", "vision"}) and ("academy" in user_tokens or is_founders_like)
 
     # Academy phase/program detectors
-    is_nurturing_years_like = (any(t in user_tokens for t in {"early","beginnings","like","where","held","challenges","face"}) and ("northwestern" in user_tokens or "nwu" in user_tokens)) and not is_academy_sacrifices_like
+    is_nurturing_years_like = (any(t in user_tokens for t in {"early","beginnings","like","where","held","challenges","face"}) and (mentions_institution_for_founders)) and not is_academy_sacrifices_like
     is_operating_like = any(t in user_tokens for t in {"operating","operate","start","started","begin","began","location","located","held"}) and not any(t in user_tokens for t in {"sacrifices", "goal", "vision"})
     is_commonwealth_planning_like = any(t in user_tokens for t in {"planning","expand","expansion","programs","courses","why", "commonwealth", "1935", "constitution", "surge", "affect"})
     is_engineering_program_like = "engineering" in user_tokens and any(t in user_tokens for t in {"program", "courses", "dean", "flagship", "engineering"})
-    is_generic_course_query = any(t in user_tokens for t in {"courses", "programs", "degree", "associate"}) and ("college" in user_tokens or "northwestern" in user_tokens) and not is_engineering_program_like
+    is_generic_course_query = any(t in user_tokens for t in {"courses", "programs", "degree", "associate"}) and (mentions_institution_for_president) and not is_engineering_program_like
     is_transition_process_like = any(t in user_tokens for t in process_terms) and any(t in user_tokens for t in {"college","university","northwestern","nwu", "academy", "how"})
 
     # Access policy disambiguator
@@ -750,13 +755,13 @@ def get_semantic_response_debug(user_input: str, eval_mode: bool = False):
              if tag == "northwestern_college_courses": score += 8
              elif tag in {"Accreditation", "Deregulated_Status", "northwestern_college_engineering_program"}: score = max(0, score - 6)
 
-        # NEW: Massive penalty for Commonwealth stealing Incorporators (Fix Example 1)
+        # NEW: Massive penalty for Commonwealth stealing Incorporators
         if (is_founders_like or "incorporator" in user_tokens) and tag == "northwestern_academy_commonwealth_era":
              score -= 5.0
         # NEW: Massive penalty for Incorporators stealing Commonwealth
         if is_commonwealth_planning_like and tag == "northwestern_academy_incorporators":
              score -= 5.0
-        # NEW: Penalty for Presidents List stealing Founders (Fix Example 2)
+        # NEW: Penalty for Presidents List stealing Founders
         if (is_founders_like or "incorporator" in user_tokens) and tag == "complete_northwestern_presidents_list":
              score -= 5.0
 
@@ -873,7 +878,7 @@ def get_semantic_response_debug(user_input: str, eval_mode: bool = False):
         if (is_founders_query or is_founders_list_query):
             if tag == "northwestern_academy_incorporators": score += 0.42
             if tag in {"major_transitions"}: score -= 0.32
-            # NEW: Penalty against Founders landing on Presidents List (Fix Example 2)
+            # NEW: Penalty against Founders landing on Presidents List
             if tag == "complete_northwestern_presidents_list": score -= 0.5
 
         if is_general_info_query:
@@ -930,7 +935,25 @@ def get_semantic_response_debug(user_input: str, eval_mode: bool = False):
         if any(t in user_tokens for t in {"sacrifices", "goal", "vision"}) and tag in {"early_years", "nurturing_years"}:
             score -= 0.3
 
-        # Academy phases (Fix Example 1)
+        # Reranker Nudge 1: Final separation of EARLY HISTORY CLUSTER (MISS 1, 2, 3, 4)
+        if is_foundation_phrase:
+            if tag == "foundation":
+                score += 0.30 # Massive boost for explicit foundation query
+            if tag == "early_years":
+                score -= 0.30 # Massive penalty on early_years stealing explicit foundation
+        
+        if is_beginnings_query:
+            if tag == "early_years":
+                score += 0.30 # Force generic 'beginnings' query to early_years
+            if tag == "nurturing_years":
+                score -= 0.20 # Penalize nurturing years for short ambiguous query
+        
+        # FINAL check on 1932/when queries (MISS 2, 3, 4)
+        if has_1932 or is_when_query:
+            if tag == "foundation": score += 0.20 # Reinforce foundation
+            if tag == "early_years": score -= 0.20 # Penalize generic early years stealing date
+        
+        # Academy phases
         # STRONG BOOST if any commonwealth planning keywords are present, to overcome generic early_years steal
         if is_commonwealth_planning_like and tag == "northwestern_academy_commonwealth_era":
              score += 0.5
@@ -967,22 +990,6 @@ def get_semantic_response_debug(user_input: str, eval_mode: bool = False):
         
         if any(t in user_tokens for t in {"student", "leaders", "marcos", "protest"}) and tag == "student_activism":
              score += 0.35 # Generic activism queries
-             
-        # Generic Courses vs Accreditation/Engineering
-        if is_generic_course_query and tag == "northwestern_college_courses":
-             score += 0.4
-        if is_generic_course_query and tag in {"Accreditation", "Deregulated_Status", "northwestern_college_engineering_program"}:
-             score -= 0.35
-
-        # Mentors/Teacher Reranker
-        if any(t in user_tokens for t in ["teacher", "mentors", "great", "teachers"]):
-            if tag == "northwestern_classroom_icons": score += 0.4
-            if tag == "northwestern_faculty_mentors": score += 0.25
-        
-        # Foundation vs Incorporators
-        if is_foundation_when_query:
-            if tag == "foundation": score += 0.4
-            if tag == "northwestern_academy_incorporators": score -= 0.3
 
         # NEW: who/when semantic nudges - INCREASED PENALTIES/BOOSTS
         if is_who_query:
@@ -1032,10 +1039,17 @@ def get_semantic_response_debug(user_input: str, eval_mode: bool = False):
 
 
     if (is_presidents_query or is_first_president_query or is_generic_leadership_phrase): pick_if_present({"complete_northwestern_presidents_list"}, max_gap=0.25) 
-    # FIX: Increased max_gap for founders/incorporators (Fix Example 1, 2)
+    # FIX: Increased max_gap for founders/incorporators
     if (is_founders_query or is_founders_list_query): pick_if_present({"northwestern_academy_incorporators"}, max_gap=0.5) 
     # FIX: Increased max_gap for general_info to overcome semantic stealing
     if is_general_info_query: pick_if_present({"general_info"}, max_gap=0.35)
+    
+    # FINAL Pick: Ambiguous Early History Terms (MISS 1, 2, 3, 4)
+    if is_foundation_phrase:
+        pick_if_present({"foundation"}, max_gap=0.35)
+    if is_beginnings_query:
+        pick_if_present({"early_years"}, max_gap=0.35)
+    
     if is_greeting_query: pick_if_present({"greeting"}, max_gap=0.22)
     if is_buildings_overview_query: pick_if_present({"buildings"}, max_gap=0.22)
     if is_landmark_query: pick_if_present({"campus_historical_landmarks"}, max_gap=0.22)
@@ -1068,7 +1082,7 @@ def get_semantic_response_debug(user_input: str, eval_mode: bool = False):
     # NEW: explicit pick for student activists
     if is_activist_details_query:
         pick_if_present({"northwestern_student_activists"}, max_gap=0.3)
-    # NEW: explicit pick for commonwealth era (Fix Example 1)
+    # NEW: explicit pick for commonwealth era
     if is_commonwealth_planning_like:
         pick_if_present({"northwestern_academy_commonwealth_era"}, max_gap=0.3)
     # NEW: explicit pick for generic course query
@@ -1116,7 +1130,7 @@ def get_semantic_response_debug(user_input: str, eval_mode: bool = False):
         best_score = max(-1.0, best_score - 0.5)
     if best_tag == "complete_northwestern_presidents_list" and is_generic_president_query:
         best_score = max(-1.0, best_score - 0.42)
-    # NEW: Final penalty for Presidents List stealing Founders (Fix Example 2)
+    # NEW: Final penalty for Presidents List stealing Founders
     if best_tag == "complete_northwestern_presidents_list" and (is_founders_query or is_founders_list_query):
          best_score = max(-1.0, best_score - 0.7)
 
@@ -1156,7 +1170,7 @@ def get_semantic_response_debug(user_input: str, eval_mode: bool = False):
         best_score += 0.18
     if strong_academy_become_college and best_tag in {"northwestern_college_courses","general_info"}:
         best_score = max(-1.0, best_score - 0.3)
-    # NEW: Final hammer for Commonwealth stealing Incorporators (Fix Example 1)
+    # NEW: Final hammer for Commonwealth stealing Incorporators
     if (is_founders_query or is_founders_list_query) and best_tag == "northwestern_academy_commonwealth_era":
         best_score = max(-1.0, best_score - 0.7)
     # NEW: Final hammer for Incorporators stealing Commonwealth
