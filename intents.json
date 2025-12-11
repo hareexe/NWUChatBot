@@ -438,36 +438,6 @@
       ]
     },
     {
-      "tag": "northwestern_academy_open_admission",
-      "intent_description": "Intent describing: northwestern academy open admission.",
-      "context": "Northwestern University Laoag City, Ilocos Norte, Philippines. Founded 1932.",
-      "boost_keywords": [
-        "open admission",
-        "accepted",
-        "admission",
-        "help poor"
-      ],
-      "keywords": [
-        "accepted",
-        "students",
-        "academy",
-        "1930s?",
-        "help",
-        "admission?",
-        "open admission"
-      ],
-      "examples": [
-        "Did Northwestern Academy have open admission?",
-        "Who could study in Northwestern Academy in the 1930s?",
-        "Was Northwestern Academy only for rich students?",
-        "What kind of students were accepted at Northwestern Academy?",
-        "How did Northwestern Academy help the poor?"
-      ],
-      "responses": [
-        "Northwestern Academy practiced what we now call 'open admission' as early as the 1930s. Anyone who wanted to study was allowed to enroll, even if they could not immediately submit all requirements. The school became known as a place where poor students, overaged learners, and dropouts could continue their education."
-      ]
-    },
-    {
       "tag": "northwestern_academy_commonwealth_era",
       "intent_description": "Intent describing: northwestern academy commonwealth era.",
       "context": "Northwestern University Laoag City, Ilocos Norte, Philippines. Founded 1932.",
@@ -856,48 +826,6 @@
       ],
       "responses": [
         "During the Martial Law era under President Ferdinand Marcos, Northwestern College students were active in protests advocating freedom and justice. Leaders like Gervacio Velasco, Pete Salenda, Samuel Bangloy, Raymund Liongson, Juliet Pascual, and Rafaela Bumanglag were among those who stood at the forefront. Some were even detained as political prisoners, but Mr. Nicolas N. Nicolas welcomed them back after their release, showing Northwestern's enduring spirit of compassion and courage."
-      ]
-    },
-    {
-      "tag": "nurturing_years",
-      "intent_description": "Intent describing: nurturing years.",
-      "context": "Northwestern University Laoag City, Ilocos Norte, Philippines. Founded 1932.",
-      "boost_keywords": [
-        "early years",
-        "beginnings",
-        "how did",
-        "tell me"
-      ],
-      "keywords": [
-        "years",
-        "beginnings",
-        "classes",
-        "were",
-        "where",
-        "first",
-        "face",
-        "challenges",
-        "what",
-        "like?",
-        "start?",
-        "tell",
-        "northwestern.",
-        "about",
-        "days?",
-        "early",
-        "held?",
-        "northwestern",
-        "how did"
-      ],
-      "examples": [
-        "What were the early years of Northwestern like?",
-        "Tell me about the beginnings of Northwestern.",
-        "How did Northwestern start?",
-        "Where were the first classes held?",
-        "Did Northwestern face challenges in its early days?"
-      ],
-      "responses": [
-        "In its early years, Northwestern faced skepticism from locals who doubted that it could survive. Without its own building, the founders rented several structures such as the Llanes, Ruiz, Inez, Albano, and later the Agcaoili buildings to conduct classes. Despite the lack of resources and the presence of cynics, the founders persevered with determination and faith in their mission to make education accessible to all."
       ]
     },
     {
@@ -1587,43 +1515,6 @@
       ]
     },
     {
-      "tag": "nicolas_title",
-      "intent_description": "Intent describing: nicolas title.",
-      "context": "Northwestern University Laoag City, Ilocos Norte, Philippines. Founded 1932.",
-      "boost_keywords": [
-        "title",
-        "mr. northwestern",
-        "earned",
-        "called"
-      ],
-      "keywords": [
-        "northwestern",
-        "nicolas",
-        "school?",
-        "founder",
-        "'mr.",
-        "northwestern'?",
-        "title",
-        "referred",
-        "earned",
-        "northwestern?",
-        "called",
-        "earn",
-        "why",
-        "mr. northwestern"
-      ],
-      "examples": [
-        "How did Nicolas N. Nicolas earn the title Mr. Northwestern?",
-        "Who earned the title Mr. Northwestern at the school?",
-        "Who was called Mr. Northwestern?",
-        "Why is the founder referred to as Mr. Northwestern?",
-        "Why was Nicolas N. Nicolas called 'Mr. Northwestern'?"
-      ],
-      "responses": [
-        "Nicolas N. Nicolas earned the title 'Mr. Northwestern' because of his unmatched dedication and major role in building and shaping the university. His colleagues, students, and the community gave him this recognition for his lifelong service."
-      ]
-    },
-    {
       "tag": "northwestern_classroom_icons",
       "intent_description": "Intent describing: northwestern classroom icons.",
       "context": "Northwestern University Laoag City, Ilocos Norte, Philippines. Founded 1932.",
@@ -2214,6 +2105,3 @@
     }
   ]
 }
-
-
-
