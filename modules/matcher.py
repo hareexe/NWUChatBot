@@ -2,7 +2,7 @@ import random
 import torch
 from sentence_transformers import util
 import streamlit as st
-from modules.detectors import compute_detectors # IMPORT FIX
+from .detectors import compute_detectors
 
 _model = None
 _intents = None
@@ -57,51 +57,60 @@ def _get_intent_keywords(tag: str):
 
 def keyword_fallback(user_input: str, intents_data, min_overlap=2):
     user_tokens = set(_tokenizer.tokenize(user_input.lower()))
-    
-    # --- DETECTORS COMPUTATION START ---
-    D = compute_detectors(user_tokens)
-    is_who_query = D['is_who_query']
-    is_when_query = D['is_when_query']
-    is_status_like = D['is_status_like']
-    is_new_site_like = D['is_new_site_like']
-    is_general_info_like = D['is_general_info_like']
-    is_president_like = D['is_president_like']
-    is_current_time_like = D['is_current_time_like']
-    is_founders_like = D['is_founders_like']
-    is_greeting_like = D['is_greeting_like']
-    is_buildings_like = D['is_buildings_like']
-    is_barangan_like = D['is_barangan_like']
-    is_landmark_like = D['is_landmark_like']
-    is_current_head_synonym = D['is_current_president_query'] # Reuse detection logic
-    has_1932 = D['has_1932']
-    # --- DETECTORS COMPUTATION END ---
 
+    # NEW: question-word detectors
+    is_who_query = "who" in user_tokens
+    is_when_query = any(t in user_tokens for t in {"when","year","date"})
+
+    # Detector hints for safer routing in fallback
+    status_core = {"become", "became", "status", "recognized", "recognition", "confirmation", "confirm", "year"}
+    is_status_like = ("university" in user_tokens) and any(t in user_tokens for t in status_core)
+
+    site_terms = {"site", "campus", "airport", "avenue", "hectare", "new"}
+    is_new_site_like = any(t in user_tokens for t in site_terms) and ("site" in user_tokens or "campus" in user_tokens)
+
+    is_general_info_like = (("what" in user_tokens and "university" in user_tokens) or ("tell" in user_tokens and "university" in user_tokens) or ("northwestern" in user_tokens and "university" in user_tokens))
+    # Leadership/founders/greeting/general-info/buildings/barangan detectors
+    # Remove 'founding' to avoid presidents stealing founders queries
+    is_president_like = ("president" in user_tokens) or ("led" in user_tokens) or ("leader" in user_tokens) or ("head" in user_tokens)
+    is_current_time_like = any(t in user_tokens for t in {"current","present","incumbent","sitting","now","today","right"})
+    is_founders_like = any(t in user_tokens for t in {"founder","founders","incorporators","cofounders","co-founders"})
+    is_greeting_like = any(t in user_tokens for t in {"hi","hello","hey","greetings","good","day","help"})
+    # Make greeting robust: "how are you", "what's up/whats"
+    if ({"how","are","you"} <= user_tokens) or (("what" in user_tokens) and ("up" in user_tokens)) or ("whats" in user_tokens):
+        is_greeting_like = True
+    is_buildings_like = any(t in user_tokens for t in {"buildings","structures","timeline","completed","major","campus"}) and not any(t in user_tokens for t in {"student","worship","aquino","sc"})
+    is_barangan_like = any(t in user_tokens for t in {"barangan","cresencio","cashier","funds","finance"})
+    # NEW: landmark-like
+    is_landmark_like = any(t in user_tokens for t in {"landmark","landmarks","historical","historic","site","sites"})
 
     # Quick safe routes to avoid bad fallbacks
     # 1) Date-only early-year routing
-    if has_1932:
+    if "1932" in user_tokens:
         intent = next((i for i in intents_data.get("intents", []) if i.get("tag")=="early_years"), None)
         if intent:
             return random.choice(intent.get("responses", [])), "early_years"
     # 2) Motto/logo direct routes
-    if D['is_motto_query']:
+    if (("fiat" in user_tokens and "lux" in user_tokens) or "motto" in user_tokens or ("let" in user_tokens and "light" in user_tokens)):
         intent = next((i for i in intents_data.get("intents", []) if i.get("tag")=="northwestern_fiat_lux_meaning"), None)
         if intent:
             return random.choice(intent.get("responses", [])), "northwestern_fiat_lux_meaning"
-    if D['is_logo_query']:
+    if any(t in user_tokens for t in {"logo","symbol","seal","emblem","mascot","owl"}):
         intent = next((i for i in intents_data.get("intents", []) if i.get("tag")=="northwestern_logo_symbolism"), None)
         if intent:
             return random.choice(intent.get("responses", [])), "northwestern_logo_symbolism"
     # 3) Names direct routes
-    if is_barangan_like: # Reuse barangan detection
+    if any(t in user_tokens for t in {"barangan","cresencio"}):
         intent = next((i for i in intents_data.get("intents", []) if i.get("tag")=="cresencio_barangan_history"), None)
         if intent:
             return random.choice(intent.get("responses", [])), "cresencio_barangan_history"
-    if D['is_albano_query']:
+    if any(t in user_tokens for t in {"angel","albano"}):
         intent = next((i for i in intents_data.get("intents", []) if i.get("tag")=="angel_albano_history"), None)
         if intent:
             return random.choice(intent.get("responses", [])), "angel_albano_history"
     # 4) Current university head synonyms
+    # FIX: Stronger check for current president/head (Fallback route)
+    is_current_head_synonym = any(t in user_tokens for t in {"current","present","incumbent","now","today","sitting"}) and any(t in user_tokens for t in {"head","leader","president"}) and any(t in user_tokens for t in {"university","northwestern","nwu"})
     if is_current_head_synonym:
         intent = next((i for i in intents_data.get("intents", []) if i.get("tag")=="northwestern_current_president"), None)
         if intent:
@@ -233,71 +242,204 @@ def get_semantic_response_debug(user_input: str, eval_mode: bool = False):
 
     user_tokens = set(_tokenizer.tokenize(user_input.lower()))
 
-    # --- DETECTORS COMPUTATION START ---
-    D = compute_detectors(user_tokens)
-
-    is_who_query = D['is_who_query']
-    is_when_query = D['is_when_query']
-    early_greet = D['early_greet']
-    is_founder_query = D['is_founder_query']
-    is_president_like = D['is_president_like']
-    is_current_time_like = D['is_current_time_like']
-    is_current_president_query = D['is_current_president_query']
-    is_presidents_query = D['is_presidents_query']
-    is_list_query = D['is_list_query']
-    is_first_president_query = D['is_first_president_query']
-    is_generic_leadership_phrase = D['is_generic_leadership_phrase']
-    is_nicolas_title_like = D['is_nicolas_title_like']
-    strong_univ_status = D['strong_univ_status']
-    strong_academy_become_college = D['strong_academy_become_college']
-    strong_first_college_president = D['strong_first_college_president']
-    leadership_during_college_transition = D['leadership_during_college_transition']
-    is_status_like = D['is_status_like']
-    is_new_site_like = D['is_new_site_like']
-    is_founders_like = D['is_founders_like']
-    is_greeting_like = D['is_greeting_like']
-    is_general_info_like = D['is_general_info_like']
-    is_buildings_like = D['is_buildings_like']
-    is_barangan_like = D['is_barangan_like']
-    is_landmark_like = D['is_landmark_like']
-    college_leadership_focus = D['college_leadership_focus']
-    is_albano_query = D['is_albano_query']
-    is_transition_process_like = D['is_transition_process_like']
-    is_ban_building_query = D['is_ban_building_query']
-    is_student_center_query = D['is_student_center_query']
-    is_worship_center_query = D['is_worship_center_query']
-    is_motto_query = D['is_motto_query']
-    is_logo_query = D['is_logo_query']
-    is_buildings_overview_query = D['is_buildings_overview_query']
-    is_new_site_query = D['is_new_site_query']
-    is_landmark_query = D['is_landmark_query']
-    is_barangan_query = D['is_barangan_query']
-    is_foundation_when_query = D['is_foundation_when_query']
-    is_founders_who_query = D['is_founders_who_query']
-    is_college_president_query = D['is_college_president_query']
-    is_first_college_president_query = D['is_first_college_president_query']
-    is_nicolas_contrib_like = D['is_nicolas_contrib_like']
-    has_1932 = D['has_1932']
-    strong_founders_establish_list = D['strong_founders_establish_list']
+    # NEW: question-word detectors (must be defined before later use)
+    is_who_query = "who" in user_tokens
+    is_when_query = any(t in user_tokens for t in {"when","year","date"})
     
-    # --- DETECTORS COMPUTATION END ---
+    # NEW DETECTOR: Checks for terms indicating a president list or historical scope
+    is_list_query = any(t in user_tokens for t in {"past", "present", "all", "list", "history"}) and ("president" in user_tokens)
 
     # --- Early short-circuit for greetings/general info ---
+    # Replace permissive greeting with robust combos
+    early_greet = (any(t in user_tokens for t in {"hi","hello","hey","greetings"})
+        or ({"how","are","you"} <= user_tokens)
+        or ("whats" in user_tokens) or (("what" in user_tokens) and ("up" in user_tokens)))
     if len(user_tokens) <= 3:
         if early_greet:
             greet_intent = next((i for i in _intents.get("intents", []) if i.get("tag")=="greeting"), None)
             if greet_intent:
                 return random.choice(greet_intent.get("responses", [])), {"best_tag":"greeting","reason":"Early greeting route.","best_score":None}
         # Don't let general_info steal founders/president queries
-        if any(t in user_tokens for t in {"nwu","northwestern","university"}) and not (is_founder_query or is_president_like or is_who_query or is_when_query):
+        founder_like = any(t in user_tokens for t in {"founder","founders","incorporators"})
+        president_like = "president" in user_tokens
+        who_when_like = any(t in user_tokens for t in {"who","when","year","date"})
+        if any(t in user_tokens for t in {"nwu","northwestern","university"}) and not (founder_like or president_like or who_when_like):
             gi_intent = next((i for i in _intents.get("intents", []) if i.get("tag")=="general_info"), None)
             if gi_intent:
                 return random.choice(gi_intent.get("responses", [])), {"best_tag":"general_info","reason":"Early general info route.","best_score":None}
 
-    # Basic detectors used downstream (The original local definitions were here, now using D flags)
-    # The following variables were only locally defined in the original code but were referenced below.
-    mentions_institution_for_founders = D['is_founder_query'] or D['strong_founders_establish_list'] # Simplified logic based on D flags
-    mentions_institution_for_president = D['is_president_like'] or D['is_current_president_query'] # Simplified logic based on D flags
+    # Basic detectors used downstream
+    mentions_university = "university" in user_tokens
+    mentions_president = "president" in user_tokens
+    # Broaden institution mention for founders/presidents
+    mentions_institution_for_founders = any(t in user_tokens for t in {"university","northwestern","nwu","academy"})
+    mentions_institution_for_president = any(t in user_tokens for t in {"university","northwestern","nwu","college"})
+    founder_query_tokens = {"founder","founders","founded","found","cofounder","co-founder","incorporator"}
+    is_founder_query = any(t in user_tokens for t in founder_query_tokens)
+    status_core = {"become","became","status","recognized","recognition","confirmation","confirm","year"}
+    is_university_status_query = ("university" in user_tokens) and any(t in user_tokens for t in status_core)
+
+    # Site/status/building/general detectors (also used by fallback later)
+    is_status_like = ("university" in user_tokens) and any(t in user_tokens for t in status_core)
+    site_terms = {"site","campus","airport","avenue","hectare","new"}
+    is_new_site_like = any(t in user_tokens for t in site_terms) and ("site" in user_tokens or "campus" in user_tokens)
+    is_president_like = ("president" in user_tokens) or ("led" in user_tokens) or ("leader" in user_tokens) or ("head" in user_tokens)
+    is_current_time_like = any(t in user_tokens for t in {"current","present","incumbent","sitting","now","today","right"})
+    is_founders_like = any(t in user_tokens for t in {"founder","founders","incorporators","cofounders","co-founders"})
+    is_greeting_like = any(t in user_tokens for t in {"hi","hello","hey","greetings","good","day","help"})
+    # Make greeting robust: "how are you", "what's up/whats"
+    if ({"how","are","you"} <= user_tokens) or (("what" in user_tokens) and ("up" in user_tokens)) or ("whats" in user_tokens):
+        is_greeting_like = True
+    is_general_info_like = (("what" in user_tokens and "university" in user_tokens) or ("tell" in user_tokens and "university" in user_tokens) or ("northwestern" in user_tokens and "university" in user_tokens))
+    is_buildings_like = any(t in user_tokens for t in {"buildings","structures","timeline","completed","major","campus"}) and not any(t in user_tokens for t in {"student","worship","aquino","sc"})
+    is_barangan_like = any(t in user_tokens for t in {"barangan","cresencio","cashier","funds","finance"})
+    # NEW: landmark-like
+    is_landmark_like = any(t in user_tokens for t in {"landmark","landmarks","historical","historic","site","sites"})
+
+    # NEW: detector that targets college leadership specifically
+    college_leadership_focus = (
+        ("college" in user_tokens) and
+        any(t in user_tokens for t in {"who","led","leader","head"})
+    )
+
+    # NEW: add missing detectors used later
+    is_albano_query = any(t in user_tokens for t in {"angel","albano"})
+    process_terms = {"convert","conversion","transition","process","steps","petition","apply","application","recognition","recognized","approval","approved","sec","decs","ched"}
+    is_transition_process_like = any(t in user_tokens for t in process_terms) and any(t in user_tokens for t in {"college","university","northwestern","nwu"})
+
+    # NEW: add missing detectors used below
+    # Buildings and BAN/Nicolas
+    ban_tokens = {"ban", "ben", "nicolas", "ben", "ben a", "ben a. nicolas"}
+    building_terms = {"building", "inaugurated", "inauguration", "opened", "completion", "when"}
+    is_ban_building_query = (len(user_tokens.intersection(ban_tokens)) > 0) and (len(user_tokens.intersection(building_terms)) > 0)
+
+    student_center_tokens = {"student", "center", "aquino", "multipurpose", "sc"}
+    is_student_center_query = (("when" in user_tokens) or ("completed" in user_tokens) or ("finished" in user_tokens)) and any(t in user_tokens for t in student_center_tokens)
+
+    worship_center_tokens = {"worship", "center"}
+    is_worship_center_query = (("when" in user_tokens) or ("finished" in user_tokens) or ("completion" in user_tokens) or ("date" in user_tokens)) and all(t in user_tokens for t in worship_center_tokens)
+
+    # Motto, logo, buildings overview, site, landmarks
+    is_motto_query = ("fiat" in user_tokens and "lux" in user_tokens) or ("motto" in user_tokens) or ("let" in user_tokens and "light" in user_tokens)
+    is_logo_query = any(t in user_tokens for t in {"logo", "symbol", "seal", "emblem", "mascot", "owl"})
+    buildings_overview_tokens = {"buildings", "structures", "timeline", "completed", "major", "campus"}
+    is_buildings_overview_query = any(t in user_tokens for t in buildings_overview_tokens) and not (is_student_center_query or is_worship_center_query or is_ban_building_query)
+    is_new_site_query = (("site" in user_tokens or "campus" in user_tokens) and any(t in user_tokens for t in {"airport", "avenue", "hectare", "new"}))
+    is_landmark_query = is_landmark_like
+
+    # Greeting/general/status aliases + barangan alias
+    is_greeting_query = early_greet or is_greeting_like
+    is_general_info_query = is_general_info_like
+    is_status_query = is_university_status_query
+    # NEW: barangan alias to avoid NameError in later routing
+    is_barangan_query = is_barangan_like
+
+    # NEW: strong detector for "what year did NWU become a university" (punctuation-insensitive)
+    strong_univ_year_status = (
+        ("university" in user_tokens) and
+        ("year" in user_tokens) and
+        any(t in user_tokens for t in {"become","became","recognized","recognition","status","confirmation","confirm"})
+    )
+    # NEW: support "when did ... become a university" phrasing (punctuation-insensitive)
+    strong_univ_when_status = (
+        ("university" in user_tokens) and
+        ("when" in user_tokens) and
+        any(t in user_tokens for t in {"become","became","recognized","recognition","status","confirmation","confirm"})
+    )
+    # NEW: unified detector for both variants
+    strong_univ_status = strong_univ_year_status or strong_univ_when_status
+
+    # NEW: strong detector for founders establish list phrasing
+    strong_founders_establish_list = (
+        any(t in user_tokens for t in {"name","everyone","all","list"}) and
+        any(t in user_tokens for t in {"helped","establish","established","incorporators","founders"}) and
+        any(t in user_tokens for t in {"academy","northwestern","nwu"})
+    )
+
+    # NEW: strong detector for “When did Northwestern Academy become a college”
+    strong_academy_become_college = (
+        ("academy" in user_tokens) and
+        ("college" in user_tokens) and
+        any(t in user_tokens for t in {"become","became","becoming","transition","convert","conversion","when","year","date"})
+    )
+
+    # NEW: detector for “Who led NWU when it became a college”
+    leadership_during_college_transition = (
+        any(t in user_tokens for t in {"led","leader","head","who"}) and
+        ("college" in user_tokens) and
+        any(t in user_tokens for t in {"became","become","transition","when","year","date"})
+    )
+
+    # Founders/presidents composed (extend current-president to head/leader)
+    is_current_president_query = (
+        ("president" in user_tokens) and any(t in user_tokens for t in {"current","present","incumbent","sitting","now","today","right"}) and mentions_institution_for_president
+    ) or (
+        any(t in user_tokens for t in {"current","present","incumbent","sitting","now","today","right"}) and
+        any(t in user_tokens for t in {"head","leader"}) and
+        any(t in user_tokens for t in {"university","northwestern","nwu"})
+    )
+    is_presidents_query = ("president" in user_tokens) and mentions_institution_for_president and not is_current_president_query
+    is_founders_query = is_founder_query and mentions_institution_for_founders
+    founders_list_terms = {"list", "name", "founders", "incorporators", "co-founders", "cofounders"}
+    is_founders_list_query = any(t in user_tokens for t in founders_list_terms) and is_founders_query
+
+    # Add missing first-president and leadership phrase detectors
+    is_first_president_query = (("first" in user_tokens and "president" in user_tokens) or ("founding" in user_tokens and "president" in user_tokens))
+    generic_leader_terms = {"led", "leader", "head"}
+    is_generic_leadership_phrase = any(t in user_tokens for t in generic_leader_terms) and any(t in user_tokens for t in {"university","nwu","northwestern","college"})
+
+    # Stronger founders/founded detector and conflict sets
+    is_founded_nwu_like = (
+        any(t in user_tokens for t in {"founded","founder","founders","incorporators"}) and
+        not any(t in user_tokens for t in {"college","establishment"})
+    )
+    CONFLICT_INTENT_SETS = [
+        {"northwestern_academy_incorporators","foundation"},
+        {"northwestern_college_president","presidents"},
+        {"northwestern_college_engineering_program","northwestern_college_courses"},
+        {"northwestern_classroom_icons","distinguished_professors"},
+        {"northwestern_student_activists","northwestern_martial_law"},
+        {"northwestern_new_school_site","campus_historical_landmarks"},
+        {"early_years","major_transitions"},
+    ]
+
+    # Missing disambiguators used later (define them here)
+    is_foundation_when_query = any(t in user_tokens for t in {"founded","foundation"}) and any(t in user_tokens for t in {"when","year","date"})
+    is_founders_who_query = (any(t in user_tokens for t in {"founder","founders","incorporators"}) and "who" in user_tokens)
+    is_college_president_query = ("president" in user_tokens) and ("college" in user_tokens) and ("university" not in user_tokens)
+    is_first_college_president_query = is_college_president_query and ("first" in user_tokens)
+
+    # NEW: strong detector for “first president of Northwestern College”
+    strong_first_college_president = (
+        ("president" in user_tokens) and
+        ("college" in user_tokens) and
+        ("first" in user_tokens) and
+        any(t in user_tokens for t in {"northwestern","nwu"})
+    )
+
+    # Nicolas-specific detectors
+    is_nicolas_title_like = any(t in user_tokens for t in {"mr","mr.","referred","called","known"})
+    is_nicolas_who_in_college = (("nicolas" in user_tokens) and any(t in user_tokens for t in {"who","was"}) and ("college" in user_tokens))
+    is_nicolas_contrib_like = ("founder" in user_tokens and "what" in user_tokens and (("did" in user_tokens) or ("do" in user_tokens)) and any(t in user_tokens for t in {"northwestern","nwu","university"}))
+
+    # Academy phase/program detectors
+    is_operating_like = any(t in user_tokens for t in {"operating","operate","start","started","begin","began","held","location","located","establish","established"})
+    is_helped_establish_like = ("helped" in user_tokens and "establish" in user_tokens)
+    is_commonwealth_planning_like = any(t in user_tokens for t in {"planning","expand","expansion","programs","courses","why"})
+
+    # Programs alignment
+    is_flagship_like = any(t in user_tokens for t in {"flagship","1960s","1960","sixties"})
+    is_first_engineering_program_like = ("first" in user_tokens and "engineering" in user_tokens and "program" in user_tokens)
+
+    # Access policy disambiguator
+    is_access_poor_like = any(t in user_tokens for t in {"poor","needy","scholarship","scholarships","help","assist","students"})
+
+    # Nurturing years/date hint
+    is_nurturing_start_like = ("start" in user_tokens) and not any(t in user_tokens for t in {"academy","college"})
+    has_1932 = "1932" in user_tokens
+
+    # Alias to avoid NameError later
+    is_barangan_query = is_barangan_like
 
     # 1) Hard keyword override scoring (soft preference)
     forced_index = None
@@ -324,8 +466,8 @@ def get_semantic_response_debug(user_input: str, eval_mode: bool = False):
         if tag in {"northwestern_fiat_lux_meaning"} and is_motto_query: has_specific_detector = True
         if tag in {"northwestern_current_president"} and is_current_president_query: has_specific_detector = True
         if tag in {"presidents"} and is_presidents_query: has_specific_detector = True
-        if tag in {"northwestern_academy_incorporators"} and (is_founder_query or is_founders_list_query): has_specific_detector = True
-        if tag in {"major_transitions"} and is_status_like: has_specific_detector = True
+        if tag in {"northwestern_academy_incorporators"} and (is_founders_query or is_founders_list_query): has_specific_detector = True
+        if tag in {"major_transitions"} and is_status_query: has_specific_detector = True
         effective_priority = priority if (overlap_base + overlap_boost > 0 or has_specific_detector) else 0
 
         score = overlap_boost * 2 + overlap_base + effective_priority
@@ -343,10 +485,10 @@ def get_semantic_response_debug(user_input: str, eval_mode: bool = False):
             if tag == "northwestern_academy_incorporators": score += 9
             elif tag in {"major_transitions","northwestern_academy_open_admission","northwestern_academy_early_sacrifices"}: score = max(0, score - 6)
 
-        if is_status_like:
+        if is_status_query:
             if tag == "major_transitions": score += 8
         else:
-            if tag == "major_transitions" and (is_presidents_query or is_current_president_query or is_first_president_query or is_generic_leadership_phrase or is_logo_query or is_greeting_like or is_general_info_like):
+            if tag == "major_transitions" and (is_presidents_query or is_current_president_query or is_first_president_query or is_generic_leadership_phrase or is_founders_query or is_founders_list_query or is_logo_query or is_greeting_query or is_general_info_query):
                 score = max(0, score - 7)
 
         if is_ban_building_query:
@@ -364,24 +506,24 @@ def get_semantic_response_debug(user_input: str, eval_mode: bool = False):
             elif tag in {"angel_albano_history","nicolas_contribution","northwestern_academy_incorporators"}: score = max(0, score - 5)
 
         if is_landmark_query:
-            if tag == "campus_historical_landmarks" and not (is_student_center_query or is_worship_center_query or is_ban_building_query or is_motto_query or is_current_president_query or is_presidents_query or is_founder_query or is_founders_list_query or is_status_like):
+            if tag == "campus_historical_landmarks" and not (is_student_center_query or is_worship_center_query or is_ban_building_query or is_motto_query or is_current_president_query or is_presidents_query or is_founders_query or is_founders_list_query or is_status_query):
                 score += 4
             if tag == "northwestern_engineering_success_and_impact": score = max(0, score - 6)
         else:
             if tag == "campus_historical_landmarks": score = max(0, score - 4)
 
-        if ("first" in user_tokens and "president" in user_tokens) or is_generic_leadership_phrase:
+        if ("first" in user_tokens and "president" in user_tokens) or any(t in user_tokens for t in {"led","leader","head"}):
             if tag == "presidents": score += 7
             elif tag in {"major_transitions","northwestern_current_president"}: score = max(0, score - 5)
 
-        if tag == "major_transitions" and not is_status_like:
+        if tag == "major_transitions" and not is_status_query:
             score = max(0, score - 6)
 
-        if is_general_info_like:
+        if is_general_info_query:
             if tag == "general_info": score += 8
             elif tag in {"northwestern_new_school_site","major_transitions"}: score = max(0, score - 6)
 
-        if is_greeting_like:
+        if is_greeting_query:
             if tag == "greeting": score += 9
             elif tag in {"northwestern_new_school_site","major_transitions"}: score = max(0, score - 6)
 
@@ -389,7 +531,7 @@ def get_semantic_response_debug(user_input: str, eval_mode: bool = False):
             if tag == "buildings": score += 7
             elif tag == "campus_historical_landmarks": score = max(0, score - 5)
 
-        if is_barangan_like:
+        if is_barangan_query:
             if tag == "cresencio_barangan_history": score += 8
             elif tag in {"angel_albano_history","northwestern_college_glorious_years","major_transitions"}: score = max(0, score - 6)
 
@@ -410,19 +552,20 @@ def get_semantic_response_debug(user_input: str, eval_mode: bool = False):
             tag == "northwestern_fiat_lux_meaning" and is_motto_query,
             tag == "northwestern_logo_symbolism" and is_logo_query,
             tag == "northwestern_current_president" and is_current_president_query,
-            tag == "presidents" and (is_presidents_query or is_first_president_query or is_generic_leadership_phrase),
-            tag == "northwestern_academy_incorporators" and (is_founder_query or is_founders_who_query),
+            tag == "presidents" and (("president" in user_tokens) and (is_presidents_query or is_first_president_query or is_generic_leadership_phrase)),
+            tag == "northwestern_academy_incorporators" and (is_founders_query or is_founders_who_query),
             tag == "foundation" and is_foundation_when_query,
-            tag == "cresencio_barangan_history" and is_barangan_like,
+            tag == "cresencio_barangan_history" and is_barangan_query,
             tag == "angel_albano_history" and is_albano_query,
             tag == "northwestern_college_president" and (is_first_college_president_query or is_college_president_query),
-            tag == "apolinario_aquino" and is_albano_query, # Apolinario Aquino has a simple detector now
+            tag == "apolinario_aquino" and any(t in user_tokens for t in {"apolinario","aquino"}),
             tag == "northwestern_new_school_site" and is_new_site_query,
             tag == "buildings" and is_buildings_overview_query,
             tag == "campus_historical_landmarks" and is_landmark_query,
             tag == "northwestern_college_courses" and any(t in user_tokens for t in {"courses","programs","degree"}),
             tag == "northwestern_college_engineering_program" and ("engineering" in user_tokens and "program" in user_tokens),
             tag == "transition_process" and is_transition_process_like,
+            # UPDATED: allow major_transitions for both 'year' and 'when' variants
             tag == "major_transitions" and strong_univ_status,
         ])
 
@@ -486,11 +629,11 @@ def get_semantic_response_debug(user_input: str, eval_mode: bool = False):
                 if tag == "northwestern_academy_incorporators": score += 0.42
                 if tag in {"northwestern_academy_facility_challenges","major_transitions"}: score -= 0.32
 
-            if is_general_info_like:
+            if is_general_info_query:
                 if tag == "general_info": score += 0.35
                 if tag in {"distinguished_professors","major_transitions","northwestern_new_school_site"}: score -= 0.3
 
-            if is_greeting_like:
+            if is_greeting_query:
                 if tag == "greeting": score += 0.35
                 if tag in {"northwestern_new_school_site","major_transitions"}: score -= 0.28
 
@@ -504,15 +647,15 @@ def get_semantic_response_debug(user_input: str, eval_mode: bool = False):
             else:
                 if tag == "campus_historical_landmarks": score -= 0.26
 
-            if is_barangan_like:
+            if is_barangan_query:
                 if tag == "cresencio_barangan_history": score += 0.34
                 if tag in {"major_transitions","northwestern_new_school_site"}: score -= 0.28
 
             if not is_new_site_query and tag == "northwestern_new_school_site": score -= 0.34
             if is_new_site_query and tag == "northwestern_new_school_site": score += 0.26
 
-            if not is_status_like and tag == "major_transitions": score -= 0.34
-            if is_status_like and tag == "major_transitions": score += 0.26
+            if not is_status_query and tag == "major_transitions": score -= 0.34
+            if is_status_query and tag == "major_transitions": score += 0.26
 
             # Nicolas/NW guards
             nicolas_help_terms = {"contribution","contributions","role","did","help","impact","do","during","war"}
@@ -629,12 +772,12 @@ def get_semantic_response_debug(user_input: str, eval_mode: bool = False):
     if is_list_query: pick_if_present({"complete_northwestern_presidents_list"}, max_gap=0.50)
     
     if (is_presidents_query or is_first_president_query or is_generic_leadership_phrase): pick_if_present({"presidents"}, max_gap=0.2)
-    if (is_founder_query or is_founders_list_query): pick_if_present({"northwestern_academy_incorporators"}, max_gap=0.22)
-    if is_general_info_like: pick_if_present({"general_info"}, max_gap=0.22)
-    if is_greeting_like: pick_if_present({"greeting"}, max_gap=0.22)
+    if (is_founders_query or is_founders_list_query): pick_if_present({"northwestern_academy_incorporators"}, max_gap=0.22)
+    if is_general_info_query: pick_if_present({"general_info"}, max_gap=0.22)
+    if is_greeting_query: pick_if_present({"greeting"}, max_gap=0.22)
     if is_buildings_overview_query: pick_if_present({"buildings"}, max_gap=0.22)
     if is_landmark_query: pick_if_present({"campus_historical_landmarks"}, max_gap=0.22)
-    if is_barangan_like: pick_if_present({"cresencio_barangan_history"}, max_gap=0.24)
+    if is_barangan_query: pick_if_present({"cresencio_barangan_history"}, max_gap=0.24)
     # NEW: direct picks for motto/logo and transition process
     if is_motto_query: pick_if_present({"northwestern_fiat_lux_meaning"}, max_gap=0.28)
     if is_logo_query: pick_if_present({"northwestern_logo_symbolism"}, max_gap=0.28)
@@ -688,7 +831,7 @@ def get_semantic_response_debug(user_input: str, eval_mode: bool = False):
         best_score = max(-1.0, best_score - 0.35)
 
     # Accessibility vs open_admission
-    if best_tag == "northwestern_academy_open_admission" and D['is_access_poor_like']:
+    if best_tag == "northwestern_academy_open_admission" and is_access_poor_like:
         best_score = max(-1.0, best_score - 0.4)
 
     # Presidents vs college-first-president
@@ -704,9 +847,9 @@ def get_semantic_response_debug(user_input: str, eval_mode: bool = False):
         best_score = max(-1.0, best_score - 0.24)
 
     # Engineering/courses pairwise fixes
-    if best_tag == "northwestern_college_engineering_program" and D['is_first_engineering_program_like']:
+    if best_tag == "northwestern_college_engineering_program" and is_first_engineering_program_like:
         best_score = max(-1.0, best_score - 0.35)
-    if best_tag == "northwestern_college_courses" and D['is_flagship_like']:
+    if best_tag == "northwestern_college_courses" and is_flagship_like:
         best_score = max(-1.0, best_score - 0.3)
 
     # Prefer Apolinario Aquino when named (nudge non-target)
@@ -762,7 +905,7 @@ def get_semantic_response_debug(user_input: str, eval_mode: bool = False):
                 if greet_intent:
                     fallback_resp = random.choice(greet_intent.get("responses", []))
                     fallback_tag = "greeting"
-            elif is_general_info_like:
+            elif is_general_info_query:
                 gi_intent = next((i for i in _intents.get("intents", []) if i.get("tag")=="general_info"), None)
                 if gi_intent:
                     fallback_resp = random.choice(gi_intent.get("responses", []))
@@ -826,7 +969,8 @@ def get_semantic_response_debug(user_input: str, eval_mode: bool = False):
     if best_tag in {"greeting", "end_chat", "thank_you"}:
         if not eval_mode and 'recent_questions' in st.session_state:
             st.session_state['recent_questions'] = []
-    
+    # ------------------------------------------
+
     if not eval_mode:
         st.session_state['last_intent'] = best_tag
     return best_response, debug_info
