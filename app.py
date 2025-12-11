@@ -7,7 +7,7 @@ import os
 
 from modules.nlp_utils import initialize_nltk_data, preprocess, expand_with_synonyms, regexp_word_tokenizer
 from modules.data_store import load_data, build_intent_embeddings, _hash_intents, load_embedding_model
-from modules.eval_utils import build_all_tests_from_intents, run_offline_eval
+# Removed unused import of run_offline_eval: from modules.eval_utils import build_all_tests_from_intents, run_offline_eval
 from modules.matcher import get_semantic_response_debug, keyword_fallback, get_all_patterns
 
 # --- NLTK Initialization ---
@@ -94,19 +94,6 @@ if suggestions:
     st.markdown("**Try asking:**")
     st.markdown("\n".join([f"* {s}" for s in suggestions]))
     
-# --- Quick eval button ---
-col1, col2 = st.columns(2)
-with col2:
-    if st.button("Run quick evaluation"):
-        acc, res = run_offline_eval(intents_data) 
-        st.markdown(f"<small>Accuracy: {round(acc*100,1)}%</small>", unsafe_allow_html=True)
-        # Show only misses
-        misses = [r for r in res if not r["ok"]]
-        for r in misses:
-            st.markdown(
-                f"<small>- [MISS] {r['query']} → expected={r['expected']} predicted={r['predicted']} score={r['score']} reason={r['reason']}</small>",
-                unsafe_allow_html=True
-            )
 
 # Display conversation history
 for msg in st.session_state['history']:
@@ -133,13 +120,9 @@ if user_prompt:
         st.write(user_prompt)
 
     with st.spinner("Thinking..."):
-
         bot_reply, _ = get_semantic_response_debug(user_prompt) 
-        debug_info = None 
+
 
     st.session_state['history'].append({"role": "assistant", "content": bot_reply})
     with st.chat_message("assistant", avatar=None):
         st.write(bot_reply)
-      
-        if debug_info: 
-            st.markdown(f"<small style='color:gray'>Debug Info: {debug_info}</small>", unsafe_allow_html=True)
