@@ -8,7 +8,10 @@ from nltk.tokenize import RegexpTokenizer
 from nltk.corpus import stopwords
 from nltk.stem import WordNetLemmatizer
 from sentence_transformers import SentenceTransformer, util
-
+from modules.nlp_utils import initialize_nltk_data, preprocess, expand_with_synonyms, regexp_word_tokenizer
+from modules.data_store import load_data, build_intent_embeddings, _hash_intents, load_embedding_model
+from modules.eval_utils import build_all_tests_from_intents, run_offline_eval
+from modules.matcher import get_semantic_response_debug, keyword_fallback, get_all_patterns
 
 @st.cache_resource(show_spinner="Initializing NLTK resources...")
 def initialize_nltk_data():
@@ -175,3 +178,4 @@ if user_prompt:
     st.session_state['history'].append({"role": "assistant", "content": bot_reply})
     with st.chat_message("assistant", avatar=None):
         st.write(bot_reply)
+
