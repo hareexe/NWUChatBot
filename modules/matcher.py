@@ -109,7 +109,9 @@ def keyword_fallback(user_input: str, intents_data, min_overlap=2):
         if intent:
             return random.choice(intent.get("responses", [])), "angel_albano_history"
     # 4) Current university head synonyms
-    if any(t in user_tokens for t in {"current","present","incumbent","now","today","sitting"}) and any(t in user_tokens for t in {"head","leader"}) and any(t in user_tokens for t in {"university","northwestern","nwu"}):
+    # FIX: Stronger check for current president/head (Fallback route)
+    is_current_head_synonym = any(t in user_tokens for t in {"current","present","incumbent","now","today","sitting"}) and any(t in user_tokens for t in {"head","leader","president"}) and any(t in user_tokens for t in {"university","northwestern","nwu"})
+    if is_current_head_synonym:
         intent = next((i for i in intents_data.get("intents", []) if i.get("tag")=="northwestern_current_president"), None)
         if intent:
             return random.choice(intent.get("responses", [])), "northwestern_current_president"
@@ -621,7 +623,7 @@ def get_semantic_response_debug(user_input: str, eval_mode: bool = False):
             # FIX: Boost list query when past/present/all is mentioned
             if is_list_query:
                 if tag == "complete_northwestern_presidents_list": score += 0.45
-                if tag == "northwestern_current_president": score -= 0.35 # Penalize single tag
+                if tag == "northwestern_current_president": score -= 0.50 # Maximized penalty on single tag
 
             if (is_founders_query or is_founders_list_query):
                 if tag == "northwestern_academy_incorporators": score += 0.42
@@ -767,7 +769,7 @@ def get_semantic_response_debug(user_input: str, eval_mode: bool = False):
     # FIX: Increased max_gap for current president
     if is_current_president_query: pick_if_present({"northwestern_current_president"}, max_gap=0.35)
     # FIX: Explicit pick for President List when scope is broad
-    if is_list_query: pick_if_present({"complete_northwestern_presidents_list"}, max_gap=0.35)
+    if is_list_query: pick_if_present({"complete_northwestern_presidents_list"}, max_gap=0.50)
     
     if (is_presidents_query or is_first_president_query or is_generic_leadership_phrase): pick_if_present({"presidents"}, max_gap=0.2)
     if (is_founders_query or is_founders_list_query): pick_if_present({"northwestern_academy_incorporators"}, max_gap=0.22)
@@ -964,8 +966,6 @@ def get_semantic_response_debug(user_input: str, eval_mode: bool = False):
     debug_info["reason"] = "High confidence match."
     debug_info["best_tag"] = best_tag
     
-    # --- CONTEXT CLEARING FIX APPLIED HERE ---
-    # When a utility intent (greeting, thank_you, end_chat) is chosen, clear recent history
     if best_tag in {"greeting", "end_chat", "thank_you"}:
         if not eval_mode and 'recent_questions' in st.session_state:
             st.session_state['recent_questions'] = []
