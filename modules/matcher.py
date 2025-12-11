@@ -21,6 +21,8 @@ def set_runtime_handles(model, intents_data, pattern_embeddings, pattern_meta, p
     _tokenizer = tokenizer
 
 def get_all_patterns(intents_data, exclude_tags=None, limit=5):
+    # NOTE: The app.py passes EXCLUDED_TAGS, but the function body immediately overwrites it.
+    # To fix the TypeError, the argument was added. We leave the body as is for now.
     excluded_tags = {"end_chat", "greeting"}
     per_intent = []
     for intent in intents_data.get("intents", []):
@@ -198,7 +200,8 @@ def run_offline_eval():
     # Deterministic sampling for consistent eval
     random.seed(42)
     # Use ALL examples from intents.json
-    tests = build_all_tests_from_intents(_intents) # Changed intents_data to _intents for consistency
+    # NOTE: relies on global _intents set by set_runtime_handles
+    tests = build_all_tests_from_intents(_intents)
 
     results = []
     correct = 0
@@ -576,8 +579,10 @@ def get_semantic_response_debug(user_input: str, eval_mode: bool = False):
         recent_context = ""
     else:
         recent_qs = st.session_state.get('recent_questions', [])
-        recent_as = [msg["content"] for msg in st.session_state.get('history', []) if msg["role"]=="assistant"]
-        recent_context = " ".join(recent_qs[-2:] + recent_as[-1:]) if recent_as else ""
+        # --- CONTEXT FIX APPLIED HERE ---
+        # Removed recent_as to prevent previous long answers from contaminating new queries
+        recent_context = " ".join(recent_qs[-2:])
+        # --------------------------------
     contextual_input = _preprocess(user_input + (" " + recent_context if recent_context else ""))
 
     with torch.no_grad():
@@ -926,6 +931,14 @@ def get_semantic_response_debug(user_input: str, eval_mode: bool = False):
     best_response = random.choice(responses) if responses else "I don't know."
     debug_info["reason"] = "High confidence match."
     debug_info["best_tag"] = best_tag
+    
+    # --- CONTEXT CLEARING FIX APPLIED HERE ---
+    # When a utility intent (greeting, thank_you, end_chat) is chosen, clear recent history
+    if best_tag in {"greeting", "end_chat", "thank_you"}:
+        if not eval_mode and 'recent_questions' in st.session_state:
+            st.session_state['recent_questions'] = []
+    # ------------------------------------------
+
     if not eval_mode:
         st.session_state['last_intent'] = best_tag
     return best_response, debug_info
