@@ -17,6 +17,9 @@ def load_data():
     except Exception as e:
         return {"intents": []}
 
+def load_embedding_model():
+    return SentenceTransformer('all-MiniLM-L6-v2')
+
 # --------------------------
 # --- Hash helper ----
 # --------------------------
