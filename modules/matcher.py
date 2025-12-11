@@ -69,7 +69,7 @@ def keyword_fallback(user_input: str, intents_data, min_overlap=2):
 
     site_terms = {"site", "campus", "airport", "avenue", "hectare", "new"}
     is_new_site_like = any(t in user_tokens for t in site_terms) and ("site" in user_tokens or "campus" in user_tokens)
-
+    is_general_info_like = (("what" in user_tokens and "university" in user_tokens) or ("tell" in user_tokens and "university" in user_tokens) or ("northwestern" in user_tokens and "university" in user_tokens))
     # Leadership/founders/greeting/general-info/buildings/barangan detectors
     # Remove 'founding' to avoid presidents stealing founders queries
     is_president_like = ("president" in user_tokens) or ("led" in user_tokens) or ("leader" in user_tokens) or ("head" in user_tokens)
