@@ -20,8 +20,8 @@ def set_runtime_handles(model, intents_data, pattern_embeddings, pattern_meta, p
     _preprocess = preprocess
     _tokenizer = tokenizer
 
-def get_all_patterns(intents_data, limit=5):
-    excluded_tags = {"end_chat", "thank_you"}
+def get_all_patterns(intents_data, exclude_tags=None, limit=5):
+    excluded_tags = {"end_chat", "greeting"}
     per_intent = []
     for intent in intents_data.get("intents", []):
         tag = intent.get("tag")
