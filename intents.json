@@ -1092,6 +1092,41 @@
       ]
     },
     {
+      "tag": "northwestern_college_president",
+      "intent_description": "Intent describing: northwestern college president.",
+      "context": "Northwestern University Laoag City, Ilocos Norte, Philippines. Founded 1932.",
+      "boost_keywords": [
+        "college president",
+        "first college president",
+        "1949",
+        "apolinario aquino"
+      ],
+      "keywords": [
+        "college's",
+        "college?",
+        "leader?",
+        "head",
+        "became",
+        "first",
+        "when",
+        "northwestern",
+        "college leader",
+        "college head",
+        "college president",
+        "first college president",
+        "aquino",
+        "college establishment",
+        "1949"
+      ],
+      "examples": [
+        "Who was the first president of Northwestern College (not university)?",
+        "Who led Northwestern when it became a college (1949)?"
+      ],
+      "responses": [
+        "The first president of Northwestern College was Apolinario L. Aquino, a man of academic excellence and leadership who worked closely with Mr. Nicolas N. Nicolas in expanding the school's programs and securing government permits to operate courses such as BS Commerce, Associate in Arts, Education, and Law. Under his stewardship, the institution experienced academic growth and the expansion of related services."
+      ]
+    },
+    {
       "tag": "northwestern_academy_open_admission",
       "intent_description": "Intent describing: northwestern academy open admission.",
       "context": "Northwestern University Laoag City, Ilocos Norte, Philippines. Founded 1932.",
@@ -1376,4 +1411,3 @@
     }
   ]
 }
-
