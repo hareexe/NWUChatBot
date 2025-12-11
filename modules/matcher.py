@@ -102,8 +102,7 @@ def keyword_fallback(user_input: str, intents_data, min_overlap=2):
     is_nicolas_teacher_like = ("nicolas" in user_tokens) and any(t in user_tokens for t in {"teacher", "known", "faculty", "instructor"})
     # NEW: academy early sacrifices like
     is_academy_sacrifices_like = any(t in user_tokens for t in {"sacrifices", "goal", "vision"}) and ("academy" in user_tokens or "founders" in user_tokens)
-    # NEW: engineering program like
-    is_engineering_program_like = "engineering" in user_tokens and any(t in user_tokens for t in {"program", "courses", "dean", "flagship"})
+    # DELETED: is_engineering_program_like = "engineering" in user_tokens and any(t in user_tokens for t in {"program", "courses", "dean", "flagship"})
     # NEW: generic president query (for "Who is the president?" to push to current)
     is_generic_president_query = is_president_like and is_who_query and not is_current_time_like and not is_all_presidents_like and not any(t in user_tokens for t in {"first", "past", "list", "all", "of", "college"})
     # NEW: nurturing years like
@@ -115,7 +114,7 @@ def keyword_fallback(user_input: str, intents_data, min_overlap=2):
     # NEW: student activists like
     is_activist_details_query = any(t in user_tokens for t in {"velasco", "pascual", "became", "support", "notable", "leaders", "marcos"})
     # NEW: generic course query
-    is_generic_course_query = any(t in user_tokens for t in {"courses", "programs", "degree", "associate"}) and ("college" in user_tokens or "northwestern" in user_tokens) and not is_engineering_program_like
+    is_generic_course_query = any(t in user_tokens for t in {"courses", "programs", "degree", "associate"}) and ("college" in user_tokens or "northwestern" in user_tokens)
 
 
     # --- Hard Routes for Ambiguous Short Queries ---
@@ -254,9 +253,7 @@ def keyword_fallback(user_input: str, intents_data, min_overlap=2):
         # NEW: academy sacrifices boost
         if is_academy_sacrifices_like and tag == "northwestern_academy_early_sacrifices":
             score += 2.5
-        # NEW: engineering program boost
-        if is_engineering_program_like and tag == "northwestern_college_engineering_program":
-            score += 2.5
+        # DELETED: if is_engineering_program_like and tag == "northwestern_college_engineering_program": score += 2.5
         # NEW: commonwealth era boost
         if is_commonwealth_planning_like and tag == "northwestern_academy_commonwealth_era":
             score += 2.5
@@ -337,9 +334,7 @@ def keyword_fallback(user_input: str, intents_data, min_overlap=2):
         # NEW: Penalty for college courses stealing commonwealth planning/transition process
         if tag == "northwestern_college_courses" and (is_commonwealth_planning_like or is_transition_process_like):
              score -= 2.5
-        # NEW: Penalty for generic courses stealing specific engineering
-        if is_engineering_program_like and tag == "northwestern_college_courses":
-             score -= 2.5
+        # DELETED: if is_engineering_program_like and tag == "northwestern_college_courses": score -= 2.5
         # NEW: Penalty for Accreditation/Status stealing Course queries
         if is_generic_course_query and tag in {"Accreditation", "Deregulated_Status", "major_transitions"}:
              score -= 2.5
@@ -357,7 +352,7 @@ def keyword_fallback(user_input: str, intents_data, min_overlap=2):
         # NEW: Massive penalty for Incorporators stealing Commonwealth
         if is_commonwealth_planning_like and tag == "northwestern_academy_incorporators":
              score -= 5.0
-        # NEW: Penalty for Presidents List stealing Founders
+        # NEW: Penalty for Presidents List stealing Founders (Example 2 Fix)
         if (is_founders_like or "incorporator" in user_tokens) and tag == "complete_northwestern_presidents_list":
              score -= 5.0
 
@@ -577,7 +572,6 @@ def get_semantic_response_debug(user_input: str, eval_mode: bool = False):
     CONFLICT_INTENT_SETS = [
         {"northwestern_academy_incorporators","foundation"},
         {"complete_northwestern_presidents_list", "northwestern_current_president"},
-        {"northwestern_college_engineering_program","northwestern_college_courses"},
         {"northwestern_classroom_icons","northwestern_faculty_mentors"},
         {"northwestern_student_activists","northwestern_martial_law", "student_activism"},
         {"early_years","major_transitions"},
@@ -711,12 +705,12 @@ def get_semantic_response_debug(user_input: str, eval_mode: bool = False):
             if tag == "cresencio_barangan_history": score += 8
             elif tag in {"angel_albano_history","northwestern_academy_incorporators"}: score = max(0, score - 6)
         # NEW: Nicolas contribution routing
-        if is_nicolas_contrib_like:
-            if tag == "nicolas_contribution": score += 8
+        if is_nicolas_contrib_like and tag == "nicolas_contribution":
+            score += 8
             elif tag in {"northwestern_academy_incorporators", "northwestern_faculty_mentors"}: score = max(0, score - 4)
         # NEW: Nicolas teacher routing
-        if is_nicolas_teacher_like:
-            if tag == "northwestern_faculty_mentors": score += 8
+        if is_nicolas_teacher_like and tag == "northwestern_faculty_mentors":
+            score += 8
             elif tag in {"nicolas_contribution", "northwestern_academy_incorporators"}: score = max(0, score - 4)
         # NEW: Maximo Caday routing
         if is_caday_relationship_like:
@@ -724,36 +718,35 @@ def get_semantic_response_debug(user_input: str, eval_mode: bool = False):
              elif tag == "nicolas_contribution": score = max(0, score - 6)
              
         # NEW: Sacrifices routing
-        if is_academy_sacrifices_like:
-            if tag == "northwestern_academy_early_sacrifices": score += 8
+        if is_academy_sacrifices_like and tag == "northwestern_academy_early_sacrifices":
+            score += 8
             elif tag in {"early_years", "nurturing_years"}: score = max(0, score - 4)
-        # NEW: Engineering routing
-        if is_engineering_program_like:
-            if tag == "northwestern_college_engineering_program": score += 8
-            elif tag == "northwestern_college_courses": score = max(0, score - 6)
+        # DELETED: if is_engineering_program_like and tag == "northwestern_college_engineering_program": score += 8
+        # DELETED: elif tag == "northwestern_college_courses": score = max(0, score - 6)
         # NEW: Commonwealth Era routing
-        if is_commonwealth_planning_like:
-             if tag == "northwestern_academy_commonwealth_era": score += 8
+        if is_commonwealth_planning_like and tag == "northwestern_academy_commonwealth_era":
+             score += 8
              elif tag in {"early_years", "northwestern_college_courses", "Accreditation"}: score = max(0, score - 6)
         # NEW: Transition Process routing
-        if is_transition_process_like:
-            if tag == "transition_process": score += 8
+        if is_transition_process_like and tag == "transition_process":
+            score += 8
             elif tag in {"early_years", "northwestern_college_courses", "Accreditation"}: score = max(0, score - 6)
         # NEW: Nurturing Years routing
-        if is_nurturing_years_like:
-            if tag == "nurturing_years": score += 8
+        if is_nurturing_years_like and tag == "nurturing_years":
+            score += 8
             elif tag == "early_years": score = max(0, score - 6)
         # NEW: Student Activism routing
-        if is_activist_details_query:
-            if tag == "northwestern_student_activists": score += 8
+        if is_activist_details_query and tag == "northwestern_student_activists":
+            score += 8
             elif tag == "northwestern_martial_law": score = max(0, score - 4)
         if any(t in user_tokens for t in {"student", "leaders", "marcos", "protest"}):
              if tag == "student_activism": score += 4
              elif tag == "northwestern_faculty_mentors": score = max(0, score - 4)
         # NEW: Generic Courses routing
-        if is_generic_course_query:
-             if tag == "northwestern_college_courses": score += 8
-             elif tag in {"Accreditation", "Deregulated_Status", "northwestern_college_engineering_program"}: score = max(0, score - 6)
+        if is_generic_course_query and tag == "northwestern_college_courses":
+             score += 8
+             # Penalty logic for generic courses stealing specific engineering is removed as the specific engineering intent is removed.
+             elif tag in {"Accreditation", "Deregulated_Status"}: score = max(0, score - 6)
 
         # NEW: Massive penalty for Commonwealth stealing Incorporators
         if (is_founders_like or "incorporator" in user_tokens) and tag == "northwestern_academy_commonwealth_era":
@@ -771,7 +764,7 @@ def get_semantic_response_debug(user_input: str, eval_mode: bool = False):
         else:
             if tag == "northwestern_new_school_site": score = max(0, score - 5)
         # Track best keyword-hit candidate for hard override
-        if score > max_overlap:
+        if score > best_score:
             max_overlap = score
             forced_index = i
 
@@ -792,7 +785,6 @@ def get_semantic_response_debug(user_input: str, eval_mode: bool = False):
             tag == "buildings" and is_buildings_overview_query,
             tag == "campus_historical_landmarks" and is_landmark_query,
             tag == "northwestern_college_courses" and is_generic_course_query,
-            tag == "northwestern_college_engineering_program" and is_engineering_program_like,
             tag == "transition_process" and is_transition_process_like,
             tag == "nicolas_contribution" and is_nicolas_contrib_like,
             tag == "northwestern_faculty_mentors" and is_nicolas_teacher_like,
@@ -976,12 +968,10 @@ def get_semantic_response_debug(user_input: str, eval_mode: bool = False):
         if is_nurturing_years_like and tag == "early_years":
             score -= 0.3
             
-        # Engineering reranker
-        if is_engineering_program_like and tag == "northwestern_college_engineering_program":
-            score += 0.4
+        # Engineering reranker (Now routes to courses)
         if is_engineering_program_like and tag == "northwestern_college_courses":
-            score -= 0.35
-
+             score += 0.3
+        
         # Student Activists reranker
         if is_activist_details_query and tag == "northwestern_student_activists":
             score += 0.4
@@ -1076,9 +1066,9 @@ def get_semantic_response_debug(user_input: str, eval_mode: bool = False):
     # NEW: explicit pick for nurturing years
     if is_nurturing_years_like:
         pick_if_present({"nurturing_years"}, max_gap=0.3)
-    # NEW: explicit pick for engineering program
+    # NEW: explicit pick for engineering program (Now routes to courses)
     if is_engineering_program_like:
-        pick_if_present({"northwestern_college_engineering_program"}, max_gap=0.3)
+         pick_if_present({"northwestern_college_courses"}, max_gap=0.3)
     # NEW: explicit pick for student activists
     if is_activist_details_query:
         pick_if_present({"northwestern_student_activists"}, max_gap=0.3)
@@ -1159,12 +1149,14 @@ def get_semantic_response_debug(user_input: str, eval_mode: bool = False):
         best_score = max(-1.0, best_score - 0.24)
 
     # Engineering/courses pairwise fixes
-    if best_tag == "northwestern_college_engineering_program" and is_first_engineering_program_like:
-        best_score += 0.15
+    # DELETED: if best_tag == "northwestern_college_engineering_program" and is_first_engineering_program_like: best_score += 0.15
     # NEW: courses vs engineering program fix (for the mutual steal)
     if best_tag == "northwestern_college_courses" and is_engineering_program_like:
-        best_score = max(-1.0, best_score - 0.4)
-
+        # Penalize if it's generic courses and the query is very specific to the engineering tag (which is now retired). 
+        # Since the generic course intent is the target for all program questions now, only penalize for engineering *stealing* when it shouldn't.
+        # This clause remains a positive nudger for engineering questions to land on the course list.
+        best_score += 0.1
+        
     # UPDATED: extra guards for Academy→College phrasing
     if strong_academy_become_college and best_tag == "early_years":
         best_score += 0.18
@@ -1198,8 +1190,7 @@ def get_semantic_response_debug(user_input: str, eval_mode: bool = False):
     if is_generic_course_query:
         if best_tag in {"Accreditation", "Deregulated_Status", "major_transitions"}:
             best_score = max(-1.0, best_score - 0.4)
-        if best_tag == "northwestern_college_engineering_program":
-             best_score = max(-1.0, best_score - 0.3)
+        # DELETED: if best_tag == "northwestern_college_engineering_program": best_score = max(-1.0, best_score - 0.3)
              
     # General Info Hammer
     if best_tag == "general_info" and any(t in user_tokens for t in ["presidents", "founders", "nicolas", "courses", "engineering"]):
