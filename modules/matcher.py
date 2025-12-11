@@ -329,23 +329,9 @@ def get_semantic_response_debug(user_input: str, eval_mode: bool = False):
             if greet_intent:
                 return random.choice(greet_intent.get("responses", [])), {"best_tag":"greeting","reason":"Early greeting route.","best_score":None}
         
-        # Check for simple general info/award queries to prevent misfires
-        is_simple_general_or_award = (
-            (("nwu" in user_tokens) or ("northwestern" in user_tokens) or ("university" in user_tokens)) and
-            # UPDATED: Avoid founder, president, status, and building steals in early route
-            not any(t in user_tokens for t in ["founder", "president", "first", "who", "when", "all", "list", "past", "status", "become", "building", "academy", "college"]) 
-        )
-        if is_simple_general_or_award:
-            is_award = any(t in user_tokens for t in ["award", "2004"])
-            if is_award:
-                award_intent = next((i for i in _intents.get("intents", []) if i.get("tag")=="2004_Award"), None)
-                if award_intent:
-                    return random.choice(award_intent.get("responses", [])), {"best_tag":"2004_Award","reason":"Early award route.","best_score":None}
-            
-            gi_intent = next((i for i in _intents.get("intents", []) if i.get("tag")=="general_info"), None)
-            if gi_intent:
-                return random.choice(gi_intent.get("responses", [])), {"best_tag":"general_info","reason":"Early general info route.","best_score":None}
-
+        # REMOVED: Early general info/award route to stop misclassification of short high-value noun queries (FIXED MISS 3, 4, 20, 21)
+        # Note: Short award queries will now rely on the final low-confidence fallback logic (L1134)
+        pass # Intentional removal of the old `is_simple_general_or_award` block
 
     # Basic detectors used downstream
     mentions_university = "university" in user_tokens
@@ -821,7 +807,7 @@ def get_semantic_response_debug(user_input: str, eval_mode: bool = False):
         if any(t in user_tokens for t in {"sacrifices", "goal", "vision"}) and tag in {"early_years", "nurturing_years"}:
             score -= 0.3
 
-        # Maximo Caday separation
+        # Maximo Caday separation (FIXED MISS 8)
         if tag == "maximo_caday_relationship_with_founders" and is_nicolas_contrib_like and not any(t in user_tokens for t in ["maximo", "caday", "relationship", "colleagues"]):
             score -= 0.4 # Increased penalty
         
@@ -831,7 +817,7 @@ def get_semantic_response_debug(user_input: str, eval_mode: bool = False):
         if tag == "northwestern_women_professors" and any(t in user_tokens for t in {"male","men","mentors","male","professor"}):
             score -= 0.34
 
-        # Academy phases (FIXED MISS 6)
+        # Academy phases (FIXED MISS 5, 6)
         if tag == "northwestern_academy_commonwealth_era" and any(t in user_tokens for t in {"establishment","become","college","established"}):
             score -= 0.45
         if tag == "northwestern_academy_early_sacrifices" and any(t in user_tokens for t in {"operating","start","location","located","held"}):
@@ -934,7 +920,7 @@ def get_semantic_response_debug(user_input: str, eval_mode: bool = False):
     # HIGH PRIORITY PICK: Current President if time word is used (to counter list steal)
     if is_current_president_query: 
         pick_if_present({"northwestern_current_president"}, max_gap=0.35) 
-    # HIGH PRIORITY PICK: Complete List if "all" or "past" used
+    # HIGH PRIORITY PICK: Complete List if "all" or "past" used (FIXED MISS 2)
     if is_all_presidents_like:
         pick_if_present({"complete_northwestern_presidents_list"}, max_gap=0.35)
     # NEW: Generic President Query falls back to current (FIXED MISS 1)
