@@ -5,8 +5,6 @@ import torch
 import hashlib
 import os
 
-# --- Imports from Modules ---
-from modules.matcher import get_semantic_response_debug, keyword_fallback, get_all_patterns, set_runtime_handles 
 
 # --- NLTK Initialization ---
 @st.cache_resource(show_spinner="Initializing NLTK resources...")
@@ -136,5 +134,6 @@ if user_prompt:
     st.session_state['history'].append({"role": "assistant", "content": bot_reply})
     with st.chat_message("assistant", avatar=None):
         st.write(bot_reply)
+
 
 
