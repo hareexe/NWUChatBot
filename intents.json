@@ -90,7 +90,7 @@
         "list of presidents"
       ],
       "aliases": [
-        "all nwu president",
+        "all nwu presidents",
         "northwestern complete presidents",
         "nu laoag list of all presidents"
       ],
@@ -168,14 +168,11 @@
         "first university president",
         "first college president",
         "who was the first president",
-        "who is the first president",
-        "initial president",
-        "maiden president"
+        "who is the first president"
       ],
       "aliases": [
         "nwu first president",
-        "northwestern first president",
-        "nu laoag first president"
+        "northwestern first president"
       ],
       "examples": [
         "who was the first university president?",
@@ -2296,4 +2293,5 @@
     }
   ]
 }
+
 
