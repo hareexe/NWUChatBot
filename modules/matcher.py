@@ -21,7 +21,6 @@ def set_runtime_handles(model, intents_data, pattern_embeddings, pattern_meta, p
     _tokenizer = tokenizer
 
 def get_all_patterns(intents_data, limit=5):
-    # one example per intent, exclude utility intents
     excluded_tags = {"end_chat", "thank_you"}
     per_intent = []
     for intent in intents_data.get("intents", []):
@@ -38,7 +37,6 @@ def get_all_patterns(intents_data, limit=5):
     if not per_intent:
         return []
 
-    # randomize and cap to limit
     try:
         selection = random.sample(per_intent, k=min(limit, len(per_intent)))
     except ValueError:
