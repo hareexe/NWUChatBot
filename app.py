@@ -98,7 +98,7 @@ if suggestions:
 col1, col2 = st.columns(2)
 with col2:
     if st.button("Run quick evaluation"):
-        acc, res = run_offline_eval(intents_data)
+        acc, res = run_offline_eval() 
         st.markdown(f"<small>Accuracy: {round(acc*100,1)}%</small>", unsafe_allow_html=True)
         # Show only misses
         misses = [r for r in res if not r["ok"]]
@@ -140,3 +140,4 @@ if user_prompt:
         st.write(bot_reply)
         if debug_info:
             st.markdown(f"<small style='color:gray'>Debug Info: {debug_info}</small>", unsafe_allow_html=True)
+
